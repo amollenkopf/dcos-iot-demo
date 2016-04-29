@@ -1,0 +1,14 @@
+{
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "amollenkopf/eventsource",
+      "forcePullImage": true
+    }
+  },
+  "cmd": "java -jar ./jars/eventsource-assembly-1.0.jar broker-0.kafka.mesos:1025,broker-1.kafka.mesos:1025,broker-2.kafka.mesos:1025 source1 4 1000",
+  "id": "source1",
+  "instances": 1,
+  "cpus": 1.0,
+  "mem": 256
+}
