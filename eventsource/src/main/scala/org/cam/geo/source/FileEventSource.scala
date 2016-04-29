@@ -4,8 +4,9 @@ import java.util.Properties
 import org.apache.kafka.clients.producer.{KafkaProducer, Producer, ProducerRecord}
 
 /*
+ *  @author    Adam Mollenkopf
  *
- *  To run locally:
+ *  To run locally (no Docker):
  *  (1) Start Zookeeper:
  *      kafka_2.11-0.9.0.1$ ./bin/zookeeper-server-start.sh config/zookeeper.properties
  *  (2) Start Kafka:
@@ -16,6 +17,18 @@ import org.apache.kafka.clients.producer.{KafkaProducer, Producer, ProducerRecor
  *  (4) Verify events are being sent by running a command line Kafka Consumer utility to listen to the topic:
  *      kafka_2.11-0.9.0.1$ ./bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic source1 --from-beginning
  *
+ *  To run locally as Docker:
+ *  (1) Start Zookeeper:
+ *      kafka_2.11-0.9.0.1$ ./bin/zookeeper-server-start.sh config/zookeeper.properties
+ *  (2) Start Kafka:
+ *      kafka_2.11-0.9.0.1$ ./bin/kafka-server-start.sh config/server.properties
+ *  (3) Build, create/upload docker image & run docker image:
+ *      eventsource$ docker-machine start default
+ *      eventsource$ eval "$(docker-machine env default)"
+ *      eventsource$ docker build -t amollenkopf/event-source .
+ *      eventsource$ docker login
+ *      eventsource$ docker push amollenkopf/event-source
+
  *  To run on DCOS:
  *  (1) Deploy a new Marathon app using the DCOS-CLI:
  *      eventsource$ dcos marathon app add eventsource-docker.json

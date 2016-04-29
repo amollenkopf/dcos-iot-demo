@@ -2,7 +2,7 @@
   "container": {
     "type": "DOCKER",
     "docker": {
-      "image": "amollenkopf/eventsource",
+      "image": "amollenkopf/event-source",
       "forcePullImage": true
     }
   },
