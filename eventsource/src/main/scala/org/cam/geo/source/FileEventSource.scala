@@ -4,17 +4,20 @@ import java.util.Properties
 import org.apache.kafka.clients.producer.{KafkaProducer, Producer, ProducerRecord}
 
 /*
+ *
  *  To run locally:
- *    Start Zookeeper:
+ *  (1) Start Zookeeper:
  *      kafka_2.11-0.9.0.1$ ./bin/zookeeper-server-start.sh config/zookeeper.properties
- *    Start Kafka:
+ *  (2) Start Kafka:
  *      kafka_2.11-0.9.0.1$ ./bin/kafka-server-start.sh config/server.properties
- *    Run EventSource:
+ *  (3) Build & Run EventSource:
+ *      eventsource$ sbt assembly
  *      eventsource$ java -jar target/scala-2.11/eventsource-assembly-1.0.jar localhost:9092 source1 4 1000
- *    Verify events are being sent by running the command line Kafka Consumer utility:
+ *  (4) Verify events are being sent by running a command line Kafka Consumer utility to listen to the topic:
  *      kafka_2.11-0.9.0.1$ ./bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic source1 --from-beginning
  *
- *    To run on DCOS using the DCOS-CLI to deploy a new Marathon app:
+ *  To run on DCOS:
+ *  (1) Deploy a new Marathon app using the DCOS-CLI:
  *      eventsource$ dcos marathon app add eventsource-docker.json
  *
  */
