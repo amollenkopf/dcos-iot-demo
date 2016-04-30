@@ -6,7 +6,7 @@ import org.apache.kafka.clients.producer.{KafkaProducer, Producer, ProducerRecor
 /*
  *  @author    Adam Mollenkopf
  *
- *  To run locally (no Docker):
+ *  To run locally:
  *  (1) Start Zookeeper:
  *      kafka_2.11-0.9.0.1$ ./bin/zookeeper-server-start.sh config/zookeeper.properties
  *  (2) Start Kafka:
@@ -17,25 +17,32 @@ import org.apache.kafka.clients.producer.{KafkaProducer, Producer, ProducerRecor
  *  (4) Verify events are being sent by running a command line Kafka Consumer utility to listen to the topic:
  *      kafka_2.11-0.9.0.1$ ./bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic source1 --from-beginning
  *
- *  To run locally as Docker:
- *  (1) Start Zookeeper:
- *      kafka_2.11-0.9.0.1$ ./bin/zookeeper-server-start.sh config/zookeeper.properties
- *  (2) Start Kafka:
- *      kafka_2.11-0.9.0.1$ ./bin/kafka-server-start.sh config/server.properties
- *  (3) Build, create/upload docker image & run docker image:
+ *  To run on DCOS:
+ *  (1) Configure Kafka topic:
+ *      ~$ dcos config set core.dcos_url <your dcos url>
+ *      ~$ dcos kafka broker list
+ *      ~$ dcos kafka broker add 1-3
+ *      ~$ dcos kafka broker start 1-3
+ *      ~$ dcos kafka broker list
+ *      ~$ TODO: dcos kafka topic add source1 --partitions=3 --replicas=1
+ *  (2) Build, create/upload docker image:
  *      eventsource$ docker-machine start default
  *      eventsource$ eval "$(docker-machine env default)"
  *      eventsource$ docker build -t amollenkopf/event-source .
  *      eventsource$ docker login
  *      eventsource$ docker push amollenkopf/event-source
-
- *  To run on DCOS:
- *  (1) Deploy a new Marathon app using the DCOS-CLI:
+ *  (3) Add Marathon app:
  *      eventsource$ dcos marathon app add eventsource-docker.json
- *
+ *  (4) Verify events are being sent by running command line Kafka Consumer utilities to listen to the topic:
+ *      azureuser@dcos-master-3F983CB-0:~$ wget http://mirror.reverse.net/pub/apache/kafka/0.9.0.1/kafka_2.10-0.9.0.1.tgz
+ *      azureuser@dcos-master-3F983CB-0:~$ tar -xvf kafka_2.10-0.9.0.1.tgz
+ *      azureuser@dcos-master-3F983CB-0:~$ cd kafka_2.10-0.9.0.1
+ *      azureuser@dcos-master-3F983CB-0:~/kafka_2.10-0.9.0.1$ ./bin/kafka-console-consumer.sh --zookeeper mesos.master:2181 --topic source1 --from-beginning
+ *      TODO: mesos.master or localhost
  */
 
 object FileEventSource extends App {
+  //TODO: Make file based and make file part of Docker image
   //SUSPECT,TRACK_DATE,SENSOR,BATTERY_LEVEL,LATITUDE,LONGITUDE,DISTANCE_FT,DURATION_MIN,SPEED_MPH,COURSE_DEGREE
   val tracks = Array[String](
     "J7890,TIME,2,High,32.97903,-115.550378,78.63,0.87,1.03,123",
