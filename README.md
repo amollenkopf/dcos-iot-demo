@@ -1,7 +1,7 @@
 # dcos-iot-demo
 Demonstrates how to configure a full stack geo-enabled Internet of Things (IoT) solution using <a href="https://mesosphere.com/">Mesosphere's</a> open sourced <a href="https://dcos.io/">Data Center Operating System (DC/OS)</a>, <a href="https://www.docker.com/">Docker</a>, <a href="http://kafka.apache.org/">Kafka</a>, <a href="http://spark.apache.org/">Spark</a>, <a href="https://www.elastic.co/products/elasticsearch">Elasticsearch</a>, and the <a href="https://www.playframework.com/">Play Framework</a>.
 
-## Working locally:
+## Working locally (no DC/OS, for local dev & verification):
 ### To setup locally:
 <pre>
 (1) TODO: Setup SBT
@@ -35,17 +35,17 @@ Demonstrates how to configure a full stack geo-enabled Internet of Things (IoT) 
                                      localhost:9092 source01 source01-consumer-id false
 </pre>
 
-## Working on DCOS:
-### To configure a DCOS
+## Working on DC/OS:
+### To configure a DC/OS
 <pre>
-(1) TODO: Create a DCOS cluster on Azure or Amazon
-(2) TODO: Install packages on DCOS:
+(1) TODO: Create a DC/OS cluster on Azure or Amazon
+(2) TODO: Install packages on DC/OS:
     In DC/OS dashboard, go to 'Universe' and install the Marathon, Chronos, Kafka & Spark packages.
-(3) TODO: Configure the DCOS-CLI
-    ~$ dcos config set core.dcos_url <your dcos url>
+(3) TODO: Configure the DC/OS-CLI
+    ~$ dcos config set core.dcos_url <your DC/OS url>
 </pre>
 
-### to run on DCOS:
+### to run on DC/OS:
 <pre>
 (1) Configure Kafka topic:
     ~$ dcos kafka broker list
