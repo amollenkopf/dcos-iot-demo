@@ -3,40 +3,7 @@ package org.cam.geo.source
 import java.util.Properties
 import org.apache.kafka.clients.producer.{KafkaProducer, Producer, ProducerRecord}
 
-/*
- *  @author    Adam Mollenkopf
- *
- *  To run locally:
- *  (1) Start Zookeeper:
- *      kafka_2.11-0.9.0.1$ ./bin/zookeeper-server-start.sh config/zookeeper.properties
- *  (2) Start Kafka:
- *      kafka_2.11-0.9.0.1$ ./bin/kafka-server-start.sh config/server.properties
- *  (3) Build & Run EventSource:
- *      eventsource$ sbt assembly
- *      eventsource$ java -jar target/scala-2.11/eventsource-assembly-1.0.jar localhost:9092 source01 4 1000
- *  (4) Verify events are being sent by running a command line Kafka Consumer utility to listen to the topic:
- *      kafka_2.11-0.9.0.1$ ./bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic source01 --from-beginning
- *
- *  To run on DCOS:
- *  (1) Configure Kafka topic:
- *      ~$ dcos config set core.dcos_url <your dcos url>
- *      In DC/OS dashboard, go to 'Universe' and install Marathon and Kafka.
- *      ~$ dcos kafka broker list
- *      ~$ dcos kafka topic create source01 --partitions=3 --replication=1
- *  (2) Build, create/upload docker image:
- *      eventsource$ docker-machine start default
- *      eventsource$ eval "$(docker-machine env default)"
- *      eventsource$ docker build -t amollenkopf/event-source .
- *      eventsource$ docker login
- *      eventsource$ docker push amollenkopf/event-source
- *  (3) Add Marathon app:
- *      eventsource$ dcos marathon app add eventsource-docker.json
- *  (4) Verify events are being sent by running command line Kafka Consumer utilities to listen to the topic:
- *      azureuser@dcos-master-3F983CB-0:~$ wget http://mirror.reverse.net/pub/apache/kafka/0.9.0.1/kafka_2.10-0.9.0.1.tgz
- *      azureuser@dcos-master-3F983CB-0:~$ tar -xvf kafka_2.10-0.9.0.1.tgz
- *      azureuser@dcos-master-3F983CB-0:~$ cd kafka_2.10-0.9.0.1
- *      azureuser@dcos-master-3F983CB-0:~/kafka_2.10-0.9.0.1$ ./bin/kafka-console-consumer.sh --zookeeper master.mesos:2181/kafka --topic source01 --from-beginning
- */
+//TODO: Update DockerHub info: https://hub.docker.com/r/amollenkopf/event-source/
 
 object FileEventSource extends App {
   //TODO: Make file based and make file part of Docker image
@@ -152,17 +119,19 @@ object FileEventSource extends App {
     "A12345,TIME,1,High,33.729377,-116.998138,513.09,1,5.83,88"
   )
 
-  if (args.length < 4) {
-    System.err.println("Usage: org.cam.geo.source.FileEventSource <brokerUrl(s)> <topic> <eventsPerSecond> <intervalInMillis>")
+  if (args.length < 5) {
+    System.err.println("Usage: org.cam.geo.source.FileEventSource <brokerUrl(s)> <topic> <eventsPerSecond> <intervalInMillis> <verbose>")
     System.err.println("      brokerUrl(s): a comma separated list of Kafka broker urls, e.g. localhost:9092")
     System.err.println("             topic: the Kafka topic name to produce to, e.g. source1")
     System.err.println("   eventsPerSecond: the number of events to produce every second, e.g. 4")
     System.err.println("  intervalInMillis: the interval of milliseconds to pause between sending events, e.g. 1000")
+    System.err.println("           verbose: when true, prints out messages sent to stdout")
     System.exit(1)
   }
-  val Array(brokers, topic, eventsPerSecondStr, intervalInMillisStr) = args
+  val Array(brokers, topic, eventsPerSecondStr, intervalInMillisStr, verboseStr) = args
   val eventsPerSecond = eventsPerSecondStr.toInt
   val intervalInMillis = intervalInMillisStr.toInt
+  val verbose = verboseStr.toBoolean
 
   val props: Properties = new Properties
   props.put("bootstrap.servers", brokers)
@@ -171,7 +140,7 @@ object FileEventSource extends App {
   val producer: Producer[String, String] = new KafkaProducer[String, String](props)
 
   var ix = 0
-  println("Writing " + eventsPerSecond + " every " + intervalInMillis + " millis to " + topic + " on " + brokers + " ...")
+  println("Writing " + eventsPerSecond + " e/s every " + intervalInMillis + " millis to topic " + topic + " on brokers " + brokers + " ...")
   while(true) {
     if (ix + eventsPerSecond > tracks.length)
       ix = 0
@@ -179,7 +148,8 @@ object FileEventSource extends App {
       val eventString = tracks(jx).replace("TIME", System.currentTimeMillis().toString)
       producer.send(new ProducerRecord[String, String](topic, null, eventString))
       ix += 1
-      println(jx + ": " + eventString)
+      if (verbose)
+        println(jx + ": " + eventString)
     }
     println()
     Thread.sleep(intervalInMillis)
