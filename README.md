@@ -1,26 +1,57 @@
 # dcos-iot-demo
 Demonstrates how to configure a full stack geo-enabled Internet of Things (IoT) solution using <a href="https://mesosphere.com/">Mesosphere's</a> open sourced <a href="https://dcos.io/">Data Center Operating System (DC/OS)</a>, <a href="https://www.docker.com/">Docker</a>, <a href="http://kafka.apache.org/">Kafka</a>, <a href="http://spark.apache.org/">Spark</a>, <a href="https://www.elastic.co/products/elasticsearch">Elasticsearch</a>, and the <a href="https://www.playframework.com/">Play Framework</a>.
 
-# To run locally:
+# Working locally:
+## To setup locally:
+<pre>
+(1) TODO: Setup SBT
+(2) TODO: Setup Kafka
+(3) TODO: Spark
+    ~$ export SPARK_HOME=~/spark-1.6.1-bin-hadoop2.6
+</pre>
+
+## To build locally:
+<pre>
+(1) Build event source:
+    eventsource$ sbt assembly
+(2) Build Spark analytic tasks:
+    esrispatiotemporalanalytics$ sbt assembly
+    TODO: add other analytics ...
+</pre>
+
+## To run locally:
 <pre>
 (1) Start Zookeeper:
     kafka_2.11-0.9.0.1$ ./bin/zookeeper-server-start.sh config/zookeeper.properties
 (2) Start Kafka:
     kafka_2.11-0.9.0.1$ ./bin/kafka-server-start.sh config/server.properties
-(3) Build & Run EventSource:
-    eventsource$ sbt assembly
+(3) Run Source:
     eventsource$ java -jar target/scala-2.11/eventsource-assembly-1.0.jar localhost:9092 source01 4 1000 true
-(4) Verify events are being sent by running a command line Kafka Consumer utility to listen to the topic:
+    note: you can verify events are being sent by running a command line Kafka Consumer utility to listen to the topic:
     kafka_2.11-0.9.0.1$ ./bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic source01
+(4) Run Spark analytic tasks:
+    esrispatiotemporalanalytics$ $SPARK_HOME/bin/spark-submit --class "org.cam.geo.analytics.esri.EsriSpatiotemporalAnalyticTask"
+                                     --master local[2] target/scala-2.10/esrispatiotemporalanalytics-assembly-1.0.jar
+                                     localhost:9092 source01 source01-consumer-id false
 </pre>
 
-# To run on DCOS:
+# Working on DCOS:
+## To configure a DCOS
+<pre>
+(1) TODO: Create a DCOS cluster on Azure or Amazon
+(2) TODO: Install packages on DCOS:
+    In DC/OS dashboard, go to 'Universe' and install the Marathon, Chronos, Kafka & Spark packages.
+(3) TODO: Configure the DCOS-CLI
+    ~$ dcos config set core.dcos_url <your dcos url>
+</pre>
+
+## to run on DCOS:
 <pre>
 (1) Configure Kafka topic:
-    ~$ dcos config set core.dcos_url <your dcos url>
-    In DC/OS dashboard, go to 'Universe' and install Marathon and Kafka.
     ~$ dcos kafka broker list
+    ~$ dcos kafka topic list
     ~$ dcos kafka topic create source01 --partitions=3 --replication=1
+    ~$ dcos kafka topic list
 (2) Build, create/upload docker image:
     eventsource$ docker-machine start default
     eventsource$ eval "$(docker-machine env default)"
