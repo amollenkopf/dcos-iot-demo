@@ -122,7 +122,7 @@ object FileEventSource extends App {
   if (args.length < 5) {
     System.err.println("Usage: org.cam.geo.source.FileEventSource <brokerUrl(s)> <topic> <eventsPerSecond> <intervalInMillis> <verbose>")
     System.err.println("      brokerUrl(s): a comma separated list of Kafka broker urls, e.g. localhost:9092")
-    System.err.println("             topic: the Kafka topic name to produce to, e.g. source1")
+    System.err.println("             topic: the Kafka topic name to produce to, e.g. source01")
     System.err.println("   eventsPerSecond: the number of events to produce every second, e.g. 4")
     System.err.println("  intervalInMillis: the interval of milliseconds to pause between sending events, e.g. 1000")
     System.err.println("           verbose: when true, prints out messages sent to stdout")
