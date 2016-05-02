@@ -12,8 +12,10 @@ Demonstrates how to configure a full stack geo-enabled Internet of Things (IoT) 
     eventsource$ java -jar target/scala-2.11/eventsource-assembly-1.0.jar localhost:9092 source01 4 1000
 (4) Verify events are being sent by running a command line Kafka Consumer utility to listen to the topic:
     kafka_2.11-0.9.0.1$ ./bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic source01 --from-beginning
+</pre>
 
 # To run on DCOS:
+<pre>
 (1) Configure Kafka topic:
     ~$ dcos config set core.dcos_url <your dcos url>
     In DC/OS dashboard, go to 'Universe' and install Marathon and Kafka.
