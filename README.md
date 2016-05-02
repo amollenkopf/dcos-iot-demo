@@ -1,8 +1,8 @@
 # dcos-iot-demo
 Demonstrates how to configure a full stack geo-enabled Internet of Things (IoT) solution using <a href="https://mesosphere.com/">Mesosphere's</a> open sourced <a href="https://dcos.io/">Data Center Operating System (DC/OS)</a>, <a href="https://www.docker.com/">Docker</a>, <a href="http://kafka.apache.org/">Kafka</a>, <a href="http://spark.apache.org/">Spark</a>, <a href="https://www.elastic.co/products/elasticsearch">Elasticsearch</a>, and the <a href="https://www.playframework.com/">Play Framework</a>.
 
-# Working locally:
-## To setup locally:
+## Working locally:
+### To setup locally:
 <pre>
 (1) TODO: Setup SBT
 (2) TODO: Setup Kafka
@@ -10,7 +10,7 @@ Demonstrates how to configure a full stack geo-enabled Internet of Things (IoT) 
     ~$ export SPARK_HOME=~/spark-1.6.1-bin-hadoop2.6
 </pre>
 
-## To build locally:
+### To build locally:
 <pre>
 (1) Build event source:
     eventsource$ sbt assembly
@@ -19,7 +19,7 @@ Demonstrates how to configure a full stack geo-enabled Internet of Things (IoT) 
     TODO: add other analytics ...
 </pre>
 
-## To run locally:
+### To run locally:
 <pre>
 (1) Start Zookeeper:
     kafka_2.11-0.9.0.1$ ./bin/zookeeper-server-start.sh config/zookeeper.properties
@@ -35,8 +35,8 @@ Demonstrates how to configure a full stack geo-enabled Internet of Things (IoT) 
                                      localhost:9092 source01 source01-consumer-id false
 </pre>
 
-# Working on DCOS:
-## To configure a DCOS
+## Working on DCOS:
+### To configure a DCOS
 <pre>
 (1) TODO: Create a DCOS cluster on Azure or Amazon
 (2) TODO: Install packages on DCOS:
@@ -45,7 +45,7 @@ Demonstrates how to configure a full stack geo-enabled Internet of Things (IoT) 
     ~$ dcos config set core.dcos_url <your dcos url>
 </pre>
 
-## to run on DCOS:
+### to run on DCOS:
 <pre>
 (1) Configure Kafka topic:
     ~$ dcos kafka broker list
