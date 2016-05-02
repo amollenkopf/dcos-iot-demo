@@ -13,18 +13,16 @@ import org.apache.kafka.clients.producer.{KafkaProducer, Producer, ProducerRecor
  *      kafka_2.11-0.9.0.1$ ./bin/kafka-server-start.sh config/server.properties
  *  (3) Build & Run EventSource:
  *      eventsource$ sbt assembly
- *      eventsource$ java -jar target/scala-2.11/eventsource-assembly-1.0.jar localhost:9092 source1 4 1000
+ *      eventsource$ java -jar target/scala-2.11/eventsource-assembly-1.0.jar localhost:9092 source01 4 1000
  *  (4) Verify events are being sent by running a command line Kafka Consumer utility to listen to the topic:
- *      kafka_2.11-0.9.0.1$ ./bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic source1 --from-beginning
+ *      kafka_2.11-0.9.0.1$ ./bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic source01 --from-beginning
  *
  *  To run on DCOS:
  *  (1) Configure Kafka topic:
  *      ~$ dcos config set core.dcos_url <your dcos url>
+ *      In DC/OS dashboard, go to 'Universe' and install Marathon and Kafka.
  *      ~$ dcos kafka broker list
- *      ~$ dcos kafka broker add 1-3
- *      ~$ dcos kafka broker start 1-3
- *      ~$ dcos kafka broker list
- *      ~$ TODO: dcos kafka topic add source1 --partitions=3 --replicas=1
+ *      ~$ dcos kafka topic create source01 --partitions=3 --replication=1
  *  (2) Build, create/upload docker image:
  *      eventsource$ docker-machine start default
  *      eventsource$ eval "$(docker-machine env default)"
@@ -37,8 +35,7 @@ import org.apache.kafka.clients.producer.{KafkaProducer, Producer, ProducerRecor
  *      azureuser@dcos-master-3F983CB-0:~$ wget http://mirror.reverse.net/pub/apache/kafka/0.9.0.1/kafka_2.10-0.9.0.1.tgz
  *      azureuser@dcos-master-3F983CB-0:~$ tar -xvf kafka_2.10-0.9.0.1.tgz
  *      azureuser@dcos-master-3F983CB-0:~$ cd kafka_2.10-0.9.0.1
- *      azureuser@dcos-master-3F983CB-0:~/kafka_2.10-0.9.0.1$ ./bin/kafka-console-consumer.sh --zookeeper mesos.master:2181 --topic source1 --from-beginning
- *      TODO: mesos.master or localhost
+ *      azureuser@dcos-master-3F983CB-0:~/kafka_2.10-0.9.0.1$ ./bin/kafka-console-consumer.sh --zookeeper master.mesos:2181/kafka --topic source01 --from-beginning
  */
 
 object FileEventSource extends App {
@@ -168,13 +165,13 @@ object FileEventSource extends App {
   val intervalInMillis = intervalInMillisStr.toInt
 
   val props: Properties = new Properties
-  props.put("bootstrap.servers", "localhost:9092")
+  props.put("bootstrap.servers", brokers)
   props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer")
   props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer")
   val producer: Producer[String, String] = new KafkaProducer[String, String](props)
 
   var ix = 0
-  println("Writing " + eventsPerSecond + " e/s every " + intervalInMillis + " millis ...")
+  println("Writing " + eventsPerSecond + " every " + intervalInMillis + " millis to " + topic + " on " + brokers + " ...")
   while(true) {
     if (ix + eventsPerSecond > tracks.length)
       ix = 0
