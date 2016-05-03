@@ -79,7 +79,8 @@ It is useful to do development and verification locally prior to installing appl
     $ dcos spark run --submit-args="-Dspark.mesos.coarse=false
           --driver-cores 1 --driver-memory 1G --executor-cores 2 --executor-memory 1G
           --class org.cam.geo.analytics.esri.SpatiotemporalEsriAnalyticTask
-          http://esri.box.com/s/w4rrhuxbh4bwitozcjhekqc4utszbmkb  broker-0.kafka.mesos:10040,broker-1.kafka.mesos:9312,broker-2.kafka.mesos:9601
+          http://esri.box.com/s/w4rrhuxbh4bwitozcjhekqc4utszbmkb  
+          broker-0.kafka.mesos:10040,broker-1.kafka.mesos:9312,broker-2.kafka.mesos:9601
           source01 source01-consumer-id false"
     note: copy the driver-id, you will need it to kill the Spark app later
 (4) Observe stdout of both
