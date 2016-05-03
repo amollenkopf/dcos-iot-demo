@@ -1,4 +1,4 @@
-name := "magellanspatiotemporalanalytics"
+name := "spatiotemporal-sis-analytic-task"
 
 version := "1.0"
 

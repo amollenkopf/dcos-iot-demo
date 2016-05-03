@@ -1,4 +1,4 @@
-name := "eventsource"
+name := "event-source"
 
 version := "1.0"
 

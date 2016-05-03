@@ -1,4 +1,4 @@
-name := "sisspatiotemporalanalytics"
+name := "spatiotemporal-magellan-analytic-task"
 
 version := "1.0"
 
