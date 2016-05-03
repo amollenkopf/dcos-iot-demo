@@ -31,9 +31,10 @@ It is useful to do development and verification locally prior to installing appl
     note: you can verify events are being sent by running a command line Kafka Consumer utility to listen to the topic:
     kafka_2.11-0.9.0.1$ ./bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic source01
 (4) Run Spark analytic tasks:
-    spatiotemporal-esri-analytics$ $SPARK_HOME/bin/spark-submit --class "org.cam.geo.analytics.esri.SpatiotemporalAnalyticEsriTask"
-                                       --master local[2] target/scala-2.10/spatiotemporal-esri-analytic-task-assembly-1.0.jar
-                                       localhost:9092 source01 source01-consumer-id false
+    spatiotemporal-esri-analytics$ 
+        $SPARK_HOME/bin/spark-submit --class "org.cam.geo.analytics.esri.SpatiotemporalEsriAnalyticTask"
+            --master local[2] target/scala-2.10/spatiotemporal-esri-analytic-task-assembly-1.0.jar
+            localhost:9092 source01 source01-consumer-id false
 </pre>
 
 ## Working on DC/OS:
