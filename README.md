@@ -34,7 +34,7 @@ It is useful to do development and verification locally prior to installing appl
     spatiotemporal-esri-analytics$ 
         $SPARK_HOME/bin/spark-submit --class "org.cam.geo.analytics.esri.SpatiotemporalEsriAnalyticTask"
             --master local[2] target/scala-2.10/spatiotemporal-esri-analytic-task-assembly-1.0.jar
-            localhost:9092 source01 source01-consumer-id false
+            localhost:9092 source01 source01-consumer-id false true
 </pre>
 
 ## Working on DC/OS:
@@ -81,7 +81,7 @@ It is useful to do development and verification locally prior to installing appl
           --class org.cam.geo.analytics.esri.SpatiotemporalEsriAnalyticTask
           http://esri.box.com/s/w4rrhuxbh4bwitozcjhekqc4utszbmkb  
           broker-0.kafka.mesos:10040,broker-1.kafka.mesos:9312,broker-2.kafka.mesos:9601
-          source01 source01-consumer-id false"
+          source01 source01-consumer-id false true"
     note: copy the driver-id, you will need it to kill the Spark app later
 (4) Observe stdout of both
 (5) Remove apps:
