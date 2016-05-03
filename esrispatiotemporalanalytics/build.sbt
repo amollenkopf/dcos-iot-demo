@@ -1,4 +1,4 @@
-name := "esrispatiotemporalanalytics"
+name := "spatiotemporal-esri-analytic-task"
 
 version := "1.0"
 
@@ -15,11 +15,11 @@ assemblyExcludedJars in assembly := {
   val cp = (fullClasspath in assembly).value
   cp filter {
     x =>
-        x.data.getName.matches("sbt.*") ||
-          x.data.getName.matches(".*guava.*") ||
-          x.data.getName.matches(".*yarn.*") ||
-          x.data.getName.matches(".*unused.*") ||
-        x.data.getName.matches(".*minlog.*") ||
-        x.data.getName.matches(".*beanutils.*")
+      x.data.getName.matches("sbt.*") ||
+      x.data.getName.matches(".*guava.*") ||
+      x.data.getName.matches(".*yarn.*") ||
+      x.data.getName.matches(".*unused.*") ||
+      x.data.getName.matches(".*minlog.*") ||
+      x.data.getName.matches(".*beanutils.*")
   }
 }

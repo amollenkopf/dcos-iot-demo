@@ -1,0 +1,14 @@
+{
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "amollenkopf/spatiotemporal-esri-analytic-task",
+      "forcePullImage": true
+    }
+  },
+  "cmd": "java -jar ./jars/spatiotemporal-esri-analytic-task-assembly-1.0.jar broker-0.kafka.mesos:10040,broker-1.kafka.mesos:9312,broker-2.kafka.mesos:9601 source01 source01-consumer-id false",
+  "id": "spatiotemporal-esri-analytic-task",
+  "instances": 1,
+  "cpus": 2.0,
+  "mem": 1024
+}
