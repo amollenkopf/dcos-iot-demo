@@ -9,8 +9,9 @@ import org.apache.spark.streaming.{Seconds, StreamingContext, Time}
 import org.cam.geo.analytics.AnalyticLog
 import com.esri.core.geometry.{GeometryEngine, Point, SpatialReference}
 import org.codehaus.jackson.JsonFactory
+import org.elasticsearch.spark._
 
-object SpatiotemporalEsriAnalyticTask {
+object SpatiotemporalEsriAnalyticTaskWithElasticsearchSink {
   //TODO: Get Analytic to work with 2.11 not 2.10, https://hub.docker.com/r/javidelgadillo/mesosphere-spark_2.11/
   //TODO: refactor geofence ring to common AnalyticData object or file
   val geofenceRing =
@@ -35,6 +36,9 @@ object SpatiotemporalEsriAnalyticTask {
 
     val sparkConf = new SparkConf()
       .setAppName("EsriSpatiotemporalAnalyticTask")
+      .set("es.cluster.name", "spatiotemporal-store")
+      .set("es.nodes", "localhost:9200")
+      .set("es.index.auto.create", "true")
 
     val ssc = new StreamingContext(sparkConf, Seconds(1))
     //ssc.checkpoint("checkpoint")  //note: Use only if HDFS is available where Spark is running
@@ -52,14 +56,37 @@ object SpatiotemporalEsriAnalyticTask {
 
     val filtered = if (geofenceFilteringOn) filterGeofences(lines) else lines
 
-    filtered.foreachRDD((rdd: RDD[String], time: Time) => {
-      if (stdoutOn)
-        println("----------------------------------------------------------------------")
-      println("Time %s: Spatiotemporal Esri Analytics (%s total records)".format(time, rdd.count()))
+    val datasource = filtered.map(
+      // SUSPECT,TRACK_DATE,SENSOR,BATTERY_LEVEL,LATITUDE,LONGITUDE,DISTANCE_FT,DURATION_MIN,SPEED_MPH,COURSE_DEGREE
+      // J7890,TIME,2,High,32.97903,-115.550378,78.63,0.87,1.03,123
+      line => {  //TODO: move to function mapToDatasource
+        val fields = line.split(",")
+        val point = (fields(4).toDouble, fields(5).toDouble)
+        Map(
+          "suspectId" -> fields(0),
+          "observationTime" -> fields(1).toLong,
+          "sensor" -> fields(2).toInt,
+          "batteryLevel" -> fields(3),
+          "latitude" -> point._1,
+          "longitude" -> point._2,
+          "distanceInFeet" -> fields(6).toFloat,
+          "durationInMinutes" -> fields(7).toFloat,
+          "speedMph" -> fields(8).toFloat,
+          "courseDegree" -> fields(9).toFloat,
+          "geometry" -> s"${point._1},${point._2}"
+        )
+      }
+    )
+
+    val esIndexName = "test1"
+    datasource.foreachRDD((rdd: RDD[Map[String, Any]], time: Time) => {
+      rdd.saveToEs(esIndexName + "/" + esIndexName) // ES index/type
       if (stdoutOn) {
-        println("----------------------------------------------------------------------")
-        for (line <- rdd)
-          println(line)
+        println("--------------------------------------------------------------------------")
+        println("Time %s: Elasticsearch sink (saved %s total records to %s)".format(time, rdd.count(), esIndexName))
+        println("--------------------------------------------------------------------------")
+        for (ds <- rdd)
+          println(ds)
       }
     })
 
