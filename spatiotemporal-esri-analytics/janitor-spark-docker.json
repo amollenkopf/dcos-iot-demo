@@ -1,0 +1,15 @@
+{
+  "id": "janitor",
+  "cmd": "/janitor.py -r spark-role -p spark-principal -z spark",
+  "cpus": 1,
+  "mem": 128,
+  "disk": 1,
+  "instances": 1,
+  "container": {
+    "docker": {
+      "image": "mesosphere/janitor:latest",
+      "network": "HOST"
+    },
+    "type": "DOCKER"
+  }
+}
