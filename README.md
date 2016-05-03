@@ -48,12 +48,15 @@ It is useful to do development and verification locally prior to installing appl
 
 ### To build apps in preperation for installing them on DC/OS:
 <pre>
-(1) Build, create/upload docker image:
+(1) Configure docker:
     eventsource$ docker-machine start default
     eventsource$ eval "$(docker-machine env default)"
-    eventsource$ docker build -t amollenkopf/event-source .
     eventsource$ docker login
+(2) Build & push event-source to DockerHub:
+    eventsource$ docker build -t amollenkopf/event-source .
     eventsource$ docker push amollenkopf/event-source
+(2) Build & push spatiotemporal-esri-analytic-task to DockerHub:
+    copy to S3: https://esri.box.com/s/w4rrhuxbh4bwitozcjhekqc4utszbmkb
 </pre>
 
 ### to run on DC/OS:
@@ -72,5 +75,6 @@ It is useful to do development and verification locally prior to installing appl
       azureuser@dcos-master-3F983CB-0:~$ cd kafka_2.10-0.9.0.1
       azureuser@dcos-master-3F983CB-0:~/kafka_2.10-0.9.0.1$ ./bin/kafka-console-consumer.sh --zookeeper master.mesos:2181/kafka --topic source01
 (3) Add spatiotemporal analytics as Marathon apps:
+    dcos spark run --submit-args="-Dspark.mesos.coarse=false --driver-cores 1 --driver-memory 1G --executor-cores 2 -executor-memory 1G --class org.cam.geo.analytics.esri.SpatiotemporalEsriAnalyticTask http://esri.box.com/s/w4rrhuxbh4bwitozcjhekqc4utszbmkb broker-0.kafka.mesos:10040,broker-1.kafka.mesos:9312,broker-2.kafka.mesos:9601 source01 source01-consumer-id false"
 
 </pre>
