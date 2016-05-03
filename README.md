@@ -82,6 +82,8 @@ It is useful to do development and verification locally prior to installing appl
       azureuser@dcos-master-3F983CB-0:~$ cd kafka_2.10-0.9.0.1
       azureuser@dcos-master-3F983CB-0:~/kafka_2.10-0.9.0.1$ ./bin/kafka-console-consumer.sh --zookeeper master.mesos:2181/kafka --topic source01
 (3) Add spatiotemporal-esri-analytics as a Marathon app:
+    spatiotemporal-esri-analytics$ dcos marathon app add spatiotemporal-esri-analytic-task-docker.json
+    to run w/ Spark directly:
     $ dcos spark run --submit-args="-Dspark.mesos.coarse=false
           --driver-cores 1 --driver-memory 1G --executor-cores 2 --executor-memory 1G
           --class org.cam.geo.analytics.esri.SpatiotemporalEsriAnalyticTask
