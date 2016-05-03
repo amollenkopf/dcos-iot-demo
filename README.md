@@ -12,6 +12,7 @@ It is useful to do development and verification locally prior to installing appl
     http://spark.apache.org/docs/latest/building-spark.html#building-for-scala-211
       $ ./dev/change-scala-version.sh 2.11
       $ mvn -Pyarn -Phadoop-2.4 -Dscala-2.11 -DskipTests clean package
+      $ ./make-distribution.sh --name spark-1.6.1_2.11-bin-hadoop2.4 --tgz -Psparkr -Phadoop-2.4 -Phive -Phive-thriftserver -Pyarn
       
     ~$ export SPARK_HOME=~/spark-1.6.1-bin-hadoop2.6
 </pre>
