@@ -3,9 +3,11 @@ import org.cam.geo.analytics.AnalyticLog
 import org.apache.spark.SparkConf
 import org.apache.spark.streaming.dstream.DStream
 import org.apache.spark.streaming.kafka.KafkaUtils
-import org.apache.spark.streaming.{Seconds, StreamingContext}
+import org.apache.spark.streaming.{Seconds, StreamingContext, Time}
 import com.esri.core.geometry.{GeometryEngine, Point, SpatialReference}
 import kafka.serializer.StringDecoder
+import org.apache.spark.rdd.RDD
+import org.elasticsearch.spark._
 import org.codehaus.jackson.JsonFactory
 
 /**
@@ -15,6 +17,15 @@ import org.codehaus.jackson.JsonFactory
   *              localhost:9092 source01 source01-consumer-id false
   *
   *  Run on DC/OS:
+  *  ~$ dcos spark run --submit-args="-Dspark.mesos.coarse=false
+  *              --driver-cores 1 --driver-memory 1G --executor-cores 2 --executor-memory 1G
+  *              --class org.cam.geo.analytics.esri.SpatiotemporalEsriAnalyticTask
+  *              https://s3-us-west-1.amazonaws.com/dcos-iot-demo/spatiotemporal-esri-analytic-task-assembly-1.0.jar
+  *              broker-0.kafka.mesos:10040,broker-1.kafka.mesos:9312,broker-2.kafka.mesos:9601
+  *              source01 source01-consumer-id false"
+  *
+  *  TODO: Get Analytic to work with 2.11 not 2.10
+  *  TODO: https://hub.docker.com/r/javidelgadillo/mesosphere-spark_2.11/
   *
   */
 object SpatiotemporalEsriAnalyticTask {
@@ -35,7 +46,15 @@ object SpatiotemporalEsriAnalyticTask {
     AnalyticLog.setStreamingLogLevels()
 
     val Array(zkQuorum, topics, consumerGroupId, geofenceFilteringOn) = args
-    val sparkConf = new SparkConf().setAppName("EsriSpatiotemporalAnalyticTask")
+
+    //val Array(zkQuorum, group, topics, numThreads, interval,
+
+    val sparkConf = new SparkConf()
+      .setAppName("EsriSpatiotemporalAnalyticTask")
+      .set("es.cluster.name", "spatiotemporal-store")
+      .set("es.nodes", "localhost:9200")
+      .set("es.index.auto.create", "true")
+
     val ssc = new StreamingContext(sparkConf, Seconds(1))
     //ssc.checkpoint("checkpoint")
 
@@ -49,10 +68,40 @@ object SpatiotemporalEsriAnalyticTask {
         ssc, kafkaParams, topicsSet
       ).map(_._2)
 
+    /*
     val geofenceOn = geofenceFilteringOn.toBoolean
     val filtered = if (geofenceOn) filterGeofences(lines) else lines
     val idWithLocation = format(filtered)
     idWithLocation.print()
+    */
+
+    val ds = lines.map(
+      // SUSPECT,TRACK_DATE,SENSOR,BATTERY_LEVEL,LATITUDE,LONGITUDE,DISTANCE_FT,DURATION_MIN,SPEED_MPH,COURSE_DEGREE
+      // J7890,TIME,2,High,32.97903,-115.550378,78.63,0.87,1.03,123
+      line => {
+        val fields = line.split(",")
+        val point = (fields(4).toDouble, fields(5).toDouble)
+        Map(
+          "suspectId" -> fields(0),
+          "observationTime" -> fields(1).toLong,
+          "sensor" -> fields(2).toInt,
+          "batteryLevel" -> fields(3),
+          "latitude" -> point._1,
+          "longitude" -> point._2,
+          "distanceInFeet" -> fields(6).toFloat,
+          "durationInMinutes" -> fields(7).toFloat,
+          "speedMph" -> fields(8).toFloat,
+          "courseDegree" -> fields(9).toFloat,
+          "geometry" -> s"${point._1},${point._2}"
+        )
+      }
+    )
+
+    val esIndexName = "test1"
+    ds.foreachRDD((rdd: RDD[Map[String, Any]], time: Time) => {
+      rdd.saveToEs(esIndexName + "/" + esIndexName) // ES index/type
+      println("Time %s: saving to Elasticsearch (%s total records)".format(time, rdd.count()))
+    })
 
     ssc.start()
     ssc.awaitTermination()

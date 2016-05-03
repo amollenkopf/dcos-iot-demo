@@ -8,6 +8,7 @@ libraryDependencies ++= Seq(
   "org.apache.spark" %% "spark-core" % "1.6.1" % "provided",
   "org.apache.spark" %% "spark-streaming" % "1.6.1" % "provided",
   "org.apache.spark" %% "spark-streaming-kafka" % "1.6.1",
+  "org.elasticsearch" %% "elasticsearch-spark" % "2.3.0",
   "com.esri.geometry" % "esri-geometry-api" % "1.2.1"
 )
 
