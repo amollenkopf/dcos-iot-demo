@@ -1,6 +1,5 @@
 package org.cam.geo.analytics.esri
 
-import kafka.serializer.StringDecoder
 import org.apache.spark.SparkConf
 import org.apache.spark.rdd.RDD
 import org.apache.spark.streaming.dstream.DStream
@@ -33,21 +32,30 @@ object SpatiotemporalEsriAnalyticTask {
     val stdoutOn = stdoutOnStr.toBoolean
 
     val sparkConf = new SparkConf()
-      .setAppName("EsriSpatiotemporalAnalyticTask")
+      .setAppName("spatiotemporal-esri-analytic-task")
 
     val ssc = new StreamingContext(sparkConf, Seconds(1))
     //ssc.checkpoint("checkpoint")  //note: Use only if HDFS is available where Spark is running
 
-    val topicsSet = topics.split(",").toSet
+    //val topicsSet = topics.split(",").toSet
+    //val topicsMap = topics.split(",").toMap[String, String]
+    val numThreads = "1"
+    val topicMap = topics.split(",").map((_, numThreads.toInt)).toMap
+    /*
     val kafkaParams = Map[String, String](
       "metadata.broker.list" -> zkQuorum,
       "group.id" -> consumerGroupId
     )
+    */
 
+    val lines = KafkaUtils.createStream(ssc, zkQuorum, consumerGroupId, topicMap).map(_._2)
+
+    /*
     val lines = KafkaUtils.createDirectStream
       [String, String, StringDecoder, StringDecoder](
         ssc, kafkaParams, topicsSet
       ).map(_._2)
+    */
 
     val filtered = if (geofenceFilteringOn) filterGeofences(lines) else lines
 
