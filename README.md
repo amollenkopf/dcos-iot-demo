@@ -7,7 +7,12 @@ It is useful to do development and verification locally prior to installing appl
 <pre>
 (1) TODO: Setup SBT
 (2) TODO: Setup Kafka
-(3) TODO: Spark
+(3) TODO: Spark, got to Github, find the 1.6.1 release, download zip
+    https://github.com/apache/spark/releases
+    http://spark.apache.org/docs/latest/building-spark.html#building-for-scala-211
+      $ ./dev/change-scala-version.sh 2.11
+      $ mvn -Pyarn -Phadoop-2.4 -Dscala-2.11 -DskipTests clean package
+      
     ~$ export SPARK_HOME=~/spark-1.6.1-bin-hadoop2.6
 </pre>
 
