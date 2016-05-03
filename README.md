@@ -14,9 +14,9 @@ It is useful to do development and verification locally prior to installing appl
 ### To build locally:
 <pre>
 (1) Build event source:
-    eventsource$ sbt assembly
+    event-source$ sbt assembly
 (2) Build Spark analytic tasks:
-    esrispatiotemporalanalytics$ sbt assembly
+    spatiotemporal-esri-analytics$ sbt assembly
     TODO: add other analytics ...
 </pre>
 
@@ -69,16 +69,21 @@ It is useful to do development and verification locally prior to installing appl
     ~$ dcos kafka topic list
     ~$ dcos kafka topic describe source01
 (2) Add event source as a Marathon app:
-    eventsource$ dcos marathon app add eventsource-docker.json
+    event-source$ dcos marathon app add eventsource-docker.json
     note: you can verify events are being sent by running command line Kafka Consumer utilities to listen to the topic:
       azureuser@dcos-master-3F983CB-0:~$ wget http://mirror.reverse.net/pub/apache/kafka/0.9.0.1/kafka_2.10-0.9.0.1.tgz
       azureuser@dcos-master-3F983CB-0:~$ tar -xvf kafka_2.10-0.9.0.1.tgz
       azureuser@dcos-master-3F983CB-0:~$ cd kafka_2.10-0.9.0.1
       azureuser@dcos-master-3F983CB-0:~/kafka_2.10-0.9.0.1$ ./bin/kafka-console-consumer.sh --zookeeper master.mesos:2181/kafka --topic source01
-(3) Add spatiotemporal analytics as Marathon apps:
-    dcos spark run --submit-args="-Dspark.mesos.coarse=false
-        --driver-cores 1 --driver-memory 1G --executor-cores 2 --executor-memory 1G
-        --class org.cam.geo.analytics.esri.SpatiotemporalEsriAnalyticTask
-        http://esri.box.com/s/w4rrhuxbh4bwitozcjhekqc4utszbmkb broker-0.kafka.mesos:10040,broker-1.kafka.mesos:9312,broker-2.kafka.mesos:9601
-        source01 source01-consumer-id false"
+(3) Add spatiotemporal-esri-analytics as a Marathon app:
+    $ dcos spark run --submit-args="-Dspark.mesos.coarse=false
+          --driver-cores 1 --driver-memory 1G --executor-cores 2 --executor-memory 1G
+          --class org.cam.geo.analytics.esri.SpatiotemporalEsriAnalyticTask
+          http://esri.box.com/s/w4rrhuxbh4bwitozcjhekqc4utszbmkb  broker-0.kafka.mesos:10040,broker-1.kafka.mesos:9312,broker-2.kafka.mesos:9601
+          source01 source01-consumer-id false"
+    note: copy the driver-id, you will need it to kill the Spark app later
+(4) Observe stdout of both
+(5) Remove apps:
+    event-source$ dcos marathon app remove source01
+    event-source$ dcos spark kill driver-20160503154055-0003
 </pre>
