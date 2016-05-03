@@ -17,8 +17,8 @@ object SpatiotemporalEsriAnalyticTask {
 
   def main(args: Array[String]) {
     if (args.length < 5) {
-      System.err.println("Usage: EsriSpatiotemporalAnalyticTask <brokerUrl(s)> <topic(s)> <consumerGroupId> <geofenceFilteringOn>")
-      System.err.println("         brokerUrl(s): a comma separated list of Kafka broker urls, e.g. localhost:9092")
+      System.err.println("Usage: EsriSpatiotemporalAnalyticTask <zkQuorum> <topic(s)> <consumerGroupId> <geofenceFilteringOn>")
+      System.err.println("          zkQuorum(s): the zookeeper url, e.g. localhost:2181")
       System.err.println("             topic(s): a comma separated list of the Kafka topic(s) name to consume from, e.g. source01")
       System.err.println("      consumerGroupId: the Kafka consumer group id to consume with, e.g. source01-consumer-id")
       System.err.println("  geofenceFilteringOn: indicates whether or not to apply a geofence filter, e.g. true")
@@ -37,26 +37,9 @@ object SpatiotemporalEsriAnalyticTask {
     val ssc = new StreamingContext(sparkConf, Seconds(1))
     //ssc.checkpoint("checkpoint")  //note: Use only if HDFS is available where Spark is running
 
-    //val topicsSet = topics.split(",").toSet
-    //val topicsMap = topics.split(",").toMap[String, String]
     val numThreads = "1"
     val topicMap = topics.split(",").map((_, numThreads.toInt)).toMap
-    /*
-    val kafkaParams = Map[String, String](
-      "metadata.broker.list" -> zkQuorum,
-      "group.id" -> consumerGroupId
-    )
-    */
-
     val lines = KafkaUtils.createStream(ssc, zkQuorum, consumerGroupId, topicMap).map(_._2)
-
-    /*
-    val lines = KafkaUtils.createDirectStream
-      [String, String, StringDecoder, StringDecoder](
-        ssc, kafkaParams, topicsSet
-      ).map(_._2)
-    */
-
     val filtered = if (geofenceFilteringOn) filterGeofences(lines) else lines
 
     filtered.foreachRDD((rdd: RDD[String], time: Time) => {

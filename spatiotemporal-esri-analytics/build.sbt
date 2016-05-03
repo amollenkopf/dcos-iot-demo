@@ -9,7 +9,8 @@ libraryDependencies ++= Seq(
   "org.apache.spark" %% "spark-streaming" % "1.6.1" % "provided",
   "org.apache.spark" %% "spark-streaming-kafka" % "1.6.1",
   "org.elasticsearch" %% "elasticsearch-spark" % "2.3.0",
-  "com.esri.geometry" % "esri-geometry-api" % "1.2.1"
+  "com.esri.geometry" % "esri-geometry-api" % "1.2.1",
+  "org.apache.httpcomponents" % "httpclient" % "4.5.1"
 )
 
 assemblyExcludedJars in assembly := {
@@ -21,6 +22,7 @@ assemblyExcludedJars in assembly := {
       x.data.getName.matches(".*yarn.*") ||
       x.data.getName.matches(".*unused.*") ||
       x.data.getName.matches(".*minlog.*") ||
+        x.data.getName.matches(".*slf4j.*") ||
       x.data.getName.matches(".*beanutils.*")
   }
 }
