@@ -96,6 +96,14 @@ It is useful to do development and verification locally prior to installing appl
           source01 source01-consumer-id false true"
     note: copy the driver-id, you will need it to kill the Spark app later
 (4) Observe stdout of both
+
+(5) Add spatiotemporal-store Elasticsearch cluster as a Marathon app:
+    dcos-iot-demo-extras$ dcos marathon app add sat-marathon.json
+(5) Install marathon-lb via Universe UI.
+(6) Add map service as a Marathon app:
+    dcos-iot-demo-extras$ dcos marathon app add badmf-marathon.json
+
+
 (5) Remove apps:
     event-source$ dcos marathon app remove source01
     event-source$ dcos spark kill driver-20160503154055-0003
