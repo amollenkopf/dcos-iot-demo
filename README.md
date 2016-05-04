@@ -41,6 +41,10 @@ It is useful to do development and verification locally prior to installing appl
         $SPARK_HOME/bin/spark-submit --class "org.cam.geo.analytics.esri.SpatiotemporalEsriAnalyticTask"
             --master local[2] target/scala-2.10/spatiotemporal-esri-analytic-task-assembly-1.0.jar
             localhost:9092 source01 source01-consumer-id false true
+        $SPARK_HOME/bin/spark-submit --class "org.cam.geo.analytics.esri.SpatiotemporalEsriAnalyticTaskWithElasticsearchSink"
+            --master local[2] target/scala-2.10/spatiotemporal-esri-analytic-task-assembly-1.0.jar
+            localhost:2181 source01 source01-consumer-id false true
+            adammac.esri.com:9200 spatiotemporal-store
 </pre>
 
 ## Working on DC/OS:
