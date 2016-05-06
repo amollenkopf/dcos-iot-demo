@@ -12,7 +12,7 @@ import org.codehaus.jackson.JsonFactory
 import org.elasticsearch.spark._
 
 object SpatiotemporalEsriAnalyticTaskWithElasticsearchSink {
-  //TODO: esri-geo-hash ---geo_hash---
+  //TODO: make esri-geo-hash ---geo_hash--- conditional
   //TODO: refactor geofence ring to common AnalyticData object or file
   //TODO: /arcgis/rest/services/test2/FeatureServer/0/query?where=1%3D1&objectIds=
   //TODO:   lod=15  lodType=pointyHexagon lodSR=102100 returnLodGeometry=true f=pjson
