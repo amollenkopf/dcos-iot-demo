@@ -1,0 +1,14 @@
+{
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "amollenkopf/spatiotemporal-event-source",
+      "forcePullImage": false
+    }
+  },
+  "cmd": "java -Xms4096m -Xmx4096m -jar ./jars/spatiotemporal-event-source-assembly-1.0.jar broker-0.kafka.mesos:10040,broker-1.kafka.mesos:9312,broker-2.kafka.mesos:9601 taxi11 3000 /data/taxi/taxi-simulation-01-25.csv 1 false",
+  "id": "source01",
+  "instances": 1,
+  "cpus": 1.0,
+  "mem": 5120
+}

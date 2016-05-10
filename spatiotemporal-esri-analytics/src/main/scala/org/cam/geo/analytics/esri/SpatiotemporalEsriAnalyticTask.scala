@@ -17,28 +17,28 @@ object SpatiotemporalEsriAnalyticTask {
 
   def main(args: Array[String]) {
     if (args.length < 5) {
-      System.err.println("Usage: EsriSpatiotemporalAnalyticTask <zkQuorum> <topic(s)> <consumerGroupId> <geofenceFilteringOn>")
+      System.err.println("Usage: EsriSpatiotemporalAnalyticTask <zkQuorum> <topic> <geofenceFilteringOn>")
       System.err.println("          zkQuorum(s): the zookeeper url, e.g. localhost:2181")
-      System.err.println("             topic(s): a comma separated list of the Kafka topic(s) name to consume from, e.g. source01")
-      System.err.println("      consumerGroupId: the Kafka consumer group id to consume with, e.g. source01-consumer-id")
+      System.err.println("                topic: the Kafka topic name to consume from, e.g. taxi03")
       System.err.println("  geofenceFilteringOn: indicates whether or not to apply a geofence filter, e.g. true")
       System.err.println("             stdoutOn: indicates whether or not to write to stdout, e.g. true")
       System.exit(1)
     }
     AnalyticLog.setStreamingLogLevels()
 
-    val Array(zkQuorum, topics, consumerGroupId, geofenceFilteringOnStr, stdoutOnStr) = args
+    val Array(zkQuorum, topic, geofenceFilteringOnStr, stdoutOnStr) = args
     val geofenceFilteringOn = geofenceFilteringOnStr.toBoolean
     val stdoutOn = stdoutOnStr.toBoolean
 
     val sparkConf = new SparkConf()
-      .setAppName("spatiotemporal-esri-analytic-task")
+      .setAppName("rat1-simple")
 
     val ssc = new StreamingContext(sparkConf, Seconds(1))
     //ssc.checkpoint("checkpoint")  //note: Use only if HDFS is available where Spark is running
 
     val numThreads = "1"
-    val topicMap = topics.split(",").map((_, numThreads.toInt)).toMap
+    val topicMap = topic.split(",").map((_, numThreads.toInt)).toMap
+    val consumerGroupId = topic + "-consumer-group"
     val lines = KafkaUtils.createStream(ssc, zkQuorum, consumerGroupId, topicMap).map(_._2)
     val filtered = if (geofenceFilteringOn) filterGeofences(lines) else lines
 
@@ -61,7 +61,7 @@ object SpatiotemporalEsriAnalyticTask {
     lines.filter(
       line => {
         val elems = line.split(",")
-        val point = new Point(elems(5).toDouble, elems(4).toDouble)
+        val point = new Point(elems(2).toDouble, elems(3).toDouble)
         !GeometryEngine.disjoint(point, geofence, SpatialReference.create(4326))
       })
   }
