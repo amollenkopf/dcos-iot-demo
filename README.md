@@ -66,7 +66,7 @@ It is useful to do development and verification locally prior to installing appl
 (2) Build & push event-source to DockerHub:
     spatiotemporal-event-source$ docker build -t amollenkopf/spatiotemporal-event-source .
     spatiotemporal-event-source$ docker push amollenkopf/spatiotemporal-event-source
-(3) Build & push spatiotemporal-esri-analytic-task to DockerHub:
+(3) Build & upload spatiotemporal-esri-analytic-task to make it publicly available:
     spatiotemporal-esri-analytics$ sbt assembly
     Upload target/scala-2.10/spatiotemporal-esri-analytic-task-assembly-1.0.jar to S3/Azure Blob storage and make publicly available.
 </pre>
