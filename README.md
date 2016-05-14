@@ -79,6 +79,7 @@ It is useful to do development and verification locally prior to installing appl
     ~$ dcos kafka topic create source01 --partitions=3 --replication=1
     ~$ dcos kafka topic list
     ~$ dcos kafka topic describe source01
+    ~$ dcos kafka topic create taxi-pickup --partitions=1 --replication=1
 (2) Add event source as a Marathon app:
     event-source$ dcos marathon app add eventsource-docker.json
     note: you can verify events are being sent by running command line Kafka Consumer utilities to listen to the topic:
