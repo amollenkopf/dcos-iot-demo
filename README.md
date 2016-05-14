@@ -60,14 +60,15 @@ It is useful to do development and verification locally prior to installing appl
 ### To build apps in preperation for installing them on DC/OS:
 <pre>
 (1) Configure docker:
-    eventsource$ docker-machine start default
-    eventsource$ eval "$(docker-machine env default)"
-    eventsource$ docker login
+    spatiotemporal-event-source$ docker-machine start default
+    spatiotemporal-event-source$ eval "$(docker-machine env default)"
+    spatiotemporal-event-source$ docker login
 (2) Build & push event-source to DockerHub:
-    eventsource$ docker build -t amollenkopf/event-source .
-    eventsource$ docker push amollenkopf/event-source
-(2) Build & push spatiotemporal-esri-analytic-task to DockerHub:
-    copy to S3: https://esri.box.com/s/w4rrhuxbh4bwitozcjhekqc4utszbmkb
+    spatiotemporal-event-source$ docker build -t amollenkopf/spatiotemporal-event-source .
+    spatiotemporal-event-source$ docker push amollenkopf/spatiotemporal-event-source
+(3) Build & push spatiotemporal-esri-analytic-task to DockerHub:
+    spatiotemporal-esri-analytics$ sbt assembly
+    Upload target/scala-2.10/spatiotemporal-esri-analytic-task-assembly-1.0.jar to S3/Azure Blob storage and make publicly available.
 </pre>
 
 ### to run on DC/OS:
