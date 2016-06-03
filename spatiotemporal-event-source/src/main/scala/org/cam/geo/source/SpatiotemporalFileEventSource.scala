@@ -5,10 +5,7 @@ import org.apache.kafka.clients.producer.{KafkaProducer, Producer, ProducerRecor
 import scala.io.Source
 
 /*
- *  Integrate and test NYC airport polygon filter
- *  Add Spark code snippets to PPT
- *  Make demo videos: Taxis + Filtering + DC/OS exploration
- *  Update doc on GitHub and DockerHub
+ *  spatiotemporal-event-source$ java -Xms4096m -Xmx4096m -jar target/scala-2.11/spatiotemporal-event-source-assembly-1.0.jar localhost:9092 taxi-pickup 500 ./data/taxi/taxi-pickup-simulation.csv 1 false
  */
 
 object SpatiotemporalFileEventSource extends App {
@@ -47,19 +44,21 @@ object SpatiotemporalFileEventSource extends App {
     val elems = line.trim.split(",")
     if (lastTimestamp.equals(""))
       lastTimestamp = elems(timeFieldIx)
-    if (!lastTimestamp.equals(elems(timeFieldIx))) {
+    if (elems.length > 1 && !lastTimestamp.equals(elems(timeFieldIx))) {
       lastTimestamp = elems(timeFieldIx)
       timeMillis = System.currentTimeMillis()
-      println("Sent " + count + " events.")
+      println("Time %s: Spatiotemporal Event Source sent %s events.".format(System.currentTimeMillis, count))
       count = 0
       Thread.sleep(intervalInMillis)
     }
     val eventString = line.trim.replace(lastTimestamp, timeMillis.toString)
-    producer.send(new ProducerRecord[String, String](topic, elems(0), eventString))
-    if (verbose)
-      println(ix + ": " + eventString)
-    count += 1
-    ix += 1
+    if (!eventString.equals("")) {
+      producer.send(new ProducerRecord[String, String](topic, elems(0), eventString))
+      if (verbose)
+        println(ix + ": " + eventString)
+      count += 1
+      ix += 1
+    }
   }
   producer.close()
 }

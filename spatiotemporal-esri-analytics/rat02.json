@@ -1,0 +1,17 @@
+{
+  "uris": [
+    "http://dcos-iot-demo.s3.amazonaws.com/spatiotemporal-esri-analytic-task-assembly-1.0.jar"
+  ],
+  "cmd": "/opt/spark/dist/bin/spark-submit --master mesos://leader.mesos:5050 --executor-memory 1g --executor-cores 2 --conf spark.mesos.coarse=true --conf spark.cores.max=2 --conf spark.mesos.executor.docker.image=mesosphere/spark:1.6.1-6 --class org.cam.geo.analytics.esri.SpatiotemporalEsriAnalyticTaskWithElasticsearchAndTShirtSink $MESOS_SANDBOX/spatiotemporal-esri-analytic-task-assembly-1.0.jar master.mesos:2181/kafka taxi-pickup true http://clcamesos25agents.westus.cloudapp.azure.com:10001/api/tshirt \"MesosCon 2016\" 2063348208 true spatiotemporal-store.elasticsearch.mesos:9200 spatiotemporal-store taxi-pickup",
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "mesosphere/spark:1.6.1-6",
+      "forcePullImage": true
+    }
+  },
+  "id": "rat02",
+  "instances": 1,
+  "cpus": 2,
+  "mem": 2048
+}
