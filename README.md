@@ -3,7 +3,7 @@ This project demonstrates how to configure a full stack geo-enabled Internet of 
 
 <center><a href="https://youtu.be/tOPmPIHuV-o"><img src="dcos-iot-demo-screenshot.jpg" height="75%" width="75%" ></a></center>
 
-## Architecture
+## IoT Event Flow
 <img src="dcos-iot-demo-flow.jpg"/>
 Sources emit events to Kafka brokers.  Real-time Analytic Tasks (RATs) use Spark Streaming to consume events from Kafka brokers, perform spatiotemporal analytics and sink results to one or more sinks.  The spatiotemporal-store uses Elasticsearch to efficiently index observations by space, time, and all the other attributes of the event.  The JavaScript Web app periodically queries to reflect the latest state of observations on a map.
 
