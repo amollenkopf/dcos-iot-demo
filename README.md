@@ -1,9 +1,7 @@
 # dcos-iot-demo
 Demonstrates how to configure a full stack geo-enabled Internet of Things (IoT) solution using <a href="https://mesosphere.com/">Mesosphere's</a> open sourced <a href="https://dcos.io/">Data Center Operating System (DC/OS)</a>, <a href="https://www.docker.com/">Docker</a>, <a href="http://kafka.apache.org/">Kafka</a>, <a href="http://spark.apache.org/">Spark</a>, and <a href="http://elasticsearch.mesosframeworks.com/">mesos/elasticsearch</a>.
 
-<a href="WorkingLocally.md">Working Locally</a>
-
-## Working locally (no DC/OS):
+## Working locally (verify apps are working prior to deploying to <b>DC</b>/OS):
 It is useful to do development and verification locally prior to installing applications onto DC/OS.  This section will walk you through the process of setting up, building, and running individual apps locally prior to installing them onto DC/OS.
 ### To setup locally:
 <pre>
