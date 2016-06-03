@@ -22,9 +22,9 @@ The spatiotemporal-store uses Elasticsearch to efficiently index observations by
 ### JavaScript Web App
 The JavaScript Web app periodically queries to reflect the latest state of observations on a map.  The JavaScript web app queries for geohash aggregations that are visualized as rectangles on the map or raw observations visualized as symbols on the map.
 
+## Architecture
 <img src="dcos-iot-demo-architecture.jpg"/>
 All components of the flow described above (sources, brokers, spark streaming, elasticsearch & map apps) are scheduled on DC/OS as marathon apps.
-
 
 ## Working locally (for verification prior to deploying on DC/OS):
 It is useful to do development and verification locally prior to installing applications onto DC/OS.  This section will walk you through the process of setting up, building, and running individual apps locally prior to installing them onto DC/OS.
