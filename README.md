@@ -7,6 +7,9 @@ This project demonstrates how to configure a full stack geo-enabled Internet of 
 <img src="dcos-iot-demo-architecture.jpg"/>
 The Spark Streaming app illustrates how to combine the <a href="https://github.com/Esri/geometry-api-java">esri/geometry-java-api</a> to perform geospatial analytics in near real-time.
 
+<img src="dcos-iot-demo-flow.jpg"/>
+
+
 ## Working locally (for verification prior to deploying on DC/OS):
 It is useful to do development and verification locally prior to installing applications onto DC/OS.  This section will walk you through the process of setting up, building, and running individual apps locally prior to installing them onto DC/OS.
 ### To setup locally:
