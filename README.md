@@ -3,6 +3,9 @@ This project demonstrates how to configure a full stack geo-enabled Internet of 
 
 <img src="dcos-iot-demo-architecture.jpg"/>
 
+A video of the demonstration can be found here:
+[![ScreenShot](dcos-iot-demo-screenshot.jpg)](https://youtu.be/tOPmPIHuV-o)
+
 ## Working locally (for verification prior to deploying on DC/OS):
 It is useful to do development and verification locally prior to installing applications onto DC/OS.  This section will walk you through the process of setting up, building, and running individual apps locally prior to installing them onto DC/OS.
 ### To setup locally:
