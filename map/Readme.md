@@ -3,7 +3,7 @@
 1. Deploy the files in this folder in your clusters web server.
   * If you want to deploy the map web application on an external web server, you need to establish a tunnel from the web server to the {es} instant of the cluster and change the {es} host url as described in 2.
 2. On default the app will try to communicate with {es} on http://spatiotemporal-store.elasticsearch.mesos:9200
-  * Open the URL in a browser on your clusters machine where the web server is located to verify communication with {es} is working
+  * Open the URL in a browser on your clusters machine where the web server is located to verify communication with {es} is working. You should be able to hit an {es} landing page looking like the following:
   
   ![{es} landing page with working communication](doc/{es}LandingPage.png)
   _Note: This example is using an external webserver with a tunnel to the {es} cluster bound to localhost_
