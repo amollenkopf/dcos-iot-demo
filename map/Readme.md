@@ -4,6 +4,30 @@
   * If you want to deploy the map web application on an external web server, you need to establish a tunnel from the web server to the {es} instant of the cluster and change the {es} host url as described in 2.
 2. On default the app will try to communicate with {es} on http://spatiotemporal-store.elasticsearch.mesos:9200
   * Open the URL in a browser to verify communication with {es} is working
+  
+  ![{es} landing page with working communication](doc/{es}LandingPage.png)
+  _Note: This example is using an external webserver with a tunnel to the {es} cluster bound to localhost_
+
   * If you need to change the {es} host URL go to line 89/90 of the index.html (in this section you can also change the name of the datasource name (index/type) in case you did not use the default taxi name)
   * Optional: To change the FeatureThreshold (value when to switch from aggregated view to individual feature view) edit the number in line 93 of the index.html
-  * 
+ 
+### Capabilities
+
+* Aggregation view in GeoHash (displays Count of features per bucket) or HeatMap style:
+
+![aggregation](doc/aggregation.png)
+![heatmap](doc/heatmap.png)
+
+ * GeoHash bins are dynamically resizing and adjusting color ramp dependend on zoom level
+
+![aggregationCloseup](doc/aggregationCloseup.png)
+
+* Replay data in any viewing mode
+
+![heatmapReplay](doc/heatmapReplay.png)
+
+* Individual feature view when FeatureThreshold is reached
+
+![feature](doc/featureView.png)
+
+* Change Basemap via Widget in top right corner
