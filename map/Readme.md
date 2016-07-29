@@ -1,3 +1,7 @@
+### Map web application
+
+This is a custom JavaScript based Web application to visualize the dcos-iot-demo data in a map focused browser based client application. It uses the [ArcGIS JavaScript API](https://developers.arcgis.com/javascript/), [elasticsearch.js API](http://www.elastic.co/guide/en/elasticsearch/client/javascript-api/current/index.html) and a [Geohash library for Javascript](https://github.com/davetroy/geohash-js)
+
 ### Deployment & Configuration
 
 1. Deploy the files in this folder in your clusters web server.
