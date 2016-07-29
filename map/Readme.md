@@ -31,3 +31,9 @@
 ![feature](doc/featureView.png)
 
 * Change Basemap via Widget in top right corner
+
+### Contact
+
+Feel free to reach out if you have questions regarding this map web application
+
+[Send an email](mailto:tpaschke@esri.com)
