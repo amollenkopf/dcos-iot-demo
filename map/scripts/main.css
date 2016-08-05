@@ -1,0 +1,227 @@
+html,
+body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #fff;
+    color: #fff;
+    overflow: hidden;
+    font-family: sans-serif;
+}
+
+#map {
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+#bottomPanel {
+    margin: 0 auto;
+    position: absolute;
+    bottom: 2.5em;
+}
+
+#control_l {
+    position: absolute;
+    left: 100px;
+    top: 20px;
+}
+
+#timeSlider {
+    z-index: 1;
+}
+
+.dijitRuleLabelH {
+    color: white;
+    position: relative;
+    left: -50%;
+}
+
+.claro .dijitSlider .dijitSliderProgressBarH {
+    background-color: rgba(146, 148, 148, 0.83);
+    background-image: none;
+}
+
+.claro .dijitSliderImageHandleH {
+    background: #F5F5F5;
+    background: -webkit-linear-gradient(#FDFDFD 0%, #F5F5F5 100%);
+    background: -moz-linear-gradient(#fdfdfd 0%, #f5f5f5 100%);
+    background: -o-linear-gradient(#fdfdfd 0%, #f5f5f5 100%);
+    background: -ms-linear-gradient(#fdfdfd 0%, #f5f5f5 100%);
+    background: linear-gradient(#FDFDFD 0%, #F5F5F5 100%);
+    -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5);
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    border: 1px solid #a9a9a9;
+    /*border: 1px solid #007AC2;*/
+    width: 16px;
+    height: 16px;
+    margin-top: -1px;
+    position: absolute;
+}
+
+.esriTimeSlider .ts {
+    padding: 5px 3px 3px 0px;
+    margin: 3px;
+}
+
+.dijitRuleMark {
+    position: absolute;
+    border: 2px solid #929293;
+    line-height: 0;
+    height: 10px;
+}
+
+.dijitSliderImageHandle:after {
+    content: "";
+    display: block;
+    background: #f5f5f5;
+    background: -webkit-linear-gradient(#ddd, #fdfdfd 100%);
+    background: -moz-linear-gradient(#ddd, #fdfdfd 100%);
+    background: -o-linear-gradient(#ddd, #fdfdfd 100%);
+    background: -ms-linear-gradient(#ddd, #fdfdfd 100%);
+    background: linear-gradient(#ddd, #fdfdfd 100%);
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    height: 10px;
+    width: 10px;
+    left: 3px;
+    top: 3px;
+    position: absolute;
+}
+
+.dijitSliderHover .dijitSliderImageHandle:after,
+.dijitSliderFocused .dijitSliderImageHandle:after {
+    background: rgba(194, 194, 194, 0.6);
+    height: 6px;
+    width: 6px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #c2c2c2 #ccc #ddd;
+}
+
+.claro .dijitSliderFocused .dijitSliderRemainingBarH,
+.claro .dijitSliderFocused .dijitSliderRightBumper {
+    background: #C7C8CA;
+    border: 1px solid rgba(0, 0, 0, 0);
+    border-radius: 2px;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15) inset;
+}
+
+.dijitSlider.dojoxRangeSlider .dijitSliderLeftBumper,
+.dijitSlider.dojoxRangeSlider .dijitSliderBottomBumper {
+    background: #C7C8CA;
+}
+
+.onoffswitch {
+    position: relative;
+    width: 60px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    margin-bottom: 10px;
+}
+
+.onoffswitch-checkbox {
+    display: none;
+}
+
+.onoffswitch-label {
+    display: block;
+    overflow: hidden;
+    cursor: pointer;
+    height: 25px;
+    padding: 0;
+    line-height: 25px;
+    border: 2px solid #CCCCCC;
+    border-radius: 25px;
+    background-color: #CCCCCC;
+    transition: background-color 0.3s ease-in;
+}
+
+.onoffswitch-label:before {
+    content: "";
+    display: block;
+    width: 25px;
+    margin: 0px;
+    background: #FFFFFF;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 33px;
+    border: 2px solid #CCCCCC;
+    border-radius: 25px;
+    transition: all 0.3s ease-in 0s;
+}
+
+.onoffswitch-checkbox:checked + .onoffswitch-label {
+    background-color: #43D141;
+}
+
+.onoffswitch-checkbox:checked + .onoffswitch-label,
+.onoffswitch-checkbox:checked + .onoffswitch-label:before {
+    border-color: #43D141;
+}
+
+.onoffswitch-checkbox:checked + .onoffswitch-label:before {
+    right: 0px;
+}
+
+.button {
+    display: inline-block;
+    position: relative;
+    color: #888;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    text-align: center;
+    padding: 8px 12px;
+    font-size: 12px;
+    font-weight: 700;
+    font-family: helvetica, arial, sans-serif;
+    border-radius: 4px;
+    border: 0px solid #bcbcbc;
+    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+    background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(239, 239, 239, 1) 60%, rgba(225, 223, 226, 1) 100%);
+    background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(239, 239, 239, 1) 60%, rgba(225, 223, 226, 1) 100%);
+    background-image: -o-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(239, 239, 239, 1) 60%, rgba(225, 223, 226, 1) 100%);
+    background-image: -ms-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(239, 239, 239, 1) 60%, rgba(225, 223, 226, 1) 100%);
+    background-image: linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(239, 239, 239, 1) 60%, rgba(225, 223, 226, 1) 100%);
+}
+
+.button:hover {
+    color: #555;
+}
+
+.button:focus {
+    outline: none;
+}
+
+.claro .dijitTitlePaneTitle {
+    color: #888;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    text-align: center;
+    padding: 8px 12px;
+    font-size: 12px;
+    font-weight: 700;
+    font-family: helvetica, arial, sans-serif;
+    border-radius: 4px;
+    border: 0px solid #bcbcbc;
+    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+    background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(239, 239, 239, 1) 60%, rgba(225, 223, 226, 1) 100%);
+    background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(239, 239, 239, 1) 60%, rgba(225, 223, 226, 1) 100%);
+    background-image: -o-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(239, 239, 239, 1) 60%, rgba(225, 223, 226, 1) 100%);
+    background-image: -ms-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(239, 239, 239, 1) 60%, rgba(225, 223, 226, 1) 100%);
+    background-image: linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(239, 239, 239, 1) 60%, rgba(225, 223, 226, 1) 100%);
+}
+
+.dijitTitlePaneTitleFocus:focus {
+    outline: none;
+}
