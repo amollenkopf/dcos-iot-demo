@@ -57,7 +57,11 @@ object SpatiotemporalEsriAnalyticTaskWithElasticsearchAndTShirtSink {
     val Array(zkQuorum, topic, geofenceFilteringOnStr, url, tShirtMessage, phoneNumber, verboseStr, esNodes, esClusterName, esIndexName) = args
     val geofenceFilteringOn = geofenceFilteringOnStr.toBoolean
     val verbose = verboseStr.toBoolean
+    val shards = 20  //TODO: expose as param, default is 3
+    val replicas = 0  //TODO: expose as param, default is 1
 
+    println("es.cluster.name: " + esClusterName)
+    println("es.nodes: " + esNodes)
     val sparkConf = new SparkConf()
       .setAppName("rat2")
       .set("es.cluster.name", esClusterName)
@@ -134,7 +138,7 @@ object SpatiotemporalEsriAnalyticTaskWithElasticsearchAndTShirtSink {
         EsField("geometry", EsFieldType.GeoPoint)
       )
     if (!ElasticsearchUtils.doesDataSourceExists(esIndexName, esNode, esPort))
-      ElasticsearchUtils.createDataSource(esIndexName, esFields, esNode, esPort)
+      ElasticsearchUtils.createDataSource(esIndexName, esFields, esNode, esPort, shards, replicas)
 
     datasource.foreachRDD((rdd: RDD[Map[String, Any]], time: Time) => {
       println("Time %s: Updating Elasticsearch (%s total records)".format(time, rdd.count))

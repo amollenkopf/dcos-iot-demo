@@ -21,6 +21,7 @@ object ElasticsearchUtils {
     * @param esPort the es port
     * @return
     */
+  //TODO: Change DataSource references to Index
   def doesDataSourceExists(dataSourceName:String, esHostName:String, esPort:Int = 9200):Boolean = {
     val client = HttpClients.createDefault()
     try {
@@ -62,19 +63,17 @@ object ElasticsearchUtils {
     * @param fields the fields
     * @param esHostName the es host name
     * @param esPort the es port name
-    * @param geometryType the geometry type, could be "esriGeometryPoint", "esriGeometryPolygon" or "esriGeometryPolyline"
     */
-  def createDataSource(dataSourceName:String, fields:Array[EsField], esHostName:String, esPort:Int = 9200, geometryType:String = "esriGeometryPoint"):Boolean = {
+  def createDataSource(dataSourceName:String, fields:Array[EsField], esHostName:String, esPort:Int = 9200, shards:Int=3, replicas:Int=1):Boolean = {
     val client = HttpClients.createDefault()
     try {
       val dataSourceNameToLowercase = dataSourceName.toLowerCase()
-      // step 1 - create the mapping with metadata
       val createMappingURLStr = s"http://$esHostName:$esPort/$dataSourceNameToLowercase"
       val createMappingURL:URL = new URL(createMappingURLStr)
       val httpPut:HttpPut = new HttpPut(createMappingURL.toURI)
       httpPut.setHeader(HttpHeaders.CONTENT_TYPE, "application/json")
       httpPut.setHeader("charset", "utf-8")
-      val createMappingRequest = createMappingJsonAsStr(dataSourceNameToLowercase, fields)
+      val createMappingRequest = createMappingJsonAsStr(dataSourceNameToLowercase, fields, shards, replicas)
       httpPut.setEntity(new StringEntity(createMappingRequest, ContentType.APPLICATION_JSON))
 
       // execute
@@ -101,55 +100,7 @@ object ElasticsearchUtils {
           parseError.printStackTrace()
           return false
       }
-
-      // step 2 - create the metadata documents
-      val geometryField = fields.find( field => field.fieldType == EsFieldType.GeoPoint || field.fieldType == EsFieldType.GeoShape )
-      val geometryFieldName = geometryField match {
-        case Some(field) if field.fieldType == EsFieldType.GeoPoint || field.fieldType == EsFieldType.GeoShape=>
-          field.name
-        case _ =>
-          "Geometry"
-      }
-      val createOIDDoc =
-        s"""{ "index" : { "_index" : "$dataSourceNameToLowercase", "_type" : "---metadata---", "_id" : "object_id_generator" } }
-            {}
-         """.stripMargin
-      val createMetadataDoc =
-        s"""{ "index" : { "_index" : "$dataSourceNameToLowercase", "_type" : "---metadata---", "_id" : "data_source_metadata" } }
-            {"aliasName":"$dataSourceNameToLowercase","indexNamePrefix":"${UUID.randomUUID().toString}","indexTypeName":"$dataSourceNameToLowercase","oidFieldName":"objectid","globalIdFieldName":"globalid","trackIdFieldName":null,"startTimeFieldName":null,"endTimeFieldName":null,"geometryFieldName":"$geometryFieldName","geometryType":"$geometryType","timeInterval":10,"timeIntervalUnits":"esriTimeUnitsSeconds","hasLiveData":true,"objectIdStrategy":"ObjectId64Bit","rollingIndexStrategy":"Hourly","oidSeed":0,"oidBlockSize":1,"esriGeoHashes":"[{\\"field_name\\":\\"triangle_h_102100\\",\\"type\\":\\"triangle\\",\\"wkid\\":102100,\\"precision\\":20,\\"orientation\\":\\"horizontal\\"},{\\"field_name\\":\\"triangle_v_102100\\",\\"type\\":\\"triangle\\",\\"wkid\\":102100,\\"precision\\":20,\\"orientation\\":\\"vertical\\"},{\\"field_name\\":\\"square_102100\\",\\"type\\":\\"square\\",\\"wkid\\":102100,\\"precision\\":20}]"}
-        """.stripMargin
-      val bulkRequest = createOIDDoc + "\n" +createMetadataDoc
-      val bulkURLStr = s"http://$esHostName:$esPort/$dataSourceNameToLowercase/_bulk"
-      val bulkURL:URL = new URL(bulkURLStr)
-      val httpPost:HttpPost = new HttpPost(bulkURL.toURI)
-      httpPost.setEntity(new StringEntity(bulkRequest, ContentType.DEFAULT_TEXT))
-
-      // execute
-      val bulkResponse = client.execute(httpPost)
-      val bulkResponseAsString = getHttpResponseAsString(bulkResponse, httpPut)
-      try {
-        val createSuccessOpt = bulkResponseAsString.map(str => {
-          implicit val formats = DefaultFormats
-          (parse(str) \ "errors").extract[Boolean]
-        })
-        createSuccessOpt match {
-          case Some(errors) =>
-            if (errors) {
-              println(s"Failed to create the metadata and oid documents for DataSource $dataSourceName! Errors: $bulkResponseAsString")
-              return false
-            }
-          case _ =>
-            println(s"Failed to create the mapping for DataSource $dataSourceName! Errors: $bulkResponseAsString")
-            return false
-        }
-      } catch {
-        case parseError: Throwable =>
-          println(s"Failed to create the mapping for DataSource $dataSourceName!")
-          parseError.printStackTrace()
-          return false
-      }
       true
-
     } finally {
       client.close()
     }
@@ -164,7 +115,6 @@ object ElasticsearchUtils {
     * @return a String
     */
   private def getHttpResponseAsString(response:CloseableHttpResponse, request:HttpUriRequest):Option[String] = {
-    // make sure we close the response
     try {
       val entity = response.getEntity
       val responseString = {
@@ -192,9 +142,14 @@ object ElasticsearchUtils {
     * @param fields the es fields to create
     * @return a json str
     */
-  private def createMappingJsonAsStr(datSourceName:String, fields:Array[EsField]):String = {
+  private def createMappingJsonAsStr(datSourceName:String, fields:Array[EsField], shards:Int=3, replicas:Int=1):String = {
     s"""
        |{
+       |  "settings": {
+       |     "number_of_shards" : $shards,
+       |     "auto_expand_replicas" : 0,
+       |     "number_of_replicas" : $replicas
+       |  },
        |	"mappings": {
        |		"$datSourceName": {
        |			"_timestamp": {
@@ -203,70 +158,6 @@ object ElasticsearchUtils {
        |			"properties": {
        |       ${createFieldMappingJsonAsStr(fields)}
        |			}
-       |		},
-       |		"---metadata---": {
-       |			"_timestamp": {
-       |				"enabled": true
-       |			},
-       |			"properties": {
-       |				"aliasName": {
-       |					"type": "string"
-       |				},
-       |				"endTimeFieldName": {
-       |					"type": "string"
-       |				},
-       |				"esriGeoHashes": {
-       |					"type": "string"
-       |				},
-       |				"geometryFieldName": {
-       |					"type": "string"
-       |				},
-       |				"geometryType": {
-       |					"type": "string"
-       |				},
-       |				"globalIdFieldName": {
-       |					"type": "string"
-       |				},
-       |				"hasLiveData": {
-       |					"type": "string"
-       |				},
-       |				"indexNamePrefix": {
-       |					"type": "string"
-       |				},
-       |				"indexTypeName": {
-       |					"type": "string"
-       |				},
-       |				"objectIdStrategy": {
-       |					"type": "string"
-       |				},
-       |				"oidBlockSize": {
-       |					"type": "string"
-       |				},
-       |				"oidFieldName": {
-       |					"type": "string"
-       |				},
-       |				"oidGuid": {
-       |					"type": "string"
-       |				},
-       |				"oidSeed": {
-       |					"type": "string"
-       |				},
-       |				"rollingIndexStrategy": {
-       |					"type": "string"
-       |				},
-       |				"startTimeFieldName": {
-       |					"type": "string"
-       |				},
-       |				"timeInterval": {
-       |					"type": "string"
-       |				},
-       |				"timeIntervalUnits": {
-       |					"type": "string"
-       |				},
-       |				"trackIdFieldName": {
-       |					"type": "string"
-       |				}
-       |			}
        |		}
        |	}
        |}
@@ -274,16 +165,7 @@ object ElasticsearchUtils {
   }
 
   private def createFieldMappingJsonAsStr(fields:Array[EsField]):String = {
-    val idFields =
-      """
-        |"globalid": {
-        |  "type": "string"
-        |},
-        |"objectid": {
-        |  "type": "long"
-        |}
-      """.stripMargin
-    fields.foldRight(idFields)( (field, str) => {
+    fields.foldRight("")( (field, str) => {
       val fieldJson = field.fieldType match {
         case EsFieldType.Unknown => ""
         case EsFieldType.GeoPoint =>
@@ -293,29 +175,6 @@ object ElasticsearchUtils {
               "lat_lon": "true",
               "geohash": "true",
               "geohash_prefix": "true"
-            },
-            "---geo_hash---": {
-              "type": "esri_geo_hash",
-              "hashes": [{
-                "orientation": "horizontal",
-                "precision": 20,
-                "wkid": 102100,
-                "type": "triangle",
-                "field_name": "triangle_h_102100"
-              },
-              {
-                "orientation": "vertical",
-                "precision": 20,
-                "wkid": 102100,
-                "type": "triangle",
-                "field_name": "triangle_v_102100"
-              },
-              {
-                "precision": 20,
-                "wkid": 102100,
-                "type": "square",
-                "field_name": "square_102100"
-              }]
             }
           """.stripMargin
         case EsFieldType.GeoShape =>

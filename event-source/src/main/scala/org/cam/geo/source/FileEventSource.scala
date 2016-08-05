@@ -33,6 +33,7 @@ object FileEventSource extends App {
   val producer: Producer[String, String] = new KafkaProducer[String, String](props)
 
   var ix = 0
+  var count = 0
   println("Writing " + eventsPerSecond + " e/s every " + intervalInMillis + " millis to topic " + topic + " on brokers " + brokers + " ...")
   while(true) {
     if (ix + eventsPerSecond > tracks.length)
@@ -41,10 +42,14 @@ object FileEventSource extends App {
       val eventString = tracks(jx).replace("TIME", System.currentTimeMillis().toString).trim
       producer.send(new ProducerRecord[String, String](topic, eventString.split(",")(0), eventString))
       ix += 1
+      count += 1
       if (verbose)
         println(jx + ": " + eventString)
     }
-    println()
+    if (verbose)
+      println()
+    println("Time %s: File Event Source sent %s events.".format(System.currentTimeMillis, count))
+    count = 0
     Thread.sleep(intervalInMillis)
   }
   producer.close()

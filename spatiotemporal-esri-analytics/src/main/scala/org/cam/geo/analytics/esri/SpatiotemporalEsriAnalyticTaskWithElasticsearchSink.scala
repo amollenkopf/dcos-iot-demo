@@ -33,9 +33,11 @@ object SpatiotemporalEsriAnalyticTaskWithElasticsearchSink {
     val Array(zkQuorum, topic, geofenceFilteringOnStr, verboseStr, esNodes, esClusterName, esIndexName) = args
     val geofenceFilteringOn = geofenceFilteringOnStr.toBoolean
     val verbose = verboseStr.toBoolean
+    val shards = 20  //TODO: expose as param, default is 3
+    val replicas = 0  //TODO: expose as param, default is 1
 
     val sparkConf = new SparkConf()
-      .setAppName("rat1")
+      .setAppName("taxi-rat")
       .set("es.cluster.name", esClusterName)
       .set("es.nodes", esNodes)
       .set("es.index.auto.create", "true")
@@ -76,8 +78,8 @@ object SpatiotemporalEsriAnalyticTaskWithElasticsearchSink {
           "pickup_latitude" -> fields(16).toDouble,
           "dropoff_longitude" -> fields(17).toDouble,
           "dropoff_latitude" -> fields(18).toDouble,
-          "geometry" -> s"${point._1},${point._2}",
-          "---geo_hash---" -> s"${point._1},${point._2}"
+          "geometry" -> s"${point._1},${point._2}"//,
+          //"---geo_hash---" -> s"${point._1},${point._2}"
         )
       }
     )
@@ -107,7 +109,7 @@ object SpatiotemporalEsriAnalyticTaskWithElasticsearchSink {
         EsField("geometry", EsFieldType.GeoPoint)
       )
     if (!ElasticsearchUtils.doesDataSourceExists(esIndexName, esNode, esPort))
-      ElasticsearchUtils.createDataSource(esIndexName, esFields, esNode, esPort)
+      ElasticsearchUtils.createDataSource(esIndexName, esFields, esNode, esPort, shards, replicas)
 
     datasource.foreachRDD((rdd: RDD[Map[String, Any]], time: Time) => {
       rdd.saveToEs(esIndexName + "/" + esIndexName) // ES index/type

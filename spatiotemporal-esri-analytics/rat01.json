@@ -11,7 +11,8 @@
     }
   },
   "id": "rat01",
-  "instances": 5,
+  "instances": 3,
   "cpus": 4,
   "mem": 2048
 }
+
