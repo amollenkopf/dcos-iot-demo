@@ -86,10 +86,11 @@
         var map,
             ///////////////////////////////////////////////////////////////////
             //Please configure the following parameters
-            host = 'spatiotemporal-store.elasticsearch.mesos:9200', //Elasticsearch address 
-            //host = 'localhost:9200', //Elasticsearch address
+            //host = 'spatiotemporal-store.elasticsearch.mesos:9200', //Elasticsearch address 
+            host = 'localhost:9200', //Elasticsearch address if tunnel is used
             index = 'taxi', //DataSource Index
             type = 'taxi', //DataSource Type
+            refreshInterval = 2000, //Auto refresh interval in ms
             featureThreshold = 1000, //Feature thereshold when to switch from aggregation to feature rendering
             //////////////////////////////////////////////////////////////////            
             initTimeExtent,
@@ -121,6 +122,7 @@
             addESFeatureLayer();
             addAggregationLayer();
             addHeatmapLayer();
+            autoUpdate();
             initBasemapGallery();
             initExtent = map.extent;
         });
@@ -753,6 +755,18 @@
             })
             return labels
         }
+        
+        //
+        //Auto Refresh Layers
+        //
+        function autoUpdate(){
+            setInterval(function(){
+                if (!replay){
+                    getESAggregations(map.getLevel(), currentExtent);
+                }
+            },refreshInterval)
+        }
+        
     });
 </script>
 
