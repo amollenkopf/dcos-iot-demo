@@ -90,7 +90,7 @@
             host = 'localhost:9200', //Elasticsearch address if tunnel is used
             index = 'taxi', //DataSource Index
             type = 'taxi', //DataSource Type
-            refreshInterval = 2000, //Auto refresh interval in ms
+            refreshInterval = 0, //Auto refresh interval in ms, 0 = no auto refresh
             featureThreshold = 1000, //Feature thereshold when to switch from aggregation to feature rendering
             //////////////////////////////////////////////////////////////////            
             initTimeExtent,
@@ -112,7 +112,7 @@
         //create map
         map = new Map("map", {
             basemap: "dark-gray",
-            center: [-73.9, 40.73] ,
+            center: [-73.9, 40.73],
             zoom: 10,
             showLabels: true
         });
@@ -285,23 +285,39 @@
             var coords = webMercatorUtils.webMercatorToGeographic(extent),
                 startT = timePara.startTime.getTime(),
                 endT = timePara.endTime.getTime(),
-                prec;
+                prec, labelSize = 10;
 
             if (!hm) {
                 if (level <= 2) {
                     prec = 2
+                    labelSize = 4
                 } else if (level > 2 && level <= 5) {
                     prec = 3
+                    if (level == 3 || level == 4) {
+                        labelSize = 4
+                    }
                 } else if (level > 5 && level <= 8) {
                     prec = 4
+                    if (level == 6) {
+                        labelSize = 4
+                    }
                 } else if (level > 8 && level <= 11) {
                     prec = 5
+                    if (level == 9) {
+                        labelSize = 4
+                    }
                 } else if (level > 11 && level <= 13) {
                     prec = 6
                 } else if (level > 13 && level <= 15) {
                     prec = 7
+                    if (level == 14) {
+                        labelSize = 4
+                    }
                 } else if (level > 15) {
                     prec = 8
+                    if (level == 16) {
+                        labelSize = 4
+                    }
                 }
             } else {
                 if (level <= 2) {
@@ -378,6 +394,7 @@
                                     attributes = {};
                                 count.push(feature.doc_count)
                                 attributes.Count = feature.doc_count;
+                                attributes.Label = abbreviateNumber(feature.doc_count).toString()
                                 attributes.GeoHash_ID = feature.key;
                                 var coords = decodeGeoHash(feature.key);
                                 if (hm) {
@@ -403,6 +420,7 @@
                             } else {
                                 var layer = map.getLayer("ESAggregations");
                                 layer.renderer.normalizationTotal = maxValue
+                                layer.labelingInfo[0].symbol.font.size = labelSize
                             }
 
                             map.getLayer("ESFeatures").clear();
@@ -479,6 +497,10 @@
                     "name": "Count",
                     "type": "esriFieldTypeInteger",
                     "alias": "Count"
+                }, {
+                    "name": "Label",
+                    "type": "esriFieldTypeString",
+                    "alias": "Label"
                 }, {
                     "name": "Geometry",
                     "type": "esriFieldTypeGeometry",
@@ -561,7 +583,7 @@
                     return new SimpleFillSymbol()
                         .setColor(color)
                         .setOutline(
-                           new SimpleLineSymbol().setColor(new Color([255, 255, 255])).setWidth(0.4)
+                            new SimpleLineSymbol().setColor(new Color([255, 255, 255])).setWidth(0.4)
                         );
                 }
                 classColorInfo = []
@@ -613,7 +635,7 @@
             } else
             if (type == "Heatmap") {
                 var renderer = new HeatmapRenderer({
-                  colorStops: [
+                    colorStops: [
                         {
                             ratio: 0,
                             color: "rgba(49, 54, 149, 0)"
@@ -662,7 +684,7 @@
                 //create a text symbol and renderer to define the style of labels
                 var labelJson = {
                     "labelExpressionInfo": {
-                        "value": "{Count}"
+                        "value": "{Label}"
                     },
                     "labelPlacement": "always-horizontal"
                 };
@@ -678,6 +700,28 @@
         //#############################################################################################
         //Other Functions
         //#############################################################################################
+        //
+        //Shorten Labels
+        //
+        function abbreviateNumber(value) {
+            var newValue = value;
+            if (value >= 1000) {
+                var suffixes = ["", "k", "m", "b", "t"];
+                var suffixNum = Math.floor(("" + value).length / 3);
+                var shortValue = '';
+                for (var precision = 2; precision >= 1; precision--) {
+                    shortValue = parseFloat((suffixNum != 0 ? (value / Math.pow(1000, suffixNum)) : value).toPrecision(precision));
+                    var dotLessShortValue = (shortValue + '').replace(/[^a-zA-Z 0-9]+/g, '');
+                    if (dotLessShortValue.length <= 2) {
+                        break;
+                    }
+                }
+                if (shortValue % 1 != 0) shortNum = shortValue.toFixed(1);
+                newValue = shortValue + suffixes[suffixNum];
+            }
+            return newValue;
+        }
+
         //
         //Init the basemap gallery
         //
@@ -755,18 +799,20 @@
             })
             return labels
         }
-        
+
         //
         //Auto Refresh Layers
         //
-        function autoUpdate(){
-            setInterval(function(){
-                if (!replay){
-                    getESAggregations(map.getLevel(), currentExtent);
-                }
-            },refreshInterval)
+        function autoUpdate() {
+            if (refreshInterval != 0) {
+                setInterval(function () {
+                    if (!replay) {
+                        getESAggregations(map.getLevel(), currentExtent);
+                        console.log("Refresh")
+                    }
+                }, refreshInterval)
+            }
         }
-        
     });
 </script>
 
