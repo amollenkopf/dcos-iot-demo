@@ -16,14 +16,25 @@ Microsoft Azure has a capability named Azure Container Service (ACS) that allows
 <br><br>Step 6: Create a SSH key that will enable you to access the 'Azure Container Service' once it has been created.<ul>
 <li>for more info see the <a href="https://azure.microsoft.com/en-us/documentation/articles/virtual-machines-linux-ssh-from-linux/">Azure ssh doc</a>.</li></ul>
 <img src="../images/01-acs-setup/acs-create-06.png"/>
-<br><br>Step 7: Fill in the 'Basic' information needed to create 'Azure Container Service' including:<ul>
+<br><br>Step 7: Fill in the 'Basic' information needed to create the 'Azure Container Service' including:<ul>
 <li>SSH user name & public key, more ~/.ssh/azureuser.pub and very carefully cut and paste the public key contents.</li>
 <li>select the Azure subscription you wish to associate this Azure Container Service with.</li>
 <li>create a new 'Resource Group' and enter a new unique name, e.g. esri40.</li>
 <li>select the 'Location'/region you wish this Azure Container Service to run in.</li></ul>
 <img src="../images/01-acs-setup/acs-create-07.png"/>
-<br><br>Step 7: In the 'Framework configuration' section choose 'DC/OS' as the Orchestrator configuration.<ul>
+<br><br>Step 7: In the 'Framework configuration' section choose 'DC/OS' as the Orchestrator configuration and click the 'OK' button.
 <img src="../images/01-acs-setup/acs-create-08.png"/>
+<br><br>Step 7: Fill in the 'Azure Container service settings' information needed to create the 'Azure Container Service' including:<ul>
+<li>Set the 'Agent count' to the number of private agents you desire for your cluster</li>
+<img src="../images/01-acs-setup/acs-create-09.png"/>
+<li>Click on 'Agent virtual machine size' to choose the VM size you would like your private agents to be.</li>
+<img src="../images/01-acs-setup/acs-create-10.png"/>
+<li>Click the 'View all' link to browse through all available VM sizes.</li>
+<li>Select the VM size you desire and click the 'Select' button.</li>
+<img src="../images/01-acs-setup/acs-create-11.png"/>
+
+</ul>
+
 
 #<a name="amazon">Running DC/OS on Amazon
 Coming soon ...
