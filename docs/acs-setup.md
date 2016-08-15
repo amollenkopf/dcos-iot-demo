@@ -1,6 +1,6 @@
-This section describes [Getting a DC/OS cluster running on Microsoft Azure](#azure) or [Amazon](#amazon).<br>
+This section describes how to get a DC/OS cluster running on [Microsoft Azure](#azure) or [Amazon](#amazon).<br>
 
-#<a name="azure"></a>Getting a DC/OS cluster running on Microsoft Azure
+#<a name="azure"></a>Get a DC/OS cluster running on Microsoft Azure
 Microsoft Azure has a capability named Azure Container Service (ACS) that allows you to choose DC/OS as the orchestrator of the virtual machines group created.  This section walks you through step-by-step on how to provision DC/OS on Azure using the Azure Container Service capability.
 
 <b>Step 1:</b> Login to <a href="http://portal.azure.com">portal.azure.com</a> using your Microsoft Azure credentials.  If you are new or don't have credentials you can sign-up for Azure <a href="https://azure.microsoft.com/en-us/free/">here</a> and try it out.
@@ -46,8 +46,8 @@ Microsoft Azure has a capability named Azure Container Service (ACS) that allows
 <img src="../images/01-acs-setup/acs-create-17.png"/>
 <br><br><b>Step 15:</b> Wait a few seconds for it to appear, then hover the 'DNS name' and click the copy to clipboard icon.
 <img src="../images/01-acs-setup/acs-create-18.png"/>
-<br><br><b>Congratulations:</b> You now have an 'Azure Container Service' in place on Microsoft Azure that is configured to orchestrate using DC/OS.  Next, we will walk through <a href="../docs/dcos-mesos-explore.md">Exploring the DC/OS and Mesos dashboards</a>
+<br><br><b>Congratulations:</b> You now have an 'Azure Container Service' in place on Microsoft Azure that is configured to orchestrate using DC/OS.  Next, we will walk through <a href="../docs/dcos-mesos-explore.md">Explore the DC/OS and Mesos dashboards</a>
 
 <br><br>
-#<a name="amazon">Getting a DC/OS cluster running on Amazon
+#<a name="amazon">Get a DC/OS cluster running on Amazon
 <a href="https://mesosphere.com/">Mesosphere</a> (creator of <a href="http://mesos.apache.org/">Mesos</a> and <a href="https://dcos.io/">DC/OS</a>) has great documentation on how to establish a DC/OS cluster on Amazon.  Please follow the instructions that can be found <a href="https://mesosphere.com/amazon/">here</a>.
