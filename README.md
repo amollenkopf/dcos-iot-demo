@@ -19,6 +19,6 @@ This project demonstrates how to configure a full stack geo-enabled Internet of 
 10. <a href="docs/source-setup.md">Schedule a Source that emits events</a><br>
 
 ## other topics of interest:
-1. <a href="docs/cleanup-demo.md">cleanup procedures between demo runs</a><br>
-2. <a href="docs/running-local.md">running on a local machine for verification during development</a><br>
-3. <a href="docs/running-dcos-old.md">running on DC/OS (old content)</a><br>
+1. <a href="docs/other/cleanup-demo.md">cleanup procedures between demo runs</a><br>
+2. <a href="docs/other/running-local.md">running on a local machine for verification during development</a><br>
+3. <a href="docs/other/running-dcos-old.md">running on DC/OS (old content)</a><br>
