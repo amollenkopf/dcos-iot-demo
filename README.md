@@ -1,7 +1,7 @@
 # dcos-iot-demo
 This project demonstrates how to configure a full stack geo-enabled Internet of Things (IoT) solution using <a href="https://mesosphere.com/">Mesosphere's</a> open sourced <a href="https://dcos.io/">Data Center Operating System (DC/OS)</a> using <a href="https://www.docker.com/">Docker</a> containerization and <a href="http://mesos.apache.org/">Mesos</a> frameworks including <a href="https://mesosphere.github.io/marathon/">Marathon</a>, <a href="http://kafka.apache.org/">Kafka</a>, <a href="http://spark.apache.org/">Spark</a>, and <a href="http://elasticsearch.mesosframeworks.com/">Elasticsearch</a>.
 
-<center><a href="https://youtu.be/tOPmPIHuV-o"><img src="dcos-iot-demo-screenshot.jpg" height="75%" width="75%" ></a></center>
+<center><a href="https://youtu.be/tOPmPIHuV-o"><img src="images/dcos-iot-demo-screenshot.jpg" height="75%" width="75%" ></a></center>
 
 ## To create your own dcos-iot-demo environment:
 1. <a href="docs/overview.md">Review the architecture & application overview</a><br>
