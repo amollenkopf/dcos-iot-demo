@@ -1,2 +1,2 @@
-# Azure Container Service (ACS) setup
+# Setting up an Azure Container Service (ACS) with DC/OS as the orchestrator
 This project demonstrates how to configure a ...
