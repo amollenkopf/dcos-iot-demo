@@ -44,8 +44,9 @@ Microsoft Azure has a capability named Azure Container Service (ACS) that allows
 <img src="../images/01-acs-setup/acs-create-16.png"/>
 <br><br><b>Step 14:</b> Scroll down in the 'Resource group' to find the entry marked 'Public IP address' for the DC/OS master(s) and click it.
 <img src="../images/01-acs-setup/acs-create-17.png"/>
-<br><br><b>Step 15:</b> Wait a few seconds for it to appear, then hover the 'DNS name' and click the copy to clipboard icon.  This value will be needed to establish communication with DC/OS in the next section 'Exploring the DC/OS Dashboard'.
+<br><br><b>Step 15:</b> Wait a few seconds for it to appear, then hover the 'DNS name' and click the copy to clipboard icon.
 <img src="../images/01-acs-setup/acs-create-18.png"/>
+<br><br><b>Congratulations:</b> You now have an 'Azure Container Service' in place on Microsoft Azure that is configured to orchestrate using DC/OS.  Next, we will walk through <a href="../docs/dcos-mesos-explore.md">Exploring the DC/OS and Mesos dashboards</a>
 
 #<a name="amazon">Getting a DC/OS cluster running on Amazon
 Coming soon ...
