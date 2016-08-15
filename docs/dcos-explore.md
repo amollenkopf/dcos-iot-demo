@@ -4,6 +4,10 @@ The DC/OS dashboards allows you to visualize what has been allocated on the clus
 
 This section provides a brief walk through of the DC/OS & Mesos dashboards and describes what information can be seen and what actions can be performed.
 
+To connect to your DC/OS and Mesos dashboards:
+* On Amazon, obtain the public IP address of your master(s) and connect to, <your master(s) url>/#/dashboard/.
+* On Azure, copy the public IP address of your master(s) and establish an ssh tunneling session with the master.
+
 <br><br><b>Step 16:</b> We will use the 'Public IP address' 'DNS name' value of the DC/OS master(s) to establish a secure SSH tunnel using the SSH key created previously.
 <img src="../images/01-acs-setup/acs-create-19.png"/>
 <br><br><b>Step 17:</b> If prompted to 'Are you sure you want to continue connecting (yes/no): ', enter 'yes' and hit the Enter key.
