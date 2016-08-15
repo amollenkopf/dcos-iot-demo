@@ -27,15 +27,16 @@ Microsoft Azure has a capability named Azure Container Service (ACS) that allows
 <br><br>Step 9: Fill in the 'Azure Container service settings' information needed to create the 'Azure Container Service' including:<ul>
 <li>Set the 'Agent count' to the number of private agents you desire for your cluster</li>
 <img src="../images/01-acs-setup/acs-create-09.png"/>
-<br><li>Click on 'Agent virtual machine size' to choose the VM size you would like your private agents to be.</li>
+<br><br><li>Click on 'Agent virtual machine size' to choose the VM size you would like your private agents to be.</li>
 <img src="../images/01-acs-setup/acs-create-10.png"/>
-<br><li>Click the 'View all' link to browse through all available VM sizes.</li>
+<br><br><li>Click the 'View all' link to browse through all available VM sizes.</li>
 <li>Select the VM size you desire and click the 'Select' button.</li>
 <img src="../images/01-acs-setup/acs-create-11.png"/>
-<br><li>Set the 'Master count' to the amount you desire.<li>
+<br><br><li>Set the 'Master count' to the amount you desire.<li>
 <li>Specify a new unique value for the 'DNS prefix for container service' field and hit the 'OK' button</li></ul>
-<br><br>Step 10:
 <img src="../images/01-acs-setup/acs-create-12.png"/>
+<br><br>Step 10:
+<img src="../images/01-acs-setup/acs-create-13.png"/>
 
 
 #<a name="amazon">Running DC/OS on Amazon
