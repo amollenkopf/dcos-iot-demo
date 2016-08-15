@@ -28,9 +28,14 @@ The JavaScript Web app periodically queries to reflect the latest state of obser
 
 
 ## Deploying dcos-iot-demo to your own environment
-1. <a href="acs-setup.md">Provision a DC/OS cluster on the cloud provider of your choice</a><br>
-2. <a href="kafka-setup.md">Schedule Kafka brokers to run on DC/OS</a><br>
-
+1. <a href="acs-setup.md">Establish a DC/OS cluster on the cloud provider of your choice</a><br>
+2. <a href="kafka-setup.md">Schedule Kafka brokers</a><br>
+3. <a href="es-setup.md">Schedule an Elasticsearch cluster</a><br>
+4. <a href="marathon-lb-setup.md">Schedule marathon-lb to run on public agents</a><br>
+5. <a href="azure-ports-setup.md">Open up Azure ports</a><br>
+6. <a href="map-setup.md">Schedule the map</a><br>
+7. <a href="app-setup.md">Schedule the components of the application</a><br>
+8. <a href="source-setup.md">Schedule a Source that emits events</a><br>
 
 ## Working locally (for verification prior to deploying on DC/OS):
 It is useful to do development and verification locally prior to installing applications onto DC/OS.  This section will walk you through the process of setting up, building, and running individual apps locally prior to installing them onto DC/OS.
