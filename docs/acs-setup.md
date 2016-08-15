@@ -48,5 +48,6 @@ Microsoft Azure has a capability named Azure Container Service (ACS) that allows
 <img src="../images/01-acs-setup/acs-create-18.png"/>
 <br><br><b>Congratulations:</b> You now have an 'Azure Container Service' in place on Microsoft Azure that is configured to orchestrate using DC/OS.  Next, we will walk through <a href="../docs/dcos-mesos-explore.md">Exploring the DC/OS and Mesos dashboards</a>
 
+<br><br>
 #<a name="amazon">Getting a DC/OS cluster running on Amazon
 Coming soon ...
