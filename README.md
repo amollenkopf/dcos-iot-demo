@@ -3,6 +3,10 @@ This project demonstrates how to configure a full stack geo-enabled Internet of 
 
 <center><a href="https://youtu.be/tOPmPIHuV-o"><img src="dcos-iot-demo-screenshot.jpg" height="75%" width="75%" ></a></center>
 
+## Architecture
+<img src="dcos-iot-demo-architecture.jpg"/>
+All components of the IoT Event Flow described below (sources, brokers, spark streaming, elasticsearch & map apps) are scheduled on DC/OS as marathon apps.
+
 ## IoT Event Flow
 <img src="dcos-iot-demo-flow.jpg"/>
 Sources emit events to Kafka brokers.  Real-time Analytic Tasks (RATs) use Spark Streaming to consume events from Kafka brokers, perform spatiotemporal analytics and sink results to one or more sinks.  The spatiotemporal-store uses Elasticsearch to efficiently index observations by space, time, and all the other attributes of the event.  The JavaScript Web app periodically queries to reflect the latest state of observations on a map.
@@ -21,10 +25,6 @@ The spatiotemporal-store uses Elasticsearch to efficiently index observations by
 
 ### JavaScript Web App
 The JavaScript Web app periodically queries to reflect the latest state of observations on a map.  The JavaScript web app queries for geohash aggregations that are visualized as rectangles on the map or raw observations visualized as symbols on the map.
-
-## Architecture
-<img src="dcos-iot-demo-architecture.jpg"/>
-All components of the flow described above (sources, brokers, spark streaming, elasticsearch & map apps) are scheduled on DC/OS as marathon apps.
 
 ## Working locally (for verification prior to deploying on DC/OS):
 It is useful to do development and verification locally prior to installing applications onto DC/OS.  This section will walk you through the process of setting up, building, and running individual apps locally prior to installing them onto DC/OS.
