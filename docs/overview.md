@@ -1,7 +1,3 @@
-We will now explore the DC/OS and Mesos dashboards.<br>
-
-TODO: paragraph describing overall architecture & application
-
 ## Architecture
 <img src="../images/00-overview/architecture.jpg"/>
 All components of the IoT Event Flow described below (sources, brokers, spark streaming, elasticsearch & map apps) are scheduled on DC/OS as marathon apps.
