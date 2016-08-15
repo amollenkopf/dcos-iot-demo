@@ -15,10 +15,10 @@ Microsoft Azure has a capability named Azure Container Service (ACS) that allows
 <img src="../images/01-acs-setup/acs-create-05.png"/>
 <br><br>Step 6: Fill in the 'Basic' information needed to create 'Azure Container Service' including:
 <ul>
-<li><br>&nbsp;&nbsp;&nbsp;&nbsp; SSH user name & public key, for more info see the <a href="https://azure.microsoft.com/en-us/documentation/articles/virtual-machines-linux-ssh-from-linux/">Azure ssh doc</a>.</li>
-<li><br>&nbsp;&nbsp;&nbsp;&nbsp; select the Azure subscription you wish to associate this Azure Container Service with.</li>
-<li><br>&nbsp;&nbsp;&nbsp;&nbsp; Create a new 'Resource Group' and enter a new unique name, e.g. esri40.</li>
-<li><br>&nbsp;&nbsp;&nbsp;&nbsp; Select the 'Location'/region you wish this Azure Container Service to run in.</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp; SSH user name & public key, for more info see the <a href="https://azure.microsoft.com/en-us/documentation/articles/virtual-machines-linux-ssh-from-linux/">Azure ssh doc</a>.</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp; select the Azure subscription you wish to associate this Azure Container Service with.</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp; Create a new 'Resource Group' and enter a new unique name, e.g. esri40.</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp; Select the 'Location'/region you wish this Azure Container Service to run in.</li>
 </ul>
 <img src="../images/01-acs-setup/acs-create-06.png"/>
 
