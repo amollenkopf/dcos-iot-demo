@@ -1,2 +1,6 @@
-# Setting up an Azure Container Service (ACS) with DC/OS as the orchestrator
+# Azure Container Service (ACS) with DC/OS as the orchestrator
 This project demonstrates how to configure a ...
+
+
+# Running DC/OS on Amazon
+## Coming soon ...
