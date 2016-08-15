@@ -28,8 +28,8 @@ The JavaScript Web app periodically queries to reflect the latest state of obser
 
 
 ## Deploying dcos-iot-demo to your own environment
-### 1. <a href="acs-setup.md">Provision a DC/OS cluster on the cloud provider of your choice</a>
-### 2. <a href="kafka-setup.md">Schedule Kafka brokers to run on DC/OS</a>
+1. <a href="acs-setup.md">Provision a DC/OS cluster on the cloud provider of your choice</a><br>
+2. <a href="kafka-setup.md">Schedule Kafka brokers to run on DC/OS</a><br>
 
 
 ## Working locally (for verification prior to deploying on DC/OS):
