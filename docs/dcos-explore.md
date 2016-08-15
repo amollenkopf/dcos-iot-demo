@@ -9,5 +9,6 @@ This section provides a brief walk through of the DC/OS & Mesos dashboards and d
 <img src="../images/01-acs-setup/acs-create-20.png"/>
 <br><br>With the SSH tunnel in place you can connect to the DC/OS dashboard with <a href="http://localhost:9001">http://localhost:9001</a>.
 <img src="../images/01-acs-setup/acs-create-21.png"/>
+<br><br>
 * On Amazon, obtain the public IP address of your master(s) and connect with <your master(s) url>.
 
