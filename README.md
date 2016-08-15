@@ -27,8 +27,8 @@ The spatiotemporal-store uses Elasticsearch to efficiently index observations by
 The JavaScript Web app periodically queries to reflect the latest state of observations on a map.  The JavaScript web app queries for geohash aggregations that are visualized as rectangles on the map or raw observations visualized as symbols on the map.
 
 
-## Deploying dcos-iot-demo to your own environment
-1. <a href="docs/acs-setup.md">Getting a DC/OS cluster running on the Microsoft Azure or Amazon.</a><br>
+## Workflow for creating dcos-iot-demo in your own environment:
+1. <a href="docs/acs-setup.md">Getting a DC/OS cluster running on the Microsoft Azure or Amazon</a><br>
 2. <a href="docs/dcos-mesos-explore.md">Exploring the DC/OS and Mesos dashboards</a><br>
 3. <a href="docs/kafka-setup.md">Schedule Kafka brokers</a><br>
 4. <a href="docs/es-setup.md">Schedule an Elasticsearch cluster</a><br>
