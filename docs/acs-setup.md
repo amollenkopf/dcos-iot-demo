@@ -1,6 +1,6 @@
 
-[Link 1](#one)<br>
-[Link 2]#(Running-DC/OS-on-Amazon)
+[Azure](#azure)<br>
+[Amazon](#amazon)<br>
 
 
 #<a name="azure"></a>Running DC/OS on Microsoft Azure)
