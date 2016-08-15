@@ -1,4 +1,4 @@
-We will now explore the DC/OS and Mesos dashboards.<br>
+# Explore the DC/OS and Mesos dashboards<br>
 
 The DC/OS and Mesos dashboards allows you to visualize what has been allocated on the cluster, enables you to manage <a href="https://github.com/mesosphere/universe/tree/version-3.x/repo/packages">packages (Mesos frameworks)</a> that you enable the cluster can use, and to schedule tasks to run on the cluster.
 
