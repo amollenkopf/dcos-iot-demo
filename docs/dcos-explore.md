@@ -12,3 +12,9 @@ This section provides a brief walk through of the DC/OS & Mesos dashboards and d
 <br><br>
 * On Amazon, obtain the public IP address of your master(s) and connect with &lt;your master url&gt;.
 
+<br><br><b>Step 2:</b> text:
+<img src="../images/01-acs-setup/acs-create-22.png"/>
+
+<br><br><b>Step 3:</b> text:
+<img src="../images/01-acs-setup/acs-create-23.png"/>
+
