@@ -1,4 +1,4 @@
-[Getting a DC/OS cluster running on Microsoft Azure](#azure) or [Amazon](#amazon)<br>
+This section describes [Getting a DC/OS cluster running on Microsoft Azure](#azure) or [Amazon](#amazon)<br>.
 
 #<a name="azure"></a>Getting a DC/OS cluster running on Microsoft Azure
 Microsoft Azure has a capability named Azure Container Service (ACS) that allows you to choose DC/OS as the orchestrator of the virtual machines group created.  This section walks you through step-by-step on how to provision DC/OS on Azure using the Azure Container Service capability.
