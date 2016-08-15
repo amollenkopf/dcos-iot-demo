@@ -13,8 +13,7 @@ Microsoft Azure has a capability named Azure Container Service (ACS) that allows
 <img src="../images/01-acs-setup/acs-create-04.png"/>
 <br><br><b>Step 5:</b> Review the 'Azure Container Service' description and click the 'Create' button.
 <img src="../images/01-acs-setup/acs-create-05.png"/>
-<br><br><b>Step 6:</b> Create a SSH key that will enable you to access the 'Azure Container Service' once it has been created.<ul>
-<li>for more info see the <a href="https://azure.microsoft.com/en-us/documentation/articles/virtual-machines-linux-ssh-from-linux/">Azure ssh doc</a>.</li></ul>
+<br><br><b>Step 6:</b> Create a SSH key that will enable you to access the 'Azure Container Service' once it has been created.<ul><li>for more info see the <a href="https://azure.microsoft.com/en-us/documentation/articles/virtual-machines-linux-ssh-from-linux/">Azure ssh doc</a>.</li></ul>
 <img src="../images/01-acs-setup/acs-create-06.png"/>
 <br><br><b>Step 7:</b> Fill in the 'Basic' information needed to create the 'Azure Container Service' including:<ul>
 <li>SSH user name & public key, more ~/.ssh/azureuser.pub and very carefully cut and paste the public key contents.</li>
