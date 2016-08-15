@@ -198,7 +198,10 @@ object ElasticsearchUtils {
             }
           """.stripMargin
       }
-      str + "," + fieldJson
+      if (str != "")
+        str + "," + fieldJson
+      else
+        str + fieldJson
     })
   }
 }

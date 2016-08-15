@@ -78,8 +78,7 @@ object SpatiotemporalEsriAnalyticTaskWithElasticsearchSink {
           "pickup_latitude" -> fields(16).toDouble,
           "dropoff_longitude" -> fields(17).toDouble,
           "dropoff_latitude" -> fields(18).toDouble,
-          "geometry" -> s"${point._1},${point._2}"//,
-          //"---geo_hash---" -> s"${point._1},${point._2}"
+          "geometry" -> s"${point._1},${point._2}"
         )
       }
     )
