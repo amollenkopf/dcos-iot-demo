@@ -44,16 +44,8 @@ Microsoft Azure has a capability named Azure Container Service (ACS) that allows
 <img src="../images/01-acs-setup/acs-create-16.png"/>
 <br><br><b>Step 14:</b> Scroll down in the 'Resource group' to find the entry marked 'Public IP address' for the DC/OS master(s) and click it.
 <img src="../images/01-acs-setup/acs-create-17.png"/>
-<br><br><b>Step 15:</b> Wait a few seconds for it to appear, then hover the 'DNS name' and click the copy to clipboard icon.
+<br><br><b>Step 15:</b> Wait a few seconds for it to appear, then hover the 'DNS name' and click the copy to clipboard icon.  This value will be needed to establish communication with DC/OS in the next section 'Exploring the DC/OS Dashboard'.
 <img src="../images/01-acs-setup/acs-create-18.png"/>
-<br><br><b>Step 16:</b> We will use the 'Public IP address' 'DNS name' value of the DC/OS master(s) to establish a secure SSH tunnel using the SSH key created previously.
-<img src="../images/01-acs-setup/acs-create-19.png"/>
-<br><br><b>Step 17:</b> If prompted to 'Are you sure you want to continue connecting (yes/no): ', enter 'yes' and hit the Enter key.
-<img src="../images/01-acs-setup/acs-create-20.png"/>
-<br><br><b>Step 18:</b> Now that we have established an SSH tunnel to the DC/OS master(s) we can now access the DC/OS dashboard via URL in our browser, <a href="http://localhost:9001">http://localhost:9001</a>
-<img src="../images/01-acs-setup/acs-create-21.png"/>
-
-
 
 #<a name="amazon">Get a DC/OS cluster running on Amazon
 Coming soon ...
