@@ -22,6 +22,8 @@ Microsoft Azure has a capability named Azure Container Service (ACS) that allows
 <li>create a new 'Resource Group' and enter a new unique name, e.g. esri40.</li>
 <li>select the 'Location'/region you wish this Azure Container Service to run in.</li></ul>
 <img src="../images/01-acs-setup/acs-create-07.png"/>
+<br><br>Step 7: In the 'Framework configuration' section choose 'DC/OS' as the Orchestrator configuration.<ul>
+<img src="../images/01-acs-setup/acs-create-08.png"/>
 
 #<a name="amazon">Running DC/OS on Amazon
 Coming soon ...
