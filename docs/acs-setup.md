@@ -1,6 +1,6 @@
 
-Link 1 #(Running-DC/OS-on-Microsoft-Azure)<br>
-Link 2 #(Running-DC/OS-on-Amazon)
+[Link 1]#(Running-DC/OS-on-Microsoft-Azure)<br>
+[Link 2]#(Running-DC/OS-on-Amazon)
 
 
 #(Running-DC/OS-on-Microsoft-Azure)
