@@ -32,11 +32,17 @@ Microsoft Azure has a capability named Azure Container Service (ACS) that allows
 <br><br><li>Click the 'View all' link to browse through all available VM sizes.</li>
 <li>Select the VM size you desire and click the 'Select' button.</li>
 <img src="../images/01-acs-setup/acs-create-11.png"/>
-<br><br><li>Set the 'Master count' to the amount you desire.<li>
-<li>Specify a new unique value for the 'DNS prefix for container service' field and hit the 'OK' button</li></ul>
+<br><br><li>Set the 'Master count' to the amount you desire.</li>
+<li>Specify a new unique value for the 'DNS prefix for container service' field and hit the 'OK' button.</li></ul>
 <img src="../images/01-acs-setup/acs-create-12.png"/>
-<br><br>Step 10:
+<br><br>Step 10: Review the 'Summary' section, make sure that the 'Validation passed', and hit the 'OK' button.
 <img src="../images/01-acs-setup/acs-create-13.png"/>
+<br><br>Step 11: Carefully review the 'Buy' section and if you are ok with the pricing & terms of use hit the 'Purchase' button.
+<img src="../images/01-acs-setup/acs-create-14.png"/>
+<br><br>Step 12: Wait patiently for between 10-15 minutes for your 'Azure Container Service' to be provisioned.
+<img src="../images/01-acs-setup/acs-create-15.png"/>
+<br><br>Step 13: You will know your 'Azure Container Service' has been succefully created when you see the 'Resource group' appear.
+<img src="../images/01-acs-setup/acs-create-16.png"/>
 
 
 #<a name="amazon">Running DC/OS on Amazon
