@@ -50,4 +50,4 @@ Microsoft Azure has a capability named Azure Container Service (ACS) that allows
 
 <br><br>
 #<a name="amazon">Getting a DC/OS cluster running on Amazon
-Coming soon ...
+<a href="https://mesosphere.com/">Mesosphere</a> (creator of <a href="http://mesos.apache.org/">Mesos</a> and <a href="https://dcos.io/">DC/OS</a>) has great documentation on how to establish a DC/OS cluster on Amazon.  Please follow the instructions that can be found <a href="https://mesosphere.com/amazon/">here</a>.
