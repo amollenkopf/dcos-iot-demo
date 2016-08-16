@@ -18,7 +18,11 @@
 <img src="../images/03-kafka-setup/kafka-08.png"/>
 <br><br><b>Step 9:</b> Find the 'delete.topic.enable' parameter and enable it so that we will be able to delete topics between demo runs.
 <img src="../images/03-kafka-setup/kafka-09.png"/>
-<br><br><b>Step 10:</b> Click the 'Review and Install' button, review the parameters values, and click the 'Install' button to install the package.
+<br><br><b>Step 10:</b> Click the 'Review and Install' button and review the parameters values.
 <img src="../images/03-kafka-setup/kafka-10.png"/>
+<br><br><b>Step 11:</b> Click the 'Install' button to install the package and click the 'Acknowledge (check)' button.
+<img src="../images/03-kafka-setup/kafka-11.png"/>
+
+
 
 
