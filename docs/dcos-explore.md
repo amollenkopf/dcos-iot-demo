@@ -31,5 +31,6 @@ This section provides a brief walk through of the DC/OS & Mesos dashboards and d
 <img src="../images/01-acs-setup/acs-create-26.png"/><br>
 <br><br><b>Step 8:</b> In the DC/OS dashboard click on the 'Services' tab.  Initially marathon is the only service on the cluster and is in an Idle state until we submit our first application to marathon.  Marathon is like a distributed init.d for the cluster where we submit apps to it to run and it will make sure they are running and resilient.  We will explore marathon in greater detail later.
 <img src="../images/01-acs-setup/acs-create-27.png"/><br>
+<br><br><b>Congratulations:</b> You have become familiar with how to Explore the DC/OS and Mesos dashboards.  Next, we will walk through <a href="../docs/kafka-setup.md">Explore the DC/OS and Mesos dashboards</a>
 
 
