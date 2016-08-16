@@ -1,5 +1,5 @@
-# Schedule Kafka brokers
+# Schedule the components of the application
 
 <b>Step 1:</b> instructions coming soon ...
-<img src="../images/03-kafka-setup/kafka-01.png"/>
+<img src="../images/08-app-setup/app-01.png"/>
 <br><br><b>Step 2:</b> instructions coming soon ...
