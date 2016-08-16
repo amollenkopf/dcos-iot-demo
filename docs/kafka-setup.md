@@ -1,4 +1,4 @@
-# Kafka setup
+# Schedule Kafka brokers
 
 <b>Step 1:</b> coming soon ...
 <img src="../images/03-kafka-setup/kafka-01.png"/>
