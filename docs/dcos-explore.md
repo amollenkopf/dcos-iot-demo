@@ -18,12 +18,12 @@ This section provides a brief walk through of the DC/OS & Mesos dashboards and d
 <li>Task Failure Rate: shows the rate of tasks (work that is scheduled on the DC/OS cluster) that have failed over time.  With distributed systems failure is a given and DC/OS has measures in place to keep tasks resilient upon failure.  This dashboard widget provides you visibility into failures that have happened over time.</li>
 <li>Services Health: Shows the health of services that are running on the cluster.  Initially marathon is the only service on the cluster and is in an Idle state until we submit our first application to marathon.  Marathon is like a distributed init.d for the cluster where we submit apps to it to run and it will make sure they are running and resilient.  We will explore marathon in greater detail throughout this demonstration.</li></ul>
 <br><b>Step 3:</b> On the DC/OS dashboard click the 'Nodes' tab to see the nodes that are participating in the cluster.
-<img src="../images/01-acs-setup/acs-create-22.png"/>
+<img src="../images/01-acs-setup/acs-create-22.png"/><br>
 <br><br><b>Step 4:</b> Scroll down to see the full listing of nodes participating in the cluster.<ul>
 <li>Node hostnames that start with 10.0.0.* are nodes that are participating as public agents node(s).</li>
 <li>Node hostnames that start with 10.32.0.* are nodes that are participating as private agents.</li></ul>
-<img src="../images/01-acs-setup/acs-create-23.png"/>
+<img src="../images/01-acs-setup/acs-create-23.png"/><br>
 <br><br><b>Step 5:</b> asdf
-<img src="../images/01-acs-setup/acs-create-24.png"/>
+<img src="../images/01-acs-setup/acs-create-24.png"/><br>
 
 
