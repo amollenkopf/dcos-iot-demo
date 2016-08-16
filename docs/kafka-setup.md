@@ -22,6 +22,10 @@
 <img src="../images/03-kafka-setup/kafka-10.png"/>
 <br><br><b>Step 11:</b> Click the 'Install' button to install the package and click the 'Acknowledge (check)' button.
 <img src="../images/03-kafka-setup/kafka-11.png"/>
+<br><br><b>Step 12:</b> In the DC/OS dashboard navigate to 'Services'.  The 'Services' tab is where you can monitor what services have been scheduled and are running on the DC/OS cluster.  Notice there is a Service named 'kafka' that now appears.
+<img src="../images/03-kafka-setup/kafka-12.png"/>
+
+
 
 
 
