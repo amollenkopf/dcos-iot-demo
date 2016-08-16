@@ -24,6 +24,9 @@
 <img src="../images/03-kafka-setup/kafka-11.png"/>
 <br><br><b>Step 12:</b> In the DC/OS dashboard navigate to 'Services'.  The 'Services' tab is where you can monitor what services have been scheduled and are running on the DC/OS cluster.  Notice there is a Service named 'kafka' that now appears.
 <img src="../images/03-kafka-setup/kafka-12.png"/>
+<br><br><b>Step 13:</b> Click on 'kafka' in the service listing to open up more information on the 'kafka' service.  Here we can see the three brokers, their names, their status, and the resources that have been allocated to them.
+<img src="../images/03-kafka-setup/kafka-13.png"/>
+
 
 
 
