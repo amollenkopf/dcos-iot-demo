@@ -9,8 +9,8 @@ This section provides a brief walk through of the DC/OS & Mesos dashboards and d
 <img src="../images/01-acs-setup/acs-create-20.png"/><br><br><ul>
 <li>On Azure, with the SSH tunnel in place you can connect to the DC/OS dashboard with <a href="http://localhost:9001">http://localhost:9001</a>.</li></ul>
 <img src="../images/01-acs-setup/acs-create-21.png"/>
-<br><br>
-<li>On Amazon, obtain the public IP address of your master(s) and connect with &lt;your master url&gt;.</li>
+<br><br><ul>
+<li>On Amazon, obtain the public IP address of your master(s) and connect with &lt;your master url&gt;.</li></ul>
 <br><br><b>Step 2:</b> On the DC/OS dashboard click the 'Nodes' tab to see the nodes that are participating in the cluster.
 <img src="../images/01-acs-setup/acs-create-22.png"/>
 <br><br><b>Step 3:</b> Scroll down to see the full listing of nodes participating in the cluster.<ul>
