@@ -1,4 +1,4 @@
-# Schedule Kafka brokers
+# Install Kafka & schedule brokers
 
 <b>Step 1:</b> In the DC/OS dashboard navigate to 'Universe'.  The 'Universe' is where you can manage what packages (mesos frameworks) your cluster can make use of.
 <img src="../images/03-kafka-setup/kafka-01.png"/>
