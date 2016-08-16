@@ -20,8 +20,8 @@ This section provides a brief walk through of the DC/OS & Mesos dashboards and d
 <br><b>Step 3:</b> On the DC/OS dashboard click the 'Nodes' tab to see the nodes that are participating in the cluster.
 <img src="../images/01-acs-setup/acs-create-22.png"/><br>
 <br><br><b>Step 4:</b> Scroll down to see the full listing of nodes participating in the cluster.<ul>
-<li>Node hostnames that start with 10.0.0.* are nodes that are participating as public agents node(s).</li>
-<li>Node hostnames that start with 10.32.0.* are nodes that are participating as private agents.</li></ul>
+<li>Public agent node hostnames start with 10.0.0.*.</li>
+<li>Private agent node hostnames start with 10.32.0.*.</li></ul>
 <img src="../images/01-acs-setup/acs-create-23.png"/><br>
 <br><br><b>Step 5:</b> asdf
 <img src="../images/01-acs-setup/acs-create-24.png"/><br>
