@@ -16,7 +16,7 @@ Microsoft Azure has a capability named Azure Container Service (ACS) that allows
 <br><br><b>Step 6:</b> Create a SSH key that will enable you to access the 'Azure Container Service' once it has been created.<ul><li>for more info see the <a href="https://azure.microsoft.com/en-us/documentation/articles/virtual-machines-linux-ssh-from-linux/">Azure ssh doc</a>.</li></ul>
 <img src="../images/01-acs-setup/acs-create-06.png"/>
 <br><br><b>Step 7:</b> Fill in the 'Basic' information needed to create the 'Azure Container Service' including:<ul>
-<li>SSH user name & public key, more ~/.ssh/azureuser.pub and very carefully cut and paste the public key contents.</li>
+<li>SSH user name & public key, more ~/.ssh/azureuser.pub and very carefully cut (without any extra whitespace) and paste the public key contents.</li>
 <li>select the Azure subscription you wish to associate this Azure Container Service with.</li>
 <li>create a new 'Resource Group' and enter a new unique name, e.g. esri40.</li>
 <li>select the 'Location'/region you wish this Azure Container Service to run in.</li></ul>
