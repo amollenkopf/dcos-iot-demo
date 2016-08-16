@@ -8,7 +8,17 @@
 <img src="../images/03-kafka-setup/kafka-03.png"/>
 <br><br><b>Step 4:</b> Click the 'Advanced Installation' link to fine tune the installation parameters.
 <img src="../images/03-kafka-setup/kafka-04.png"/>
-<br><br><b>Step 5:</b> Click the 'service' parameter group to scroll through it's available options and keep all defaults.
+<br><br><b>Step 5:</b> Click the 'service' parameter group, scroll through it's available options, and keep all defaults.
 <img src="../images/03-kafka-setup/kafka-05.png"/>
-<br><br><b>Step 6:</b> Click the 'brokers' parameter group to scroll through it's available options and change the count to the number of brokers you desire, for the purpose of the demo we will keep the default of '3'.
+<br><br><b>Step 6:</b> Click the 'brokers' parameter group and scroll through it's available options.
 <img src="../images/03-kafka-setup/kafka-06.png"/>
+<br><br><b>Step 7:</b> Find the 'count' parameter and change the value to the number of brokers you desire, for the purpose of the demo we will keep the default of '3'.
+<img src="../images/03-kafka-setup/kafka-07.png"/>
+<br><br><b>Step 8:</b> Click the 'kafka' parameter group and scroll through it's available options.
+<img src="../images/03-kafka-setup/kafka-08.png"/>
+<br><br><b>Step 9:</b> Find the 'delete.topic.enable' parameter and enable it so that we will be able to delete topics between demo runs.
+<img src="../images/03-kafka-setup/kafka-09.png"/>
+<br><br><b>Step 10:</b> Click the 'Review and Install' button, review the parameters values, and click the 'Install' button to install the package.
+<img src="../images/03-kafka-setup/kafka-10.png"/>
+
+
