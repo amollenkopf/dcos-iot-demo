@@ -16,7 +16,7 @@ This section provides a brief walk through of the DC/OS & Mesos dashboards and d
 <li>The other 3 nodes are what was configured as public agents.  Public agent nodes are the the nodes that expose public IPs/ports out publicly and typically are only used for running load balancers such as marathon-lb that balance work to private agents.  While the number of public agents is not an option to specify when creating the cluster it is based on the number of masters you selected.  We specified a 3 master setup which resulted in 3 public agent nodes.  In fact, had we specified 5, 7, or 9 masters we would still get 3 public agent nodes.  The assumption of DC/OS is that if you want a highly available configuration for masters you also want a highly available configuration of public agents.  Likewise, if you selected a 1 master configuration for your cluster you would only get a single public agent.</li></ul>
 <li>Memory Allocation: showing 0 B of 344 GiB.  With 13 nodes of 'D4_V2 Standard' (28GiB memory) the cluster has 364 GiB of memory.  DC/OS reserves a portion of the memory for it's own usage which is why we show 344 GiB or roughly 26GiB of memory per node.</li>
 <li>Task Failure Rate: shows the rate of tasks (work that is scheduled on the DC/OS cluster) that have failed over time.  With distributed systems failure is a given and DC/OS has measures in place to keep tasks resilient upon failure.  This dashboard widget provides you visibility into failures that have happened over time.</li>
-<li>Services Health: Shows the health of services that are running on the cluster.  Initially marathon is the only service on the cluster and is in an Idle state until we submit our first application to marathon.  Marathon is like a distributed init.d for the cluster where we submit apps to it to run and it will make sure they are running and resilient.  We will explore marathon in greater detail throughout this demonstration.</li></ul>
+<li>Services Health: Shows the health of services that are running on the cluster.</li></ul>
 <br><b>Step 3:</b> On the DC/OS dashboard click the 'Nodes' tab to see the nodes that are participating in the cluster.
 <img src="../images/01-acs-setup/acs-create-22.png"/><br>
 <br><br><b>Step 4:</b> Scroll down to see the full listing of nodes participating in the cluster.<ul>
@@ -29,5 +29,7 @@ This section provides a brief walk through of the DC/OS & Mesos dashboards and d
 <img src="../images/01-acs-setup/acs-create-25.png"/><br>
 <br><br><b>Step 7:</b> In the Mesos dashboard click on the 'Slaves' menu.  Slaves are the same as DC/OS agents and were renamed at the Mesos 1.0 release.  DC/OS 1.8 is based on Mesos 1.0 so consistent Agent naming will be present at that release.
 <img src="../images/01-acs-setup/acs-create-26.png"/><br>
+<br><br><b>Step 8:</b> In the DC/OS dashboard click on the 'Services' tab.  Initially marathon is the only service on the cluster and is in an Idle state until we submit our first application to marathon.  Marathon is like a distributed init.d for the cluster where we submit apps to it to run and it will make sure they are running and resilient.  We will explore marathon in greater detail later.
+<img src="../images/01-acs-setup/acs-create-27.png"/><br>
 
 
