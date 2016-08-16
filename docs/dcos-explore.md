@@ -23,7 +23,7 @@ This section provides a brief walk through of the DC/OS & Mesos dashboards and d
 <li>Public agent node hostnames start with 10.0.0.*.</li>
 <li>Private agent node hostnames start with 10.32.0.*.</li></ul>
 <img src="../images/01-acs-setup/acs-create-23.png"/><br>
-<br><br><b>Step 5:</b> asdf
+<br><br><b>Step 5:</b> The foundation of DC/OS is Apache Mesos.  The Mesos dashboard provides very detailed information about active and completed tasks.  To access the Mesos dashboard use the same URL you used to access the DC/OS dashboard and append /mesos at the end, e.g. http://localhost:9001/mesos.
 <img src="../images/01-acs-setup/acs-create-24.png"/><br>
 
 
