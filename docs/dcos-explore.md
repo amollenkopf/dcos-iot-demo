@@ -11,8 +11,13 @@ This section provides a brief walk through of the DC/OS & Mesos dashboards and d
 <img src="../images/01-acs-setup/acs-create-21.png"/>
 <br><br>
 <li>On Amazon, obtain the public IP address of your master(s) and connect with &lt;your master url&gt;.</li>
-<br><br><b>Step 2:</b> text:
+<br><br><b>Step 2:</b> On the DC/OS dashboard click the 'Nodes' tab to see the nodes that are participating in the cluster.
 <img src="../images/01-acs-setup/acs-create-22.png"/>
-<br><br><b>Step 3:</b> text:
+<br><br><b>Step 3:</b> Scroll down to see the full listing of nodes participating in the cluster.<ol>
+<li>Node hostnames that start with 10.0.0.* are nodes that are participating as public agents node(s).  While the number of public agents is not an option to specify when creating the cluster it is based on the number of masters you selected.  If you selected 1 master you get 1 public agent, whereas if you selected 3, 5, 7, or 9 masters you will get 3 public agents.  The assumption is that if you want a highly available configuration for masters you also want a highly available configuration of public agents.  Public agent nodes are the the nodes that expose public IPs/ports out publicly and typically are only used for running load balancers such as marathon-lb.</li>
+<li>Node hostnames that start with 10.32.0.* are nodes that are participating as private agents.  Private agent nodes are the nodes that typically perform the majority of task work that gets scheduled on the cluster.</li></ol>
 <img src="../images/01-acs-setup/acs-create-23.png"/>
+<br><br><b>Step 3:</b> asdf
+<img src="../images/01-acs-setup/acs-create-24.png"/>
+
 
