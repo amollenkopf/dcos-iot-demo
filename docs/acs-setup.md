@@ -29,7 +29,7 @@ Microsoft Azure has a capability named Azure Container Service (ACS) that allows
 <br><br><li>Click on 'Agent virtual machine size' to choose the VM size you would like your private agents to be.</li>
 <img src="../images/01-acs-setup/acs-create-10.png"/>
 <br><br><li>Click the 'View all' link to browse through all available VM sizes.</li>
-<li>Select the VM size you desire and click the 'Select' button.  For the purposes of this demo app we will choose 'D4 v2' (8 cores, 28GB memory, 400GB local SSD storage)</li>
+<li>Select the VM size you desire and click the 'Select' button.  For the purposes of this demo app we will choose 'D4_V2 Standard' (8 cores, 28GB memory, 400GB local SSD storage)</li>
 <img src="../images/01-acs-setup/acs-create-11.png"/>
 <br><br><li>Set the 'Master count' to the amount you desire.  For the purpose of the demo you can choose '1' or '3', either will work.</li>
 <li>Specify a new unique value for the 'DNS prefix for container service' field and hit the 'OK' button.</li></ul>
