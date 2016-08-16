@@ -23,7 +23,11 @@ This section provides a brief walk through of the DC/OS & Mesos dashboards and d
 <li>Public agent node hostnames start with 10.0.0.*.</li>
 <li>Private agent node hostnames start with 10.32.0.*.</li></ul>
 <img src="../images/01-acs-setup/acs-create-23.png"/><br>
-<br><br><b>Step 5:</b> The foundation of DC/OS is Apache Mesos.  The Mesos dashboard provides very detailed information about active and completed tasks.  To access the Mesos dashboard use the same URL you used to access the DC/OS dashboard and append /mesos at the end, e.g. http://localhost:9001/mesos.
+<br><br><b>Step 5:</b> The foundation of DC/OS is Apache Mesos.  The Mesos dashboard provides very detailed information about active and completed tasks.  To access the Mesos dashboard use the same URL you used to access the DC/OS dashboard and append '/mesos' at the end, e.g. <a href="http://localhost:9001/mesos">http://localhost:9001/mesos</a>.
 <img src="../images/01-acs-setup/acs-create-24.png"/><br>
+<br><br><b>Step 6:</b> Scrolling down on the Mesos dashboard on the bottom left we can see another view of the resources avaiable in the cluster.  Once we start deploying tasks we will see the shares of CPUs/mem/disk we have allocated in the 'Used' row.
+<img src="../images/01-acs-setup/acs-create-25.png"/><br>
+<br><br><b>Step 7:</b> In the Mesos dashboard click on the 'Slaves' menu.  Slaves are the same as DC/OS agents and were renamed at the Mesos 1.0 release.  DC/OS 1.8 is based on Mesos 1.0 so consistent Agent naming will be present at that release.
+<img src="../images/01-acs-setup/acs-create-26.png"/><br>
 
 
