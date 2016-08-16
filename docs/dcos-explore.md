@@ -8,12 +8,12 @@ This section provides a brief walk through of the DC/OS & Mesos dashboards and d
 <li>On Azure, you first need to establish an SSH tunneling session.  To establish a secure SSH tunnel you should use the SSH key created in the previous section along with the value of the 'Public IP address' 'DNS name' of the Mesos master(s).</li></ul>
 <img src="../images/01-acs-setup/acs-create-20.png"/><br><br><ul>
 <li>On Azure, with the SSH tunnel in place you can connect to the DC/OS dashboard with <a href="http://localhost:9001">http://localhost:9001</a>.</li></ul>
+<li>On Amazon, obtain the public IP address of your master(s) and connect with &lt;your master url&gt;.</li></ul>
 <br><br><ul>
-<li>On Amazon, obtain the public IP address of your master(s) and connect with &lt;your master url&gt;.</li>
 <li>Once connected to your DC/OS dashboard you should see a high level dashboard of your cluster</li>
 <ul>
-<li></li>
-<li></li>
+<li>one</li>
+<li>two</li>
 </ul></ul>
 <img src="../images/01-acs-setup/acs-create-21.png"/>
 <br><br><b>Step 2:</b> On the DC/OS dashboard click the 'Nodes' tab to see the nodes that are participating in the cluster.
