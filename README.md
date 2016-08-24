@@ -12,7 +12,7 @@ This project demonstrates how to configure a full stack geo-enabled Internet of 
 3. <a href="docs/dcos-explore.md">explore the DC/OS and Mesos dashboards</a><br>
 4. <a href="docs/kafka-setup.md">install Kafka & schedule brokers</a><br>
 5. <a href="docs/es-setup.md">install Elasticsearch & schedule a cluster</a><br>
-6. <a href="docs/marathon-lb-setup.md">schedule a load balancer (marathon-lb) to run on public agents</a><br>
+6. <a href="docs/marathon-lb-setup.md">schedule a load balancer to run on public agents</a><br>
 7. <a href="docs/ports-setup.md">open up load balancer ports</a><br>
 8. <a href="docs/map-setup.md">schedule the map visualization</a><br>
 9. <a href="docs/app-setup.md">schedule the components of the application</a><br>
