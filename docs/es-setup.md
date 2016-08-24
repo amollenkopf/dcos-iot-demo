@@ -6,17 +6,17 @@
 <br><br><b>Step 3:</b> To establish an Elasticsearch cluster with the CORS setting in place we will make use of the <a href="https://hub.docker.com/r/amollenkopf/elasticsearch/">amollenkopf/elasticsearch:2.3.2</a> Docker image and schedule the cluster to run via <a href="https://github.com/mesosphere/marathon">Marathon</a>.  Prior to doing this lets review the contents of the file we will submit to Marathon <a href="../elasticsearch-marathon.json">elasticsearch-marathon.json</a>.<br>
 <img src="../images/04-es-setup/es-01.png" width="70%" height="70%"/><br>
 Properties worth a more detailed review include:
-<ul><li>"id": the marathon app id and is what will be shown as the common name in the Marathon application listing.</li>
+<ul><li>"id": the marathon name that will be shown in the DC/OS Service listing.</li>
 <li>"args": "--elasticsearchNodes": the # of Elasticsearch data nodes you would like your cluster to be provisioned with.</li>
 <li>"args": "--elasticsearchClusterName": the name that you would like to give your Elasticsearch cluster.</li>
 <li>"args": "--elasticsearchCpu": the amount of cores that you would like to allocate per Elasticsearch data node.</li>
 <li>"args": "--elasticsearchDisk": the amount of disk that you would like to allocate per Elasticsearch data node.</li>
 <li>"args": "--elasticsearchRam": the amount of memory that you would like to allocate per Elasticsearch data node.</li>
 <li>"args": "--elasticsearchDockerImage": the Elasticsearch image to utilize when provisioning data nodes.</li>
-<li>"args": "--executorName": the name that you would like to give to the Elasticsearch executor, is shown in the Service listing of DC/OS.</li></ul>
+<li>"args": "--executorName": the name that you would like to give to the Elasticsearch executor, shown in the Application listing of Marathon.</li></ul>
 <br><b>Step 4:</b> To schedule an Elasticsearch cluster with Marathon on DC/OS submit the following command via the DC/OS CLI: 'dcos marathon app add <a href="../elasticsearch-marathon.json">elasticsearch-marathon.json</a>'.<br>
 <img src="../images/04-es-setup/es-02.png" width="70%" height="70%"/>
-<br><br><b>Step 5:</b>... 
+<br><br><b>Step 5:</b> The progress of the Elasticsearch executor can be  
 <img src="../images/04-es-setup/es-03.png"/>
 <br><br><b>Step 6:</b>... 
 <img src="../images/04-es-setup/es-04.png"/>
