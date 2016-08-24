@@ -2,7 +2,7 @@
 
 <b>Step 1:</b> Review the contents of <a href="../elasticsearch-marathon.json">elasticsearch-marathon.json</a>.
 <img src="../images/04-es-setup/es-01.png" width="70%" height="70%"/><br>
-Note that the Docker image that is used is <a href="https://hub.docker.com/r/amollenkopf/elasticsearch/">amollenkopf/elasticsearch</a>. This is needed as <a href="https://www.w3.org/TR/cors/">Cross-Origin Resource Sharing (CORS)</a> has to enabled on Elasticsearch.  CORS needs to be enabled in order for the JavaScript map web app (that we will use in later steps) to establish a line of communication with Elasticsearch.  If you prefer to create your own Docker image of this instead of using the provided one, see the <a href="es-docker.md">How to create your own Elasticsearch docker image with CORS enabled</a> instructions.
+Note that the Docker image that is used is <a href="https://hub.docker.com/r/amollenkopf/elasticsearch/">amollenkopf/elasticsearch</a>. This is needed as <a href="https://www.w3.org/TR/cors/">Cross-Origin Resource Sharing (CORS)</a> has to enabled on Elasticsearch.  CORS needs to be enabled in order for the JavaScript map web app (that we will use in later steps) to establish a line of communication with Elasticsearch.  If you prefer to create your own Docker image of this instead of using the provided one, see the <a href="es-setup-docker.md">How to create your own Elasticsearch docker image with CORS enabled</a> instructions.
 <br><br><b>Step 2:</b> Schedule an Elasticsearch cluster on DC/OS by submitting the <a href="../elasticsearch-marathon.json">elasticsearch-marathon.json</a> to Marathon.<br>
 <img src="../images/04-es-setup/es-02.png" width="70%" height="70%"/>
 <br><br><b>Step 3:</b>... 
