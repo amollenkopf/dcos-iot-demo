@@ -13,7 +13,7 @@ This project demonstrates how to configure a full stack geo-enabled Internet of 
 4. <a href="docs/kafka-setup.md">install Kafka & schedule brokers</a><br>
 5. <a href="docs/es-setup.md">install Elasticsearch & schedule a cluster</a><br>
 6. <a href="docs/marathon-lb-setup.md">schedule a load balancer to run on public agents</a><br>
-7. Open up Load Balancer Ports on either <a href="../docs/ports-setup.md">Microsoft Azure</a> or <a href="../docs/ports-amazon-setup.md">Amazon Web Services</a>.
+7. open up load balancer ports on either <a href="../docs/ports-setup.md">Microsoft Azure</a> or <a href="../docs/ports-amazon-setup.md">Amazon Web Services</a>.
 8. <a href="docs/map-setup.md">schedule the map visualization</a><br>
 9. <a href="docs/app-setup.md">schedule the components of the application</a><br>
 10. <a href="docs/source-setup.md">schedule a Source that emits events</a><br>
