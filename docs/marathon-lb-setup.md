@@ -1,4 +1,4 @@
-# Schedule a Load Balancer (marathon-lb) to run on Public Agents
+# Schedule a Load Balancer to run on Public Agents
 
 <b>Step 1:</b> ...
 <img src="../images/05-marathon-lb-setup/marathon-lb-01.png"/><br>
