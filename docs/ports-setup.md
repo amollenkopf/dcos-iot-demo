@@ -48,3 +48,5 @@
 <img src="../images/06-ports-setup/acs-ports-23.png"/><br>
 <br><b>Step 24:</b> ...
 <img src="../images/06-ports-setup/acs-ports-24.png"/><br>
+
+<br><br><b>Congratulations:</b> You now have opened up ports on Microsoft Azure and are ready to receive application requests on the DC/OS cluster.  Next, we will walk through how to <a href="../docs/map-setup.md">Schedule the Map Visualization</a>.
