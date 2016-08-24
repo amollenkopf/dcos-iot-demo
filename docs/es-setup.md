@@ -1,4 +1,4 @@
-# Schedule an Elasticsearch cluster
+# Install Elasticsearch & Schedule a Cluster
 
 <b>Step 1:</b> Review the contents of <a href="../elasticsearch-marathon.json">elasticsearch-marathon.json</a>.
 <img src="../images/04-es-setup/es-01.png" width="70%" height="70%"/><br>
