@@ -23,5 +23,7 @@
 <br><b>Step 11:</b> ...
 <img src="../images/05-marathon-lb-setup/marathon-lb-11.png"/><br>
 
+<br><br><b>Congratulations:</b> You now have a load balancer (marathon-lb) installed on public agents are ready to load balance application requests on the DC/OS cluster.  Next, we will walk through how to Open up Load Balancer Ports on either <a href="../docs/ports-setup.md">Microsoft Azure or <a href="../docs/ports-amazon-setup.md">Amazon Web Services</a>.
+
 
 
