@@ -20,7 +20,7 @@
 <img src="../images/05-marathon-lb-setup/marathon-lb-09.png"/><br>
 <br><b>Step 10:</b> In the Marathon UI we can see a new application listed named 'marathon-lb-default'.
 <img src="../images/05-marathon-lb-setup/marathon-lb-10.png"/><br>
-<br><b>Step 11:</b> Clicking on the marathon-lb app in the listing we can see more detailed configuration including the range of ports that HAProxy has pre-configured including ports 10000-101000.  These ports are where we will assign any applications that run within the DC/OS cluster that need to have the ability to be accessed externally from the DC/OS cluster.
+<br><b>Step 11:</b> Clicking on the marathon-lb app in the listing we can see more detailed configuration including the range of ports that HAProxy has pre-configured including ports 10000-10100.  These ports are where we will assign any applications that run within the DC/OS cluster that need to have the ability to be accessed externally from the DC/OS cluster.
 <img src="../images/05-marathon-lb-setup/marathon-lb-11.png"/><br>
 
 <br><br><b>Congratulations:</b> You now have a load balancer (marathon-lb) installed on public agents are ready to load balance application requests on the DC/OS cluster.  Next, we will walk through how to Open up Load Balancer Ports on either <a href="../docs/ports-setup.md">Microsoft Azure or <a href="../docs/ports-amazon-setup.md">Amazon Web Services</a>.
