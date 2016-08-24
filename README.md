@@ -8,7 +8,7 @@ This project demonstrates how to configure a full stack geo-enabled Internet of 
 
 ## create your own dcos-iot-demo environment:
 1. <a href="docs/overview.md">review architecture & application overview</a><br>
-2. get a DC/OS cluster running on <a href="docs/acs-setup.md">Microsoft Azure</a> or <a href="docs/amazon-setup.md">Amazon Web Services</a>.<br>
+2. get a DC/OS cluster running on either <a href="docs/acs-setup.md">Microsoft Azure</a> or <a href="docs/amazon-setup.md">Amazon Web Services</a>.<br>
 3. <a href="docs/dcos-explore.md">explore the DC/OS and Mesos dashboards</a><br>
 4. <a href="docs/kafka-setup.md">install Kafka & schedule brokers</a><br>
 5. <a href="docs/es-setup.md">schedule an Elasticsearch cluster</a><br>
