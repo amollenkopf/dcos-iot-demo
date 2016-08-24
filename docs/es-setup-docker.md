@@ -14,7 +14,7 @@ Breaking down this Dockerfile we are:<ul><li>starting FROM a base <a href="https
 <img src="../images/04-es-setup-docker/es-docker-06.png" width="45%" height="45%"/></li>
 <li>exposing the normal <a href="https://www.elastic.co/guide/en/elasticsearch/guide/current/_talking_to_elasticsearch.html">Elasticsearch ports for 9200 & 9300</a></li><li>defining the entry point</li><li>specifying the command to run when the Docker image starts</li></ul>
 <br><b>Step 6:</b> ...<br>
-<img src="../images/04-es-setup-docker/es-docker-07.png" width="60%" height="60%"/><br>
-<img src="../images/04-es-setup-docker/es-docker-08.png" width="60%" height="60%"/><br>
+<img src="../images/04-es-setup-docker/es-docker-07.png" width="70%" height="70%"/><br>
+<img src="../images/04-es-setup-docker/es-docker-08.png" width="70%" height="70%"/><br>
 <br><b>Step 8:</b> ...<br>
 <img src="../images/04-es-setup-docker/es-docker-09.png"/><br>
