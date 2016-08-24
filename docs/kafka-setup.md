@@ -29,11 +29,11 @@
 <br><br><b>Step 14:</b> Install the dcos-cli (Command Line Interface).
 <img src="../images/03-kafka-setup/dcos-cli-01.png"/>
 <br><br><b>Step 15:</b> Using the dcos-cli we can interact with Kafka.  Type 'dcos kafka --help' to see the available commands.
-<img src="../images/03-kafka-setup/kafka-14.png"/ width="50%" height="50%">
+<img src="../images/03-kafka-setup/kafka-14.png" width="50%" height="50%"/>
 <br><br><b>Step 16:</b> You can get a listing of broker names.  Type 'dcos kafka broker list'.
-<img src="../images/03-kafka-setup/kafka-15.png"/>
+<img src="../images/03-kafka-setup/kafka-15.png" width="50%" height="50%"/>
 <br><br><b>Step 17:</b> You can get connection details which is needed information to share with Kafka producers.  Type 'dcos kafka connection'.
-<img src="../images/03-kafka-setup/kafka-16.png"/>
+<img src="../images/03-kafka-setup/kafka-16.png" width="50%" height="50%"/>
 
 <br><br><b>Congratulations:</b> You now have Kafka installed with three brokers ready to receive data on the DC/OS cluster.  Next, we will walk through how to <a href="../docs/es-setup.md">Install & schedule an Elasticsearch cluster</a>
 
