@@ -22,9 +22,9 @@ Properties worth a more detailed review include:
 <img src="../images/04-es-setup/es-04.png"/>
 <br><br><b>Step 7:</b> Navigating to the DC/OS Service tab we can now see a service for 'elasticsearch'.  Hovering over the text of the 'elasticsearch' service presents a popout icon that we can click on to view more details of Elasticsearch cluster in a new browser tab.<br>
 <img src="../images/04-es-setup/es-05.png"/>
-<br><br><b>Step 8:</b>... 
+<br><br><b>Step 8:</b> Here we see a dashboard of our 5-node Elasticsearch cluster.
 <img src="../images/04-es-setup/es-06.png"/>
-<br><br><b>Step 9:</b>... 
+<br><br><b>Step 9:</b> Clicking on the Tasks tab of the Elasticsearch dashboard we can see the State as well as the hostname and IP addresses of each data node.
 <img src="../images/04-es-setup/es-07.png"/>
-<br><br><b>Step 10:</b>... 
+<br><br><b>Step 10:</b> If you wanted to scale-out (add additional nodes) the # of data nodes on the Elasticsearch cluster it is possible by typing your new desired horizontal scaling value and clicking the 'Scale' button.
 <img src="../images/04-es-setup/es-08.png"/>
