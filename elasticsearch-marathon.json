@@ -28,7 +28,7 @@
 	 "--elasticsearchCpu", "4.0",
 	 "--elasticsearchDisk", "10240",
 	 "--elasticsearchRam", "12228",
-	 "--elasticsearchDockerImage", "elasticsearch:2.3.4",
+	 "--elasticsearchDockerImage", "amollenkopf/elasticsearch:2.3.2",
 
 	 "--executorForcePullImage", "false",
 	 "--executorName", "spatiotemporal-store"
