@@ -5,16 +5,15 @@
 <br><br><b>Step 2:</b> The small modification that is needed is to enable <a href="https://www.w3.org/TR/cors/">Cross-Origin Resource Sharing (CORS)</a> so that the JavaScript web map app (that we will use in later steps) can establish a line of communication with Elasticsearch. A Docker image <a href="https://hub.docker.com/r/amollenkopf/elasticsearch/">amollenkopf/elasticsearch</a> has been created and provided for you to work with that has the appropriate configuration in place.  If you prefer to create your own Docker image instead of using the provided one, see the <a href="es-setup-docker.md">How to create your own Elasticsearch docker image with CORS enabled</a> instructions.
 <br><br><b>Step 3:</b> To establish an Elasticsearch cluster with the CORS setting in place we will make use of the <a href="https://hub.docker.com/r/amollenkopf/elasticsearch/">amollenkopf/elasticsearch:2.3.2</a> Docker image and schedule the cluster to run via <a href="https://github.com/mesosphere/marathon">Marathon</a>.  Prior to doing this lets review the contents of the file we will submit to Marathon <a href="../elasticsearch-marathon.json">elasticsearch-marathon.json</a>.<br>
 <img src="../images/04-es-setup/es-01.png" width="70%" height="70%"/><br>
-Properties worth a more detailed review include:<ul>
-<li>"id": the marathon app id and is what will be shown as the common name in the Marathon application listing.</li>
+Properties worth a more detailed review include:
+<ul><li>"id": the marathon app id and is what will be shown as the common name in the Marathon application listing.</li>
 <li>"args": "--elasticsearchNodes": the # of Elasticsearch data nodes you would like your cluster to be provisioned with.</li>
 <li>"args": "--elasticsearchClusterName": the name that you would like to give your Elasticsearch cluster.</li>
 <li>"args": "--elasticsearchCpu": the amount of cores that you would like to allocate per Elasticsearch data node.</li>
 <li>"args": "--elasticsearchDisk": the amount of disk that you would like to allocate per Elasticsearch data node.</li>
 <li>"args": "--elasticsearchRam": the amount of memory that you would like to allocate per Elasticsearch data node.</li>
 <li>"args": "--elasticsearchDockerImage": the Elasticsearch image to utilize when provisioning data nodes.</li>
-<li>"args": "--executorName": the name that you would like to give to the Elasticsearch executor, is shown in the Service listing of DC/OS.</li>
-</ul>
+<li>"args": "--executorName": the name that you would like to give to the Elasticsearch executor, is shown in the Service listing of DC/OS.</li></ul>
 <br><b>Step 4:</b> Schedule an Elasticsearch cluster on DC/OS by submitting the <a href="../elasticsearch-marathon.json">elasticsearch-marathon.json</a> to Marathon.<br>
 <img src="../images/04-es-setup/es-02.png" width="70%" height="70%"/>
 <br><br><b>Step 5:</b>... 
