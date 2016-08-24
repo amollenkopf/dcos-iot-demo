@@ -18,5 +18,5 @@ Breaking down this Dockerfile we are:<ul><li>starting FROM a base <a href="https
 <img src="../images/04-es-setup-docker/es-docker-08.png" width="75%" height="75%"/><br>
 <br><b>Step 8:</b> Following a successful build, we need to push the built Docker image to <a href="https://hub.docker.com/">Docker Hub</a> by issuing the following command 'docker push <your docker hub username>/elasticsearch:2.3.2, again replacing <your docker hub username> with your username, e.g. amollenkopf<br>
 <img src="../images/04-es-setup-docker/es-docker-09.png"/><br>
-<br><br><b>Congratulations:</b> You now have your own Docker image for Elasticsearch with CORS enabled.  Now, let's return back to <a href="../docs/es-setup.md">Install Elasticsearch & schedule a cluster</a>
+<br><br><b>Congratulations:</b> You now have your own Docker image for Elasticsearch with CORS enabled.  Now, let's return back to <a href="../docs/es-setup.md">Install Elasticsearch & schedule a cluster</a>.
 
