@@ -10,7 +10,7 @@
 <img src="../images/04-es-setup-docker/es-docker-04.png" width="75%" height="75%"/><br>
 <br><b>Step 5:</b> Review the <a href="../es-docker/Dockerfile">dcos-iot-demo/es-docker/Dockerfile</a><br>
 <img src="../images/04-es-setup-docker/es-docker-05.png" width="70%" height="70%"/><br>
-This Dockerfile is starting FROM a base <a href="https://github.com/docker-library/elasticsearch">Elasticsearch Image</a><ul><li>we are modifying the base image copying all the contents of <a href="../es-docker/config>dcos-iot-demo/es-docker/config</a> to the base image's /usr/share/elasticsearch/config folder</li><li>exposing the normal Elasticsearch ports 9200 and 9300</li><li>defining the entry point</li><li>and specifying the commnad to run when the Docker image starts</li><br>
+Breaking down this Dockerfile we are:<ul><li>starting FROM a base <a href="https://github.com/docker-library/elasticsearch">Elasticsearch Image</a></li><li>we are modifying the base image copying all the contents of <a href="../es-docker/config">dcos-iot-demo/es-docker/config</a> to the base image's /usr/share/elasticsearch/config folder</li><li>exposing the normal Elasticsearch ports 9200 and 9300</li><li>defining the entry point</li><li>and specifying the commnad to run when the Docker image starts</li><br>
 <br><b>Step 6:</b> ...<br>
 <img src="../images/04-es-setup-docker/es-docker-06.png"/><br>
 <br><b>Step 7:</b> ...<br>
