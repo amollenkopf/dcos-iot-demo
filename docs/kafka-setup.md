@@ -29,7 +29,7 @@
 <br><br><b>Step 14:</b> Install the dcos-cli (Command Line Interface).
 <img src="../images/03-kafka-setup/dcos-cli-01.png"/>
 <br><br><b>Step 15:</b> Using the dcos-cli we can interact with Kafka.  Type 'dcos kafka --help' to see the available commands.
-<img src="../images/03-kafka-setup/kafka-14.png"/>
+<img src="../images/03-kafka-setup/kafka-14.png"/ width="50%" height="50%">
 <br><br><b>Step 16:</b> You can get a listing of broker names.  Type 'dcos kafka broker list'.
 <img src="../images/03-kafka-setup/kafka-15.png"/>
 <br><br><b>Step 17:</b> You can get connection details which is needed information to share with Kafka producers.  Type 'dcos kafka connection'.
