@@ -28,3 +28,7 @@ Properties worth a more detailed review include:
 <img src="../images/04-es-setup/es-07.png"/>
 <br><br><b>Step 10:</b> If you wanted to scale-out (add additional nodes) the # of data nodes on the Elasticsearch cluster it is possible by typing your new desired horizontal scaling value and clicking the 'Scale' button.
 <img src="../images/04-es-setup/es-08.png"/>
+
+<br><br><b>Congratulations:</b> You now have an Elasticsearch cluster installed with five data nodes ready to store data on the DC/OS cluster.  Next, we will walk through how to <a href="../docs/marathon-lb-setup.md">Schedule a Load Balancer (marathon-lb) to run on Public Agents</a>,
+
+
