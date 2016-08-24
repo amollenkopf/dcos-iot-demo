@@ -5,4 +5,4 @@ Step by step instructions coming soon ...<br>
 In the meantime, please follow the instructions that can be found <a href="https://mesosphere.com/amazon/">here</a>.<br>
 <br>
 
-<br><br><b>Congratulations:</b> You now have an 'Azure Container Service' in place on Microsoft Azure that is configured to orchestrate using DC/OS.  Next, we will walk through <a href="../docs/dcos-explore.md">Explore the DC/OS and Mesos dashboards</a>
+<br><br><b>Congratulations:</b> You now have a 'DC/OS cluster' in place on Amazon Web Services.  Next, we will walk through <a href="../docs/dcos-explore.md">Explore the DC/OS and Mesos dashboards</a>
