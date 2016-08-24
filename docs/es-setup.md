@@ -14,7 +14,7 @@ Properties worth a more detailed review include:
 <li>"args": "--elasticsearchRam": the amount of memory that you would like to allocate per Elasticsearch data node.</li>
 <li>"args": "--elasticsearchDockerImage": the Elasticsearch image to utilize when provisioning data nodes.</li>
 <li>"args": "--executorName": the name that you would like to give to the Elasticsearch executor, is shown in the Service listing of DC/OS.</li></ul>
-<br><b>Step 4:</b> Schedule an Elasticsearch cluster on DC/OS by submitting the <a href="../elasticsearch-marathon.json">elasticsearch-marathon.json</a> to Marathon.<br>
+<br><b>Step 4:</b> To schedule an Elasticsearch cluster with Marathon on DC/OS submit the following command via the DC/OS CLI: 'dcos marathon app add <a href="../elasticsearch-marathon.json">elasticsearch-marathon.json</a>'.<br>
 <img src="../images/04-es-setup/es-02.png" width="70%" height="70%"/>
 <br><br><b>Step 5:</b>... 
 <img src="../images/04-es-setup/es-03.png"/>
