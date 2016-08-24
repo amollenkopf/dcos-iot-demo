@@ -1,5 +1,5 @@
-# Open up Load Balancer Ports on Microsoft Azure
+# Open up Load Balancer Ports on Amazon Web Services
 
 <b>Step 1:</b>  ...
-<img src="../images/06-ports-setup/acs—ports-01.png"/><br>
+<img src="../images/06-ports-amazon-setup/aws—ports-01.png"/><br>
 <br><b>Step 2:</b> ...
