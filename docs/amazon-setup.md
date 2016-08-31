@@ -6,11 +6,13 @@ In the meantime, please follow the instructions that can be found <a href="https
 <br>
 
 
-<b>Step 1:</b> Navigate to the ...<br>
+<b>Step 1:</b> Navigate to the <a href="http://www.mesosphere.com/amazon">Mesosphere Amazon launch page</a> and click the 'Get Started on AWS For Free' button.<br>
 <img src="../images/01-aws-setup/aws-01.png"/>
-<br><br><b>Step 2:</b> description needed<br>
+<br><br><b>Step 2:</b> Read through the 'System' and 'Software' requirements.<br>
 <img src="../images/01-aws-setup/aws-02.png"/>
-<br><br><b>Step 3:</b> description needed<br>
+<br><br><b>Step 3:</b> As a prerequisite you must have an Amazon EC2 Key Pair for the same region as your cluster. Key pairs cannot be shared across regions. The AWS key pair uses public-key cryptography to provide secure login to your AWS cluster.  If you don't already have a key pair for the region you wish to deploy a DC/OS cluster follow these <a href="amazon-keypair-setup.md">instructions</a>.<br>
+<br><br><b>Step 4:</b> Next.<br>
+<img src="../images/01-aws-setup/aws-03.png"/>
 
 <br><br>
 <a href="https://dcos.io/docs/1.7/administration/installing/cloud/aws/">Installing DC/OS on AWS</a><br><br>
