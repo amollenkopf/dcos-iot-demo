@@ -2,7 +2,6 @@
    "id": "elasticsearch",
    "cpus": 0.2,
    "mem": 512,
-   "ports": [0],
    "instances": 1,
    "healthChecks": [
 	 {
