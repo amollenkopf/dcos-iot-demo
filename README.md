@@ -17,5 +17,5 @@ This project demonstrates how to configure a full stack geo-enabled Internet of 
 8. <a href="docs/other/cleanup-demo.md">applying cleanup procedures between demo runs</a><br>
 
 ## other topics of interest:
-1. (optional) <a href="docs/marathon-lb-setup.md">schedule a load balancer to run on public agents</a><br>
-2. (optional) <a href="docs/other/running-local.md">running on a local machine for verification during development</a><br>
+1. (optional) <a href="docs/other/running-local.md">running on a local machine for verification during development</a><br>
+2. (optional) <a href="docs/marathon-lb-setup.md">schedule a load balancer to run on public agents</a><br>
