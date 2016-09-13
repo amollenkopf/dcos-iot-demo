@@ -8,7 +8,7 @@ We will now configure a Source to emit data into the Kafka brokers.  A real-time
 <li>the --class gets bootstraped in via a URI downloaded prior to the start of each container</li></ul>
 <img src="../images/07-app-setup/app-01.png"/><br>
 
-<br><b>Step 2:</b> To schedule a real-time analytic task onto the DC/OS cluster issue the following DC/OS CLI command<ul><li>dcos marathon app add spatiotemporal-esri-analytics/rat01.json</li></ul>
+<br><b>Step 2:</b> To schedule <a href="../spatiotemporal-esri-analytics/rat01.json">spatiotemporal-esri-analytics/rat01.json</a> onto the DC/OS cluster issue the following DC/OS CLI command<ul><li>dcos marathon app add spatiotemporal-esri-analytics/rat01.json</li></ul>
 <img src="../images/07-app-setup/app-02.png"/><br>
 
 <br><b>Step 3:</b> ...<br>
