@@ -39,9 +39,9 @@ We will now configure a Source to emit data into the Kafka brokers.  A real-time
 <img src="../images/07-app-setup/app-14.png"/><br>
 <br><b>Step 15:</b> Click on the 'Sandbox' of the source01 instance and open the stdout file to monitor verbose print outs of source01:<br>
 <img src="../images/07-app-setup/app-15.png"/><br>
-<br><b>Step 16:</b> ...<br>
+<br><b>Step 16:</b> The stdout file of the associated source01 instance shows that it is emitting events to the Kafka topic partitions every 3 seconds:<br>
 <img src="../images/07-app-setup/app-16.png" width="50%" height="50%"/><br>
-<br><b>Step 17:</b> ...<br>
+<br><b>Step 17:</b> The three stdout files of the associated rat01 instances are now showing they are consuming these events evenly as each is subscribed to a unique Kafka topic partition:<br>
 <img src="../images/07-app-setup/app-17.png"/><br>
 <br><b>Step 18:</b> ...<br>
 <img src="../images/07-app-setup/app-18.png"/><br>
