@@ -12,12 +12,12 @@ This project demonstrates how to configure a full stack geo-enabled Internet of 
 3. <a href="docs/dcos-explore.md">explore the DC/OS and Mesos dashboards</a><br>
 4. <a href="docs/kafka-setup.md">install Kafka & schedule brokers</a><br>
 5. <a href="docs/es-setup.md">install Elasticsearch & schedule a cluster</a><br>
-6. <a href="docs/marathon-lb-setup.md">schedule a load balancer to run on public agents</a><br>
-7. <a href="docs/map-setup.md">configure the map application</a><br>
-8. <a href="docs/app-setup.md">schedule the components of the application</a><br>
-9. <a href="docs/source-setup.md">schedule a Source that emits events</a><br>
+6. <a href="docs/map-setup.md">configure the map application</a><br>
+7. <a href="docs/app-setup.md">schedule the components of the application</a><br>
+8. <a href="docs/source-setup.md">schedule a Source that emits events</a><br>
 
 ## other topics of interest:
 1. <a href="docs/other/cleanup-demo.md">cleanup procedures between demo runs</a><br>
-2. <a href="docs/other/running-local.md">running on a local machine for verification during development</a><br>
-3. <a href="docs/other/running-dcos-old.md">running on DC/OS (old content)</a><br>
+2. <a href="docs/marathon-lb-setup.md">schedule a load balancer to run on public agents</a><br>
+3. <a href="docs/other/running-local.md">running on a local machine for verification during development</a><br>
+4. <a href="docs/other/running-dcos-old.md">running on DC/OS (old content)</a><br>
