@@ -2,7 +2,7 @@
 We will now configure a Source to emit data into the Kafka brokers.  A real-time analytic task using SPark Streaming will then consume the data and write the results to the spatiotemporal-store.  The spatiotemporal-store uses Elasticsearch to efficiently index observations by space, time, and all the other attributes of the event.  The JavaScript map app periodically queries to reflect the latest state of observations on a map.
 <img src="../images/00-overview/iot-flow.jpg"/>
 
-<b>Step 1:</b> We will now review a real-time analytic task marathon configuration found at <a href="../spatiotemporal-esri-analytics/rat01.json">spatiotemporal-esri-analytics/rat01.json</a>.  Breaking the marathon app configuration file down:<ul><li>deploys 3 instances of a 'rat01' deployed as Spark 1.6 Docker containers</li>
+<b>Step 1:</b> We will now review a real-time analytic task marathon configuration found at <a href="../spatiotemporal-esri-analytics/rat01.json">spatiotemporal-esri-analytics/rat01.json</a>.  Breaking the marathon app configuration file down:<ul><li>deploys 3 instances of a 'rat01' deployed as <a href="https://hub.docker.com/r/mesosphere/spark/">mesossphere/spark-1.6.1.6</a> Docker containers</li>
 <li>each container is allocated 4 cpu shares & 2GB of memory</li>
 <li>each container starts up with the command spark-submit with lots of application specific parameters</li>
 <li>the --class gets bootstraped in via a URI downloaded prior to the start of each container</li></ul>
@@ -23,8 +23,8 @@ We will now configure a Source to emit data into the Kafka brokers.  A real-time
 <img src="../images/07-app-setup/app-08.png"/><br>
 <br><b>Step 9:</b> The Source has runtime parameters that specify deployment hosts & ports of the Kafka brokers.  To learn this information use the DC/OS CLI and issue the following command<br><ul><li>dcos kafka connection</li></ul>
 <img src="../images/07-app-setup/app-09.png" width="70%" height="70%"/><br>
-<br><b>Step 10:</b> We will now review a source task marathon configuration found at <a href="../spatiotemporal-event-source/source01.json">spatiotemporal-event-source/source01.json</a>.  Breaking the marathon app configuration file down:<ul><li>deploys 3 instances of a 'rat01' deployed as Spark 1.6 Docker containers</li>
-<li>each container is allocated 4 cpu shares & 2GB of memory</li>
+<br><b>Step 10:</b> We will now review a source task marathon configuration found at <a href="../spatiotemporal-event-source/source01.json">spatiotemporal-event-source/source01.json</a>.  Breaking the marathon app configuration file down:<ul><li>deploys 1 instance of a 'source01' deployed as a <a href="https://hub.docker.com/r/amollenkopf/spatiotemporal-event-source/">amollenkopf/spatiotemporal-event-source</a> Docker container</li>
+<li>each container is allocated 1 cpu shares & 5GB of memory (needed for the large simulation file)</li>
 <li>each container starts up with the command spark-submit with lots of application specific parameters</li>
 <li>the --class gets bootstraped in via a URI downloaded prior to the start of each container</li></ul>
 
