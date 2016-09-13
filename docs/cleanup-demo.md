@@ -12,7 +12,9 @@ Often times when you show this demo you may want to start from a zero data situa
 <li>to verify you can run: curl -XGET 'http://spatiotemporal-store.elasticsearch.mesos:9200/*' and see that you get empty results</li>
 <img src="../images/08-cleanup-demo/cleanup-05.png"/><br>
 </ul>
-<br><b>Step 5:</b> Kafka consumer group offsets need to be cleared out so old data is not propogated to consumer when they reconnect using the same consumer group.  To do this the Kafka offsets are managed in the distributed config store state of the DC/OS cluster called Zookeeper.  There is Zookeeper Exhibitor dashboard that can be used to accomplish this.<br>
+<br><b>Step 5:</b> Kafka consumer group offsets need to be cleared out so old data is not propogated to consumer when they reconnect using the same consumer group.  To do this the Kafka offsets are managed in the distributed config store state of the DC/OS cluster called Zookeeper.  There is Zookeeper Exhibitor dashboard that can be used to accomplish this.  To connect to Zookeeper Exhibitor:<ul><li>On Azure, with the SSH tunnel in place you can connect to the DC/OS dashboard with <a href="http://localhost:9001/exhibitor">http://localhost:9001/exhibitor</a>.</li>
+<li>On Amazon, obtain the public IP address of your master(s) and connect with <your master url>/exhibitor.</li></ul>
+<br>
 <img src="../images/08-cleanup-demo/cleanup-06.png"/><br>
 <br><b>Step 6:</b> delete /kafka/consumers/taxi-consumer-group<br>
 <img src="../images/08-cleanup-demo/cleanup-07.png"/><br>
