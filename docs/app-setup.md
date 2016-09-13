@@ -21,7 +21,7 @@ We will now configure a Source to emit data into the Kafka brokers.  A real-time
 <br><b>Step 8:</b> ...<br>
 <img src="../images/07-app-setup/app-08.png"/><br>
 <br><b>Step 9:</b> ...<br>
-<img src="../images/07-app-setup/app-09.png"/><br>
+<img src="../images/07-app-setup/app-09.png" width="70%" height="70%"/><br>
 <br><b>Step 10:</b> ...<br>
 <img src="../images/07-app-setup/app-10.png"/><br>
 
@@ -34,7 +34,7 @@ We will now configure a Source to emit data into the Kafka brokers.  A real-time
 <br><b>Step 14:</b> ...<br>
 <img src="../images/07-app-setup/app-14.png"/><br>
 <br><b>Step 15:</b> ...<br>
-<img src="../images/07-app-setup/app-15.png"/><br>
+<img src="../images/07-app-setup/app-15.png" width="50%" height="50%"/><br>
 <br><b>Step 16:</b> ...<br>
 <img src="../images/07-app-setup/app-16.png"/><br>
 <br><b>Step 17:</b> ...<br>
