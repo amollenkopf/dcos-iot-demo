@@ -11,15 +11,15 @@ We will now configure a Source to emit data into the Kafka brokers.  A real-time
 <br><b>Step 2:</b> To schedule <a href="../spatiotemporal-esri-analytics/rat01.json">spatiotemporal-esri-analytics/rat01.json</a> onto the DC/OS cluster issue the following DC/OS CLI command<ul><li>dcos marathon app add spatiotemporal-esri-analytics/rat01.json</li></ul>
 <img src="../images/07-app-setup/app-02.png"/><br>
 
-<br><b>Step 3:</b> ...<br>
+<br><b>Step 3:</b> Open the Marathon dashboard to view the deployment progress of rat01:<br>
 <img src="../images/07-app-setup/app-03.png"/><br>
-<br><b>Step 4:</b> ...<br>
+<br><b>Step 4:</b> Click on the rat01 application to see more details include what hosts and ports it was scheduled to:<br>
 <img src="../images/07-app-setup/app-04.png"/><br>
-<br><b>Step 5:</b> ...<br>
+<br><b>Step 5:</b> Open the Mesos dashboard to view the active tasks of rat01:<br>
 <img src="../images/07-app-setup/app-05.png"/><br>
-<br><b>Step 6:</b> ...<br>
+<br><b>Step 6:</b> For each rat01 instance click on it's 'Sandbox' and open the stdout file to monitor verbose print outs of rat01:<br>
 <img src="../images/07-app-setup/app-06.png"/><br>
-<br><b>Step 7:</b> ...<br>
+<br><b>Step 7:</b> The three stdout files of the associated rat01 instances are showing that they are saving 0 records to Elasticsearch.  This is because we have not yet enabled a Source that will emit events.<br>
 <img src="../images/07-app-setup/app-07.png"/><br>
 <br><b>Step 8:</b> ...<br>
 <img src="../images/07-app-setup/app-08.png"/><br>
