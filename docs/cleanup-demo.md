@@ -7,8 +7,15 @@ Often times when you show this demo you may want to start from a zero data situa
 <img src="../images/08-cleanup-demo/cleanup-02.png"/><br>
 <b>Step 3:</b> Verify that source01 and rat01 are both removed from the application listing in the Marathon dashboard<br>
 <img src="../images/08-cleanup-demo/cleanup-03.png"/><br>
-<b>Step 4:</b> Remove the Elasticsearch index and all of it's assoicated data by issuing the following command from the ssh tunnel shell of the master node<br><ul><li>curl -XDELETE 'http://spatiotemporal-store.elasticsearch.mesos:9200/taxi'</li><li>to verify you can run: curl -XGET 'http://spatiotemporal-store.elasticsearch.mesos:9200/*' and see that you get empty results</ul>
+<b>Step 4:</b> Remove the Elasticsearch index and all of it's assoicated data by issuing the following command from the ssh tunnel shell of the master node<br><ul><li>curl -XDELETE 'http://spatiotemporal-store.elasticsearch.mesos:9200/taxi'</li>
 <img src="../images/08-cleanup-demo/cleanup-04.png"/><br>
-<b>Step 5:</b> Navigate to the Zookeeper Exhibitor dashboard <br><ul><li>delete /kafka/consumers/taxi-consumer-group</li></ul>
+<li>to verify you can run: curl -XGET 'http://spatiotemporal-store.elasticsearch.mesos:9200/*' and see that you get empty results</li>
 <img src="../images/08-cleanup-demo/cleanup-05.png"/><br>
+</ul>
+<b>Step 5:</b> Navigate to the Zookeeper Exhibitor dashboard<br>
+<img src="../images/08-cleanup-demo/cleanup-06.png"/><br>
+<b>Step 6:</b> delete /kafka/consumers/taxi-consumer-group<br>
+<img src="../images/08-cleanup-demo/cleanup-07.png"/><br>
+
+
 
