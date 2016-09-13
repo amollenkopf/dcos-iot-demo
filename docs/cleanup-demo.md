@@ -21,3 +21,6 @@ Often times when you show this demo you may want to start from a zero data situa
 <img src="../images/08-cleanup-demo/cleanup-08.png"/><br>
 <br><b>Step 8:</b> Click 'OK' on the 'Modify Node' confirmation dialog:<br>
 <img src="../images/08-cleanup-demo/cleanup-09.png" width="50%" height="50%"/><br>
+
+<br>
+All previous demo run state is now cleaned up so you can proceed to re-run the demo starting with the instructions at <a href="app-setup.md">schedule a real-time analytic task & a source that emits events</a>.
