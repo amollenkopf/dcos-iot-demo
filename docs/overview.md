@@ -1,4 +1,4 @@
-## Architecture
+## Architecture & Application Overview
 <img src="../images/00-overview/architecture.jpg"/>
 All components of the IoT Event Flow described below (sources, brokers, spark streaming, elasticsearch & map apps) are scheduled on DC/OS as marathon apps.
 
