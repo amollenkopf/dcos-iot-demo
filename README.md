@@ -17,6 +17,5 @@ This project demonstrates how to configure a full stack geo-enabled Internet of 
 
 ## other topics of interest:
 1. <a href="docs/other/cleanup-demo.md">cleanup procedures between demo runs</a><br>
-2. <a href="docs/marathon-lb-setup.md">schedule a load balancer to run on public agents</a><br>
-3. <a href="docs/other/running-local.md">running on a local machine for verification during development</a><br>
-4. <a href="docs/other/running-dcos-old.md">running on DC/OS (old content)</a><br>
+2. (optional) <a href="docs/marathon-lb-setup.md">schedule a load balancer to run on public agents</a><br>
+3. (optional) <a href="docs/other/running-local.md">running on a local machine for verification during development</a><br>
