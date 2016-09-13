@@ -31,13 +31,13 @@ We will now configure a Source to emit data into the Kafka brokers.  A real-time
 
 <br><b>Step 11:</b> To schedule a Source that emits events into a Kafka topic's partitions running on a DC/OS cluster issue the following DC/OS CLI command<ul><li>dcos marathon app add spatiotemporal-event-source/source01.json</li></ul>
 <img src="../images/07-app-setup/app-11.png"/><br>
-<br><b>Step 12:</b> ...<br>
+<br><b>Step 12:</b> Open the Marathon dashboard to view the deployment progress of source01 (it will take 1-2 minutes to deploy as the Docker image is large due to the size of the simulation file):<br>
 <img src="../images/07-app-setup/app-12.png"/><br>
-<br><b>Step 13:</b> ...<br>
+<br><b>Step 13:</b> Click on the source01 application to see more details include what host and port it was scheduled to:<br>
 <img src="../images/07-app-setup/app-13.png"/><br>
-<br><b>Step 14:</b> ...<br>
+<br><b>Step 14:</b> Open the Mesos dashboard to view the active task of source01:<br>
 <img src="../images/07-app-setup/app-14.png"/><br>
-<br><b>Step 15:</b> ...<br>
+<br><b>Step 15:</b> Click on the 'Sandbox' of the source01 instance and open the stdout file to monitor verbose print outs of source01:<br>
 <img src="../images/07-app-setup/app-15.png"/><br>
 <br><b>Step 16:</b> ...<br>
 <img src="../images/07-app-setup/app-16.png" width="50%" height="50%"/><br>
