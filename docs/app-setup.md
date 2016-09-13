@@ -21,7 +21,7 @@ We will now configure a Source to emit data into the Kafka brokers.  A real-time
 <img src="../images/07-app-setup/app-07.png"/><br>
 <br><b>Step 8:</b> In order for us to partition events sent to Kafka in an evenly distributed mode we will create a topic with partitions matching the number of brokers we have deployed.  The Source (producer) has code, see <a href="../spatiotemporal-event-source/src/main/scala/org/cam/geo/source/SpatiotemporalFileEventSource.scala">SpatiotemporalFileEventSource.scala</a> use of <a href="../spatiotemporal-event-source/src/main/scala/org/cam/geo/source/SimplePartitioner.scala">SimplePartitioner.scala</a>, that partitions the events in a consistent manner so the same taxi ids go to the same partitions while evenly distributing the load across the configured partitions of the topic.<br><ul><li>dcos kafka topic create taxi --partitions=3 --replication=1</li></ul>
 <img src="../images/07-app-setup/app-08.png"/><br>
-<br><b>Step 9:</b> The Source has runtime parameters that specify deployment hosts & ports of the Kafka brokers.  To learn this information use the DC/OS CLI and issue the following command<br><ul><li>dcos kafka connection</li><ul>
+<br><b>Step 9:</b> The Source has runtime parameters that specify deployment hosts & ports of the Kafka brokers.  To learn this information use the DC/OS CLI and issue the following command<br><ul><li>dcos kafka connection</li></ul>
 <img src="../images/07-app-setup/app-09.png" width="70%" height="70%"/><br>
 <br><b>Step 10:</b> ...<br>
 <img src="../images/07-app-setup/app-10.png"/><br>
