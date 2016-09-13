@@ -7,10 +7,8 @@ We will now configure a Source to emit data into the Kafka brokers.  A real-time
 <li>each container starts up with the command spark-submit with lots of application specific parameters</li>
 <li>the --class gets bootstraped in via a URI downloaded prior to the start of each container</li></ul>
 <img src="../images/07-app-setup/app-01.png"/><br>
-
 <br><b>Step 2:</b> To schedule <a href="../spatiotemporal-esri-analytics/rat01.json">spatiotemporal-esri-analytics/rat01.json</a> onto the DC/OS cluster issue the following DC/OS CLI command<ul><li>dcos marathon app add spatiotemporal-esri-analytics/rat01.json</li></ul>
 <img src="../images/07-app-setup/app-02.png"/><br>
-
 <br><b>Step 3:</b> Open the Marathon dashboard to view the deployment progress of rat01:<br>
 <img src="../images/07-app-setup/app-03.png"/><br>
 <br><b>Step 4:</b> Click on the rat01 application to see more details include what hosts and ports it was scheduled to:<br>
@@ -21,7 +19,7 @@ We will now configure a Source to emit data into the Kafka brokers.  A real-time
 <img src="../images/07-app-setup/app-06.png"/><br>
 <br><b>Step 7:</b> The three stdout files of the associated rat01 instances are showing that they are saving 0 records to Elasticsearch.  This is because we have not yet enabled a Source that will emit events.<br>
 <img src="../images/07-app-setup/app-07.png"/><br>
-<br><b>Step 8:</b> ...<br>
+<br><b>Step 8:</b> In order for us to partition events sent to Kafka in an evenly distributed mode we will create a topic with partitions matching the number of brokers we have deployed.  note: the Source (producer) has code, <a href="../blob/master/spatiotemporal-event-source/src/main/scala/org/cam/geo/source/SimplePartitioner.scala">SimplePartitioner.scala</a> that<br>
 <img src="../images/07-app-setup/app-08.png"/><br>
 <br><b>Step 9:</b> ...<br>
 <img src="../images/07-app-setup/app-09.png" width="70%" height="70%"/><br>
