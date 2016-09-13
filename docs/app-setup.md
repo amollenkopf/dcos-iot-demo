@@ -28,7 +28,7 @@ We will now configure a Source to emit data into the Kafka brokers.  A real-time
 <li>each container starts up with the java command with lots of application specific parameters (including the Kafka broker hosts & ports)</li>
 <li>the --class comes as part of the <a href="https://hub.docker.com/r/amollenkopf/spatiotemporal-event-source/">amollenkopf/spatiotemporal-event-source</a> Docker image</li></ul>
 <img src="../images/07-app-setup/app-10.png"/><br>
-
+<ul><li>NOTE: MAKE SURE you change the broker hosts and port numbers with what was learned in Step 9.</li></ul>
 <br><b>Step 11:</b> To schedule a Source that emits events into a Kafka topic's partitions running on a DC/OS cluster issue the following DC/OS CLI command<ul><li>dcos marathon app add spatiotemporal-event-source/source01.json</li></ul>
 <img src="../images/07-app-setup/app-11.png"/><br>
 <br><b>Step 12:</b> Open the Marathon dashboard to view the deployment progress of source01 (it will take 1-2 minutes to deploy as the Docker image is large due to the size of the simulation file):<br>
