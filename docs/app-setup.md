@@ -1,4 +1,4 @@
-# Schedule the components of the application
+# Schedule a Real-Time Analytic Task & a Source that emits events
 We will now configure a Source to emit data into the Kafka brokers.  A real-time analytic task using SPark Streaming will then consume the data and write the results to the spatiotemporal-store.  The spatiotemporal-store uses Elasticsearch to efficiently index observations by space, time, and all the other attributes of the event.  The JavaScript map app periodically queries to reflect the latest state of observations on a map.
 <img src="../images/00-overview/iot-flow.jpg"/>
 
