@@ -20,4 +20,4 @@ Often times when you show this demo you may want to start from a zero data situa
 <br><b>Step 7:</b> With 'taxi-consumer-group' selected click on the 'Modify...' button, in the dialog box select a 'Type' value of 'Delete', fill in the Username/Ticket Code/Reason with a value of 'a' for each, and click the 'Next...' button.<br>
 <img src="../images/08-cleanup-demo/cleanup-08.png"/><br>
 <br><b>Step 8:</b> Click 'OK' on the 'Modify Node' confirmation dialog:<br>
-<img src="../images/08-cleanup-demo/cleanup-09.png"/><br>
+<img src="../images/08-cleanup-demo/cleanup-09.png" width="50%" height="50%"/><br>
