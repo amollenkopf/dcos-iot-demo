@@ -1,9 +1,9 @@
 # Applying Cleanup Procedures Between Demo Runs
 Often times when you show this demo you may want to start from a zero data situation to best illustrate how data flows in accumulates.  To accomplish this here is a tear down script that will reset all the components necessary to have re-establish a clean data environment.<br>
 
-<b>Step 1:</b> Remove source01 by issueing the following DC/OS CLI command<ul><li>dcos marathon app remove source01</li></ul>
+<b>Step 1:</b> Remove source01 by issuing the following DC/OS CLI command<ul><li>dcos marathon app remove source01</li></ul>
 <img src="../images/08-cleanup-demo/cleanup-01.png" width="70%" height="70%"/><br>
-<br><b>Step 2:</b> Remove rat01 by issueing the following DC/OS CLI command<ul><li>dcos marathon app remove rat01</li></ul>
+<br><b>Step 2:</b> Remove rat01 by issuing the following DC/OS CLI command<ul><li>dcos marathon app remove rat01</li></ul>
 <img src="../images/08-cleanup-demo/cleanup-02.png" width="70%" height="70%"/><br>
 <br><b>Step 3:</b> Verify that source01 and rat01 are both removed from the application listing in the Marathon dashboard<br>
 <img src="../images/08-cleanup-demo/cleanup-03.png"/><br>
