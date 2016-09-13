@@ -42,3 +42,5 @@ launch the <a href="https://downloads.dcos.io/dcos/EarlyAccess/commit/14509fe1e7
 <br><br>
 
 <br><br><b>Congratulations:</b> You now have a DC/OS cluster in place on Amazon Web Services.  Next, we will walk through <a href="../docs/dcos-explore.md">Explore the DC/OS and Mesos dashboards</a>
+
+<br/>
