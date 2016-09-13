@@ -43,18 +43,18 @@ We will now configure a Source to emit data into the Kafka brokers.  A real-time
 <img src="../images/07-app-setup/app-16.png" width="50%" height="50%"/><br>
 <br><b>Step 17:</b> The three stdout files of the associated rat01 instances are now showing they are consuming these events evenly as each is subscribed to a unique Kafka topic partition:<br>
 <img src="../images/07-app-setup/app-17.png"/><br>
-<br><b>Step 18:</b> ...<br>
+<br><b>Step 18:</b> Go back to the browser tab that has the map app and hit the refresh button.  You should now see taxi content appearing on the map asgeohash aggregations that are auto-updated as new data appears in Elasticsearch:<br>
 <img src="../images/07-app-setup/app-18.png"/><br>
-<br><b>Step 19:</b> ...<br>
+<br><b>Step 19:</b> The map app has the ability to enable 'Replay' of the spatiotemporal observations.  To enable this flip the dial to on and use the time slider on the bottom left corner to specify the time window you want to replay with:<br>
 <img src="../images/07-app-setup/app-19.png"/><br>
-<br><b>Step 20:</b> ...<br>
+<br><b>Step 20:</b> Steppign forward on the replay we can see the counts (labels on the goehash aggregations) increasing:<br>
 <img src="../images/07-app-setup/app-20.png"/><br>
-<br><b>Step 21:</b> ...<br>
+<br><b>Step 21:</b> The map app also supports the ability to generate a client-side heatmap based on content being queried from Elasticsearch:<br>
 <img src="../images/07-app-setup/app-21.png"/><br>
-<br><b>Step 22:</b> ...<br>
+<br><b>Step 22:</b> Using the timeslider we can see how the density changes over time<br>
 <img src="../images/07-app-setup/app-22.png"/><br>
-<br><b>Step 23:</b> ...<br>
+<br><b>Step 23:</b> Disabling both the Heatmap and Replay capabilities we get back to a near real-time view of the obervations:<br>
 <img src="../images/07-app-setup/app-23.png"/><br>
-<br><b>Step 24:</b> ...<br>
+<br><b>Step 24:</b> Reviewing the stdout files of the associated real-time analytic tasks we can see that they are continuing to process events in a distributed fashion:<br>
 <img src="../images/07-app-setup/app-24.png"/><br>
 
