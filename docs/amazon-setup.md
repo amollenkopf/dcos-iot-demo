@@ -18,6 +18,30 @@ launch the <a href="https://downloads.dcos.io/dcos/EarlyAccess/commit/14509fe1e7
 <img src="../images/01-aws-setup/aws-04.png"/><br>
 <br><b>Step 5:</b> ...<br>
 <img src="../images/01-aws-setup/aws-05.png"/><br>
+<br><b>Step 6:</b> ...<br>
+<img src="../images/01-aws-setup/aws-06.png"/><br>
+<br><b>Step 7:</b> ...<br>
+<img src="../images/01-aws-setup/aws-07.png"/><br>
+<br><b>Step 8:</b> ...<br>
+<img src="../images/01-aws-setup/aws-08.png"/><br>
+<br><b>Step 9:</b> ...<br>
+<img src="../images/01-aws-setup/aws-09.png"/><br>
+<br><b>Step 10:</b> ...<br>
+<img src="../images/01-aws-setup/aws-10.png"/><br>
+<br><b>Step 11:</b> ...<br>
+<img src="../images/01-aws-setup/aws-11.png"/><br>
+<br><b>Step 12:</b> ...<br>
+<img src="../images/01-aws-setup/aws-12.png"/><br>
+<br><b>Step 13:</b> ...<br>
+<img src="../images/01-aws-setup/aws-13.png"/><br>
+<br><b>Step 14:</b> ...<br>
+<img src="../images/01-aws-setup/aws-14.png"/><br>
+<br><b>Step 15:</b> ...<br>
+<img src="../images/01-aws-setup/aws-15.png"/><br>
+<br><b>Step 16:</b> ...<br>
+<img src="../images/01-aws-setup/aws-16.png"/><br>
+<br><b>Step 17:</b> ...<br>
+<img src="../images/01-aws-setup/aws-17.png"/><br>
 
 
 <br><br>
