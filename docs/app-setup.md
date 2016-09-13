@@ -5,9 +5,8 @@ We will now configure a Source to emit data into the Kafka brokers.  A real-time
 <b>Step 1:</b> We will now review a real-time analytic task marathon configuration found at <a href="../spatiotemporal-esri-analytics/rat01.json">spatiotemporal-esri-analytics/rat01.json</a>.
 <img src="../images/07-app-setup/app-01.png"/><br>
 
-<br><b>Step 2:</b> To schedule the real-time analytic task onto the DC/OS cluster issue the following DC/OS CLI command<ul><li>dcos marathon app add spatiotemporal-esri-analytics/rat01.json</li></ul>
+<br><b>Step 2:</b> To schedule a real-time analytic task onto the DC/OS cluster issue the following DC/OS CLI command<ul><li>dcos marathon app add spatiotemporal-esri-analytics/rat01.json</li></ul>
 <img src="../images/07-app-setup/app-02.png"/><br>
-dcos marathon app add spatiotemporal-event-source/source01.json
 
 <br><b>Step 3:</b> ...<br>
 <img src="../images/07-app-setup/app-03.png"/><br>
@@ -25,7 +24,8 @@ dcos marathon app add spatiotemporal-event-source/source01.json
 <img src="../images/07-app-setup/app-09.png"/><br>
 <br><b>Step 10:</b> ...<br>
 <img src="../images/07-app-setup/app-10.png"/><br>
-<br><b>Step 11:</b> ...<br>
+
+<br><b>Step 11:</b> To schedule a Source that emits events into a Kafka topic's partitions running on a DC/OS cluster issue the following DC/OS CLI command<ul><li>dcos marathon app add spatiotemporal-event-source/source01.json</li></ul>
 <img src="../images/07-app-setup/app-11.png"/><br>
 <br><b>Step 12:</b> ...<br>
 <img src="../images/07-app-setup/app-12.png"/><br>
