@@ -12,11 +12,13 @@ In the meantime, please follow the instructions that can be found <a href="https
 After reviewing <a href="https://dcos.io/docs/1.7/administration/installing/cloud/aws/">Installing DC/OS on AWS</a> documentation 
 launch the <a href="https://downloads.dcos.io/dcos/EarlyAccess/commit/14509fe1e7899f439527fb39867194c7a425c771/aws.html?_ga=1.161721663.282044494.1466715839">DC/OS Template</a> on CloudFormation and select the region and number of masters (1 or 3). You must have a key pair for your selected region.<br>
 <img src="../images/01-aws-setup/aws-02.png"/><br>
-<br><b>Step 3:</b> More instructions to come soon.<br>
+<br><b>Step 3:</b> ...<br>
 <img src="../images/01-aws-setup/aws-03.png"/><br>
-<br><b>Step 4:</b> More instructions to come soon.<br>
+<br><b>Step 4:</b> ...<br>
 <img src="../images/01-aws-setup/aws-04.png"/><br>
-<br><b>Step 5:</b> More instructions to come soon.<br>
+<br><b>Step 5:</b> ...<br>
+<img src="../images/01-aws-setup/aws-05.png"/><br>
+
 
 <br><br>
 
