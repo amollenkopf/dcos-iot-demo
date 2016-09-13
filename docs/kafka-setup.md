@@ -26,8 +26,7 @@
 <img src="../images/03-kafka-setup/kafka-12.png"/>
 <br><br><b>Step 13:</b> Click on 'kafka' in the service listing to open up more information on the 'kafka' service.  Here we can see the three brokers, their names, their status, and the resources that have been allocated to them.
 <img src="../images/03-kafka-setup/kafka-13.png"/>
-<br><br><b>Step 14:</b> Install the dcos-cli (Command Line Interface) by grabbing the binaries for your operating system at <a href="https://github.com/dcos/dcos-cli/releases">https://github.com/dcos/dcos-cli/releases</a><br>
-<img src="../images/03-kafka-setup/dcos-cli-01.png"/>
+<br><br><b>Step 14:</b> Install the dcos-cli (Command Line Interface) by grabbing the binaries for your operating system at <a href="https://github.com/dcos/dcos-cli/releases">https://github.com/dcos/dcos-cli/releases</a>
 <br><br><b>Step 15:</b> Using the dcos-cli we can interact with Kafka.  Type 'dcos kafka --help' to see the available commands.<br>
 <img src="../images/03-kafka-setup/kafka-14.png" width="50%" height="50%"/>
 <br><br><b>Step 16:</b> You can get a listing of broker names.  Type 'dcos kafka broker list'.<br>
