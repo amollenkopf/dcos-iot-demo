@@ -23,7 +23,11 @@ We will now configure a Source to emit data into the Kafka brokers.  A real-time
 <img src="../images/07-app-setup/app-08.png"/><br>
 <br><b>Step 9:</b> The Source has runtime parameters that specify deployment hosts & ports of the Kafka brokers.  To learn this information use the DC/OS CLI and issue the following command<br><ul><li>dcos kafka connection</li></ul>
 <img src="../images/07-app-setup/app-09.png" width="70%" height="70%"/><br>
-<br><b>Step 10:</b> ...<br>
+<br><b>Step 10:</b> We will now review a source task marathon configuration found at <a href="../spatiotemporal-event-source/source01.json">spatiotemporal-event-source/source01.json</a>.  Breaking the marathon app configuration file down:<ul><li>deploys 3 instances of a 'rat01' deployed as Spark 1.6 Docker containers</li>
+<li>each container is allocated 4 cpu shares & 2GB of memory</li>
+<li>each container starts up with the command spark-submit with lots of application specific parameters</li>
+<li>the --class gets bootstraped in via a URI downloaded prior to the start of each container</li></ul>
+
 <img src="../images/07-app-setup/app-10.png"/><br>
 
 <br><b>Step 11:</b> To schedule a Source that emits events into a Kafka topic's partitions running on a DC/OS cluster issue the following DC/OS CLI command<ul><li>dcos marathon app add spatiotemporal-event-source/source01.json</li></ul>
