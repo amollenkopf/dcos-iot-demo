@@ -14,7 +14,7 @@ This project demonstrates how to configure a full stack geo-enabled Internet of 
 5. <a href="docs/es-setup.md">install Elasticsearch & schedule a cluster</a><br>
 6. <a href="docs/map-setup.md">configure the map application</a><br>
 7. <a href="docs/app-setup.md">schedule a real-time analytic task & a source that emits events</a><br>
-8. <a href="docs/other/cleanup-demo.md">applying cleanup procedures between demo runs</a><br>
+8. <a href="docs/cleanup-demo.md">applying cleanup procedures between demo runs</a><br>
 
 ## other topics of interest:
 1. (optional) <a href="docs/other/running-local.md">running on a local machine for verification during development</a><br>
