@@ -14,10 +14,10 @@ Often times when you show this demo you may want to start from a zero data situa
 </ul>
 <br><b>Step 5:</b> Kafka consumer group offsets need to be cleared out so old data is not propogated to consumer when they reconnect using the same consumer group.  To do this the Kafka offsets are managed in the distributed config store state of the DC/OS cluster called Zookeeper.  There is Zookeeper Exhibitor dashboard that can be used to accomplish this.  To connect to Zookeeper Exhibitor:<ul><li>On Azure, with the SSH tunnel in place you can connect to the DC/OS dashboard with <a href="http://localhost:9001/exhibitor">http://localhost:9001/exhibitor</a>.</li>
 <li>On Amazon, obtain the public IP address of your master(s) and connect with <your master url>/exhibitor.</li></ul>
-<br>
 <img src="../images/08-cleanup-demo/cleanup-06.png"/><br>
-<br><b>Step 6:</b> delete /kafka/consumers/taxi-consumer-group<br>
+<br><b>Step 6:</b> In Zookeeper Exhibitor click on the 'Explorer' tab, expand the folder, expand the 'dcos-service-kafka' folder, expand the 'consumers' folder, and click on the 'taxi-consumer-group':<br>
 <img src="../images/08-cleanup-demo/cleanup-07.png"/><br>
-
-
-
+<br><b>Step 7:</b> With 'taxi-consumer-group' selected click on the 'Modify...' button, in the dialog box select a 'Type' value of 'Delete', fill in the Username/Ticket Code/Reason with a value of 'a' for each, and click the 'Next...' button.<br>
+<img src="../images/08-cleanup-demo/cleanup-08.png"/><br>
+<br><b>Step 8:</b> Click 'OK' on the 'Modify Node' confirmation dialog:<br>
+<img src="../images/08-cleanup-demo/cleanup-09.png"/><br>
