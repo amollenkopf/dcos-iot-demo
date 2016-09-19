@@ -22,12 +22,13 @@ After a minute or two the app should be "Green" and running.
 <b>Step 2:</b> Create Tunnels
 
 Use this command to create a tunnel to the application (31501) and to Elasticsearch (9200)
+
 $ ssh -i ~/.ssh/azure -L 31501:iot-demo-map.marathon.mesos:31501-L 9200:spatiotemporal-store.elasticsearch.mesos:9200 azureuser@esri51mgmt.westus.cloudapp.azure.com -p 2200
 
 <b> Step 3:</b> Access the App
 
 Now you can use your browser to navigate to http://localhost:31501/map.
 
-<img src="../images/06-map-setup/dcos-iot-map-new-app.png"/>
+<img src="../images/06-map-setup/dcos-iot-map-31501.png"/>
 
 
