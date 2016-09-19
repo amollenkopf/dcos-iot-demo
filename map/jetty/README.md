@@ -1,4 +1,4 @@
-** Details on how Jetty App was created
+# Details on how Jetty App was created
 
 <b>Step 1:</b> Download Jetty from http://www.eclipse.org/jetty/download.html
 
