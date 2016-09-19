@@ -6,7 +6,7 @@ From Marathon click Create Application.  Click on "JSON Mode"; then replace the 
 
 <img src="../images/06-map-setup/dcos-iot-map-new-app.png"/>
 
-## Highlist of JSON
+## Highlights of JSON
 - The "cmd" sets JAVA_HOME and adds it to the PATH. Defines a JETTY_ARGS to set the app port then runs Jetty.
 - The "uri" is the path to the JRE and dcos-iot.app.zip. These are downloaded when Marathon starts the application. The JRE is retrieved from Kafka assets. The dcos-iot.app.zip is retrieved from the github project. Details on how the app was created can be found <a href="../map/jetty/README.md".
 - The "healthChecks" verify the app is running on port 31501.
