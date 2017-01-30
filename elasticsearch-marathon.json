@@ -47,7 +47,10 @@
    "requirePorts": true,
    "labels": {
 	 "DCOS_PACKAGE_FRAMEWORK_NAME": "elasticsearch",
-	 "DCOS_PACKAGE_IS_FRAMEWORK": "true"
+	 "DCOS_PACKAGE_IS_FRAMEWORK": "true",
+	 "DCOS_SERVICE_NAME": "service-name",
+         "DCOS_SERVICE_PORT_INDEX": "0",
+         "DCOS_SERVICE_SCHEME": "http"
    }
  }
 
