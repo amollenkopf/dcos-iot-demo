@@ -86,14 +86,15 @@
 		var map,
 			///////////////////////////////////////////////////////////////////
 			//Please configure the following parameters
-			//host = 'spatiotemporal-store.elasticsearch.mesos:9200', //Elasticsearch address 
-			host = 'localhost:9200', //Elasticsearch address if tunnel is used
+			host = 'spatiotemporal-store.elasticsearch.mesos:9200', //Elasticsearch address 
+			//host = 'localhost:9200', //Elasticsearch address if tunnel is used
 			index = 'taxi', //DataSource Index
 			type = 'taxi', //DataSource Type
 			refreshInterval = 2000, //Auto refresh interval in ms, 0 = no auto refresh
 			featureThreshold = 1000, //Feature thereshold when to switch from aggregation to feature rendering
 			//////////////////////////////////////////////////////////////////            
 			initTimeExtent,
+			currentExtent,
 			timePara,
 			startTime,
 			endTime,
@@ -125,6 +126,7 @@
 			autoUpdate();
 			initBasemapGallery();
 			initExtent = map.extent;
+			currentExtent = map.extent;
 		});
 		map.on("zoom-end", function (evt) {
 			currentExtent = evt.extent;
