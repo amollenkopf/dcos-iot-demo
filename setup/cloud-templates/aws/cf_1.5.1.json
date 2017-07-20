@@ -1,0 +1,1679 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "Creates a set of Servers for DC/OS using CentOS 7.3 AMI.  Creates a boot server to host the DC/OS installer and a NAT Instance for outbound connections from private agents.  Creates 1 Master(s), 5 Private Agent(s), and 1 Public Agent(s).  After creating the Stack; Log into the boot server and run the DCOS Bash Script installer for AWS",
+    "Mappings": {
+        "NATAmi": {
+            "us-east-1": {
+                "default": "ami-dd3dd7cb"
+            },
+            "us-east-2": {
+                "default": "ami-564b6e33"
+            },
+            "us-west-1": {
+                "default": "ami-7d54061d"
+            },
+            "us-west-2": {
+                "default": "ami-3b6fd05b"
+            }
+        },
+        "c73Ami": {
+            "us-east-1": {
+                "default": "ami-46c1b650"
+            },
+            "us-east-2": {
+                "default": "ami-18f8df7d"
+            },
+            "us-west-1": {
+                "default": "ami-f5d7f195"
+            },
+            "us-west-2": {
+                "default": "ami-f4533694"
+            }
+        }
+    },
+    "Outputs": {
+        "BootServer": {
+            "Description": "Name/IP of Boot Server",
+            "Value": {
+                "Fn::Join": [
+                    "/",
+                    [
+                        {
+                            "Fn::GetAtt": [
+                                "boot",
+                                "PublicDnsName"
+                            ]
+                        },
+                        {
+                            "Fn::GetAtt": [
+                                "boot",
+                                "PublicIp"
+                            ]
+                        }
+                    ]
+                ]
+            }
+        },
+        "MastersURL": {
+            "Description": "URL of the Masters",
+            "Value": {
+                "Fn::Join": [
+                    "",
+                    [
+                        "http://",
+                        {
+                            "Fn::GetAtt": [
+                                "masters",
+                                "DNSName"
+                            ]
+                        }
+                    ]
+                ]
+            }
+        },
+        "PublicAgentsURL": {
+            "Description": "URL of the Public Agents haproxy stats.",
+            "Value": {
+                "Fn::Join": [
+                    "",
+                    [
+                        "http://",
+                        {
+                            "Fn::GetAtt": [
+                                "publicagents",
+                                "DNSName"
+                            ]
+                        },
+                        ":9090/haproxy?stats"
+                    ]
+                ]
+            }
+        }
+    },
+    "Parameters": {
+        "AVZoneName": {
+            "ConstraintDescription": "Must be the name of an an Availability Zone",
+            "Description": "Name of an Availability Zone",
+            "Type": "AWS::EC2::AvailabilityZone::Name"
+        },
+        "InstanceTypeAgent": {
+            "AllowedValues": [
+                "t2.xlarge",
+                "t2.2xlarge",
+                "m4.xlarge",
+                "m4.2xlarge",
+                "m4.4xlarge",
+                "m4.10xlarge",
+                "c4.xlarge",
+                "c4.2xlarge",
+                "c4.4xlarge",
+                "c4.8xlarge"
+            ],
+            "ConstraintDescription": "Must be a valid EC2 instance type.",
+            "Default": "m4.2xlarge",
+            "Description": "EC2 instance type for 5 Private Agent(s)",
+            "Type": "String"
+        },
+        "InstanceTypeMaster": {
+            "AllowedValues": [
+                "t2.xlarge",
+                "t2.2xlarge",
+                "m4.xlarge",
+                "m4.2xlarge",
+                "m4.4xlarge",
+                "m4.10xlarge",
+                "c4.xlarge",
+                "c4.2xlarge",
+                "c4.4xlarge",
+                "c4.8xlarge"
+            ],
+            "ConstraintDescription": "Must be a valid EC2 instance type.",
+            "Default": "m4.xlarge",
+            "Description": "EC2 instance type for 1 Masters(s)",
+            "Type": "String"
+        },
+        "InstanceTypePublicAgent": {
+            "AllowedValues": [
+                "t2.xlarge",
+                "t2.2xlarge",
+                "m4.xlarge",
+                "m4.2xlarge",
+                "m4.4xlarge",
+                "m4.10xlarge",
+                "c4.xlarge",
+                "c4.2xlarge",
+                "c4.4xlarge",
+                "c4.8xlarge"
+            ],
+            "ConstraintDescription": "Must be a valid EC2 instance type.",
+            "Default": "m4.xlarge",
+            "Description": "EC2 instance type for 1 Public Agent(s)",
+            "Type": "String"
+        },
+        "KeyName": {
+            "ConstraintDescription": "Must be the name of an existing EC2 KeyPair.",
+            "Description": "Name of an existing EC2 KeyPair to enable SSH access to the instance",
+            "Type": "AWS::EC2::KeyPair::KeyName"
+        },
+        "dataDriveSizeGB": {
+            "Default": "100",
+            "Description": "Size of data drive to add to private agents from 20 to 1000GB",
+            "MaxValue": 1000,
+            "MinValue": 20,
+            "Type": "Number"
+        },
+        "sshlocation": {
+            "Description": "Subnet allowed to ssh to these servers. 0.0.0.0/0 to allow all.",
+            "Type": "String"
+        }
+    },
+    "Resources": {
+        "a1": {
+            "Properties": {
+                "AvailabilityZone": {
+                    "Ref": "AVZoneName"
+                },
+                "BlockDeviceMappings": [
+                    {
+                        "DeviceName": "/dev/sda1",
+                        "Ebs": {
+                            "DeleteOnTermination": "true",
+                            "VolumeSize": "100"
+                        }
+                    }
+                ],
+                "ImageId": {
+                    "Fn::FindInMap": [
+                        "c73Ami",
+                        {
+                            "Ref": "AWS::Region"
+                        },
+                        "default"
+                    ]
+                },
+                "InstanceType": {
+                    "Ref": "InstanceTypeAgent"
+                },
+                "KeyName": {
+                    "Ref": "KeyName"
+                },
+                "NetworkInterfaces": [
+                    {
+                        "AssociatePublicIpAddress": "false",
+                        "DeleteOnTermination": "true",
+                        "DeviceIndex": "0",
+                        "GroupSet": [
+                            {
+                                "Ref": "securityGroup"
+                            }
+                        ],
+                        "PrivateIpAddress": "10.10.16.11",
+                        "SubnetId": {
+                            "Ref": "agentsSubnet"
+                        }
+                    }
+                ],
+                "Tags": [
+                    {
+                        "Key": "Application",
+                        "Value": {
+                            "Ref": "AWS::StackId"
+                        }
+                    },
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Join": [
+                                "",
+                                [
+                                    {
+                                        "Ref": "AWS::StackName"
+                                    },
+                                    "-",
+                                    "a1"
+                                ]
+                            ]
+                        }
+                    }
+                ]
+            },
+            "Type": "AWS::EC2::Instance"
+        },
+        "a1data": {
+            "Properties": {
+                "AvailabilityZone": {
+                    "Ref": "AVZoneName"
+                },
+                "Size": {
+                    "Ref": "dataDriveSizeGB"
+                },
+                "Tags": [
+                    {
+                        "Key": "Application",
+                        "Value": {
+                            "Ref": "AWS::StackId"
+                        }
+                    },
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Join": [
+                                "",
+                                [
+                                    {
+                                        "Ref": "AWS::StackName"
+                                    },
+                                    "-",
+                                    "a1data"
+                                ]
+                            ]
+                        }
+                    }
+                ]
+            },
+            "Type": "AWS::EC2::Volume"
+        },
+        "a1dataattach": {
+            "Properties": {
+                "Device": "/dev/sdc",
+                "InstanceId": {
+                    "Ref": "a1"
+                },
+                "VolumeId": {
+                    "Ref": "a1data"
+                }
+            },
+            "Type": "AWS::EC2::VolumeAttachment"
+        },
+        "a2": {
+            "Properties": {
+                "AvailabilityZone": {
+                    "Ref": "AVZoneName"
+                },
+                "BlockDeviceMappings": [
+                    {
+                        "DeviceName": "/dev/sda1",
+                        "Ebs": {
+                            "DeleteOnTermination": "true",
+                            "VolumeSize": "100"
+                        }
+                    }
+                ],
+                "ImageId": {
+                    "Fn::FindInMap": [
+                        "c73Ami",
+                        {
+                            "Ref": "AWS::Region"
+                        },
+                        "default"
+                    ]
+                },
+                "InstanceType": {
+                    "Ref": "InstanceTypeAgent"
+                },
+                "KeyName": {
+                    "Ref": "KeyName"
+                },
+                "NetworkInterfaces": [
+                    {
+                        "AssociatePublicIpAddress": "false",
+                        "DeleteOnTermination": "true",
+                        "DeviceIndex": "0",
+                        "GroupSet": [
+                            {
+                                "Ref": "securityGroup"
+                            }
+                        ],
+                        "PrivateIpAddress": "10.10.16.12",
+                        "SubnetId": {
+                            "Ref": "agentsSubnet"
+                        }
+                    }
+                ],
+                "Tags": [
+                    {
+                        "Key": "Application",
+                        "Value": {
+                            "Ref": "AWS::StackId"
+                        }
+                    },
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Join": [
+                                "",
+                                [
+                                    {
+                                        "Ref": "AWS::StackName"
+                                    },
+                                    "-",
+                                    "a2"
+                                ]
+                            ]
+                        }
+                    }
+                ]
+            },
+            "Type": "AWS::EC2::Instance"
+        },
+        "a2data": {
+            "Properties": {
+                "AvailabilityZone": {
+                    "Ref": "AVZoneName"
+                },
+                "Size": {
+                    "Ref": "dataDriveSizeGB"
+                },
+                "Tags": [
+                    {
+                        "Key": "Application",
+                        "Value": {
+                            "Ref": "AWS::StackId"
+                        }
+                    },
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Join": [
+                                "",
+                                [
+                                    {
+                                        "Ref": "AWS::StackName"
+                                    },
+                                    "-",
+                                    "a2data"
+                                ]
+                            ]
+                        }
+                    }
+                ]
+            },
+            "Type": "AWS::EC2::Volume"
+        },
+        "a2dataattach": {
+            "Properties": {
+                "Device": "/dev/sdc",
+                "InstanceId": {
+                    "Ref": "a2"
+                },
+                "VolumeId": {
+                    "Ref": "a2data"
+                }
+            },
+            "Type": "AWS::EC2::VolumeAttachment"
+        },
+        "a3": {
+            "Properties": {
+                "AvailabilityZone": {
+                    "Ref": "AVZoneName"
+                },
+                "BlockDeviceMappings": [
+                    {
+                        "DeviceName": "/dev/sda1",
+                        "Ebs": {
+                            "DeleteOnTermination": "true",
+                            "VolumeSize": "100"
+                        }
+                    }
+                ],
+                "ImageId": {
+                    "Fn::FindInMap": [
+                        "c73Ami",
+                        {
+                            "Ref": "AWS::Region"
+                        },
+                        "default"
+                    ]
+                },
+                "InstanceType": {
+                    "Ref": "InstanceTypeAgent"
+                },
+                "KeyName": {
+                    "Ref": "KeyName"
+                },
+                "NetworkInterfaces": [
+                    {
+                        "AssociatePublicIpAddress": "false",
+                        "DeleteOnTermination": "true",
+                        "DeviceIndex": "0",
+                        "GroupSet": [
+                            {
+                                "Ref": "securityGroup"
+                            }
+                        ],
+                        "PrivateIpAddress": "10.10.16.13",
+                        "SubnetId": {
+                            "Ref": "agentsSubnet"
+                        }
+                    }
+                ],
+                "Tags": [
+                    {
+                        "Key": "Application",
+                        "Value": {
+                            "Ref": "AWS::StackId"
+                        }
+                    },
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Join": [
+                                "",
+                                [
+                                    {
+                                        "Ref": "AWS::StackName"
+                                    },
+                                    "-",
+                                    "a3"
+                                ]
+                            ]
+                        }
+                    }
+                ]
+            },
+            "Type": "AWS::EC2::Instance"
+        },
+        "a3data": {
+            "Properties": {
+                "AvailabilityZone": {
+                    "Ref": "AVZoneName"
+                },
+                "Size": {
+                    "Ref": "dataDriveSizeGB"
+                },
+                "Tags": [
+                    {
+                        "Key": "Application",
+                        "Value": {
+                            "Ref": "AWS::StackId"
+                        }
+                    },
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Join": [
+                                "",
+                                [
+                                    {
+                                        "Ref": "AWS::StackName"
+                                    },
+                                    "-",
+                                    "a3data"
+                                ]
+                            ]
+                        }
+                    }
+                ]
+            },
+            "Type": "AWS::EC2::Volume"
+        },
+        "a3dataattach": {
+            "Properties": {
+                "Device": "/dev/sdc",
+                "InstanceId": {
+                    "Ref": "a3"
+                },
+                "VolumeId": {
+                    "Ref": "a3data"
+                }
+            },
+            "Type": "AWS::EC2::VolumeAttachment"
+        },
+        "a4": {
+            "Properties": {
+                "AvailabilityZone": {
+                    "Ref": "AVZoneName"
+                },
+                "BlockDeviceMappings": [
+                    {
+                        "DeviceName": "/dev/sda1",
+                        "Ebs": {
+                            "DeleteOnTermination": "true",
+                            "VolumeSize": "100"
+                        }
+                    }
+                ],
+                "ImageId": {
+                    "Fn::FindInMap": [
+                        "c73Ami",
+                        {
+                            "Ref": "AWS::Region"
+                        },
+                        "default"
+                    ]
+                },
+                "InstanceType": {
+                    "Ref": "InstanceTypeAgent"
+                },
+                "KeyName": {
+                    "Ref": "KeyName"
+                },
+                "NetworkInterfaces": [
+                    {
+                        "AssociatePublicIpAddress": "false",
+                        "DeleteOnTermination": "true",
+                        "DeviceIndex": "0",
+                        "GroupSet": [
+                            {
+                                "Ref": "securityGroup"
+                            }
+                        ],
+                        "PrivateIpAddress": "10.10.16.14",
+                        "SubnetId": {
+                            "Ref": "agentsSubnet"
+                        }
+                    }
+                ],
+                "Tags": [
+                    {
+                        "Key": "Application",
+                        "Value": {
+                            "Ref": "AWS::StackId"
+                        }
+                    },
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Join": [
+                                "",
+                                [
+                                    {
+                                        "Ref": "AWS::StackName"
+                                    },
+                                    "-",
+                                    "a4"
+                                ]
+                            ]
+                        }
+                    }
+                ]
+            },
+            "Type": "AWS::EC2::Instance"
+        },
+        "a4data": {
+            "Properties": {
+                "AvailabilityZone": {
+                    "Ref": "AVZoneName"
+                },
+                "Size": {
+                    "Ref": "dataDriveSizeGB"
+                },
+                "Tags": [
+                    {
+                        "Key": "Application",
+                        "Value": {
+                            "Ref": "AWS::StackId"
+                        }
+                    },
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Join": [
+                                "",
+                                [
+                                    {
+                                        "Ref": "AWS::StackName"
+                                    },
+                                    "-",
+                                    "a4data"
+                                ]
+                            ]
+                        }
+                    }
+                ]
+            },
+            "Type": "AWS::EC2::Volume"
+        },
+        "a4dataattach": {
+            "Properties": {
+                "Device": "/dev/sdc",
+                "InstanceId": {
+                    "Ref": "a4"
+                },
+                "VolumeId": {
+                    "Ref": "a4data"
+                }
+            },
+            "Type": "AWS::EC2::VolumeAttachment"
+        },
+        "a5": {
+            "Properties": {
+                "AvailabilityZone": {
+                    "Ref": "AVZoneName"
+                },
+                "BlockDeviceMappings": [
+                    {
+                        "DeviceName": "/dev/sda1",
+                        "Ebs": {
+                            "DeleteOnTermination": "true",
+                            "VolumeSize": "100"
+                        }
+                    }
+                ],
+                "ImageId": {
+                    "Fn::FindInMap": [
+                        "c73Ami",
+                        {
+                            "Ref": "AWS::Region"
+                        },
+                        "default"
+                    ]
+                },
+                "InstanceType": {
+                    "Ref": "InstanceTypeAgent"
+                },
+                "KeyName": {
+                    "Ref": "KeyName"
+                },
+                "NetworkInterfaces": [
+                    {
+                        "AssociatePublicIpAddress": "false",
+                        "DeleteOnTermination": "true",
+                        "DeviceIndex": "0",
+                        "GroupSet": [
+                            {
+                                "Ref": "securityGroup"
+                            }
+                        ],
+                        "PrivateIpAddress": "10.10.16.15",
+                        "SubnetId": {
+                            "Ref": "agentsSubnet"
+                        }
+                    }
+                ],
+                "Tags": [
+                    {
+                        "Key": "Application",
+                        "Value": {
+                            "Ref": "AWS::StackId"
+                        }
+                    },
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Join": [
+                                "",
+                                [
+                                    {
+                                        "Ref": "AWS::StackName"
+                                    },
+                                    "-",
+                                    "a5"
+                                ]
+                            ]
+                        }
+                    }
+                ]
+            },
+            "Type": "AWS::EC2::Instance"
+        },
+        "a5data": {
+            "Properties": {
+                "AvailabilityZone": {
+                    "Ref": "AVZoneName"
+                },
+                "Size": {
+                    "Ref": "dataDriveSizeGB"
+                },
+                "Tags": [
+                    {
+                        "Key": "Application",
+                        "Value": {
+                            "Ref": "AWS::StackId"
+                        }
+                    },
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Join": [
+                                "",
+                                [
+                                    {
+                                        "Ref": "AWS::StackName"
+                                    },
+                                    "-",
+                                    "a5data"
+                                ]
+                            ]
+                        }
+                    }
+                ]
+            },
+            "Type": "AWS::EC2::Volume"
+        },
+        "a5dataattach": {
+            "Properties": {
+                "Device": "/dev/sdc",
+                "InstanceId": {
+                    "Ref": "a5"
+                },
+                "VolumeId": {
+                    "Ref": "a5data"
+                }
+            },
+            "Type": "AWS::EC2::VolumeAttachment"
+        },
+        "agentsSubnet": {
+            "Properties": {
+                "AvailabilityZone": {
+                    "Ref": "AVZoneName"
+                },
+                "CidrBlock": "10.10.16.0/24",
+                "Tags": [
+                    {
+                        "Key": "Application",
+                        "Value": {
+                            "Ref": "AWS::StackId"
+                        }
+                    },
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Join": [
+                                "",
+                                [
+                                    {
+                                        "Ref": "AWS::StackName"
+                                    },
+                                    "-",
+                                    "agentsSubnet"
+                                ]
+                            ]
+                        }
+                    }
+                ],
+                "VpcId": {
+                    "Ref": "vpc"
+                }
+            },
+            "Type": "AWS::EC2::Subnet"
+        },
+        "boot": {
+            "Properties": {
+                "AvailabilityZone": {
+                    "Ref": "AVZoneName"
+                },
+                "BlockDeviceMappings": [
+                    {
+                        "DeviceName": "/dev/sda1",
+                        "Ebs": {
+                            "DeleteOnTermination": "true",
+                            "VolumeSize": "100"
+                        }
+                    }
+                ],
+                "ImageId": {
+                    "Fn::FindInMap": [
+                        "c73Ami",
+                        {
+                            "Ref": "AWS::Region"
+                        },
+                        "default"
+                    ]
+                },
+                "InstanceType": "m4.xlarge",
+                "KeyName": {
+                    "Ref": "KeyName"
+                },
+                "NetworkInterfaces": [
+                    {
+                        "AssociatePublicIpAddress": "true",
+                        "DeleteOnTermination": "true",
+                        "DeviceIndex": "0",
+                        "GroupSet": [
+                            {
+                                "Ref": "securityGroup"
+                            }
+                        ],
+                        "PrivateIpAddress": "10.10.0.10",
+                        "SubnetId": {
+                            "Ref": "mastersSubnet"
+                        }
+                    }
+                ],
+                "Tags": [
+                    {
+                        "Key": "Application",
+                        "Value": {
+                            "Ref": "AWS::StackId"
+                        }
+                    },
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Join": [
+                                "",
+                                [
+                                    {
+                                        "Ref": "AWS::StackName"
+                                    },
+                                    "-",
+                                    "boot"
+                                ]
+                            ]
+                        }
+                    }
+                ]
+            },
+            "Type": "AWS::EC2::Instance"
+        },
+        "gatewayAttachment": {
+            "Properties": {
+                "InternetGatewayId": {
+                    "Ref": "ig"
+                },
+                "VpcId": {
+                    "Ref": "vpc"
+                }
+            },
+            "Type": "AWS::EC2::VPCGatewayAttachment"
+        },
+        "ig": {
+            "Properties": {
+                "Tags": [
+                    {
+                        "Key": "Application",
+                        "Value": {
+                            "Ref": "AWS::StackId"
+                        }
+                    },
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Join": [
+                                "",
+                                [
+                                    {
+                                        "Ref": "AWS::StackName"
+                                    },
+                                    "-",
+                                    "ig"
+                                ]
+                            ]
+                        }
+                    }
+                ]
+            },
+            "Type": "AWS::EC2::InternetGateway"
+        },
+        "m1": {
+            "Properties": {
+                "AvailabilityZone": {
+                    "Ref": "AVZoneName"
+                },
+                "BlockDeviceMappings": [
+                    {
+                        "DeviceName": "/dev/sda1",
+                        "Ebs": {
+                            "DeleteOnTermination": "true",
+                            "VolumeSize": "100"
+                        }
+                    }
+                ],
+                "ImageId": {
+                    "Fn::FindInMap": [
+                        "c73Ami",
+                        {
+                            "Ref": "AWS::Region"
+                        },
+                        "default"
+                    ]
+                },
+                "InstanceType": {
+                    "Ref": "InstanceTypeMaster"
+                },
+                "KeyName": {
+                    "Ref": "KeyName"
+                },
+                "NetworkInterfaces": [
+                    {
+                        "AssociatePublicIpAddress": "true",
+                        "DeleteOnTermination": "true",
+                        "DeviceIndex": "0",
+                        "GroupSet": [
+                            {
+                                "Ref": "securityGroup"
+                            },
+                            {
+                                "Ref": "securityGroupMasters"
+                            }
+                        ],
+                        "PrivateIpAddress": "10.10.0.11",
+                        "SubnetId": {
+                            "Ref": "mastersSubnet"
+                        }
+                    }
+                ],
+                "Tags": [
+                    {
+                        "Key": "Application",
+                        "Value": {
+                            "Ref": "AWS::StackId"
+                        }
+                    },
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Join": [
+                                "",
+                                [
+                                    {
+                                        "Ref": "AWS::StackName"
+                                    },
+                                    "-",
+                                    "m1"
+                                ]
+                            ]
+                        }
+                    }
+                ]
+            },
+            "Type": "AWS::EC2::Instance"
+        },
+        "masters": {
+            "Properties": {
+                "CrossZone": "false",
+                "HealthCheck": {
+                    "HealthyThreshold": "2",
+                    "Interval": "30",
+                    "Target": "TCP:80",
+                    "Timeout": "5",
+                    "UnhealthyThreshold": "2"
+                },
+                "Instances": [
+                    {
+                        "Ref": "m1"
+                    }
+                ],
+                "Listeners": [
+                    {
+                        "InstancePort": "80",
+                        "LoadBalancerPort": "80",
+                        "Protocol": "TCP"
+                    },
+                    {
+                        "InstancePort": "443",
+                        "LoadBalancerPort": "443",
+                        "Protocol": "TCP"
+                    }
+                ],
+                "SecurityGroups": [
+                    {
+                        "Ref": "securityGroupMasters"
+                    }
+                ],
+                "Subnets": [
+                    {
+                        "Ref": "mastersSubnet"
+                    }
+                ],
+                "Tags": [
+                    {
+                        "Key": "Application",
+                        "Value": {
+                            "Ref": "AWS::StackId"
+                        }
+                    },
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Join": [
+                                "",
+                                [
+                                    {
+                                        "Ref": "AWS::StackName"
+                                    },
+                                    "-",
+                                    "masters"
+                                ]
+                            ]
+                        }
+                    }
+                ]
+            },
+            "Type": "AWS::ElasticLoadBalancing::LoadBalancer"
+        },
+        "mastersSubnet": {
+            "Properties": {
+                "AvailabilityZone": {
+                    "Ref": "AVZoneName"
+                },
+                "CidrBlock": "10.10.0.0/24",
+                "Tags": [
+                    {
+                        "Key": "Application",
+                        "Value": {
+                            "Ref": "AWS::StackId"
+                        }
+                    },
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Join": [
+                                "",
+                                [
+                                    {
+                                        "Ref": "AWS::StackName"
+                                    },
+                                    "-",
+                                    "mastersSubnet"
+                                ]
+                            ]
+                        }
+                    }
+                ],
+                "VpcId": {
+                    "Ref": "vpc"
+                }
+            },
+            "Type": "AWS::EC2::Subnet"
+        },
+        "nat": {
+            "DependsOn": "ig",
+            "Properties": {
+                "AvailabilityZone": {
+                    "Ref": "AVZoneName"
+                },
+                "BlockDeviceMappings": [
+                    {
+                        "DeviceName": "/dev/xvda",
+                        "Ebs": {
+                            "DeleteOnTermination": "true"
+                        }
+                    }
+                ],
+                "ImageId": {
+                    "Fn::FindInMap": [
+                        "NATAmi",
+                        {
+                            "Ref": "AWS::Region"
+                        },
+                        "default"
+                    ]
+                },
+                "InstanceType": "m4.large",
+                "KeyName": {
+                    "Ref": "KeyName"
+                },
+                "NetworkInterfaces": [
+                    {
+                        "AssociatePublicIpAddress": "true",
+                        "DeleteOnTermination": "true",
+                        "DeviceIndex": "0",
+                        "GroupSet": [
+                            {
+                                "Ref": "securityGroup"
+                            }
+                        ],
+                        "PrivateIpAddress": "10.10.0.9",
+                        "SubnetId": {
+                            "Ref": "mastersSubnet"
+                        }
+                    }
+                ],
+                "SourceDestCheck": "false",
+                "Tags": [
+                    {
+                        "Key": "Application",
+                        "Value": {
+                            "Ref": "AWS::StackId"
+                        }
+                    },
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Join": [
+                                "",
+                                [
+                                    {
+                                        "Ref": "AWS::StackName"
+                                    },
+                                    "-",
+                                    "nat"
+                                ]
+                            ]
+                        }
+                    }
+                ]
+            },
+            "Type": "AWS::EC2::Instance"
+        },
+        "natRoute": {
+            "Properties": {
+                "DestinationCidrBlock": "0.0.0.0/0",
+                "InstanceId": {
+                    "Ref": "nat"
+                },
+                "RouteTableId": {
+                    "Ref": "natRouteTable"
+                }
+            },
+            "Type": "AWS::EC2::Route"
+        },
+        "natRouteTable": {
+            "Properties": {
+                "Tags": [
+                    {
+                        "Key": "Application",
+                        "Value": {
+                            "Ref": "AWS::StackId"
+                        }
+                    },
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Join": [
+                                "",
+                                [
+                                    {
+                                        "Ref": "AWS::StackName"
+                                    },
+                                    "-",
+                                    "natRouteTable"
+                                ]
+                            ]
+                        }
+                    }
+                ],
+                "VpcId": {
+                    "Ref": "vpc"
+                }
+            },
+            "Type": "AWS::EC2::RouteTable"
+        },
+        "p1": {
+            "Properties": {
+                "AvailabilityZone": {
+                    "Ref": "AVZoneName"
+                },
+                "BlockDeviceMappings": [
+                    {
+                        "DeviceName": "/dev/sda1",
+                        "Ebs": {
+                            "DeleteOnTermination": "true",
+                            "VolumeSize": "100"
+                        }
+                    }
+                ],
+                "ImageId": {
+                    "Fn::FindInMap": [
+                        "c73Ami",
+                        {
+                            "Ref": "AWS::Region"
+                        },
+                        "default"
+                    ]
+                },
+                "InstanceType": {
+                    "Ref": "InstanceTypePublicAgent"
+                },
+                "KeyName": {
+                    "Ref": "KeyName"
+                },
+                "NetworkInterfaces": [
+                    {
+                        "AssociatePublicIpAddress": "true",
+                        "DeleteOnTermination": "true",
+                        "DeviceIndex": "0",
+                        "GroupSet": [
+                            {
+                                "Ref": "securityGroup"
+                            },
+                            {
+                                "Ref": "securityGroupPublicAgents"
+                            }
+                        ],
+                        "PrivateIpAddress": "10.10.32.11",
+                        "SubnetId": {
+                            "Ref": "publicAgentsSubnet"
+                        }
+                    }
+                ],
+                "Tags": [
+                    {
+                        "Key": "Application",
+                        "Value": {
+                            "Ref": "AWS::StackId"
+                        }
+                    },
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Join": [
+                                "",
+                                [
+                                    {
+                                        "Ref": "AWS::StackName"
+                                    },
+                                    "-",
+                                    "p1"
+                                ]
+                            ]
+                        }
+                    }
+                ]
+            },
+            "Type": "AWS::EC2::Instance"
+        },
+        "publicAgentsSubnet": {
+            "Properties": {
+                "AvailabilityZone": {
+                    "Ref": "AVZoneName"
+                },
+                "CidrBlock": "10.10.32.0/24",
+                "Tags": [
+                    {
+                        "Key": "Application",
+                        "Value": {
+                            "Ref": "AWS::StackId"
+                        }
+                    },
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Join": [
+                                "",
+                                [
+                                    {
+                                        "Ref": "AWS::StackName"
+                                    },
+                                    "-",
+                                    "publicAgentsSubnet"
+                                ]
+                            ]
+                        }
+                    }
+                ],
+                "VpcId": {
+                    "Ref": "vpc"
+                }
+            },
+            "Type": "AWS::EC2::Subnet"
+        },
+        "publicagents": {
+            "Properties": {
+                "CrossZone": "false",
+                "HealthCheck": {
+                    "HealthyThreshold": "2",
+                    "Interval": "30",
+                    "Target": "TCP:9090",
+                    "Timeout": "5",
+                    "UnhealthyThreshold": "2"
+                },
+                "Instances": [
+                    {
+                        "Ref": "p1"
+                    }
+                ],
+                "Listeners": [
+                    {
+                        "InstancePort": "10000",
+                        "LoadBalancerPort": "10000",
+                        "Protocol": "TCP"
+                    },
+                    {
+                        "InstancePort": "10001",
+                        "LoadBalancerPort": "10001",
+                        "Protocol": "TCP"
+                    },
+                    {
+                        "InstancePort": "10002",
+                        "LoadBalancerPort": "10002",
+                        "Protocol": "TCP"
+                    },
+                    {
+                        "InstancePort": "10003",
+                        "LoadBalancerPort": "10003",
+                        "Protocol": "TCP"
+                    },
+                    {
+                        "InstancePort": "10004",
+                        "LoadBalancerPort": "10004",
+                        "Protocol": "TCP"
+                    },
+                    {
+                        "InstancePort": "10005",
+                        "LoadBalancerPort": "10005",
+                        "Protocol": "TCP"
+                    },
+                    {
+                        "InstancePort": "10006",
+                        "LoadBalancerPort": "10006",
+                        "Protocol": "TCP"
+                    },
+                    {
+                        "InstancePort": "10007",
+                        "LoadBalancerPort": "10007",
+                        "Protocol": "TCP"
+                    },
+                    {
+                        "InstancePort": "10008",
+                        "LoadBalancerPort": "10008",
+                        "Protocol": "TCP"
+                    },
+                    {
+                        "InstancePort": "10009",
+                        "LoadBalancerPort": "10009",
+                        "Protocol": "TCP"
+                    },
+                    {
+                        "InstancePort": "10010",
+                        "LoadBalancerPort": "10010",
+                        "Protocol": "TCP"
+                    },
+                    {
+                        "InstancePort": "9090",
+                        "LoadBalancerPort": "9090",
+                        "Protocol": "TCP"
+                    },
+                    {
+                        "InstancePort": "80",
+                        "LoadBalancerPort": "80",
+                        "Protocol": "TCP"
+                    },
+                    {
+                        "InstancePort": "443",
+                        "LoadBalancerPort": "443",
+                        "Protocol": "TCP"
+                    }
+                ],
+                "SecurityGroups": [
+                    {
+                        "Ref": "securityGroupPublicAgents"
+                    }
+                ],
+                "Subnets": [
+                    {
+                        "Ref": "publicAgentsSubnet"
+                    }
+                ],
+                "Tags": [
+                    {
+                        "Key": "Application",
+                        "Value": {
+                            "Ref": "AWS::StackId"
+                        }
+                    },
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Join": [
+                                "",
+                                [
+                                    {
+                                        "Ref": "AWS::StackName"
+                                    },
+                                    "-",
+                                    "publicagents"
+                                ]
+                            ]
+                        }
+                    }
+                ]
+            },
+            "Type": "AWS::ElasticLoadBalancing::LoadBalancer"
+        },
+        "route": {
+            "DependsOn": "gatewayAttachment",
+            "Properties": {
+                "DestinationCidrBlock": "0.0.0.0/0",
+                "GatewayId": {
+                    "Ref": "ig"
+                },
+                "RouteTableId": {
+                    "Ref": "routeTable"
+                }
+            },
+            "Type": "AWS::EC2::Route"
+        },
+        "routeTable": {
+            "Properties": {
+                "Tags": [
+                    {
+                        "Key": "Application",
+                        "Value": {
+                            "Ref": "AWS::StackId"
+                        }
+                    },
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Join": [
+                                "",
+                                [
+                                    {
+                                        "Ref": "AWS::StackName"
+                                    },
+                                    "-",
+                                    "routeTable"
+                                ]
+                            ]
+                        }
+                    }
+                ],
+                "VpcId": {
+                    "Ref": "vpc"
+                }
+            },
+            "Type": "AWS::EC2::RouteTable"
+        },
+        "securityGroup": {
+            "Properties": {
+                "GroupDescription": "Security Group",
+                "SecurityGroupIngress": [
+                    {
+                        "CidrIp": {
+                            "Ref": "sshlocation"
+                        },
+                        "FromPort": "22",
+                        "IpProtocol": "tcp",
+                        "ToPort": "22"
+                    },
+                    {
+                        "CidrIp": "10.10.0.0/16",
+                        "IpProtocol": "-1"
+                    }
+                ],
+                "Tags": [
+                    {
+                        "Key": "Application",
+                        "Value": {
+                            "Ref": "AWS::StackId"
+                        }
+                    },
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Join": [
+                                "",
+                                [
+                                    {
+                                        "Ref": "AWS::StackName"
+                                    },
+                                    "-",
+                                    "securityGroup"
+                                ]
+                            ]
+                        }
+                    }
+                ],
+                "VpcId": {
+                    "Ref": "vpc"
+                }
+            },
+            "Type": "AWS::EC2::SecurityGroup"
+        },
+        "securityGroupMasters": {
+            "Properties": {
+                "GroupDescription": "Security Group Masters",
+                "SecurityGroupIngress": [
+                    {
+                        "CidrIp": {
+                            "Ref": "sshlocation"
+                        },
+                        "FromPort": "80",
+                        "IpProtocol": "tcp",
+                        "ToPort": "80"
+                    },
+                    {
+                        "CidrIp": {
+                            "Ref": "sshlocation"
+                        },
+                        "FromPort": "443",
+                        "IpProtocol": "tcp",
+                        "ToPort": "443"
+                    }
+                ],
+                "Tags": [
+                    {
+                        "Key": "Application",
+                        "Value": {
+                            "Ref": "AWS::StackId"
+                        }
+                    },
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Join": [
+                                "",
+                                [
+                                    {
+                                        "Ref": "AWS::StackName"
+                                    },
+                                    "-",
+                                    "securityGroupMasters"
+                                ]
+                            ]
+                        }
+                    }
+                ],
+                "VpcId": {
+                    "Ref": "vpc"
+                }
+            },
+            "Type": "AWS::EC2::SecurityGroup"
+        },
+        "securityGroupPublicAgents": {
+            "Properties": {
+                "GroupDescription": "Security Group Public Agents",
+                "SecurityGroupIngress": [
+                    {
+                        "CidrIp": "0.0.0.0/0",
+                        "FromPort": "80",
+                        "IpProtocol": "tcp",
+                        "ToPort": "80"
+                    },
+                    {
+                        "CidrIp": "0.0.0.0/0",
+                        "FromPort": "443",
+                        "IpProtocol": "tcp",
+                        "ToPort": "443"
+                    },
+                    {
+                        "CidrIp": "0.0.0.0/0",
+                        "FromPort": "10000",
+                        "IpProtocol": "tcp",
+                        "ToPort": "10010"
+                    },
+                    {
+                        "CidrIp": "0.0.0.0/0",
+                        "FromPort": "9090",
+                        "IpProtocol": "tcp",
+                        "ToPort": "9090"
+                    }
+                ],
+                "Tags": [
+                    {
+                        "Key": "Application",
+                        "Value": {
+                            "Ref": "AWS::StackId"
+                        }
+                    },
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Join": [
+                                "",
+                                [
+                                    {
+                                        "Ref": "AWS::StackName"
+                                    },
+                                    "-",
+                                    "securityGroupPublicAgents"
+                                ]
+                            ]
+                        }
+                    }
+                ],
+                "VpcId": {
+                    "Ref": "vpc"
+                }
+            },
+            "Type": "AWS::EC2::SecurityGroup"
+        },
+        "subnetRTAAgents": {
+            "Properties": {
+                "RouteTableId": {
+                    "Ref": "natRouteTable"
+                },
+                "SubnetId": {
+                    "Ref": "agentsSubnet"
+                }
+            },
+            "Type": "AWS::EC2::SubnetRouteTableAssociation"
+        },
+        "subnetRTAMasters": {
+            "Properties": {
+                "RouteTableId": {
+                    "Ref": "routeTable"
+                },
+                "SubnetId": {
+                    "Ref": "mastersSubnet"
+                }
+            },
+            "Type": "AWS::EC2::SubnetRouteTableAssociation"
+        },
+        "subnetRTAPublicAgents": {
+            "Properties": {
+                "RouteTableId": {
+                    "Ref": "routeTable"
+                },
+                "SubnetId": {
+                    "Ref": "publicAgentsSubnet"
+                }
+            },
+            "Type": "AWS::EC2::SubnetRouteTableAssociation"
+        },
+        "vpc": {
+            "Properties": {
+                "CidrBlock": "10.10.0.0/16",
+                "EnableDnsHostnames": "true",
+                "EnableDnsSupport": "true",
+                "Tags": [
+                    {
+                        "Key": "Application",
+                        "Value": {
+                            "Ref": "AWS::StackId"
+                        }
+                    },
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Join": [
+                                "",
+                                [
+                                    {
+                                        "Ref": "AWS::StackName"
+                                    },
+                                    "-",
+                                    "vpc"
+                                ]
+                            ]
+                        }
+                    }
+                ]
+            },
+            "Type": "AWS::EC2::VPC"
+        }
+    }
+}

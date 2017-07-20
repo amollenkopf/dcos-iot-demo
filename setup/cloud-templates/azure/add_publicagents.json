@@ -1,0 +1,150 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#", 
+    "contentVersion": "1.0.0.0", 
+    "resources": [
+        {
+            "name": "[concat(resourceGroup().name, 'p', copyIndex(parameters('startindex')))]", 
+            "type": "Microsoft.Compute/virtualMachines", 
+	    "copy": {
+		"name": "publicagentscopy",
+		"count": "[parameters('count')]"
+	    },
+            "apiVersion": "2015-06-15", 
+            "comments": "[concat(resourceGroup().name, 'p', copyIndex(parameters('startindex')))]", 
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/networkInterfaces', concat(resourceGroup().name,'_p', copyIndex(parameters('startindex'))))]"
+            ], 
+            "properties": {
+                "hardwareProfile": {
+                    "vmsize": "[parameters('size')]"
+                }, 
+                "storageProfile": {
+                    "imageReference": {
+                        "sku": "7.2", 
+                        "publisher": "OpenLogic", 
+                        "version": "latest", 
+                        "offer": "CentOS"
+                    }, 
+                    "osDisk": {
+                        "caching": "ReadWrite", 
+                        "vhd": {
+                            "uri": "[concat('https', '://', resourceGroup().name, '.blob.core.windows.net', concat('/vhds/p', copyIndex(parameters('startindex')), '20161202205228.vhd'))]"
+                        }, 
+                        "createOption": "FromImage", 
+                        "name": "p"
+                    }, 
+                    "dataDisks": []
+                }, 
+                "osProfile": {
+                    "adminUsername": "[parameters('username')]", 
+                    "computerName": "[concat('p', copyIndex(parameters('startindex')))]", 
+                    "linuxConfiguration": {
+                        "ssh": {
+                            "publicKeys": [
+                                {
+                                    "path": "[concat('/home/', parameters('username'), '/.ssh/authorized_keys')]", 
+                                    "keyData": "[parameters('publicKey')]"
+                                }
+                            ]
+                        }, 
+                        "disablePasswordAuthentication": true
+                    }
+                }, 
+                "availabilitySet": {
+                    "id": "[resourceId('Microsoft.Compute/availabilitySets', concat(resourceGroup().name,'_', 'agent_public'))]"
+                }, 
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', concat(resourceGroup().name, '_p', copyIndex(parameters('startindex'))))]"
+                        }
+                    ]
+                }
+            }, 
+            "resources": [], 
+            "location": "[resourceGroup().location]"
+        }, 
+        {
+            "name": "[concat(resourceGroup().name, '_p', copyIndex(parameters('startindex')))]", 
+            "type": "Microsoft.Network/networkInterfaces", 
+	    "copy": {
+		"name": "publicagentscopy",
+		"count": "[parameters('count')]"
+	    },
+            "apiVersion": "2016-03-30", 
+            "comments": "['p', copyIndex(parameters('startindex')))]", 
+            "dependsOn": [
+            ], 
+            "properties": {
+                "enabledIPForwarding": false, 
+                "dnsSettings": {
+                    "dnsServers": []
+                }, 
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1", 
+                        "properties": {
+                            "subnet": {
+                                "id": "[concat(resourceId('Microsoft.Network/virtualNetworks', resourceGroup().name), '/subnets/agent_public')]"
+                            }, 
+                            "privateIPAllocatedMethod": "Dynamic", 
+                            "loadBalancerBackendAddressPools": [
+                                {
+                                    "id": "[concat(resourceId('Microsoft.Network/loadBalancers', concat(resourceGroup().name,'_', 'agent_public')),'/backendAddressPools/',resourceGroup().name,'_agent_public','_pool')]"
+                                }
+                            ]
+                        }
+                    }
+                ], 
+                "networkSecurityGroup": {
+                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', concat(resourceGroup().name, '_', 'agent_public'))]"
+                }
+            }, 
+            "resources": [], 
+            "location": "[resourceGroup().location]"
+        }
+    ], 
+    "parameters": {
+        "username": {
+            "defaultValue": null, 
+            "type": "String",
+	    "metadata": {
+		"description": "Username for the Virtual Machine"
+	    }
+        }, 
+        "publicKey": {
+            "defaultValue": null, 
+            "type": "String",
+	    "metadata": {
+		"description": "Public Key for the username"
+	    }
+        },
+        "startindex": {
+            "defaultValue": null, 
+            "type": "int",
+	    "metadata": {
+		"description": "Public agents are name p<index>; provide the starting index number."
+	    }
+        },
+        "count": {
+            "defaultValue": null, 
+            "type": "int",
+	    "metadata": {
+		"description": "How many agents to create from startindex."
+	    }
+        },
+        "size": {
+            "type": "String",
+            "defaultValue": null, 
+	    "allowedValues": [
+		"Standard_DS2_v2",
+		"Standard_DS3_V2",
+		"Standard_DS4_V2",
+		"Standard_DS5_V2"
+	    ],
+	    "metadata": {
+		"description": "DS2:2c/7r,DS3:4c/14r,DS4:8c/28r,DS5:16c/56r"
+	    }
+	}
+    }
+}
