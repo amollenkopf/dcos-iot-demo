@@ -1,4 +1,4 @@
-# Create DC/OS Cluster Azure
+# Create DC/OS Cluster AWS
 
 ## Create a Key Pair
 Before doing the install you'll need to create a Key Pair and Download the private key.
