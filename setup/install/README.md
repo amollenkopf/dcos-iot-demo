@@ -2,7 +2,7 @@
 
 ## Create Cluster 
 - [Azure](azure.md)
-- [Amazon Web Service](aws.md)
+- [AWS](aws.md)
 
 ## Install DCOS 
 - [Install Instructions](dcos.md)

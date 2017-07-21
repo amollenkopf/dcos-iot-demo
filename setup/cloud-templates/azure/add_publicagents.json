@@ -20,7 +20,7 @@
                 }, 
                 "storageProfile": {
                     "imageReference": {
-                        "sku": "7.2", 
+                        "sku": "7.3", 
                         "publisher": "OpenLogic", 
                         "version": "latest", 
                         "offer": "CentOS"
