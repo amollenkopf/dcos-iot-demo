@@ -181,10 +181,6 @@ echo "$ip_detect" > genconf/ip-detect
 
 bootip=$(bash ./genconf/ip-detect)
 
-
-# For Azure
-datadrive="sdc"
-
 os_config="curl -O $bootip/overlay.conf
 curl -O $bootip/override.conf
 curl -O $bootip/docker.repo
@@ -214,21 +210,34 @@ setenforce permissive
 sed -i '$ i vm.max_map_count=262144' /etc/sysctl.conf
 sysctl -w vm.max_map_count=262144"
 
-# Changes for AWS
-if [ "$awsrcode" -eq 200 ]; then
-	datadrive="xvdc"
-fi
-
-echo $datadrive  >> $boot_log 2>&1
 
 # Create install.bat
 install="#!/bin/bash
+
+# Find the unpartition drive
+getunparteddisks() {
+        for disk in \$(lsblk -e 2 | grep disk | cut -d ' ' -f 1)
+        do
+                echo \${disk}     
+        done
+
+
+        blkid | while read -r line
+        do
+                part=\$(echo \${line} | cut -d ':' -f 1 | cut -d '/' -f 3)
+		echo \${part::-1}
+        done
+}
+
+datadrive=\$(getunparteddisks | sort | uniq -u)
+
+echo \"datadrive:\" \$datadrive
 
 mkdir /var/lib/mesos
 
 if [ \"\$1\" = \"slave\" ]; then
 
-        fdisk /dev/${datadrive} << EOF
+        fdisk /dev/\${datadrive} << EOF
 n
 p
 1
@@ -237,9 +246,9 @@ p
 w
 EOF
 
-        mkfs -t xfs -n ftype=1 /dev/${datadrive}1
+        mkfs -t xfs -n ftype=1 /dev/\${datadrive}1
 
-        blkid=\$(blkid | grep ${datadrive}1)
+        blkid=\$(blkid | grep \${datadrive}1)
 
         uuid=\$(echo \$blkid | awk -F'\"' '\$0=\$2')
         echo \$blkid
@@ -266,7 +275,6 @@ echo "$install" > install.sh
 curl -O --silent $DCOS_URL >> $boot_log 2>&1
 
 dcos_cmd=$(basename $DCOS_URL)
-
 extension="${dcos_cmd##*.}"
 
 if [ "$extension" == "enc" ]; then
