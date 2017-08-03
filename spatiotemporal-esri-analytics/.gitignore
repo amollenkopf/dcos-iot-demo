@@ -1,0 +1,69 @@
+# Maven build artifacts
+*.class
+*.war
+target/
+buildoutput/
+webapps/
+*.cache
+*.versionsBackup
+
+# Eclipse
+.project
+.metadata
+bin/**
+tmp/**
+tmp/**/*
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.classpath
+.settings/
+.loadpath
+.cache-*
+
+# IntelliJ
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# editor backups/autosave
+*~
+.#*
+\#*\#
+
+# Version.java
+Version.java
+
+# Zelix obfuscation
+Z_log.txt
+t
+*.fbl7
+
+# Visual Studio
+*.suo
+*.sln.docstates
+*.csproj.user
+obj/
+bin/
+
+# Merge artifacts
+*.orig
+
+# Passolo projects files
+*.lpu
+
+# Passolo option files
+*.pslopt
+
+# js code assist
+*.sdocml
+
+# Binary files
+*.gz
+
+# Ignored the bds.properties for testing
+arcgis-bds-common/src/test/resources/com/esri/arcgis/bds/elastic/bds.properties/.DS_Store
+/.DS_Store
