@@ -5,7 +5,6 @@ import org.apache.spark.rdd.RDD
 import org.apache.spark.streaming.dstream.DStream
 import org.apache.spark.streaming.kafka.KafkaUtils
 import org.apache.spark.streaming.{Seconds, StreamingContext, Time}
-import org.cam.geo.analytics.AnalyticLog
 import com.esri.core.geometry.{GeometryEngine, Point, SpatialReference}
 import org.codehaus.jackson.JsonFactory
 
@@ -24,7 +23,6 @@ object SpatiotemporalEsriAnalyticTask {
       System.err.println("             stdoutOn: indicates whether or not to write to stdout, e.g. true")
       System.exit(1)
     }
-    AnalyticLog.setStreamingLogLevels()
 
     val Array(zkQuorum, topic, geofenceFilteringOnStr, stdoutOnStr) = args
     val geofenceFilteringOn = geofenceFilteringOnStr.toBoolean

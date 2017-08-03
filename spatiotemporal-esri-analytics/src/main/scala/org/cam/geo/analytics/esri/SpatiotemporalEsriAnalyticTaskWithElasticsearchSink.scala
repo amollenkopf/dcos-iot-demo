@@ -5,10 +5,10 @@ import org.apache.spark.rdd.RDD
 import org.apache.spark.streaming.dstream.DStream
 import org.apache.spark.streaming.kafka.KafkaUtils
 import org.apache.spark.streaming.{Seconds, StreamingContext, Time}
-import org.cam.geo.analytics.AnalyticLog
 import com.esri.core.geometry.{GeometryEngine, Point, SpatialReference}
 import org.cam.geo.sink.{ElasticsearchUtils, EsField, EsFieldType}
 import org.codehaus.jackson.JsonFactory
+import org.elasticsearch.hadoop.cfg.ConfigurationOptions
 import org.elasticsearch.spark._
 
 object SpatiotemporalEsriAnalyticTaskWithElasticsearchSink {
@@ -26,9 +26,18 @@ object SpatiotemporalEsriAnalyticTaskWithElasticsearchSink {
       System.err.println("               esNode: the hostname and port of the Elasticsearch cluster, e.g. localhost:9200")
       System.err.println("        esClusterName: the name of the Elasticsearch cluster, e.g. spatiotemporal-store")
       System.err.println("          esIndexName: the name of the Elasticsearch index to write to, e.g. taxi03")
+      System.err.println("           esUserName: (Optional) the username to authenticate with the Elasticsearch cluster, e.g. elastic")
+      System.err.println("           esPassword: (Optional) the password to authenticate with the Elasticsearch cluster, e.g. changeme\"")
       System.exit(1)
     }
-    AnalyticLog.setStreamingLogLevels()
+    // check for the optional username and password
+    val (esUserName:Option[String], esPassword:Option[String]) = {
+      if (args.length >= 9) {
+        (Option(args(7)), Option(args(8)))
+      } else {
+        (None, None)
+      }
+    }
 
     val Array(zkQuorum, topic, geofenceFilteringOnStr, verboseStr, esNodes, esClusterName, esIndexName) = args
     val geofenceFilteringOn = geofenceFilteringOnStr.toBoolean
@@ -41,6 +50,12 @@ object SpatiotemporalEsriAnalyticTaskWithElasticsearchSink {
       .set("es.cluster.name", esClusterName)
       .set("es.nodes", esNodes)
       .set("es.index.auto.create", "true")
+
+    // add the proper authentication credentials to the ES Spark connector
+    if (esUserName.exists(str => str != null && str.nonEmpty) && esPassword.exists(str => str != null && str.nonEmpty) ) {
+      sparkConf.set(ConfigurationOptions.ES_NET_HTTP_AUTH_USER, esUserName.orNull)
+      sparkConf.set(ConfigurationOptions.ES_NET_HTTP_AUTH_PASS, esPassword.orNull)
+    }
 
     val ssc = new StreamingContext(sparkConf, Seconds(1))
     //ssc.checkpoint("checkpoint")  //note: Use only if HDFS is available where Spark is running
@@ -86,7 +101,7 @@ object SpatiotemporalEsriAnalyticTaskWithElasticsearchSink {
     val esNode = esNodes.split(":")(0)
     val esPort = esNodes.split(":")(1).toInt //TODO: Clean up
     val esFields = Array(
-        EsField("taxiId", EsFieldType.String),
+        EsField("taxiId", EsFieldType.Keyword),
         EsField("observationTime", EsFieldType.Date),
         EsField("longitude", EsFieldType.Double),
         EsField("latitude", EsFieldType.Double),
@@ -94,21 +109,21 @@ object SpatiotemporalEsriAnalyticTaskWithElasticsearchSink {
         EsField("tripTimeInSecs", EsFieldType.Float),
         EsField("tripDistance", EsFieldType.Float),
         EsField("observationIx", EsFieldType.Integer),
-        EsField("medallion", EsFieldType.String),
-        EsField("hack_license", EsFieldType.String),
-        EsField("vendor_id", EsFieldType.String),
-        EsField("rate_code", EsFieldType.String),
-        EsField("store_and_fwd_flag", EsFieldType.String),
-        EsField("pickup_datetime", EsFieldType.String),
-        EsField("dropoff_datetime", EsFieldType.String),
+        EsField("medallion", EsFieldType.Keyword),
+        EsField("hack_license", EsFieldType.Keyword),
+        EsField("vendor_id", EsFieldType.Keyword),
+        EsField("rate_code", EsFieldType.Keyword),
+        EsField("store_and_fwd_flag", EsFieldType.Keyword),
+        EsField("pickup_datetime", EsFieldType.Keyword),
+        EsField("dropoff_datetime", EsFieldType.Keyword),
         EsField("pickup_longitude", EsFieldType.Double),
         EsField("pickup_latitude", EsFieldType.Double),
         EsField("dropoff_longitude", EsFieldType.Double),
         EsField("dropoff_latitude", EsFieldType.Double),
         EsField("geometry", EsFieldType.GeoPoint)
       )
-    if (!ElasticsearchUtils.doesDataSourceExists(esIndexName, esNode, esPort))
-      ElasticsearchUtils.createDataSource(esIndexName, esFields, esNode, esPort, shards, replicas)
+    if (!ElasticsearchUtils.doesDataSourceExists(esIndexName, esNode, esPort, esUserName, esPassword))
+      ElasticsearchUtils.createDataSource(esIndexName, esFields, esNode, esPort, esUserName, esPassword, shards, replicas)
 
     datasource.foreachRDD((rdd: RDD[Map[String, Any]], time: Time) => {
       rdd.saveToEs(esIndexName + "/" + esIndexName) // ES index/type

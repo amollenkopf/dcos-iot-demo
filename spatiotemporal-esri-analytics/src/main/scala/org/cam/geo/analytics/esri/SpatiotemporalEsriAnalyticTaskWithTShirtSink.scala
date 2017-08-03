@@ -5,7 +5,6 @@ import org.apache.spark.rdd.RDD
 import org.apache.spark.streaming.dstream.DStream
 import org.apache.spark.streaming.kafka.KafkaUtils
 import org.apache.spark.streaming.{Seconds, StreamingContext, Time}
-import org.cam.geo.analytics.AnalyticLog
 import com.esri.core.geometry.{GeometryEngine, Point, SpatialReference}
 import org.codehaus.jackson.JsonFactory
 
@@ -38,7 +37,6 @@ object SpatiotemporalEsriAnalyticTaskWithTShirtSink {
       System.err.println("              verbose: indicates whether or not to write details to stdout, e.g. false")
       System.exit(1)
     }
-    AnalyticLog.setStreamingLogLevels()
 
     val Array(zkQuorum, topic, geofenceFilteringOnStr, url, verboseStr) = args
     val geofenceFilteringOn = geofenceFilteringOnStr.toBoolean

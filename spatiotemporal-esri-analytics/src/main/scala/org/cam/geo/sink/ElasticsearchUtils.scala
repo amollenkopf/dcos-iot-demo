@@ -1,11 +1,10 @@
 package org.cam.geo.sink
 
 import java.net.URL
-import java.util.UUID
 
-import com.google.common.net.HttpHeaders
-import org.apache.http.HttpStatus
-import org.apache.http.client.methods.{HttpGet, HttpPost, _}
+import org.apache.commons.codec.binary.Base64
+import org.apache.http.{HttpHeaders, HttpStatus}
+import org.apache.http.client.methods.{HttpGet, _}
 import org.apache.http.entity.{ContentType, StringEntity}
 import org.apache.http.impl.client.HttpClients
 import org.apache.http.util.EntityUtils
@@ -22,13 +21,14 @@ object ElasticsearchUtils {
     * @return
     */
   //TODO: Change DataSource references to Index
-  def doesDataSourceExists(dataSourceName:String, esHostName:String, esPort:Int = 9200):Boolean = {
+  def doesDataSourceExists(dataSourceName:String, esHostName:String, esPort:Int = 9200, userName:Option[String] = None, password:Option[String] = None):Boolean = {
     val client = HttpClients.createDefault()
     try {
       val dataSourceNameToLowercase = dataSourceName.toLowerCase()
       val existsURLStr = s"http://$esHostName:$esPort/$dataSourceNameToLowercase"
       val existsURL:URL = new URL(existsURLStr)
       val httpGet:HttpGet = new HttpGet(existsURL.toURI)
+      addAuthorizationHeader(httpGet, userName, password)
 
       val existsResponse = client.execute(httpGet)
       val existsResponseAsString = getHttpResponseAsString(existsResponse, httpGet)
@@ -64,13 +64,14 @@ object ElasticsearchUtils {
     * @param esHostName the es host name
     * @param esPort the es port name
     */
-  def createDataSource(dataSourceName:String, fields:Array[EsField], esHostName:String, esPort:Int = 9200, shards:Int=3, replicas:Int=1):Boolean = {
+  def createDataSource(dataSourceName:String, fields:Array[EsField], esHostName:String, esPort:Int = 9200, userName:Option[String] = None, password:Option[String] = None, shards:Int=3, replicas:Int=1):Boolean = {
     val client = HttpClients.createDefault()
     try {
       val dataSourceNameToLowercase = dataSourceName.toLowerCase()
       val createMappingURLStr = s"http://$esHostName:$esPort/$dataSourceNameToLowercase"
       val createMappingURL:URL = new URL(createMappingURLStr)
       val httpPut:HttpPut = new HttpPut(createMappingURL.toURI)
+      addAuthorizationHeader(httpPut, userName, password)
       httpPut.setHeader(HttpHeaders.CONTENT_TYPE, "application/json")
       httpPut.setHeader("charset", "utf-8")
       val createMappingRequest = createMappingJsonAsStr(dataSourceNameToLowercase, fields, shards, replicas)
@@ -152,9 +153,6 @@ object ElasticsearchUtils {
        |  },
        |	"mappings": {
        |		"$datSourceName": {
-       |			"_timestamp": {
-       |				"enabled": true
-       |			},
        |			"properties": {
        |       ${createFieldMappingJsonAsStr(fields)}
        |			}
@@ -184,11 +182,10 @@ object ElasticsearchUtils {
               "tree": "quadtree"
             }
           """.stripMargin
-        case EsFieldType.String =>
+        case EsFieldType.Keyword =>
           s"""
             "${field.name}": {
-              "type": "string",
-              "index": "not_analyzed"
+              "type": "keyword"
             }
           """.stripMargin
         case _ =>
@@ -204,6 +201,15 @@ object ElasticsearchUtils {
         str + fieldJson
     })
   }
+
+  private def addAuthorizationHeader(httpRequest:HttpRequestBase, userName:Option[String] = None, password:Option[String] = None):Unit = {
+    // credentials
+    if (userName.exists(str => str != null && str.nonEmpty) && password.exists(str => str != null && str.nonEmpty) ) {
+      val authString = userName.orNull + ":" + password.orNull
+      val credentialString: String = Base64.encodeBase64String(authString.getBytes)
+      httpRequest.setHeader(HttpHeaders.AUTHORIZATION, "Basic " + credentialString)
+    }
+  }
 }
 
 /**
@@ -215,8 +221,8 @@ sealed trait EsFieldType {
 }
 
 object EsFieldType {
-  case object String extends EsFieldType {
-    val name: String = "string"
+  case object Keyword extends EsFieldType {
+    val name: String = "keyword"
   }
   case object Date extends EsFieldType {
     val name: String = "date"
@@ -254,7 +260,7 @@ object EsFieldType {
 
   def fromString(str:String):EsFieldType = {
     str.toLowerCase match {
-      case String.name => String
+      case Keyword.name => Keyword
       case Date.name => Date
       case Double.name => Double
       case Float.name => Float
