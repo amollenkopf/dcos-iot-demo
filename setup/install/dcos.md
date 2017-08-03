@@ -7,10 +7,10 @@ Copy your private key to the boot server.
 **NOTE**: For AWS the default user is centos. The example command lines below are for azure and assume you created a user named azureuser and that your private key is also named azureuser; you'll need to adjust command lines for AWS.
 
 <pre>
-$ scp -i {private-key} {private-key} {username}@{boot server ip}:.
+$ scp -i {private-key} {private-key} {username}@{boot server ip}:~
 
 Example:
-$ scp -i azureuser azureuser azureuser@40.78.62.181:.
+$ scp -i azureuser azureuser azureuser@40.78.62.181:~
 </pre>
 
 ## Copy Install Script to Boot Server
@@ -22,10 +22,10 @@ For Linux or Mac users you can use scp to copy the files.  Windows users can use
 From your local workstation.
 
 <pre>
-$ scp -i {Private Key} {File you want to upload} {Username}@{Boot Server IP}:.
+$ scp -i {Private Key} {File you want to upload} {Username}@{Boot Server IP}:~
 
 Examples:
-$ scp -i azureuser devtopia/real-time-gis/devops/install/install_dcos.sh azureuser@40.78.62.181:.
+$ scp -i azureuser devtopia/real-time-gis/devops/install/install_dcos.sh azureuser@40.78.62.181:~
 </pre>
 
 ## Secure shell to Boot
