@@ -6,7 +6,7 @@
   "container": {
     "type": "DOCKER",
     "docker": {
-      "image": "mesosphere/spark:1.6.1-6",
+      "image": "mesosphere/spark:1.1.1-2.2.0-hadoop-2.7",
       "forcePullImage": true
     }
   },
