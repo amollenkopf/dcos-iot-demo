@@ -21,7 +21,7 @@ object ElasticsearchUtils {
     * @return
     */
   //TODO: Change DataSource references to Index
-  def doesDataSourceExists(dataSourceName:String, esHostName:String, esPort:Int = 9200, userName:Option[String] = None, password:Option[String] = None):Boolean = {
+  def doesDataSourceExists(dataSourceName:String, esHostName:String, esPort:Int = 9200, userName:String, password:String):Boolean = {
     val client = HttpClients.createDefault()
     try {
       val dataSourceNameToLowercase = dataSourceName.toLowerCase()
@@ -64,7 +64,7 @@ object ElasticsearchUtils {
     * @param esHostName the es host name
     * @param esPort the es port name
     */
-  def createDataSource(dataSourceName:String, fields:Array[EsField], esHostName:String, esPort:Int = 9200, userName:Option[String] = None, password:Option[String] = None, shards:Int=3, replicas:Int=1):Boolean = {
+  def createDataSource(dataSourceName:String, fields:Array[EsField], esHostName:String, esPort:Int = 9200, userName:String, password:String, shards:Int=3, replicas:Int=1):Boolean = {
     val client = HttpClients.createDefault()
     try {
       val dataSourceNameToLowercase = dataSourceName.toLowerCase()
@@ -202,13 +202,11 @@ object ElasticsearchUtils {
     })
   }
 
-  private def addAuthorizationHeader(httpRequest:HttpRequestBase, userName:Option[String] = None, password:Option[String] = None):Unit = {
+  private def addAuthorizationHeader(httpRequest:HttpRequestBase, userName:String, password:String):Unit = {
     // credentials
-    if (userName.exists(str => str != null && str.nonEmpty) && password.exists(str => str != null && str.nonEmpty) ) {
-      val authString = userName.orNull + ":" + password.orNull
-      val credentialString: String = Base64.encodeBase64String(authString.getBytes)
-      httpRequest.setHeader(HttpHeaders.AUTHORIZATION, "Basic " + credentialString)
-    }
+    val authString = userName + ":" + password
+    val credentialString: String = Base64.encodeBase64String(authString.getBytes)
+    httpRequest.setHeader(HttpHeaders.AUTHORIZATION, "Basic " + credentialString)
   }
 }
 

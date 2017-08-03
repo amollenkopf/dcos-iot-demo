@@ -38,7 +38,7 @@ object SpatiotemporalEsriAnalyticTaskWithElasticsearchAndTShirtSink {
 
   def main(args: Array[String]) {
     if (args.length < 10) {
-      System.err.println("Usage: SpatiotemporalEsriAnalyticTaskWithElasticsearchAndTShirtSink <zkQuorum> <topic> <geofenceFilteringOn> <verbose>")
+      System.err.println("Usage: SpatiotemporalEsriAnalyticTaskWithElasticsearchAndTShirtSink <zkQuorum> <topic> <geofenceFilteringOn> <verbose> <esNode> <esClusterName> <esIndexName> <esUserName> <esPassword>")
       System.err.println("          zkQuorum(s): the zookeeper url, e.g. localhost:2181")
       System.err.println("                topic: the Kafka topic name to consume from, e.g. taxi03")
       System.err.println("  geofenceFilteringOn: indicates whether or not to apply a geofence filter, e.g. false")
@@ -49,21 +49,12 @@ object SpatiotemporalEsriAnalyticTaskWithElasticsearchAndTShirtSink {
       System.err.println("               esNode: the hostname and port of the Elasticsearch cluster, e.g. localhost:9200")
       System.err.println("        esClusterName: the name of the Elasticsearch cluster, e.g. spatiotemporal-store")
       System.err.println("          esIndexName: the name of the Elasticsearch index to write to, e.g. taxi03")
-      System.err.println("           esUserName: (Optional) the username to authenticate with the Elasticsearch cluster, e.g. elastic")
-      System.err.println("           esPassword: (Optional) the password to authenticate with the Elasticsearch cluster, e.g. changeme\"")
-
+      System.err.println("           esUserName: the username to authenticate with the Elasticsearch cluster, e.g. elastic")
+      System.err.println("           esPassword: the password to authenticate with the Elasticsearch cluster, e.g. changeme\"")
       System.exit(1)
     }
 
-    val Array(zkQuorum, topic, geofenceFilteringOnStr, url, tShirtMessage, phoneNumber, verboseStr, esNodes, esClusterName, esIndexName) = args
-    // check for the optional username and password
-    val (esUserName:Option[String], esPassword:Option[String]) = {
-      if (args.length >= 12) {
-        (Option(args(10)), Option(args(11)))
-      } else {
-        (None, None)
-      }
-    }
+    val Array(zkQuorum, topic, geofenceFilteringOnStr, url, tShirtMessage, phoneNumber, verboseStr, esNodes, esClusterName, esIndexName, esUserName, esPassword) = args
     val geofenceFilteringOn = geofenceFilteringOnStr.toBoolean
     val verbose = verboseStr.toBoolean
     val shards = 20  //TODO: expose as param, default is 3
@@ -79,11 +70,8 @@ object SpatiotemporalEsriAnalyticTaskWithElasticsearchAndTShirtSink {
       .set("es.write.operation", "upsert")
       .set("es.mapping.id", "taxiId")
 
-    // add the proper authentication credentials to the ES Spark connector
-    if (esUserName.exists(str => str != null && str.nonEmpty) && esPassword.exists(str => str != null && str.nonEmpty) ) {
-      sparkConf.set(ConfigurationOptions.ES_NET_HTTP_AUTH_USER, esUserName.orNull)
-      sparkConf.set(ConfigurationOptions.ES_NET_HTTP_AUTH_PASS, esPassword.orNull)
-    }
+    sparkConf.set(ConfigurationOptions.ES_NET_HTTP_AUTH_USER, esUserName)
+    sparkConf.set(ConfigurationOptions.ES_NET_HTTP_AUTH_PASS, esPassword)
 
     val ssc = new StreamingContext(sparkConf, Seconds(1))
     //ssc.checkpoint("checkpoint")  //note: Use only if HDFS is available where Spark is running
