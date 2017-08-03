@@ -27,7 +27,7 @@ object SpatiotemporalEsriAnalyticTaskWithElasticsearchSink {
       System.err.println("        esClusterName: the name of the Elasticsearch cluster, e.g. spatiotemporal-store")
       System.err.println("          esIndexName: the name of the Elasticsearch index to write to, e.g. taxi03")
       System.err.println("           esUserName: (Optional) the username to authenticate with the Elasticsearch cluster, e.g. elastic")
-      System.err.println("           esPassword: (Optional) the password to authenticate with the Elasticsearch cluster, e.g. changeme\"")
+      System.err.println("           esPassword: (Optional) the password to authenticate with the Elasticsearch cluster, e.g. changeme")
       System.exit(1)
     }
     // check for the optional username and password
