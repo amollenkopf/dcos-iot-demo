@@ -110,8 +110,13 @@ object SpatiotemporalEsriAnalyticTaskWithElasticsearchSink {
         EsField("dropoff_latitude", EsFieldType.Double),
         EsField("geometry", EsFieldType.GeoPoint)
       )
-    if (!ElasticsearchUtils.doesDataSourceExists(esIndexName, esNode, esPort, esUserName, esPassword))
+    if (!ElasticsearchUtils.doesDataSourceExists(esIndexName, esNode, esPort, esUserName, esPassword)) {
+      println(s"Debug: Attempting to create the DataSource '$datasource' on ES cluster '$esNode:$esPort' using username '$esUserName'...")
       ElasticsearchUtils.createDataSource(esIndexName, esFields, esNode, esPort, esUserName, esPassword, shards, replicas)
+      println(s"Debug: DataSource '$datasource' was created successfully!")
+    } else {
+      println(s"Debug: Skipping the DataSource creation for '$datasource' on ES cluster '$esNode:$esPort' using username '$esUserName'. DataSource already exists!")
+    }
 
     datasource.foreachRDD((rdd: RDD[Map[String, Any]], time: Time) => {
       rdd.saveToEs(esIndexName + "/" + esIndexName) // ES index/type

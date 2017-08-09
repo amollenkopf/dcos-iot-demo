@@ -88,18 +88,18 @@ object ElasticsearchUtils {
         createSuccessOpt match {
           case Some(success) =>
             if (!success) {
-              println(s"Failed to create the mapping for DataSource $dataSourceName!")
-              return false
+              println(s"Failed to create the mapping for DataSource $dataSourceName! Response: ${createResponseAsString.orNull}")
+              throw new Exception(s"Failed to create the mapping for DataSource $dataSourceName! Response: ${createResponseAsString.orNull}")
             }
           case _ =>
-            println(s"Failed to create the mapping for DataSource $dataSourceName!")
-            return false
+            println(s"Failed to create the mapping for DataSource $dataSourceName! Response: ${createResponseAsString.orNull}")
+            throw new Exception(s"Failed to create the mapping for DataSource $dataSourceName! Response: ${createResponseAsString.orNull}")
         }
       } catch {
         case parseError: Throwable =>
           println(s"Failed to create the mapping for DataSource $dataSourceName!")
           parseError.printStackTrace()
-          return false
+          throw new Exception(s"Failed to create the mapping for DataSource $dataSourceName!", parseError)
       }
       true
     } finally {
