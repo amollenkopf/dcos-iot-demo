@@ -66,3 +66,5 @@ bin/
 
 # Misc text files
 *.stackdump
+
+*.DS_Store
