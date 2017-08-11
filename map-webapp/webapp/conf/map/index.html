@@ -43,7 +43,8 @@
 <script src="scripts/elasticsearch.js"></script>
 <script src="scripts/geohash.js"></script>
 <script>
-  require(["esri/map",
+  require([
+    "esri/map",
     "esri/SpatialReference",
     "esri/graphic",
     "esri/geometry/Point",
@@ -77,122 +78,150 @@
     "dijit/layout/BorderContainer",
     "dijit/layout/ContentPane",
     "dijit/TitlePane",
-    "dojo/domReady!map/index"], function (Map, SpatialReference, Graphic, Point, Polygon, Extent, webMercatorUtils, FeatureLayer, LabelClass, SimpleFillSymbol, SimpleLineSymbol, SimpleMarkerSymbol, PictureMarkerSymbol, TextSymbol, Font, SimpleRenderer, HeatmapRenderer, UniqueValueRenderer, ClassBreaksRenderer, TimeExtent, InfoTemplate, Color, TimeSlider, BasemapGallery, parser, array, dom, domStyle, on, domConstruct, xhr) {
-    //Configurations
+    "dojo/domReady!map/index"
+  ], function (
+      Map,
+      SpatialReference,
+      Graphic,
+      Point,
+      Polygon,
+      Extent,
+      webMercatorUtils,
+      FeatureLayer,
+      LabelClass,
+      SimpleFillSymbol,
+      SimpleLineSymbol,
+      SimpleMarkerSymbol,
+      PictureMarkerSymbol,
+      TextSymbol,
+      Font,
+      SimpleRenderer,
+      HeatmapRenderer,
+      UniqueValueRenderer,
+      ClassBreaksRenderer,
+      TimeExtent,
+      InfoTemplate,
+      Color,
+      TimeSlider,
+      BasemapGallery,
+      parser,
+      array,
+      dom,
+      domStyle,
+      on,
+      domConstruct,
+      xhr) {
+
     parser.parse();
 
     esri.config.defaults.io.corsEnabledServers.push('http://localhost');
+    esri.config.defaults.io.corsEnabledServers.push('https://localhost');
 
-    //Define global variables
-    var map,
-      ///////////////////////////////////////////////////////////////////
-      //Please configure the following parameters
-      //host = 'elastic.elasticsearch.mesos:9200', //Elasticsearch address
-      //host = 'localhost:9200', //Elasticsearch address if tunnel is used
-      //host = 'http://adamdcos03.westus.cloudapp.azure.com:80',
-      host = window.location.origin,
 
-      index = 'taxi', //DataSource Index
-      type = 'taxi', //DataSource Type
-      refreshInterval = 2000, //Auto refresh interval in ms, 0 = no auto refresh
-      featureThreshold = 1000, //Feature thereshold when to switch from aggregation to feature rendering
-      //////////////////////////////////////////////////////////////////
-      initTimeExtent,
-      timePara,
-      startTime,
-      endTime,
-      initRun = true,
-      replay = false,
-      startTimeSlider = true,
-      hm = false;
+    // class data members
+    var _host = window.location.origin;
 
-    //Create Elastic Search Client
-    var client = new elasticsearch.Client({
-      host: host,
+    var _esIndex = 'taxi';         // elasticsearch index name
+    var _esType = 'taxi';          // elasticsearch index type name
+    var _refreshInterval  = 3000;  // auto refresh interval in ms, 0 = no auto refresh
+    var _featureThreshold = 1000;  // feature threshold to switch between aggregation to feature rendering
+
+    var _timeExtent;
+    var _mapExtent;
+    var _initRun = true;
+    var _replay = false;
+    var _startTimeSlider = true;
+    var _renderHeatMapLayer = false;
+
+    // layers
+    var _heatmapLayerName = "Heatmap";
+    var _featureLayerName = "Features";
+    var _aggregationLayerName = "Aggregation";
+
+    // create elasticsearch Client
+    var _esClient = new elasticsearch.Client({
+      host: _host,
       log: 'error',
       apiVersion: '5.5' //2.3
     });
 
-    //create map
-    map = new Map("map", {
+    // create map
+    var _map = new Map("map", {
       basemap: "dark-gray",
       center: [-73.9, 40.73],
       zoom: 10,
       showLabels: true
     });
-    //on map load continue
-    map.on("load", function () {
+
+    // on map load continue
+    _map.on("load", function () {
       getTimeRange();
       addESFeatureLayer();
       addAggregationLayer();
       addHeatmapLayer();
       autoUpdate();
       initBasemapGallery();
-      initExtent = map.extent;
+      _mapExtent = _map.extent;
     });
-    map.on("zoom-end", function (evt) {
-      currentExtent = evt.extent;
-      if (!initRun) {
-        getESAggregations(map.getLevel(), currentExtent);
-      }
-    })
 
-    //
-    //UI event listener
-    //
+    //_map.on("zoom-end", function (evt) { onMapExtentChanged(evt); });
+    //_map.on("pan-end", function (evt) { onMapExtentChanged(evt); });
+    //_map.on("resize", function (evt) { onMapExtentChanged(evt); });
+    _map.on("extent-change", function (evt) { onMapExtentChanged(evt); });
+
+    // UI event listener
     on(dojo.byId("switch1"), "change", toggleReplay);
     on(dojo.byId("switch2"), "change", toggleHeatmap);
 
-    //
-    //Switch change functions
-    //
-    //Replay Switch Change function
+
+    function onMapExtentChanged(evt) {
+      _mapExtent = evt.extent;
+      if (!_initRun) {
+        updateActiveLayer(_map.getLevel(), _mapExtent);
+      }
+    }
+
+    // Replay Switch Change function
     function toggleReplay(evt) {
-      if (replay == false && startTimeSlider == true) {
+      if (_replay === false && _startTimeSlider === true) {
         initTimeSlider();
-        replay = true;
-        startTimeSlider = false;
-      } else if (replay == false && startTimeSlider == false) {
-        updateTimeSlider()
+        _replay = true;
+        _startTimeSlider = false;
+      } else if (_replay === false && _startTimeSlider === false) {
+        updateTimeSlider();
         domStyle.set(dom.byId('timeSlider'), "display", 'block');
-        replay = true;
+        _replay = true;
       } else {
         domStyle.set(dom.byId('timeSlider'), "display", 'none');
-        map.setTimeSlider(null)
-        map.setTimeExtent(null)
-        getTimeRange()
-        replay = false;
+        _map.setTimeSlider(null);
+        _map.setTimeExtent(null);
+        getTimeRange();
+        _replay = false;
       }
     }
 
-    //Replay Switch Change function
+    // Replay Switch Change function
     function toggleHeatmap(evt) {
-      if (hm == false) {
-        hm = true;
-        map.getLayer("heatmap").resume();
-        map.getLayer("ESFeatures").suspend();
-        map.getLayer("ESAggregations").suspend();
-        getESAggregations(map.getLevel(), currentExtent);
+      if (_renderHeatMapLayer === false) {
+        _renderHeatMapLayer = true;
+        _map.getLayer(_heatmapLayerName).resume();
+        _map.getLayer(_featureLayerName).suspend();
+        _map.getLayer(_aggregationLayerName).suspend();
+        updateActiveLayer(_map.getLevel(), _mapExtent);
       } else {
-        hm = false;
-        map.getLayer("heatmap").suspend();
-        map.getLayer("ESFeatures").resume();
-        map.getLayer("ESAggregations").resume();
-        getESAggregations(map.getLevel(), currentExtent);
+        _renderHeatMapLayer = false;
+        _map.getLayer(_heatmapLayerName).suspend();
+        _map.getLayer(_featureLayerName).resume();
+        _map.getLayer(_aggregationLayerName).resume();
+        updateActiveLayer(_map.getLevel(), _mapExtent);
       }
     }
 
-    //
-    //#############################################################################################
-    //Querying Elasticsearch
-    //#############################################################################################
-    //
-    // Get TimeRange of Index
-    //
+    // get time range from the ES index
     function getTimeRange() {
-      client.search({
-          index: index,
-          type: type,
+      _esClient.search({
+          index: _esIndex,
+          type: _esType,
           body: {
             "aggs": {
               "minTime": {
@@ -209,22 +238,21 @@
           }
         },
         function (error, response) {
-          timePara = new TimeExtent(new Date(response.aggregations.minTime.value), new Date(response.aggregations.maxTime.value));
-          getESAggregations(map.getLevel(), map.extent);
+          _timeExtent = new TimeExtent(new Date(response.aggregations.minTime.value), new Date(response.aggregations.maxTime.value));
+          updateActiveLayer(_map.getLevel(), _map.extent);
         });
     }
 
-    //
-    // Get Features from ES
-    //
-    function getESFeatures(extent) {
-      var coords = webMercatorUtils.webMercatorToGeographic(extent),
-        startT = timePara.startTime.getTime(),
-        endT = timePara.endTime.getTime();
-      //ES Client Request
-      client.search({
-          index: index,
-          type: type,
+    // get features from ES and update/refresh the feature layer
+    function updateFeatureLayer(extent) {
+      var coords = webMercatorUtils.webMercatorToGeographic(extent);
+      var startTime = _timeExtent.startTime.getTime();
+      var endTime = _timeExtent.endTime.getTime();
+
+      // ES Client Request
+      _esClient.search({
+          index: _esIndex,
+          type: _esType,
           body: {
             fields: ["taxiId", "observationTime", "passengerCount", "geometry"],
             size: 1000,
@@ -246,8 +274,8 @@
                 }, {
                   "range": {
                     "observationTime": {
-                      "from": startT,
-                      "to": endT
+                      "from": startTime,
+                      "to": endTime
                     }
                   }
                 }]
@@ -261,20 +289,22 @@
             console.log(error)
           } else {
             var features = array.map(response.hits.hits, function (feature, i) {
-              var newFeature = {},
-                coords = feature.fields.geometry[0].split(",").map(Number).reverse(),
-                geometry = new Point(coords),
-                attributes = {};
-              geometry.setSpatialReference(new SpatialReference(4326))
+              var coords = feature.fields.geometry[0].split(",").map(Number).reverse();
+              var geometry = new Point(coords);
+              geometry.setSpatialReference(new SpatialReference(4326));
+
+              var attributes = {};
               attributes.taxiId = Number(feature.fields.taxiId);
               attributes.observationTime = Number(feature.fields.observationTime);
               attributes.passengerCount = feature.fields.passengerCount;
-              newFeature = new Graphic(geometry, null, attributes, null);
+
+              var newFeature = new Graphic(geometry, null, attributes, null);
               return newFeature;
-            })
-            map.getLayer("ESFeatures").clear();
-            map.getLayer("ESAggregations").clear();
-            var layer = map.getLayer("ESFeatures");
+            });
+
+            _map.getLayer(_featureLayerName).clear();
+            _map.getLayer(_aggregationLayerName).clear();
+            var layer = _map.getLayer(_featureLayerName);
             layer.applyEdits(features, null, null)
               .then(function () {
                 layer.refresh();
@@ -283,80 +313,80 @@
         });
     }
 
-    //
-    //Get Aggregations from ES
-    //
-    function getESAggregations(level, extent) {
-      if (timePara == null) {
+    // get aggregations from the ES index, and update/refresh the active layer
+    function updateActiveLayer(level, extent) {
+      if (_timeExtent == null) {
         getTimeRange();
       }
-      var coords = webMercatorUtils.webMercatorToGeographic(extent),
-        startT = timePara.startTime.getTime(),
-        endT = timePara.endTime.getTime(),
-        prec, labelSize = 10;
 
-      if (!hm) {
+      var coords = webMercatorUtils.webMercatorToGeographic(extent);
+      var startTime = _timeExtent.startTime.getTime();
+      var endTime = _timeExtent.endTime.getTime();
+      var snapToPrecision = 1;
+      var labelSize = 10;
+
+      if (!_renderHeatMapLayer) {
         if (level <= 2) {
-          prec = 2
-          labelSize = 4
+          snapToPrecision = 2;
+          labelSize = 4;
         } else if (level > 2 && level <= 5) {
-          prec = 3
-          if (level == 3 || level == 4) {
-            labelSize = 4
+          snapToPrecision = 3;
+          if (level === 3 || level === 4) {
+            labelSize = 4;
           }
         } else if (level > 5 && level <= 8) {
-          prec = 4
-          if (level == 6) {
-            labelSize = 4
+          snapToPrecision = 4;
+          if (level === 6) {
+            labelSize = 4;
           }
         } else if (level > 8 && level <= 11) {
-          prec = 5
-          if (level == 9) {
-            labelSize = 4
+          snapToPrecision = 5;
+          if (level === 9) {
+            labelSize = 4;
           }
         } else if (level > 11 && level <= 13) {
-          prec = 6
+          snapToPrecision = 6;
         } else if (level > 13 && level <= 15) {
-          prec = 7
-          if (level == 14) {
-            labelSize = 4
+          snapToPrecision = 7;
+          if (level === 14) {
+            labelSize = 4;
           }
         } else if (level > 15) {
-          prec = 8
-          if (level == 16) {
-            labelSize = 4
+          snapToPrecision = 8;
+          if (level === 16) {
+            labelSize = 4;
           }
         }
       } else {
         if (level <= 2) {
-          prec = 2 //datebase query
+          snapToPrecision = 2;
         } else if (level > 2 && level <= 5) {
-          prec = 3
+          snapToPrecision = 3;
         } else if (level > 5 && level <= 8) {
-          prec = 4
+          snapToPrecision = 4;
         } else if (level > 8 && level <= 9) {
-          prec = 5
+          snapToPrecision = 5;
         } else if (level > 9 && level <= 11) {
-          prec = 6
+          snapToPrecision = 6;
         } else if (level > 11 && level <= 14) {
-          prec = 7
+          snapToPrecision = 7;
         } else if (level > 14) {
-          prec = 8
+          snapToPrecision = 8;
         }
       }
 
-      //ES Client Request
-      client.search({
-          index: index,
-          type: type,
+      // ES Client Request
+      _esClient.search({
+          index: _esIndex,
+          type: _esType,
           body: {
             query: {
               constant_score: {
                 filter: {
                   range: {
                     observationTime: {
-                      from: startT,
-                      to: endT
+                      from: startTime,
+                      to: endTime
                     }
                   }
                 }
@@ -382,7 +412,7 @@
                   geohash: {
                     geohash_grid: {
                       field: "geometry",
-                      precision: prec,
+                      precision: snapToPrecision
                     }
                   }
                 }
@@ -394,52 +424,61 @@
           if (error) {
             console.log(error)
           } else {
-            //Create features from response JSON & Add them to the layer
-            var count = [],
-              features = array.map(response.aggregations.zoomedInView.geohash.buckets, function (feature, i) {
-                var newFeature = {},
-                  geometry,
-                  attributes = {};
-                count.push(feature.doc_count)
-                attributes.Count = feature.doc_count;
-                attributes.Label = abbreviateNumber(feature.doc_count).toString()
-                attributes.GeoHash_ID = feature.key;
-                var coords = decodeGeoHash(feature.key);
-                if (hm) {
-                  geometry = new Point(coords.longitude[2], coords.latitude[2], new SpatialReference(4326));
-                } else {
-                  geometry = Polygon.fromExtent(new Extent(coords.longitude[0], coords.latitude[0], coords.longitude[1], coords.latitude[1], new SpatialReference(4326)));
-                }
-                var newFeature = new Graphic(geometry, null, attributes, null);
-                return newFeature;
-              })
-            var totalCount = response.aggregations.zoomedInView.doc_count,
-              maxValue = Math.max.apply(null, count),
-              minValue = Math.min.apply(null, count);
-            if (totalCount <= featureThreshold && !hm) {
-              getESFeatures(map.extent)
+            // create features from response JSON and add them to the layer
+            var count = [];
+            var features = array.map(response.aggregations.zoomedInView.geohash.buckets, function (feature, i) {
+              count.push(feature.doc_count);
+
+              var attributes = {};
+              attributes.Count = feature.doc_count;
+              attributes.Label = abbreviateNumber(feature.doc_count).toString()
+              attributes.GeoHash_ID = feature.key;
+
+              var geometry;
+              var coords = decodeGeoHash(feature.key);
+              if (_renderHeatMapLayer) {
+                geometry = new Point(coords.longitude[2], coords.latitude[2], new SpatialReference(4326));
+              } else {
+                geometry = Polygon.fromExtent(new Extent(coords.longitude[0], coords.latitude[0], coords.longitude[1], coords.latitude[1], new SpatialReference(4326)));
+              }
+
+              var newFeature = new Graphic(geometry, null, attributes, null);
+              return newFeature;
+            });
+
+            var totalCount = response.aggregations.zoomedInView.doc_count;
+            var maxValue = Math.max.apply(null, count);
+            var minValue = Math.min.apply(null, count);
+
+            if (totalCount <= _featureThreshold && !_renderHeatMapLayer) {
+              // update the feature layer
+              updateFeatureLayer(_map.extent);
             } else {
-              if (hm) {
-                var layer = map.getLayer("heatmap");
-                if (!replay) {
+              // update the aggregation or the heatmap layer
+              var layer;
+              if (_renderHeatMapLayer) {
+                // update the heatmap layer
+                layer = _map.getLayer(_heatmapLayerName);
+                if (!_replay) {
                   layer.renderer.setMinPixelIntensity(minValue);
                   layer.renderer.setMaxPixelIntensity(maxValue);
                 }
               } else {
-                var layer = map.getLayer("ESAggregations");
-                layer.renderer.normalizationTotal = maxValue
-                layer.labelingInfo[0].symbol.font.size = labelSize
+                // update the aggregation layer
+                layer = _map.getLayer(_aggregationLayerName);
+                layer.renderer.normalizationTotal = maxValue;
+                layer.labelingInfo[0].symbol.font.size = labelSize;
               }
 
-              map.getLayer("ESFeatures").clear();
-              map.getLayer("ESAggregations").clear();
-              map.getLayer("heatmap").clear();
+              _map.getLayer(_featureLayerName).clear();
+              _map.getLayer(_aggregationLayerName).clear();
+              _map.getLayer(_heatmapLayerName).clear();
 
               layer.applyEdits(features, null, null)
                 .then(function () {
                   layer.refresh();
-                  if (initRun) {
-                    initRun = false
+                  if (_initRun) {
+                    _initRun = false;
                   }
                 })
             }
@@ -447,13 +486,7 @@
         })
     }
 
-    //
-    //#############################################################################################
-    //Adding Layers
-    //#############################################################################################
-    //
-    //Add ES Feature Layer
-    //
+    // add ES Feature Layer
     function addESFeatureLayer() {
       var layerDefinition = {
         "geometryType": "esriGeometryPoint",
@@ -474,28 +507,31 @@
           "type": "esriFieldTypeGeometry",
           "alias": "geometry"
         }]
-      }
+      };
+
       var featureCollection = {
         layerDefinition: layerDefinition,
         featureSet: null
       };
+
       var infoTemplate = new InfoTemplate("Attributes", "${*}");
 
-      ESFeatureLayer = new FeatureLayer(featureCollection, {
-        id: "ESFeatures",
+      var esFeatureLayer = new FeatureLayer(featureCollection, {
+        id: _featureLayerName,
         objectIdField: "taxiId",
         visible: true,
         opacity: 1,
         infoTemplate: infoTemplate
       });
-      ESFeatureLayer.setRenderer(createRenderer("Feature"));
-      map.addLayer(ESFeatureLayer);
+
+      esFeatureLayer.setRenderer(createRenderer(_featureLayerName));
+
+      _map.addLayer(esFeatureLayer);
+
       console.log("Client ES Feature Layer added");
     }
 
-    //
-    // Add Aggregation Layer
-    //
+    // add Aggregation Layer
     function addAggregationLayer() {
       var layerDefinition = {
         "geometryType": "esriGeometryPolygon",
@@ -516,30 +552,34 @@
           "type": "esriFieldTypeGeometry",
           "alias": "Geometry"
         }]
-      }
+      };
+
       var featureCollection = {
         layerDefinition: layerDefinition,
         featureSet: null
       };
+
       var infoTemplate = new InfoTemplate("Attributes", "${*}");
 
-      ESAggregationLayer = new FeatureLayer(featureCollection, {
-        id: "ESAggregations",
+      var aggregationLayer = new FeatureLayer(featureCollection, {
+        id: _aggregationLayerName,
         objectIdField: "GeoHash_ID",
         showLabels: true,
         infoTemplate: infoTemplate,
         outFields: ["*"]
       });
-      ESAggregationLayer.setRenderer(createRenderer("Aggregation"));
-      var label = createRenderer("Label")
-      ESAggregationLayer.setLabelingInfo([label]);
-      map.addLayer(ESAggregationLayer);
+
+      aggregationLayer.setRenderer(createRenderer(_aggregationLayerName));
+
+      var labelingInfo = createLabelingInfo();
+      aggregationLayer.setLabelingInfo(labelingInfo);
+
+      _map.addLayer(aggregationLayer);
+
       console.log("Client ES Aggregation Layer added");
     }
 
-    //
-    //Add feature layer for heat map
-    //
+    // add feature layer for heat map
     function addHeatmapLayer() {
       var layerDefinition = {
         "geometryType": "esriGeometryPoint",
@@ -561,91 +601,80 @@
           "alias": "Geometry"
         }]
       };
+
       var featureCollection = {
         layerDefinition: layerDefinition,
         featureSet: null
       };
+
       var heatmapLayer = new FeatureLayer(featureCollection, {
-        id: "heatmap",
+        id: _heatmapLayerName,
         objectIdField: "objectid",
         visible: true,
         opacity: 1
       });
-      heatmapLayer.setRenderer(createRenderer("Heatmap"));
-      map.addLayer(heatmapLayer);
-      heatmapLayer.suspend()
+
+      heatmapLayer.setRenderer(createRenderer(_heatmapLayerName));
+
+      _map.addLayer(heatmapLayer);
+      heatmapLayer.suspend();
+
       console.log("Client heatmap layer added");
-    };
-    //
-    //#############################################################################################
-    //Create Renderer or Labels
-    //#############################################################################################
-    //
-    function createRenderer(type) {
+    }
 
-      //Aggregation Layer
-      if (type == "Aggregation") {
-        //Define default symbol
-        var symbol = new SimpleFillSymbol();
-        symbol.setColor(new Color([150, 150, 150, 0.3]))
-          .setOutline(new SimpleLineSymbol().setColor(new Color("white")).setWidth(0.3));
+    function createRenderer(rendererType) {
+      if (rendererType === _aggregationLayerName) {
+        var defaultSymbol = new SimpleFillSymbol();
+        defaultSymbol.setColor(new Color([150, 150, 150, 0.3]));
+        defaultSymbol.setOutline(new SimpleLineSymbol().setColor(new Color("white")).setWidth(0.3));
 
-        //Function to create symbol for breaks with a given color
-        function createSymbol(color) {
+        // internal function to create fill symbol for breaks with a given fill color
+        function createFillSymbol(fillColor) {
           return new SimpleFillSymbol()
-            .setColor(color)
-            .setOutline(
-              new SimpleLineSymbol().setColor(new Color([255, 255, 255])).setWidth(0.4)
-            );
+            .setColor(fillColor)
+            .setOutline(new SimpleLineSymbol().setColor(new Color([255, 255, 255])).setWidth(0.4));
         }
 
-        classColorInfo = []
-
-        //Define breaks and color
         var renderer = new ClassBreaksRenderer({
           field: "Count",
-          defaultSymbol: symbol,
+          defaultSymbol: defaultSymbol,
           normalizationType: "percent-of-total",
           normalizationTotal: 79,
           classBreakInfos: [
             {
               minValue: 0,
               maxValue: 5,
-              symbol: createSymbol(new Color([255, 255, 178, 0.8]))
+              symbol: createFillSymbol(new Color([255, 255, 178, 0.8]))
             },
             {
               minValue: 5,
               maxValue: 10,
-              symbol: createSymbol(new Color([254, 204, 92, 0.8]))
+              symbol: createFillSymbol(new Color([254, 204, 92, 0.8]))
             },
             {
               minValue: 10,
               maxValue: 20,
-              symbol: createSymbol(new Color([253, 141, 60, 0.7]))
+              symbol: createFillSymbol(new Color([253, 141, 60, 0.7]))
             },
             {
               minValue: 20,
               maxValue: 40,
-              symbol: createSymbol(new Color([240, 59, 32, 0.7]))
+              symbol: createFillSymbol(new Color([240, 59, 32, 0.7]))
             },
             {
               minValue: 40,
               maxValue: 100,
-              symbol: createSymbol(new Color([189, 0, 38, 0.7]))
+              symbol: createFillSymbol(new Color([189, 0, 38, 0.7]))
             }]
         });
 
-        //Feature Layer
-      } else if (type == "Feature") {
-        var renderer = new SimpleRenderer(
-          new SimpleMarkerSymbol("circle", 8,
-            new SimpleLineSymbol("solid",
-              new Color([0, 0, 0, 1]), 1),
-            new Color([5, 115, 175])
-          ));
+      } else if (rendererType === _featureLayerName) {
+        // feature layer
+        var outlineSymbol = new SimpleLineSymbol("solid", new Color([0, 0, 0, 1]), 1);
+        var sms = new SimpleMarkerSymbol("circle",8, outlineSymbol, new Color([5, 115, 175]));
+        var renderer = new SimpleRenderer(sms);
 
-        //Heatmap
-      } else if (type == "Heatmap") {
+      } else if (rendererType === _heatmapLayerName) {
         var renderer = new HeatmapRenderer({
           colorStops: [
             {
@@ -691,31 +720,32 @@
           blurRadius: 8,
           field: "Count"
         });
-      } else if (type == "Label") {
-        //Add Labels
-        //create a text symbol and renderer to define the style of labels
-        var labelJson = {
-          "labelExpressionInfo": {
-            "value": "{Label}"
-          },
-          "labelPlacement": "always-horizontal"
-        };
-        var lc = new LabelClass(labelJson);
-        var gridLabel = new TextSymbol().setColor(new Color([0, 0, 0]));
-        gridLabel.font.setSize("8pt");
-        gridLabel.font.setFamily("arial");
-        lc.symbol = gridLabel
-        var renderer = lc
       }
-      return renderer
+
+      return renderer;
     }
 
-    //#############################################################################################
-    //Other Functions
-    //#############################################################################################
-    //
-    //Shorten Labels
-    //
+    function createLabelingInfo() {
+      // create a text symbol and renderer to define the style of labels
+      var labelJson = {
+        "labelExpressionInfo": {
+          "value": "{Label}"
+        },
+        "labelPlacement": "always-horizontal"
+      };
+
+      var gridLabel = new TextSymbol().setColor(new Color([0, 0, 0]));
+      gridLabel.font.setSize("8pt");
+      gridLabel.font.setFamily("arial");
+
+      var labelClass = new LabelClass(labelJson);
+      labelClass.symbol = gridLabel;
+
+      var labelingInfo = [labelClass];
+      return labelingInfo;
+    }
+
+    // shorten labels
     function abbreviateNumber(value) {
       var newValue = value;
       if (value >= 1000) {
@@ -729,105 +759,116 @@
             break;
           }
         }
-        if (shortValue % 1 != 0) shortNum = shortValue.toFixed(1);
+
+        if (shortValue % 1 != 0)
+          shortNum = shortValue.toFixed(1);
+
         newValue = shortValue + suffixes[suffixNum];
       }
+
       return newValue;
     }
 
-    //
-    //Init the basemap gallery
-    //
     function initBasemapGallery() {
       var basemapGallery = new BasemapGallery({
         showArcGISBasemaps: true,
-        map: map
+        map: _map
       }, "basemapGallery");
+
       basemapGallery.startup();
 
       basemapGallery.on("error", function (err) {
         console.log("Error initiating basemapgallery:  ", err);
       });
-    };
-    //
-    //TimeSlider (init & update incl. labels)
-    //
+    }
+
     function initTimeSlider() {
       timeSlider = new TimeSlider({
         style: "width: 100%;"
       }, dom.byId("timeSlider"));
-      map.setTimeSlider(timeSlider);
+
+      _map.setTimeSlider(timeSlider);
+
       timeSlider.setThumbCount(2);
-      timeSlider.createTimeStopsByCount(timePara, 21);
+      timeSlider.createTimeStopsByCount(_timeExtent, 21);
       timeSlider.setThumbIndexes([0, 21]);
       timeSlider.setThumbMovingRate(1000);
       timeSlider.startup();
+
       timeSlider.on("time-extent-change", function () {
-        timePara = timeSlider.getCurrentTimeExtent();
-        getESAggregations(map.getLevel(), map.extent);
-      })
-      //add labels for every other time stop
-      var labels = createLabels()
+        _timeExtent = timeSlider.getCurrentTimeExtent();
+        updateActiveLayer(_map.getLevel(), _map.extent);
+      });
+
+      // add labels for every other time stop
+      var labels = createLabels();
       timeSlider.setLabels(labels);
     }
 
     function updateTimeSlider() {
-      if (timePara == null) {
+      if (_timeExtent == null) {
         getTimeRange();
       }
-      timeSlider.createTimeStopsByCount(timePara, 21);
+
+      timeSlider.createTimeStopsByCount(_timeExtent, 21);
       timeSlider.setThumbIndexes([0, 21]);
       timeSlider.startup();
-      map.setTimeSlider(timeSlider);
-      //add labels for every other time stop
+
+      _map.setTimeSlider(timeSlider);
+
+      // add labels for every other time stop
       var labels = createLabels()
       timeSlider.setLabels(labels);
     }
 
-    //Timeslider labels
+    // time slider labels
     function createLabels() {
+      var seconds;
       var labels = array.map(timeSlider.timeStops, function (timeStop, i) {
         if (i % 2 === 0) {
+          var hours;
           if (timeStop.getHours() < 10) {
-            var hours = "0" + timeStop.getHours()
+            hours = "0" + timeStop.getHours();
           } else {
-            var hours = timeStop.getHours()
+            hours = timeStop.getHours();
           }
-          ;
+
+          var minutes;
           if (timeStop.getMinutes() < 10) {
-            var minutes = "0" + timeStop.getMinutes()
+            minutes = "0" + timeStop.getMinutes();
           } else {
-            var minutes = timeStop.getMinutes()
+            minutes = timeStop.getMinutes();
           }
-          ;
+
+          var seconds;
           if (timeStop.getSeconds() < 10) {
-            var seconds = "0" + timeStop.getSeconds()
+            seconds = "0" + timeStop.getSeconds()
           } else {
-            var seconds = timeStop.getSeconds()
+            seconds = timeStop.getSeconds()
           }
-          ;
+
           var month = timeStop.getMonth() + 1;
           var day = timeStop.getDate();
+
           //return hours + ":" + minutes;
           return month + "/" + day + "<br>" + hours + ":" + minutes + ":" + seconds;
         } else {
           return "";
         }
-      })
+      });
+
       return labels
     }
 
-    //
-    //Auto Refresh Layers
-    //
+    // auto refresh layers
     function autoUpdate() {
-      if (refreshInterval != 0) {
+      if (_refreshInterval !== 0) {
         setInterval(function () {
-          if (!replay) {
-            getESAggregations(map.getLevel(), currentExtent);
-            console.log("Refresh")
+          if (!_replay) {
+            updateActiveLayer(_map.getLevel(), _mapExtent);
+            console.log("refresh");
           }
-        }, refreshInterval)
+        }, _refreshInterval)
       }
     }
   });

@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.esri.dcos-demo</groupId>
-  <artifactId>dcos-demo-parent</artifactId>
+  <artifactId>map-webapp-parent</artifactId>
   <version>1.0.0</version>
 
   <packaging>pom</packaging>

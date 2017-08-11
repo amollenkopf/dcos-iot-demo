@@ -3,13 +3,9 @@
 
   <modelVersion>4.0.0</modelVersion>
 
-  <parent>
-    <groupId>com.esri.dcos-demo</groupId>
-    <artifactId>dcos-demo-parent</artifactId>
-    <version>1.0.0</version>
-  </parent>
-
-  <artifactId>dcos-demo-docker</artifactId>
+  <groupId>com.esri.dcos-demo</groupId>
+  <artifactId>docker</artifactId>
+  <version>1.0.0</version>
 
   <properties>
     <windows.default.dockerHost>tcp://192.168.99.100:2376</windows.default.dockerHost>
@@ -18,9 +14,11 @@
     <docker.namespace>hanoch</docker.namespace>
     <docker.repository>dcos-iot-demo</docker.repository>
     <docker.image.name>${docker.namespace}/${docker.repository}</docker.image.name>
+
     <webapp.artifactId>webapp</webapp.artifactId>
     <webapp.finalname>${webapp.artifactId}-${project.version}</webapp.finalname>
     <webapp.playapp.zip.path>/maven/${webapp.artifactId}/${webapp.finalname}-playapp.zip</webapp.playapp.zip.path>
+
     <webapp.http.port>9000</webapp.http.port>
     <webapp.https.port>9443</webapp.https.port>
   </properties>
