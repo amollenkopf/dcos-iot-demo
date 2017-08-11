@@ -1,0 +1,113 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.esri.dcos-demo</groupId>
+    <artifactId>dcos-demo-parent</artifactId>
+    <version>1.0.0</version>
+  </parent>
+
+  <artifactId>dcos-demo-docker</artifactId>
+
+  <properties>
+    <windows.default.dockerHost>tcp://192.168.99.100:2376</windows.default.dockerHost>
+    <windows.default.dockerCertPath>${user.home}/.docker/machine/certs</windows.default.dockerCertPath>
+
+    <docker.namespace>hanoch</docker.namespace>
+    <docker.repository>dcos-iot-demo</docker.repository>
+    <docker.image.name>${docker.namespace}/${docker.repository}</docker.image.name>
+    <webapp.artifactId>webapp</webapp.artifactId>
+    <webapp.finalname>${webapp.artifactId}-${project.version}</webapp.finalname>
+    <webapp.playapp.zip.path>/maven/${webapp.artifactId}/${webapp.finalname}-playapp.zip</webapp.playapp.zip.path>
+    <webapp.http.port>9000</webapp.http.port>
+    <webapp.https.port>9443</webapp.https.port>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.esri.dcos-demo</groupId>
+      <artifactId>webapp</artifactId>
+      <classifier>playapp</classifier>
+      <type>zip</type>
+      <version>${project.version}</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>io.fabric8</groupId>
+        <artifactId>docker-maven-plugin</artifactId>
+        <version>0.21.0</version>
+        <configuration>
+          <logDate>default</logDate>
+          <autoPull>true</autoPull>
+          <verbose>true</verbose>
+          <images>
+            <image>
+              <alias>proxy</alias>
+              <name>${docker.image.name}</name>
+              <build>
+                <from>centos:7</from>
+                <assembly>
+                  <mode>dir</mode>
+                  <descriptor>assembly.xml</descriptor>
+                </assembly>
+                <runCmds>
+                  <runCmd>yum install -y unzip</runCmd>
+                  <runCmd>yum install -y java-1.8.0-openjdk.x86_64</runCmd>
+                  <runCmd>yum install -y openssl</runCmd>
+                  <runCmd>unzip -o ${webapp.playapp.zip.path} -d /</runCmd>
+                  <runCmd>chmod 777 /${webapp.finalname}</runCmd>
+                  <runCmd>rm -rf /maven</runCmd>
+                </runCmds>
+                <ports>
+                  <port>${webapp.http.port}</port>
+                  <port>${webapp.https.port}</port>
+                </ports>
+                <entryPoint>
+                  <shell>/${webapp.finalname}/conf/configure-https.sh /${webapp.finalname} ${webapp.http.port} ${webapp.https.port}</shell>
+                </entryPoint>
+              </build>
+            </image>
+          </images>
+        </configuration>
+        <executions>
+          <execution>
+            <id>create-images</id>
+            <phase>package</phase>
+            <goals>
+              <goal>build</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <profiles>
+    <profile>
+      <id>windows</id>
+      <activation>
+        <os>
+          <family>windows</family>
+        </os>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>io.fabric8</groupId>
+            <artifactId>docker-maven-plugin</artifactId>
+            <configuration>
+              <dockerHost>${windows.default.dockerHost}</dockerHost>
+              <certPath>${windows.default.dockerCertPath}</certPath>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
+</project>

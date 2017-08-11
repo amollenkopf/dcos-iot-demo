@@ -1,0 +1,67 @@
+{
+  "id": "/map-webapp",
+  "instances": 1,
+  "cpus": 2,
+  "mem": 4096,
+  "disk": 0,
+  "gpus": 0,
+  "constraints": [],
+  "storeUrls": [],
+  "backoffSeconds": 1,
+  "backoffFactor": 1.15,
+  "maxLaunchDelaySeconds": 3600,
+  "container": {
+    "type": "DOCKER",
+    "volumes": [],
+    "docker": {
+      "image": "hanoch/dcos-iot-demo:latest",
+      "network": "BRIDGE",
+      "portMappings": [
+        {
+          "containerPort": 9000,
+          "hostPort": 80,
+          "servicePort": 80,
+          "protocol": "tcp",
+          "name": "default"
+        },
+        {
+          "containerPort": 9443,
+          "hostPort": 443,
+          "servicePort": 443,
+          "protocol": "tcp"
+        }
+      ],
+      "privileged": false,
+      "parameters": [],
+      "forcePullImage": true
+    }
+  },
+  "healthChecks": [
+    {
+      "gracePeriodSeconds": 300,
+      "intervalSeconds": 60,
+      "timeoutSeconds": 20,
+      "maxConsecutiveFailures": 3,
+      "portIndex": 0,
+      "path": "/healthcheck",
+      "protocol": "MESOS_HTTP",
+      "delaySeconds": 15
+    }
+  ],
+  "readinessChecks": [],
+  "dependencies": [],
+  "upgradeStrategy": {
+    "minimumHealthCapacity": 1,
+    "maximumOverCapacity": 1
+  },
+  "unreachableStrategy": {
+    "inactiveAfterSeconds": 300,
+    "expungeAfterSeconds": 600
+  },
+  "killSelection": "YOUNGEST_FIRST",
+  "acceptedResourceRoles": [
+    "slave_public"
+  ],
+  "requirePorts": true,
+  "env": { }
+}

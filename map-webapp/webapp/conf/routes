@@ -1,0 +1,25 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# MAP JS APP
+GET     /map/*file         controllers.ProxyExternalAssets.at(path="conf/map", file)
+
+# Home page
+GET     /                  controllers.ProxyController.proxyGet(appId:String="", path:String="" )
+GET     /healthcheck       controllers.HealthCheckController.healthcheck
+GET     /:appId            controllers.ProxyController.proxyGet(appId:String, path:String="" )
+GET     /:appId/           controllers.ProxyController.proxyGet(appId:String, path:String="" )
+GET     /:appId/*path      controllers.ProxyController.proxyGet(appId:String, path:String )
+
+POST    /:appId/           controllers.ProxyController.proxyPost(appId:String, path:String="" )
+POST    /:appId/*path      controllers.ProxyController.proxyPost(appId:String, path:String )
+
+PUT     /:appId/           controllers.ProxyController.proxyPut(appId:String, path:String="" )
+PUT     /:appId/*path      controllers.ProxyController.proxyPut(appId:String, path:String )
+
+DELETE  /:appId/           controllers.ProxyController.proxyDelete(appId:String, path:String="" )
+DELETE  /:appId/*path      controllers.ProxyController.proxyDelete(appId:String, path:String )
+
+OPTIONS /                  controllers.CORSController.rootOptions
+OPTIONS /*url              controllers.CORSController.options(url: String)
