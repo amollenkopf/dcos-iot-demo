@@ -36,6 +36,7 @@
       "forcePullImage": true
     }
   },
+  "cmd": "./webapp-1.0.0/conf/configure-https.sh /webapp-1.0.0 9000 9443",
   "healthChecks": [
     {
       "gracePeriodSeconds": 300,

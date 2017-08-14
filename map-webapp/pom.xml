@@ -4,15 +4,140 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.esri.dcos-demo</groupId>
-  <artifactId>map-webapp-parent</artifactId>
+  <groupId>org.cam.dcos.iot.demo</groupId>
+  <artifactId>webapp</artifactId>
   <version>1.0.0</version>
 
-  <packaging>pom</packaging>
+  <packaging>jar</packaging>
 
-  <modules>
-    <module>docker</module>
-    <module>webapp</module>
-  </modules>
+  <properties>
+    <play2.version>2.5.9</play2.version>
+  </properties>
+
+  <build>
+    <resources>
+      <resource>
+        <directory>${project.basedir}/conf</directory>
+      </resource>
+    </resources>
+
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>clean-sbt-files</id>
+            <phase>clean</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <target>
+                <delete includeEmptyDirs="true">
+                  <fileset dir="${project.basedir}/project/project" erroronmissingdir="false"/>
+                  <fileset dir="${project.basedir}/project/target" erroronmissingdir="false"/>
+                  <fileset dir="${project.basedir}/logs" erroronmissingdir="false"/>
+                  <fileset dir="${project.build.directory}" erroronmissingdir="false"/>
+                </delete>
+              </target>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>com.google.code.sbtrun-maven-plugin</groupId>
+        <artifactId>sbtrun-maven-plugin</artifactId>
+        <version>1.0.0-beta3</version>
+      </plugin>
+
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <version>1.8</version>
+        <executions>
+          <execution>
+            <id>install-playapp-dist</id>
+            <phase>package</phase>
+            <goals>
+              <goal>attach-artifact</goal>
+            </goals>
+            <configuration>
+              <artifacts>
+                <artifact>
+                  <file>${project.build.directory}/universal/${project.build.finalName}.zip</file>
+                  <classifier>playapp</classifier>
+                  <type>zip</type>
+                </artifact>
+              </artifacts>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <profiles>
+    <profile>
+      <id>run-sbt-dist</id>
+      <activation>
+        <property>
+          <name>skipTests</name>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>com.google.code.sbtrun-maven-plugin</groupId>
+            <artifactId>sbtrun-maven-plugin</artifactId>
+            <version>1.0.0-beta3</version>
+            <executions>
+              <execution>
+                <id>create-play-dist</id>
+                <phase>compile</phase>
+                <goals>
+                  <goal>run</goal>
+                </goals>
+                <configuration>
+                  <args>dist</args>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <profile>
+      <id>run-sbt-test</id>
+      <activation>
+        <property>
+          <name>!skipTests</name>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>com.google.code.sbtrun-maven-plugin</groupId>
+            <artifactId>sbtrun-maven-plugin</artifactId>
+            <version>1.0.0-beta3</version>
+            <executions>
+              <execution>
+                <id>test-playapp</id>
+                <phase>test</phase>
+                <goals>
+                  <goal>run</goal>
+                </goals>
+                <configuration>
+                  <args>test dist</args>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 
 </project>
