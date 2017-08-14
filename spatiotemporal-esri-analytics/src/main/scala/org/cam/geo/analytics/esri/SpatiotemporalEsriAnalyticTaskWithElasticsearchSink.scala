@@ -18,7 +18,7 @@ object SpatiotemporalEsriAnalyticTaskWithElasticsearchSink {
 
   def main(args: Array[String]) {
     if (args.length < 9) {
-      System.err.println("Usage: EsriSpatiotemporalAnalyticTask <zkQuorum> <topic> <geofenceFilteringOn> <verbose> <esNode> <esClusterName> <esIndexName>")
+      System.err.println("Usage: SpatiotemporalEsriAnalyticTaskWithElasticsearchSink <zkQuorum> <topic> <geofenceFilteringOn> <verbose> <esNode> <esClusterName> <esIndexName>")
       System.err.println("          zkQuorum(s): the zookeeper url, e.g. localhost:2181")
       System.err.println("                topic: the Kafka topic name to consume from, e.g. taxi03")
       System.err.println("  geofenceFilteringOn: indicates whether or not to apply a geofence filter, e.g. false")
