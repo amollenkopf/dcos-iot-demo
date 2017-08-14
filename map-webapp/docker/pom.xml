@@ -3,16 +3,13 @@
 
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.esri.dcos-demo</groupId>
+  <groupId>org.cam.dcos.iot.demo</groupId>
   <artifactId>docker</artifactId>
   <version>1.0.0</version>
 
   <properties>
-    <windows.default.dockerHost>tcp://192.168.99.100:2376</windows.default.dockerHost>
-    <windows.default.dockerCertPath>${user.home}/.docker/machine/certs</windows.default.dockerCertPath>
-
-    <docker.namespace>hanoch</docker.namespace>
-    <docker.repository>dcos-iot-demo</docker.repository>
+    <docker.namespace>amollenkopf</docker.namespace>
+    <docker.repository>dcos-iot-demo-map-webapp</docker.repository>
     <docker.image.name>${docker.namespace}/${docker.repository}</docker.image.name>
 
     <webapp.artifactId>webapp</webapp.artifactId>
@@ -25,7 +22,7 @@
 
   <dependencies>
     <dependency>
-      <groupId>com.esri.dcos-demo</groupId>
+      <groupId>org.cam.dcos.iot.demo</groupId>
       <artifactId>webapp</artifactId>
       <classifier>playapp</classifier>
       <type>zip</type>
@@ -84,28 +81,5 @@
       </plugin>
     </plugins>
   </build>
-
-  <profiles>
-    <profile>
-      <id>windows</id>
-      <activation>
-        <os>
-          <family>windows</family>
-        </os>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>io.fabric8</groupId>
-            <artifactId>docker-maven-plugin</artifactId>
-            <configuration>
-              <dockerHost>${windows.default.dockerHost}</dockerHost>
-              <certPath>${windows.default.dockerCertPath}</certPath>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
 
 </project>

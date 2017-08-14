@@ -4,7 +4,7 @@
      <dependencySets>
           <dependencySet>
                <includes>
-                    <include>com.esri.dcos-demo:webapp</include>
+                    <include>org.cam.dcos.iot.demo:webapp</include>
                </includes>
                <outputDirectory>/webapp/</outputDirectory>
            </dependencySet>

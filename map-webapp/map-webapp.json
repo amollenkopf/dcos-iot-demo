@@ -14,7 +14,7 @@
     "type": "DOCKER",
     "volumes": [],
     "docker": {
-      "image": "hanoch/dcos-iot-demo:latest",
+      "image": "amollenkopf/dcos-iot-demo-map-webapp:latest",
       "network": "BRIDGE",
       "portMappings": [
         {
