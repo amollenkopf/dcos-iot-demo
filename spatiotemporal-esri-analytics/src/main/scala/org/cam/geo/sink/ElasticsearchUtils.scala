@@ -75,6 +75,7 @@ object ElasticsearchUtils {
       httpPut.setHeader(HttpHeaders.CONTENT_TYPE, "application/json")
       httpPut.setHeader("charset", "utf-8")
       val createMappingRequest = createMappingJsonAsStr(dataSourceNameToLowercase, fields, shards, replicas)
+      println(createMappingRequest) //TODO: remove
       httpPut.setEntity(new StringEntity(createMappingRequest, ContentType.APPLICATION_JSON))
 
       // execute
@@ -169,10 +170,7 @@ object ElasticsearchUtils {
         case EsFieldType.GeoPoint =>
           s"""
             "${field.name}": {
-              "type": "geo_point",
-              "lat_lon": "true",
-              "geohash": "true",
-              "geohash_prefix": "true"
+              "type": "geo_point"
             }
           """.stripMargin
         case EsFieldType.GeoShape =>

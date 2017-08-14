@@ -2,7 +2,7 @@
   "uris": [
     "https://s3-us-west-1.amazonaws.com/dcos-iot-demo/spatiotemporal-esri-analytic-task-assembly-1.1.jar"
   ],
-  "cmd": "/opt/spark/dist/bin/spark-submit --master mesos://leader.mesos:5050 --executor-memory 1g --executor-cores 2 --conf spark.mesos.coarse=true --conf spark.cores.max=4 --conf spark.mesos.executor.docker.image=mesosphere/spark:1.1.1-2.2.0-hadoop-2.7 --class org.cam.geo.analytics.esri.SpatiotemporalEsriAnalyticTaskWithElasticsearchSink $MESOS_SANDBOX/spatiotemporal-esri-analytic-task-assembly-1.0.jar master.mesos:2181/dcos-service-kafka taxi false true coordinator.elastic.l4lb.thisdcos.directory:9200 elastic taxi elastic changeme",
+  "cmd": "/opt/spark/dist/bin/spark-submit --master mesos://leader.mesos:5050 --conf spark.executor.memory=1g --conf spark.executor.cores=2 --conf spark.cores.max=6 --conf spark.mesos.executor.docker.image=mesosphere/spark:1.1.1-2.2.0-hadoop-2.7 --conf spark.ui.enabled=false --conf spark.ui.showConsoleProgress=false --conf spark.mesos.coarse=true --class org.cam.geo.analytics.esri.SpatiotemporalEsriAnalyticTaskWithElasticsearchSink $MESOS_SANDBOX/spatiotemporal-esri-analytic-task-assembly-1.1.jar master.mesos:2181/dcos-service-kafka taxi false true coordinator.elastic.l4lb.thisdcos.directory:9200 elastic taxi elastic changeme",
   "container": {
     "type": "DOCKER",
     "docker": {
@@ -11,8 +11,8 @@
     }
   },
   "id": "rat01",
-  "instances": 3,
-  "cpus": 4,
+  "instances": 1,
+  "cpus": 2,
   "mem": 2048
 }
 
