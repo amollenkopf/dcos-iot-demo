@@ -13,5 +13,5 @@ This project demonstrates how to configure a full stack geo-enabled Internet of 
 7. <a href="docs/map-setup.md">Configure the map application</a>.<br>
 8. <a href="docs/app-setup.md">Schedule a real-time analytic task & a source that emits events</a>.<br>
 
-## Other information:
+## Other topics of interest:
 1. <a href="docs/cleanup-demo.md">Applying cleanup procedures between demo runs</a>.<br>
