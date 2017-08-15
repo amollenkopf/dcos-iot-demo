@@ -1,9 +1,9 @@
 ## Architecture & Application Overview
-<img src="../images/00-overview/architecture.jpg"/>
+<img src="architecture.jpg"/>
 All components of the IoT Event Flow described below (sources, brokers, spark streaming, elasticsearch & map apps) are scheduled on DC/OS as marathon apps.
 
 ## IoT Event Flow
-<img src="../images/00-overview/iot-flow.jpg"/>
+<img src="iot-flow.jpg"/>
 Sources emit events to Kafka brokers.  Real-time Analytic Tasks (RATs) use Spark Streaming to consume events from Kafka brokers, perform spatiotemporal analytics and sink results to one or more sinks.  The spatiotemporal-store uses Elasticsearch to efficiently index observations by space, time, and all the other attributes of the event.  The JavaScript Web app periodically queries to reflect the latest state of observations on a map.
 
 ### Sources
