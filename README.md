@@ -4,14 +4,14 @@ This project demonstrates how to configure a full stack geo-enabled Internet of 
 <center><a href="https://youtu.be/tOPmPIHuV-o"><img src="images/00-overview/dcos-iot-demo-screenshot.jpg" height="75%" width="75%" ></a></center>
 
 ## To create your own DC/OS IoT demo environment:
-1. <a href="docs/overview.md">Review architecture & application overview</a><br>.
-2. Provision resources on <a href="docs/acs-setup.md">Microsoft Azure</a> or <a href="docs/amazon-setup.md">Amazon Web Services</a><br>.
-3. <a href="docs/dcos-installation.md">Install DC/OS</a><br>
-4. <a href="docs/dcos-explore.md">Explore the DC/OS and Mesos dashboards</a><br>
-5. <a href="docs/kafka-setup.md">Install Kafka & schedule brokers</a><br>
-6. <a href="docs/es-setup.md">Install Elasticsearch & schedule a cluster</a><br>
-7. <a href="docs/map-setup.md">Configure the map application</a><br>
-8. <a href="docs/app-setup.md">Schedule a real-time analytic task & a source that emits events</a><br>
+1. <a href="docs/overview.md">Review architecture & application overview</a>.<br>
+2. Provision resources on <a href="docs/acs-setup.md">Microsoft Azure</a> or <a href="docs/amazon-setup.md">Amazon Web Services</a>.<br>
+3. <a href="docs/dcos-installation.md">Install DC/OS</a>.<br>
+4. <a href="docs/dcos-explore.md">Explore the DC/OS and Mesos dashboards</a>.<br>
+5. <a href="docs/kafka-setup.md">Install Kafka & schedule brokers</a>.<br>
+6. <a href="docs/es-setup.md">Install Elasticsearch & schedule a cluster</a>.<br>
+7. <a href="docs/map-setup.md">Configure the map application</a>.<br>
+8. <a href="docs/app-setup.md">Schedule a real-time analytic task & a source that emits events</a>.<br>
 
 ## Other information:
-1. <a href="docs/cleanup-demo.md">Applying cleanup procedures between demo runs</a><br>
+1. <a href="docs/cleanup-demo.md">Applying cleanup procedures between demo runs</a>.<br>
