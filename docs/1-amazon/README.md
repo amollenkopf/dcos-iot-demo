@@ -1,4 +1,8 @@
-# Get a DC/OS cluster running on Amazon Web Services
+# Provision compute resources on Amazon Web Services
+<img src="00.jpg"/><br>
+<i>Resources for a 3 master, 30 private agent and 3 public agent (3-30-3) compute cluster.</i><br><br>
+
+
 <a href="https://mesosphere.com/">Mesosphere</a> (creator of <a href="http://mesos.apache.org/">Mesos</a> and <a href="https://dcos.io/">DC/OS</a>) has great documentation on how to establish a DC/OS cluster on Amazon that can be found <a href="https://mesosphere.com/amazon/">here</a>.<br>
 
 <b>Step 1:</b> Navigate to the <a href="http://www.mesosphere.com/amazon">Mesosphere Amazon launch page</a> and click the 'Get Started on AWS For Free' button.  Read through the 'System' and 'Software' requirements.  As a prerequisite you must have an Amazon EC2 Key Pair for the same region as your cluster. Key pairs cannot be shared across regions. The AWS key pair uses public-key cryptography to provide secure login to your AWS cluster.  If you don't already have a key pair for the region you wish to deploy a DC/OS cluster follow these <a href="amazon-keypair-setup.md">instructions</a><br>
