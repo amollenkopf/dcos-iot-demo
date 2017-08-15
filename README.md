@@ -4,7 +4,7 @@ This project demonstrates how to configure a full stack geo-enabled Internet of 
 <center><a href="https://youtu.be/tOPmPIHuV-o"><img src="docs/0-overview//dcos-iot-demo-screenshot.jpg" height="75%" width="75%" ></a></center>
 
 ## To create your own DC/OS IoT demo environment:
-1. <a href="docs/overview.md">Review the application & architecture overview</a>.<br>
+1. <a href="docs/0-overview/overview.md">Review the application & architecture overview</a>.<br>
 2. Provision resources on <a href="docs/acs-setup.md">Microsoft Azure</a> or <a href="docs/amazon-setup.md">Amazon Web Services</a>.<br>
 3. <a href="docs/dcos-installation.md">Install DC/OS</a>.<br>
 4. <a href="docs/dcos-explore.md">Explore the DC/OS and Mesos dashboards</a>.<br>
