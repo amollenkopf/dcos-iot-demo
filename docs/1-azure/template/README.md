@@ -12,7 +12,7 @@ The Azure Templates for this application were created by hand using Mesosphere's
 <img src="01.png">
 <br><br><b>Step 2:</b> Click the 'More services >' menu option on the left hand side at the very bottom to expand additional services and type 'templates' into the search box.<br>
 <img src="02.png">
-<br><br><b>Step 3:</b>Click on the 'Templates' result to open up your account's Azure Templates.  Click the '+ Add' button at the top to configure a new template.<br>
+<br><br><b>Step 3:</b>Click on the 'Templates' result to open up your account's Azure Templates.  Click the 'Add' button at the top to configure a new template.<br>
 <img src="03.png">
 <br><br><b>Step 4:</b> Name the Azure Template 'dcos', fill in a description of 'Mesosphere DC/OS compute resource provisioning azure template.' and click the 'OK' button at the bottom.<br>
 <img src="04.png">
