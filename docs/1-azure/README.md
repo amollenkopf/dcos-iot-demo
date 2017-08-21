@@ -2,12 +2,16 @@
 <img src="00.jpg"/><br>
 <i>Resources for a 3 master, 30 private agent and 3 public agent (3-30-3) compute cluster.</i><br><br>
 
-<img src="01.jpg"/><br>
-<i>Resources for a 3 master, 30 private agent and 3 public agent (3-30-3) compute cluster.</i><br><br>
+Microsoft Azure provisions a set compute resources using an Azure Template.  This section walks you through step-by-step on how to provision compute resources on Azure that will be used to form a DC/OS environment.
 
-Microsoft Azure has a capability named Azure Container Service (ACS) that allows you to choose DC/OS as the orchestrator of the virtual machines group created.  This section walks you through step-by-step on how to provision DC/OS on Azure using the Azure Container Service capability.
+<b>Pre-requisite 1:</b> <a href=""><a>Establish an Azure Account</a>.  If you are new or don't have credentials you can sign-up for Azure <a href="https://azure.microsoft.com/en-us/free/">here</a> and try it out.<br><br>
+<b>Pre-requisite 2:</b> <a href=""><a>Create an Azure Template</a> that provisions your desired compute resources.<br><br>
+<b>Pre-requisite 3:</b> <a href=""><a>Establish a SSH Key Pair</a> to securely communicate with compute resources.<br><br>
 
-<b>Step 1:</b> Login to <a href="http://portal.azure.com">portal.azure.com</a> using your Microsoft Azure credentials.  If you are new or don't have credentials you can sign-up for Azure <a href="https://azure.microsoft.com/en-us/free/">here</a> and try it out.
+<b>Step 1:</b> Login to <a href="http://portal.azure.com">portal.azure.com</a> using your Microsoft Azure credentials.<br><br>
+
+
+
 <img src="../images/01-acs-setup/acs-create-01.png"/>
 <br><br><b>Step 2:</b> Click the 'New' button in the left hand menu.
 <img src="../images/01-acs-setup/acs-create-02.png"/>
@@ -15,6 +19,12 @@ Microsoft Azure has a capability named Azure Container Service (ACS) that allows
 <img src="../images/01-acs-setup/acs-create-03.png"/>
 <br><br><b>Step 4:</b> Click the 'Azure Container Service' result that has the purple icon.
 <img src="../images/01-acs-setup/acs-create-04.png"/>
+
+
+<img src="01.jpg"/><br>
+<i>Resources for a 3 master, 30 private agent and 3 public agent (3-30-3) compute cluster.</i><br><br>
+
+
 <br><br><b>Step 5:</b> Review the 'Azure Container Service' description and click the 'Create' button.
 <img src="../images/01-acs-setup/acs-create-05.png"/>
 <br><br><b>Step 6:</b> Create a SSH key that will enable you to access the 'Azure Container Service' once it has been created.<ul><li>for more info see the <a href="https://azure.microsoft.com/en-us/documentation/articles/virtual-machines-linux-ssh-from-linux/">Azure ssh doc</a>.</li>
