@@ -2,12 +2,12 @@
 <img src="00.jpg"/><br>
 <i>Resources for a 3 master, 30 private agent and 3 public agent (3-30-3) compute cluster.</i><br><br>
 
-Microsoft Azure provisions a set compute resources using an Azure Template.  This section walks you through step-by-step on how to provision compute resources on Azure that will be used to form a DC/OS environment.
+This section walks you through step-by-step on how to provision compute resources on Azure that will be used to form a DC/OS environment.  A DC/OS environment consists of 'master' nodes that administer the DC/OS environment and schedule work to run on agents, 'private agent' nodes that have perform work and 'public agent' nodes that are accessable via the public internet.  The # of masters, # of private & public agents will vary depending on your performance & scalability requirements.  The diagram below and used throughout this documentation illustrates DC/OS environment that has 3 master, 30 private agent & 3 public agent (3-30-3) nodes.  Microsoft Azure has the ability to provision a set compute resources using an 'Azure Template'.  This repo provides an 'Azure Template' that is used to provision master & agent compute resources. 
 
 <b>Pre-requisite 1:</b><br>
 Establish an Azure Account.  If you are new or don't have credentials you can sign-up for Azure <a href="https://azure.microsoft.com/en-us/free/">here</a> and try it out.<br><br>
 <b>Pre-requisite 2:</b><br>
-<a href=""><a href="">Create an Azure Template</a> that provisions your desired compute resources.<br><br>
+<a href=""><a href="">Configure an Azure Template</a> that provisions your desired compute resources.<br><br>
 <b>Pre-requisite 3:</b><br>
 <a href=""><a href="">Establish a SSH Key Pair</a> to securely communicate with compute resources.<br><br>
 
