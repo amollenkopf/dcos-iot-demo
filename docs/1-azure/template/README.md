@@ -20,6 +20,8 @@ The Azure Templates for this application were created by hand using Mesosphere's
 <img src="05.png">
 <br><br><b>Step 6:</b> Click the 'Refresh' button at the top to verify the configured Azure Template is in place.
 <img src="06.png"><br>
+<br><br><b>Congratulations:</b> You now have an 'Azure Template' in place that can be used to provision compute resources needed to support a Mesosphere DC/OS installation.
+
 
 
 
