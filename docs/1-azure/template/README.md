@@ -8,7 +8,7 @@ The Azure Templates for this application were created by hand using Mesosphere's
 - [add_publicagents.json](add_publicagents.json): used post installation to add additional public agents to an existing DC/OS environment.
 
 ## Importing to Azure
-<b>Step 1:</b>Log into your [Azure](http://portal.azure.com) account using your credentials.  Once logged in your will see the main Azure dashboard page.<br>
+<b>Step 1:</b> Log into your [Azure](http://portal.azure.com) account using your credentials.<br>
 <img src="01.png">
 <br><br><b>Step 2:</b> Click the 'More services >' menu option on the left hand side at the very bottom to expand additional services and type 'templates' into the search box.<br>
 <img src="02.png">
