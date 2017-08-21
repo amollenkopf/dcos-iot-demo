@@ -1,6 +1,6 @@
-# Provision compute resources on Microsoft Azure
 <img src="00.jpg"/><br>
 <i>Resources for a 3 master, 30 private agent and 3 public agent (3-30-3) compute cluster.</i><br><br>
+# Provision compute resources on Microsoft Azure
 
 <img src="01.jpg"/><br>
 <i>Resources for a 3 master, 30 private agent and 3 public agent (3-30-3) compute cluster.</i><br><br>
