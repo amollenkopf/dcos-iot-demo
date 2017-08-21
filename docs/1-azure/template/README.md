@@ -1,6 +1,6 @@
 # Configure an Azure Template
 
-The Azure Template for this application was created by hand using Mesosphere's <a href="https://downloads.dcos.io/dcos/stable/azure.html">DC/OS on Azure Template</a> as the foundation with JSON that was customized using [Azure docs](https://azure.microsoft.com/en-us/resources/templates/) as a guideline.<br><br>
+The Azure Template for this application was created by hand using Mesosphere's [DC/OS on Azure Template](https://downloads.dcos.io/dcos/stable/azure.html) as the foundation with JSON that was customized using [Azure docs](https://azure.microsoft.com/en-us/resources/templates/) as a guideline.<br><br>
 
 ## Azure Template
 - [dcos.json](dcos.json): Used to create compute resources to support as Mesosphere DC/OS installation.
