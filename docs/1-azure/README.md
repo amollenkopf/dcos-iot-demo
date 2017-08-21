@@ -4,7 +4,7 @@ This section walks you through step-by-step on how to provision compute resource
 
 <div align="center">
 <img src="00.jpg"/>
-<i>Compute resources provisionmed for a 3 master, 30 private agent & 3 public agent (3-30-3) DC/OS environnment.</i>
+<small><i>Compute resources provisionmed for a 3 master, 30 private agent & 3 public agent (3-30-3) DC/OS environnment.</i></small>
 </div><br>
 
 ## Pre-requisites:
