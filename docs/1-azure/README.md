@@ -4,9 +4,12 @@
 
 Microsoft Azure provisions a set compute resources using an Azure Template.  This section walks you through step-by-step on how to provision compute resources on Azure that will be used to form a DC/OS environment.
 
-<b>Pre-requisite 1:</b> <a href=""><a>Establish an Azure Account</a>.  If you are new or don't have credentials you can sign-up for Azure <a href="https://azure.microsoft.com/en-us/free/">here</a> and try it out.<br><br>
-<b>Pre-requisite 2:</b> <a href=""><a>Create an Azure Template</a> that provisions your desired compute resources.<br><br>
-<b>Pre-requisite 3:</b> <a href=""><a>Establish a SSH Key Pair</a> to securely communicate with compute resources.<br><br>
+<b>Pre-requisite 1:</b><br>
+<a href=""><a href="">Establish an Azure Account</a>.  If you are new or don't have credentials you can sign-up for Azure <a href="https://azure.microsoft.com/en-us/free/">here</a> and try it out.<br><br>
+<b>Pre-requisite 2:</b><br>
+<a href=""><a href="">Create an Azure Template</a> that provisions your desired compute resources.<br><br>
+<b>Pre-requisite 3:</b><br>
+<a href=""><a href="">Establish a SSH Key Pair</a> to securely communicate with compute resources.<br><br>
 
 <b>Step 1:</b> Login to <a href="http://portal.azure.com">portal.azure.com</a> using your Microsoft Azure credentials.<br><br>
 
