@@ -13,7 +13,7 @@ Establish an Azure Account.  If you are new or don't have credentials you can si
 <b>Pre-requisite 3:</b><br>
 <a href="ssh/README.md">Establish a SSH Key Pair</a> to securely communicate with compute resources.<br>
 
-
+<br>
 ## Provision compute resources on Microsoft Azure
 <b>Step 1:</b> Login to <a href="http://portal.azure.com">portal.azure.com</a> using your Microsoft Azure credentials.<br><br>
 <img src="../images/01-acs-setup/acs-create-01.png"/>
