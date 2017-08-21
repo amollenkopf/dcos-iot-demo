@@ -4,6 +4,8 @@ The Azure Template for this application was created by hand using Mesosphere's <
 
 ## Azure Template
 - [dcos.json](dcos.json): Used to create compute resources to support Mesosphere DC/OS installation.
+- [add_publicagents.json](add_publicagents.json): Used to add additional public agents to an existing DCOS resource group.
+- [add_agents.json](add_agents.json): Used to add additional private agents to an existing DCOS resource group.
 
 ## Importing to Azure
 - Log into Azure Account
