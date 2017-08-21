@@ -4,7 +4,7 @@ This section walks you through step-by-step on how to provision compute resource
 <img src="00.jpg"/><br>
 <i>Resources for a 3 master, 30 private agent and 3 public agent (3-30-3) compute cluster.</i><br><br>
 
-
+## Pre-requisites:
 <b>Pre-requisite 1:</b><br>
 Establish an Azure Account.  If you are new or don't have credentials you can sign-up for Azure <a href="https://azure.microsoft.com/en-us/free/">here</a> and try it out.<br><br>
 <b>Pre-requisite 2:</b><br>
