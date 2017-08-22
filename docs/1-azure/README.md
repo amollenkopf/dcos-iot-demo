@@ -7,8 +7,8 @@ This section walks you through step-by-step on how to provision compute resource
 
 ## Pre-requisites:
 <b>Pre-requisite 1:</b> Establish an Azure Account. If you are new or don't have credentials you can sign-up for Azure <a href="https://azure.microsoft.com/en-us/free/">here</a> and try it out.
-<br><br><b>Pre-requisite 2:</b> <a href="template/README.md">Configure an Azure Template</a> with your desired compute resources.
-<br><br><b>Pre-requisite 3:</b> <a href="ssh/README.md">Establish a SSH Key Pair</a> to securely communicate with compute resources.
+<br><br><b>Pre-requisite 2:</b> [Configure an Azure Template](template/README.md) with your desired compute resources.
+<br><br><b>Pre-requisite 3:</b> [Establish a SSH Key Pair](ssh/README.md) to securely communicate with compute resources.
 <br><br>
 
 ## Provision compute resources on Microsoft Azure
@@ -16,7 +16,7 @@ This section walks you through step-by-step on how to provision compute resource
 <img src="01.png">
 <br><br><b>Step 2:</b> Click the 'More services >' menu option on the left hand side at the very bottom to expand additional services and type 'templates' into the search box.<br>
 <img src="02.png">
-<br><br><b>Step 3:</b> Click on the 'Templates' result to open up your account's Azure Templates.  Click the 'dcos' template in the results listing to start provisioning compute resources.  If you do not see a 'dcos' template please see Pre-requisite 2: [Configure an Azure Template](template/README.md)<br>
+<br><br><b>Step 3:</b> Click on the 'Templates' result to open up your account's Azure Templates.  Click the 'dcos' template in the results listing to start provisioning compute resources.  If you do not see a 'dcos' template please see [Pre-requisite 2: Configure an Azure Template](template/README.md)<br>
 <img src="03.png">
 
 
