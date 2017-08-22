@@ -6,15 +6,14 @@ This section walks you through step-by-step on how to provision compute resource
 </div>
 
 ## Pre-requisites:
-<b>Pre-requisite 1:</b> Establish an Azure Account.<br>
-If you are new or don't have credentials you can sign-up for Azure <a href="https://azure.microsoft.com/en-us/free/">here</a> and try it out.
+<b>Pre-requisite 1:</b> Establish an Azure Account. If you are new or don't have credentials you can sign-up for Azure <a href="https://azure.microsoft.com/en-us/free/">here</a> and try it out.
 <br><br><b>Pre-requisite 2:</b> <a href="template/README.md">Configure an Azure Template</a> with your desired compute resources.
 <br><br><b>Pre-requisite 3:</b> <a href="ssh/README.md">Establish a SSH Key Pair</a> to securely communicate with compute resources.
 <br><br>
 
 ## Provision compute resources on Microsoft Azure
 <b>Step 1:</b> Login to <a href="http://portal.azure.com">portal.azure.com</a> using your Microsoft Azure credentials.<br><br>
-<img src="../images/01-acs-setup/acs-create-01.png"/>
+<img src="01.jpg"/>
 
 
 <br><br><b>Step 2:</b> Click the 'New' button in the left hand menu.
