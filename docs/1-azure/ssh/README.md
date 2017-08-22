@@ -2,7 +2,7 @@
 To securely with compute resources on Microsoft Azure it is necessary to establish a SSH Key Pair.
 
 ## Create an SSH Key Pair
-The following steps are an abbreviated form of [Azure's detailed instructions on creating an SSH Key Pair](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/create-ssh-keys-detailed).  This can be done from command line on Linux, Mac, or Windows (via [MobaXterm](http://mobaxterm.mobatek.net/)).
+The following steps are an abbreviated form of [Azure's detailed instructions on creating an SSH Key Pair](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/create-ssh-keys-detailed).  These steps can be performed from command line on Linux, Mac, or Windows (via [MobaXterm](http://mobaxterm.mobatek.net/)).
 
 <b>Step 1:</b> Run 'ssh-keygen':<br>
 <pre>
