@@ -8,7 +8,7 @@ The following steps are an abbreviated form of [Azure's detailed instructions on
 <pre>
 $ ssh-keygen
 </pre>
-- Change the path to the key, e.g. /Users/cory6458/.ssh/dcosiotdemo
+- Change the path to the path & filename you want your key to be stored in, <i>e.g. /Users/cory6458/.ssh/dcosiotdemo</i>
 - Leave passphrase blank.
 <img src="01.png">
 
