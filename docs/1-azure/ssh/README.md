@@ -9,7 +9,7 @@ The following steps are an abbreviated form of [Azure's detailed instructions on
 $ ssh-keygen
 </pre>
 - Change the path to the path & filename you want your key to be stored in, <i>e.g. /Users/cory6458/.ssh/dcosiotdemo</i>
-- Leave passphrase blank by entering the return key.
+- Leave passphrase blank by hitting the return key.
 <img src="01.png">
 
 <br><br><b>Step 2:</b> Review the resulting SSH Key Pair files.  The .pub file is the public key and the file without an extension is the private key file.<br>
