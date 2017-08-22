@@ -26,7 +26,6 @@ This section walks you through step-by-step on how to provision compute resource
 - Resource Group: Choose 'Create new' and give your resource group a name, <i>e.g. adamdcos4</i>.
 - Location: choose the Azure region you wish to deploy your compute resources to, <i>e.g. West US</i>.
 - Username & Public Key: to get the username & public key view the contents of your SSH Key Pair public file:
-&nbsp;&nbsp;&nbsp;&nbsp;<pre>cat ~/.ssh/dcosiotdemo.pub</pre>
 &nbsp;&nbsp;&nbsp;&nbsp;<img src="06.png">
 - Username: the username can be found towards the end of the public key file in front of the @ character, <i>e.g. cory6458</i>.
 - Public Key: copy and past the contents of the .pub file paying close attention not to include any leading or trailing whitespace.
