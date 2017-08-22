@@ -12,8 +12,12 @@ This section walks you through step-by-step on how to provision compute resource
 <br><br>
 
 ## Provision compute resources on Microsoft Azure
-<b>Step 1:</b> Login to <a href="http://portal.azure.com">portal.azure.com</a> using your Microsoft Azure credentials.<br><br>
-<img src="01.jpg"/>
+<b>Step 1:</b> Log into your [Azure](http://portal.azure.com) account using your credentials.<br>
+<img src="01.png">
+<br><br><b>Step 2:</b> Click the 'More services >' menu option on the left hand side at the very bottom to expand additional services and type 'templates' into the search box.<br>
+<img src="02.png">
+<br><br><b>Step 3:</b> Click on the 'Templates' result to open up your account's Azure Templates.  Click the 'dcos' template in the results listing to start provisioning compute resources.  If you do not see a 'dcos' template please see Pre-requisite 2: [Configure an Azure Template](template/README.md)<br>
+<img src="03.png">
 
 
 <br><br><b>Step 2:</b> Click the 'New' button in the left hand menu.
