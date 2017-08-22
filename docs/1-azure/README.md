@@ -22,17 +22,22 @@ This section walks you through step-by-step on how to provision compute resource
 <img src="04.png">
 <br><br><b>Step 5:</b> With the 'dcos' Azure template open, click the 'Deploy' button and fill in the parameters as follows:<br>
 <img src="05.png">
-* Subscription: Choose the Azure subscription you want to use for your compute resources, <i>PS GEOEVENT DEV AZ</i>.
-* Resource Group: Choose 'Create new' and give your resource group a name, <i>e.g. adamdcos4</i>.
-* Location: choose the Azure region you wish to deploy your compute resources to, <i>e.g. West US</i>.
-* Username & Public Key: to get the username & public key view the contents of your SSH Key Pair public file:
+- Subscription: Choose the Azure subscription you want to use for your compute resources, <i>PS GEOEVENT DEV AZ</i>.
+- Resource Group: Choose 'Create new' and give your resource group a name, <i>e.g. adamdcos4</i>.
+- Location: choose the Azure region you wish to deploy your compute resources to, <i>e.g. West US</i>.
+- Username & Public Key: to get the username & public key view the contents of your SSH Key Pair public file:
 &nbsp;&nbsp;&nbsp;&nbsp;<pre>cat ~/.ssh/dcosiotdemo.pub</pre>
 &nbsp;&nbsp;&nbsp;&nbsp;<img src="06.png">
-* Username: the username can be found towards the end of the public key file in front of the @ character, <i>e.g. cory6458</i>.
-* Public Key: copy and past the contents of the .pub file paying close attention not to include any leading or trailing whitespace.
-* Num Masters: the number of Mesos Masters compute resources you wish to provision, <i>e.g. 1</i>.
-* Master Size: the [Linux Virtual Machine size](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/sizes) you wish to provision for master(s)..
-
-
+- Username: the username can be found towards the end of the public key file in front of the @ character, <i>e.g. cory6458</i>.
+- Public Key: copy and past the contents of the .pub file paying close attention not to include any leading or trailing whitespace.
+- Num Masters: the number of Mesos master compute resources you wish to provision, <i>e.g. 1</i>.
+- Master Size: the [Linux Virtual Machine size](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/sizes) you wish to provision for master nodes, <i>e.g. Standard_DS3_V2 (4 vCPU, 14 GiB memory)</i>.
+- Num Agents: the number of Mesos private agent compute resources you wish to provision, <i>e.g. 5</i>.
+- Agent Size: the [Linux Virtual Machine size](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/sizes) you wish to provision for private agent nodes, <i>e.g. Standard_DS4_V2 (8 vCPU, 28 GiB memory)</i>.
+- Agent Disk Size GB: the additional disk to add to each agent in GB (10 to 1023), <i>e.g. 1023</i>.
+- Num Public Agents: the number of Mesos public agent compute resources you wish to provision, <i>e.g. 1</i>.
+- Public Agent Size: the [Linux Virtual Machine size](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/sizes) you wish to provision for public agent nodes, <i>e.g. Standard_DS3_V2 (4 vCPU, 14 GiB memory)</i>.
+- Scroll Down and review the 'Terms and Conditios' and if you agree check the 'I agree' checkbox.
+- Click the 'Purchase' button to start provisioning your compute resources on Azure.
 
 <br><br><b>Congratulations:</b> You now have an 'Azure Container Service' in place on Microsoft Azure that is configured to orchestrate using DC/OS.
