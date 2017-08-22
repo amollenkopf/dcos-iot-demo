@@ -30,8 +30,8 @@ This section walks you through step-by-step on how to provision compute resource
 cat ~/.ssh/dcosiotdemo.pub
 </pre>
 <img src="06.png">
-  - Username: the username can be found towards the end of the public key file, <i>e.g. cory6458</i>.
-  - Public Key: copy and past the contents of the .pub file paying close attention not to include any leading or trailing whitespace.
+: Username: the username can be found towards the end of the public key file, <i>e.g. cory6458</i>.
+:: Public Key: copy and past the contents of the .pub file paying close attention not to include any leading or trailing whitespace.
 - Num Masters: the number of Mesos Masters compute resources you wish to provision, <i>e.g. 1</i>.
 - Master Size: The Azure VM Image TODO:...
 
