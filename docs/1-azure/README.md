@@ -22,9 +22,19 @@ This section walks you through step-by-step on how to provision compute resource
 <img src="04.png">
 <br><br><b>Step 5:</b> With the 'dcos' Azure template open, click the 'Deploy' button and fill in the parameters as follows:<br>
 <img src="05.png">
-- Subscription: 
+- Subscription: Choose the Azure subscription you want to use for your compute resources, <i>PS GEOEVENT DEV AZ</i>.
 - Resource Group: Choose 'Create new' and give your resource group a name, <i>e.g. adamdcos4</i>.
 - Location: choose the Azure region you wish to deploy your compute resources to, <i>e.g. West US</i>.
+- Username & Public Key: to get the username & public key view the contents of your SSH Key Pair public file:
+<pre>
+cat ~/.ssh/dcosiotdemo.pub
+</pre>
+<img src="06.png">
+-- Username: the username can be found towards the end of the public key file, <i>e.g. cory6458</i>.
+-- Public Key: copy and past the contents of the .pub file paying close attention not to include any leading or trailing whitespace.
+- Num Masters: the number of Mesos Masters compute resources you wish to provision, <i>e.g. 1</i>.
+- Master Size: The Azure VM Image TODO:...
+
 
 
 <br><br><b>Congratulations:</b> You now have an 'Azure Container Service' in place on Microsoft Azure that is configured to orchestrate using DC/OS.
