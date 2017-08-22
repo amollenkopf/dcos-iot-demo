@@ -36,7 +36,22 @@ This section walks you through step-by-step on how to provision compute resource
 - Agent Disk Size GB: the additional disk to add to each agent in GB (10 to 1023), <i>e.g. 1023</i>.
 - Num Public Agents: the number of Mesos public agent compute resources you wish to provision, <i>e.g. 1</i>.
 - Public Agent Size: the [Linux Virtual Machine size](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/sizes) you wish to provision for public agent nodes, <i>e.g. Standard_DS3_V2 (4 vCPU, 14 GiB memory)</i>.
-- Scroll Down and review the 'Terms and Conditios' and if you agree check the 'I agree' checkbox.
-- Click the 'Purchase' button to start provisioning your compute resources on Azure.
+- Scroll Down and review the 'Terms and Conditions' and if you agree check the 'I agree' checkbox.
+<br><br><b>Step 6:</b> Click the 'Purchase' button to start provisioning your compute resources on Azure.  You will be returned back to main portal dashboard screen where you can see in the notification area one deployment occurring.<br>
+<img src="07.png">
+<br><br><b>Step 7:</b> Click on the 'Resource Groups' icon on the left hand menu (second item down) and click on the name of the resource group you are deploying.<br>
+<img src="08.png">
+<br><br><b>Step 8:</b> Your 'Resource Group' will likely still be in a status of 'Deploying' for around 3-4 minutes.<br>
+<img src="09.png">
+<br><br><b>Step 9:</b> Wait until another notification appears saying 'Deployment succeeded' and then hit the 'Refresh' button.<br>
+<img src="10.png">
+
+<br><br><b>Step 10:</b> Click on the 'Type' column to sort by type of resource. We can see each of the virtual machines created, e.g. <i>m1 = master1, a1/a2/a3 = agent1/2/3, p1 = public agent 1</i><br>
+<img src="11.png">
+
+<br><br><b>Step 11:</b> Click on the 'Public IP address' of the master (master entry) to get IP & DNS information on how to connect to it.<br>
+<img src="12.png">
+- take note of the 'DNS name', <i>e.g. adamdcos04dcos.westus.cloudapp.azure.com</i>.
+- take note of the 'IP address', <i>e.g. 40.78.23.14</i>.
 
 <br><br><b>Congratulations:</b> You now have an 'Azure Container Service' in place on Microsoft Azure that is configured to orchestrate using DC/OS.
