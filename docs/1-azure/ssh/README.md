@@ -12,7 +12,7 @@ $ ssh-keygen
 - Leave passphrase blank.
 <img src="01.png">
 
-<br><br><b>Step 2:</b> Review the resulting SSH Key Pair files.  The .pub file is the public key and the other file is the private key file.<br>
+<br><br><b>Step 2:</b> Review the resulting SSH Key Pair files.  The .pub file is the public key and the file without an extension is the private key file.<br>
 <img src="02.png">
 
 <br><br><b>Congratulations:</b> You now have an SSH Key Pair in place that can be used securely communicate to compute resources on Azure.
