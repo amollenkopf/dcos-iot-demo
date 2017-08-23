@@ -19,7 +19,7 @@ $ scp -i ~/.ssh/dcosiotdemo ~/.ssh/dcosiotdemo cory6458@40.78.18.217:~
 $ scp -i {private-key} {your-local-path}/dcos-iot-demo/install/install_dcos.sh {username}@{boot server ip}:~
 
 Example:
-$ scp -i ~/.ssh/dcosiotdemo ~/iot/dcos-iot-demo/install/install_dcos.sh cory6458@40.78.18.217:~
+$ scp -i ~/.ssh/dcosiotdemo '~/iot/dcos-iot-demo/install/install_dcos.sh cory6458@40.78.18.217:~
 </pre>
 <img src="02.png">
 <br><br><b>Step 3:</b> Establish a secure connection to the boot node using ssh.<br>
