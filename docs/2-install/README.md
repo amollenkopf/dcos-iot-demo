@@ -30,6 +30,7 @@ Example:
 $ ssh -i ~/.ssh/dcosiotdemo cory6458@40.78.18.217
 </pre>
 <img src="03.png">
+<br><br><b>Windows Users Only:</b> If you are using scp from a Windows workstation, there are a couple of other command to run found [here](windows.md)<br>
 
 ## Run installer
 <b>Step 4: From the ssh terminal run the DC/OS installer:</b> <br>
