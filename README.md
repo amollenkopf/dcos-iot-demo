@@ -7,7 +7,7 @@ This project demonstrates how to configure a full stack geo-enabled Internet of 
 1. <a href="docs/0-overview/README.md">Review the application & architecture overview</a>.<br>
 2. Provision compute resources on <a href="docs/1-azure/README.md">Microsoft Azure</a>, <a href="docs/1-amazon/README.md">Amazon Web Services</a>, Amazon C2S or on-premise.<br>
 3. <a href="docs/2-install/README.md">Install DC/OS</a>.<br>
-4. <a href="docs/3-explore/README.md">Explore the DC/OS and Mesos dashboards</a>.<br>
+4. <a href="docs/3-explore/README.md">Explore the DC/OS & Mesos dashboards</a>.<br>
 5. <a href="docs/4-kafka/README.md">Install Kafka & schedule brokers</a>.<br>
 6. <a href="docs/es-setup.md">Install Elasticsearch & schedule a cluster</a>.<br>
 7. <a href="docs/map-setup.md">Configure the map application</a>.<br>
