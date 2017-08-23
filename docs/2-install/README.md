@@ -45,8 +45,8 @@ $ sudo bash install_dcos.sh 1 5 1
 - Which version of DC/OS do you want to install: specify the version you want, using the number<br>
 &nbsp;&nbsp;&nbsp;&nbsp;<i>e.g. 1 for Latest Community Edition)</i><br>
 &nbsp;&nbsp;&nbsp;&nbsp;<i>e.g. 3 allows you to enter the URL from [Mesosphere Releases](https://dcos.io/releases/)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For [1.8.6](https://dcos.io/releases/1.8.6/) use https://downloads.dcos.io/dcos/stable/commit/cfccfbf84bbba30e695ae4887b65db44ff216b1d/dcos_generate_config.sh<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For [1.8.7](https://dcos.io/releases/1.8.7/) use https://downloads.dcos.io/dcos/stable/commit/1b43ff7a0b9124db9439299b789f2e2dc3cc086c/dcos_generate_config.sh<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.g. for [1.8.6](https://dcos.io/releases/1.8.6/) use https://downloads.dcos.io/dcos/stable/commit/cfccfbf84bbba30e695ae4887b65db44ff216b1d/dcos_generate_config.sh<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.g. for [1.8.7](https://dcos.io/releases/1.8.7/) use https://downloads.dcos.io/dcos/stable/commit/1b43ff7a0b9124db9439299b789f2e2dc3cc086c/dcos_generate_config.sh<br>
 - Enter OS Username (centos): specify your username, <i>e.g. cory6458</i>
 - Enter PKI Filename (centos.pem): specify your key filename, <i>e.g. dcosiotdemo</i>
 
