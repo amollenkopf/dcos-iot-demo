@@ -5,6 +5,7 @@ This section walks you through step-by-step on how to install a DC/OS environmen
 <img src="00.jpg"/>
 </div>
 
+## Prepare for installation
 <b>Step 1:</b> Copy your private key to the boot node.<br>
 <pre>
 $ scp -i {private-key} {private-key} {username}@{boot server ip}:~
@@ -13,7 +14,7 @@ Example:
 $ scp -i ~/.ssh/dcosiotdemo ~/.ssh/dcosiotdemo cory6458@40.78.18.217:~
 </pre>
 <img src="01.png">
-<b>Step 2:</b> Copy DC/OS install script to the boot node.<br>
+<br><br><b>Step 2:</b> Copy DC/OS install script to the boot node.<br>
 <pre>
 $ scp -i {private-key} {your local path}/dcos-iot-demo/install/install_dcos.sh {username}@{boot server ip}:~
 
@@ -21,9 +22,7 @@ Example:
 $ scp -i ~/.ssh/dcosiotdemo ~/iot/dcos-iot-demo/install/install_dcos.sh cory6458@40.78.18.217:~
 </pre>
 <img src="02.png">
-
-
-<b>Step 3:</b> Establish a secure connection to the boot node using ssh.<br>
+<br><br><b>Step 3:</b> Establish a secure connection to the boot node using ssh.<br>
 <pre>
 $ ssh -i {private-key} {username}@{boot server ip}
 
@@ -31,5 +30,19 @@ Example:
 $ ssh -i ~/.ssh/dcosiotdemo cory6458@40.78.18.217
 </pre>
 <img src="03.png">
+
+## Run installer
+<b>Step 4: From the ssh terminal run the DC/OS installer:</b> <br>
+<pre>
+$ sudo bash install_dcos.sh {number-of-masters} {number-of-private-agents} {number-of-public-agents}
+
+Example (for 1 master, 5 private agents, and 1 public agent):
+$ sudo bash install_dcos.sh 1 5 1
+</pre>
+<img src="04.png">
+
+
+## Access DC/OS
+
 
 <br><br><b>Congratulations:</b> You have successfully installed DC/OS.
