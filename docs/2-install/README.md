@@ -30,8 +30,9 @@ Example:
 $ ssh -i ~/.ssh/dcosiotdemo cory6458@40.78.18.217
 </pre>
 <img src="03.png">
-<br><br><b>Windows Users Only:</b> If you are using scp from a Windows workstation, there are a couple of other command to run found [here](./windows.md)<br>
+<br><br><b>Windows Users Only:</b> If you are using scp from a Windows workstation, there are a couple of other command to run found <a href="windows.md">here</a><br>
 
+<br>
 ## Run installer
 <b>Step 4:</b> From the ssh terminal run the DC/OS installer:<br>
 <pre>
@@ -48,7 +49,7 @@ $ sudo bash install_dcos.sh 1 5 1
 <br><br><b>Step 6:</b> Mesos installation complete.<br>
 <img src="06.png">
 
-
+<br>
 ## Access DC/OS
 
 
