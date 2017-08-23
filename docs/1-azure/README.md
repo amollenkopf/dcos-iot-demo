@@ -49,9 +49,8 @@ This section walks you through step-by-step on how to provision compute resource
 <br><br><b>Step 10:</b> Click on the 'Type' column to sort by type of resource. We can see each of the virtual machines created, e.g. <i>m1 = master1, a1/a2/a3 = agent1/2/3, p1 = public agent 1</i><br>
 <img src="11.png">
 
-<br><br><b>Step 11:</b> Click on the 'Public IP address' of the master (master entry) to get IP & DNS information on how to connect to it.<br>
+<br><br><b>Step 11:</b> Click on the 'Public IP address' of the boot node to get information on how to connect to it.<br>
 <img src="12.png">
-- take note of the 'DNS name', <i>e.g. adamdcos04dcos.westus.cloudapp.azure.com</i>.
-- take note of the 'IP address', <i>e.g. 40.78.23.14</i>.
+- take note of the 'IP address', <i>e.g. 40.78.18.217</i>.
 
 <br><br><b>Congratulations:</b> You now have an 'Azure Container Service' in place on Microsoft Azure that is configured to orchestrate using DC/OS.
