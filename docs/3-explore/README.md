@@ -1,4 +1,4 @@
-# Explore the DC/OS and Mesos dashboards
+# Explore the DC/OS & Mesos dashboards
 This section walks you through step-by-step on how to exlore the dashboards of a DC/OS environment.<br>
 
 ## DC/OS Dashboard
