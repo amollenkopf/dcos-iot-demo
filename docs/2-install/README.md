@@ -30,7 +30,7 @@ Example:
 $ ssh -i ~/.ssh/dcosiotdemo cory6458@40.78.18.217
 </pre>
 <img src="03.png">
-<br><br><b>Windows Users Only:</b> If you are using scp from a Windows workstation, there are a couple of other command to run found <a href="windows.md">here</a><br>
+<br><br><b>Windows Users Only:</b> If you are using scp from a Windows workstation, there are a couple of other command to run found <a href="windows.md">here</a>.<br>
 
 <br>
 ## Run installer
