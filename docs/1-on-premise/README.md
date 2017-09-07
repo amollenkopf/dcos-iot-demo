@@ -130,9 +130,9 @@ You will need to review and tweak the script for you're specific on-premise conf
 
 Here are two example
 - [install_dcos_onpremise.sh](install_dcos_onpremise.sh)
-  -- Assumes a specific name of NETWORK_DEVICE (e.g. enp0s8)
+  - Assumes a specific name of NETWORK_DEVICE (e.g. enp0s8)
 - [install_dcos_onpremise2.sh](install_dcos_onpremise2.sh)
-  -- Uses a NETWORK_MASK (e.g. 10.\*/16). This is used to determine the network device name.
+  - Uses a NETWORK_MASK (e.g. 10.\*/16). This is used to determine the network device name.
 
 ### Install DC/OS
 
