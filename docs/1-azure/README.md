@@ -7,20 +7,15 @@ This section walks you through step-by-step on how to provision compute resource
 
 ## Pre-requisites:
 <b>Pre-requisite 1:</b> Establish an Azure Account. If you are new or don't have credentials you can sign-up for Azure <a href="https://azure.microsoft.com/en-us/free/">here</a> and try it out.
-<br><br><b>Pre-requisite 2:</b> [Configure an Azure Template](template/README.md) with your desired compute resources.
-<br><br><b>Pre-requisite 3:</b> [Establish a SSH Key Pair](ssh/README.md) to securely communicate with compute resources.
+<br><br><b>Pre-requisite 2:</b> [Establish a SSH Key Pair](ssh/README.md) to securely communicate with compute resources.
 <br><br>
 
 ## Provision compute resources on Microsoft Azure
-<b>Step 1:</b> Log into your [Azure](http://portal.azure.com) account using your credentials.<br>
-<img src="01.png">
-<br><br><b>Step 2:</b> Click the 'More services >' menu option on the left hand side at the very bottom to expand additional services and type 'templates' into the search box.<br>
-<img src="02.png">
-<br><br><b>Step 3:</b> Click on the 'Templates' result to open up your account's Azure Templates.
-<img src="03.png">
-<br><br><b>Step 4:</b> Click on the 'dcos' Azure template to open it. <i>note: If you do not see a 'dcos' template please see [Pre-requisite 2: Configure an Azure Template](template/README.md).</i><br>
-<img src="04.png">
-<br><br><b>Step 5:</b> With the 'dcos' Azure template open, click the 'Deploy' button and fill in the parameters as follows:<br>
+
+<b>Step 1:</b> Run Azure Template <br>
+Open [DC/OS Azure Template Link](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Famollenkopf%2Fdcos-iot-demo%2Fmaster%2Fdocs%2F1-azure%2Ftemplate%2Fdcos.json) in your web browser. This will open the [DC/OS Azure Template](https://raw.githubusercontent.com/amollenkopf/dcos-iot-demo/master/docs/1-azure/template/dcos.json) in Azure Portal. You will need to login to your Azure account using your credentials.
+
+<br><br><b>Step 2:</b> With the 'dcos' Azure template open, click the 'Deploy' button and fill in the parameters as follows:<br>
 <img src="05.png">
 - Subscription: Choose the Azure subscription you want to use for your compute resources, <i>PS GEOEVENT DEV AZ</i>.
 - Resource Group: Choose 'Create new' and give your resource group a name, <i>e.g. adamdcos4</i>.
@@ -37,19 +32,19 @@ This section walks you through step-by-step on how to provision compute resource
 - Num Public Agents: the number of Mesos public agent compute resources you wish to provision, <i>e.g. 1</i>.
 - Public Agent Size: the [Linux Virtual Machine size](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/sizes) you wish to provision for public agent nodes, <i>e.g. Standard_DS3_V2 (4 vCPU, 14 GiB memory)</i>.
 - Scroll Down and review the 'Terms and Conditions' and if you agree check the 'I agree' checkbox.
-<br><br><b>Step 6:</b> Click the 'Purchase' button to start provisioning your compute resources on Azure.  You will be returned back to main portal dashboard screen where you can see in the notification area one deployment occurring.<br>
+<br><br><b>Step 3:</b> Click the 'Purchase' button to start provisioning your compute resources on Azure.  You will be returned back to main portal dashboard screen where you can see in the notification area one deployment occurring.<br>
 <img src="07.png">
-<br><br><b>Step 7:</b> Click on the 'Resource Groups' icon on the left hand menu (second item down) and click on the name of the resource group you are deploying.<br>
+<br><br><b>Step 4:</b> Click on the 'Resource Groups' icon on the left hand menu (second item down) and click on the name of the resource group you are deploying.<br>
 <img src="08.png">
-<br><br><b>Step 8:</b> Your 'Resource Group' will likely still be in a status of 'Deploying' for around 3-4 minutes.<br>
+<br><br><b>Step 5:</b> Your 'Resource Group' will likely still be in a status of 'Deploying' for around 3-4 minutes.<br>
 <img src="09.png">
-<br><br><b>Step 9:</b> Wait until another notification appears saying 'Deployment succeeded' and then hit the 'Refresh' button.<br>
+<br><br><b>Step 6:</b> Wait until another notification appears saying 'Deployment succeeded' and then hit the 'Refresh' button.<br>
 <img src="10.png">
 
-<br><br><b>Step 10:</b> Click on the 'Type' column to sort by type of resource. We can see each of the virtual machines created, e.g. <i>m1 = master1, a1/a2/a3 = agent1/2/3, p1 = public agent 1</i><br>
+<br><br><b>Step 7:</b> Click on the 'Type' column to sort by type of resource. We can see each of the virtual machines created, e.g. <i>m1 = master1, a1/a2/a3 = agent1/2/3, p1 = public agent 1</i><br>
 <img src="11.png">
 
-<br><br><b>Step 11:</b> Click on the 'Public IP address' of the boot node to get information on how to connect to it. Take note of the 'IP address', <i>e.g. 40.78.18.217</i>.<br>
+<br><br><b>Step 8:</b> Click on the 'Public IP address' of the boot node to get information on how to connect to it. Take note of the 'IP address', <i>e.g. 40.78.18.217</i>.<br>
 <img src="12.png">
 
 <br><br><b>Congratulations:</b> You now have compute resources in place on Microsoft Azure that can be used to [Install DC/OS](../2-install/README.md).
