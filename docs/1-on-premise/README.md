@@ -71,7 +71,7 @@ You should now be able to login to the servers with the pki key from the boot se
 ssh -i centos.pem centos@<computer's ip>
 </pre>
 
-### Edit hosts file
+## Edit hosts file
 
 ### On the boot server modify the /etc/hosts file.
 
@@ -134,7 +134,7 @@ Here are two example
 - [install_dcos_onpremise2.sh](install_dcos_onpremise2.sh)
   - Uses a NETWORK_MASK (e.g. 10.\*/16). This is used to determine the network device name.
 
-### Install DC/OS
+### Run Install Script
 
 When you run the installer you should see output like:
 <pre>
@@ -171,6 +171,40 @@ Total Time (sec): 596
 
 DCOS is Ready
 </pre>
+
+## Done
+You now have DC/OS running on-premise.
+
+## Add Additional Agents  (Optional)
+
+### Modify the hosts file 
+Add the new node to the hosts file on boot server and update on all clients.
+
+### Login to New Computer
+SSH to the new computer.
+
+### Copy Installer from Boot
+<pre>
+sudo curl -O http://boot/install.sh
+</pre>
+
+Verify contents of install.sh
+
+<pre>
+cat install.sh
+</pre>
+
+You should see the contents of the script; not an error message.
+
+### Run install.sh
+
+<pre>
+sudo bash install.sh slave
+</pre>
+
+Use "slave" for private agents or "slave_public" for public agents.
+
+After script completes the new computer should appear in DC/OS. 
 
 
 
