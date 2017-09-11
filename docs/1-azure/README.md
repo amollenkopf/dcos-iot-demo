@@ -41,10 +41,10 @@ Opening the [DC/OS Azure Template](https://portal.azure.com/#create/Microsoft.Te
 <br><br><b>Step 6:</b> Wait until another notification appears saying 'Deployment succeeded' and then hit the 'Refresh' button.<br>
 <img src="10.png">
 
-<br><br><b>Step 7:</b> Click on the 'Type' column to sort by type of resource. We can see each of the virtual machines created, e.g. <i>m1 = master1, a1/a2/a3 = agent1/2/3, p1 = public agent 1</i><br>
+<br><b>Step 7:</b> Click on the 'Type' column to sort by type of resource. We can see each of the virtual machines created, e.g. <i>m1 = master1, a1/a2/a3 = agent1/2/3, p1 = public agent 1</i><br>
 <img src="11.png">
 
-<br><br><b>Step 8:</b> Click on the 'Public IP address' of the boot node to get information on how to connect to it. Take note of the 'IP address', <i>e.g. 40.78.18.217</i>.<br>
+<br><b>Step 8:</b> Click on the 'Public IP address' of the boot node to get information on how to connect to it. Take note of the 'IP address', <i>e.g. 40.78.18.217</i>.<br>
 <img src="12.png">
 
 <br><br><b>Congratulations:</b> You now have compute resources in place on Microsoft Azure that can be used to [Install DC/OS](../2-install/README.md).
