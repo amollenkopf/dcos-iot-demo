@@ -1,6 +1,6 @@
 # Install Kafka & schedule brokers
 
-<b>Step 1:</b> In the DC/OS dashboard navigate to 'Universe'.  The 'Universe' is where you can manage what packages (aka mesos frameworks) your cluster can make use of.<br>
+<b>Step 1:</b> In the DC/OS dashboard navigate to 'Universe - Packages'.  The 'Universe' is where you can manage what packages (aka mesos frameworks) your cluster can make use of.<br>
 <img src="01.png"/>
 
 <br><b>Step 2:</b> Scroll down in the 'Universe' package listings to find the 'Kafka' package and click it's corresponding 'Install' button.<br>
