@@ -10,7 +10,4 @@ This project demonstrates how to configure a full stack geo-enabled Internet of 
 4. <a href="docs/4-kafka/README.md">Install Kafka & schedule brokers</a>.<br>
 5. <a href="docs/5-elasticsearch/README.md">Install Elasticsearch & schedule a cluster</a>.<br>
 6. <a href="docs/6-webapp/README.md">Install a Map web application</a>.<br>
-7. <a href="docs/app-setup.md">Schedule a real-time analytic task & a source that emits events</a>.<br>
-
-## Other topics of interest:
-1. <a href="docs/cleanup-demo.md">Applying cleanup procedures between demo runs</a>.<br>
+7. <a href="docs/7-demo/README.md">Run the demo</a>.
