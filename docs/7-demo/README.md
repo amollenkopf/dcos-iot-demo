@@ -27,15 +27,6 @@ Schedule a real-time analytic task & a source that emits events
 <br><b>Step 7:</b> ...<br>
 <img src="07.png"/>
 
-## Applying clean-up procedures between demo runs.
-<a href="../cleanup-demo.md">Applying cleanup procedures between demo runs</a>.<br>
-
-<br><b>Step 8:</b> ...<br>
-<img src="08.png"/>
-
-<br><b>Step 9:</b> ...<br>
-<img src="09.png"/>
-
 <br><br><b>Congratulations:</b> You now have ...
 
 
