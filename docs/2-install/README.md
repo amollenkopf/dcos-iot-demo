@@ -61,7 +61,16 @@ $ sudo bash install_dcos.sh 1 5 1
 <br>
 
 ## Access DC/OS
-<br><b>Step 7:</b> To verify the installation open a web browser to the 'DNS name' or 'IP address' of your master agent node, e.g. http://adamdcos04dcos.westus.cloudapp.azure.com or http://40.78.23.14.  The first time you connect you will get a 'Not Secure' warning page, to proceed open the 'Advanced' area and click on the 'Process to ...' link.<br>
+<br><b>Step 7:</b> To verify the installation open a web browser to the 'DNS name' or 'IP address' of your master agent node, e.g. https://adamdcos04dcos.westus.cloudapp.azure.com or https://40.78.23.14.  The first time you connect you will get a 'Not Secure' warning page, to proceed open the 'Advanced' area and click on the 'Process to ...' link.<br>
+<img src="07.png">
+
+<br><b>Step 8 (Optional):</b> If your corporate firewall or other network measures cause you to be unable to access the DC/OS administrative interface directly you can establish an 'ssh tunnel' into your master agent node as follows:<br>
+<pre>
+$ scp -i {private-key} -L 9001:m1:443 {username}@{master agent node ip}:~
+
+Example:
+$ ssh -i ~/.ssh/dcosiotdemo -L 9001:m1:443 cory6458@40.78.19.245
+</pre>
 <img src="07.png">
 
 <br><b>Congratulations:</b> You have successfully installed DC/OS.  Next we will <a href="../3-explore/README.md">Explore the DC/OS & Mesos dashboards</a>.
