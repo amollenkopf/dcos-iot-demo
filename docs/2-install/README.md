@@ -64,7 +64,7 @@ $ sudo bash install_dcos.sh 1 5 1
 <br><b>Step 7:</b> To verify the installation open a web browser to the 'DNS name' or 'IP address' of your master agent node, e.g. https://adamdcos04dcos.westus.cloudapp.azure.com or https://40.78.23.14.  The first time you connect you will get a 'Not Secure' warning page, to proceed beyond this expand the 'Advanced' section and click on the 'Process to ...' link.<br>
 <img src="07.png">
 
-<br><b>Step 8 (Optional):</b> If your corporate firewall or other network measures cause you to be unable to access the DC/OS administrative interface directly you can establish an 'ssh tunnel' into your master agent node.  Once the 'ssh tunnel' is in place you can open a browser to https://localhost:9001 to access the DC/OS administrative dashboard.<br>
+<br><b>Step 8 (Optional):</b> If your corporate firewall or other network measures cause you to be unable to access the DC/OS administrative interface directly as described in the previous step, you can establish an 'ssh tunnel' into your master agent node.  Once the 'ssh tunnel' is in place you can open a browser to https://localhost:9001 to access the DC/OS administrative dashboard.<br>
 <pre>
 $ ssh -i {private-key} -L 9001:m1:443 {username}@{master agent node ip}:~
 
