@@ -1,7 +1,7 @@
 # Explore the DC/OS & Mesos dashboards
 This section walks you through step-by-step on how to exlore the dashboards of a DC/OS environment.<br>
 
-The DC/OS and Mesos dashboards allows you to visualize what has been allocated on the cluster, enables you to manage <a href="https://github.com/mesosphere/universe/tree/version-3.x/repo/packages">packages (Mesos frameworks)</a> that you enable the cluster can use, and to schedule tasks to run on the cluster.  This section provides a brief walk through of the DC/OS & Mesos dashboards and describes what information can be seen and what actions can be performed.
+The DC/OS and Mesos dashboards allows you to visualize what has been allocated on the cluster, enables you to manage <a href="https://github.com/mesosphere/universe/tree/version-3.x/repo/packages">packages (Mesos frameworks)</a> that you enable the cluster can use, and to schedule tasks to run on the cluster.  This section provides a brief walk through of the DC/OS & Mesos dashboards and describes what information can be seen and what actions can be performed.<br>
 
 ## Explore the DC/OS administrative dashboard
 <br><b>Step 1:</b> Connect to the DC/OS administrative dashboard by openibg a web browser to the 'DNS name' or 'IP address' of your master agent node, e.g. https://adamdcos04dcos.westus.cloudapp.azure.com or https://40.78.23.14.  The first time you connect you will get a 'Not Secure' warning page, to proceed beyond this expand the 'Advanced' section and click on the 'Process to ...' link.  Once connected to your DC/OS dashboard you should see a high level dashboard of your cluster including information about CPU Allocation, Memory Allocation, Task Failure Rate, and Services Health.<br>
