@@ -25,7 +25,7 @@
 <li>To check the health of the elasticsearch cluster: <pre>curl -XGET http://adamdcos04.westus.cloudapp.azure.com/_cat/health?v</pre><img src="08.png"/></li>
 <li>To list all indices in the elasticsearch cluster: <pre>curl -XGET http://adamdcos04.westus.cloudapp.azure.com/_cat/indices?v</pre><img src="09.png"/></li>
 <li>To query a specific index named 'taxi': <pre>curl -XGET http://adamdcos04.westus.cloudapp.azure.com/taxi</pre><img src="10.png"/></li>
-<li>For more information about querying elasticsearch, see the [Elasticsearch 5.5 Reference Guide](https://www.elastic.co/guide/en/elasticsearch/reference/5.5/index.html).<li>
+<li>For more information about querying elasticsearch, see the (Elasticsearch 5.5 Reference Guide)[https://www.elastic.co/guide/en/elasticsearch/reference/5.5/index.html].<li>
 </ul>
 
 <br><b>Step 9:</b> The webapp also has a map application that can be accessed at ...., e.g. ...<br>
