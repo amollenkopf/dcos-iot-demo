@@ -62,5 +62,4 @@ $ sudo bash install_dcos.sh 1 5 1
 
 ## Access DC/OS
 
-
 <br><b>Congratulations:</b> You have successfully installed DC/OS.  Next we will <a href="../3-explore/README.md">Explore the DC/OS & Mesos dashboards</a>.
