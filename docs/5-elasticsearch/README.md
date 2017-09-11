@@ -39,6 +39,6 @@
 <br><b>Step 13:</b> Taking a quick glimpse at the Mesos dashboard we can see the 'Active Tasks' that are running to support our Elasticsearch cluster.  <i>Note: you can launch into the log files, etc... of any of the tasks from this dashboard.</i><br>
 <img src="13.png"/>
 
-<br><br><b>Congratulations:</b> You now have an Elasticsearch cluster installed with two data nodes ready to store data on the DC/OS cluster.  Next, we will walk through how to [Install a Map web application](../6-webapp/README.md).
+<br><br><b>Congratulations:</b> You now have an Elasticsearch cluster installed with two data nodes ready to store data on the DC/OS cluster.  Next, we will walk through how to [Install Map web application](../6-webapp/README.md).
 
 
