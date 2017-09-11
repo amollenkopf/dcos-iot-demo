@@ -18,17 +18,11 @@ The DC/OS and Mesos dashboards allows you to visualize what has been allocated o
 <li>Hostnames starting with 172.17.2.* are the private agent nodes.</li>
 <li>Hostnames starting with 172.17.3.* are the public agent nodes.</li></ul><br><br>
 
-## Explore the Mesos dashboards
-<br><br><b>Step 4:</b> The foundation of DC/OS is Apache Mesos.  The Mesos dashboard provides very detailed information about active and completed tasks.  To access the Mesos dashboard use the same URL you used to access the DC/OS dashboard and append '/mesos' at the end, e.g. <a href="http://localhost:9001/mesos">https://localhost:9001/mesos</a>.
+## Explore the Mesos dashboard
+<br><br><b>Step 3:</b> The foundation of DC/OS is Apache Mesos.  The Mesos dashboard provides very detailed information about active and completed tasks.  To access the Mesos dashboard use the same URL you used to access the DC/OS dashboard but append '/mesos' at the end, e.g. https://adamdcos04dcos.westus.cloudapp.azure.com/mesos</a>. On the bottom left of the Mesos dashboard  we can see another view of the resources avaiable in the cluster.  Once we start deploying tasks we will see the shares of CPUs/mem/disk we have allocated in the 'Used' row.<br>
+<img src="03.png"/><br>
+
+<br><br><b>Step 4:</b> In the Mesos dashboard click on the 'Agents' menu to view agent level information.<br>
 <img src="04.png"/><br>
 
-<br><br><b>Step 5:</b> Scrolling down on the Mesos dashboard on the bottom left we can see another view of the resources avaiable in the cluster.  Once we start deploying tasks we will see the shares of CPUs/mem/disk we have allocated in the 'Used' row.
-<img src="05.png"/><br>
-
-<br><br><b>Step 6:</b> In the Mesos dashboard click on the 'Slaves' menu.  Slaves are the same as DC/OS agents and were renamed at the Mesos 1.0 release.  DC/OS 1.8 is based on Mesos 1.0 so consistent Agent naming will be present at that release.
-<img src="06.png"/><br>
-
-<br><b>Step 7:</b> In the DC/OS dashboard click on the 'Services' tab.  Initially marathon is the only service on the cluster and is in an Idle state until we submit our first application to marathon.  Marathon is like a distributed init.d for the cluster where we submit apps to it to run and it will make sure they are running and resilient.  We will explore marathon in greater detail later.
-<img src="07.png"/><br>
-
-<br><br><b>Congratulations:</b> You have have successfully explored the DC/OS and Mesos dashboards.  Next we will [Install Kafka & schedule brokers](../4-kafka/README.md).
+<br><br><b>Congratulations:</b> You have have successfully explored the DC/OS and Mesos dashboards.  Next we will schedule our first task to run on the DC/OS cluster by [Installing Kafka & schedule brokers](../4-kafka/README.md).
