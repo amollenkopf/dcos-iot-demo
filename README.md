@@ -6,12 +6,11 @@ This project demonstrates how to configure a full stack geo-enabled Internet of 
 ## To create your own DC/OS IoT demo environment:
 1. <a href="docs/0-overview/README.md">Review the application & architecture overview</a>.<br>
 2. Provision compute resources on <a href="docs/1-azure/README.md">Microsoft Azure</a>, <a href="docs/1-amazon/README.md">Amazon Web Services</a>, Amazon C2S or on-premise.<br>
-3. <a href="docs/2-install/README.md">Install DC/OS</a>.<br>
-4. <a href="docs/3-explore/README.md">Explore the DC/OS & Mesos dashboards</a>.<br>
-5. <a href="docs/4-kafka/README.md">Install Kafka & schedule brokers</a>.<br>
-6. <a href="docs/5-elasticsearch/README.md">Install Elasticsearch & schedule a cluster</a>.<br>
-7. <a href="docs/6-webapp/README.md">Install a Map web application</a>.<br>
-8. <a href="docs/app-setup.md">Schedule a real-time analytic task & a source that emits events</a>.<br>
+3. <a href="docs/2-install/README.md">Install DC/OS</a> and then <a href="docs/3-explore/README.md">Explore the DC/OS & Mesos dashboards</a>.<br>
+4. <a href="docs/4-kafka/README.md">Install Kafka & schedule brokers</a>.<br>
+5. <a href="docs/5-elasticsearch/README.md">Install Elasticsearch & schedule a cluster</a>.<br>
+6. <a href="docs/6-webapp/README.md">Install a Map web application</a>.<br>
+7. <a href="docs/app-setup.md">Schedule a real-time analytic task & a source that emits events</a>.<br>
 
 ## Other topics of interest:
 1. <a href="docs/cleanup-demo.md">Applying cleanup procedures between demo runs</a>.<br>
