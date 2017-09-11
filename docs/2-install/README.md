@@ -14,7 +14,8 @@ Example:
 $ scp -i ~/.ssh/dcosiotdemo ~/.ssh/dcosiotdemo cory6458@40.78.18.217:~
 </pre>
 <img src="01.png">
-<br><br><b>Step 2:</b> Copy DC/OS install script to the boot node.<br>
+
+<br><b>Step 2:</b> Copy DC/OS install script to the boot node.<br>
 <pre>
 $ scp -i {private-key} {your-local-path}/dcos-iot-demo/install/install_dcos.sh {username}@{boot server ip}:~
 
@@ -22,7 +23,8 @@ Example:
 $ scp -i \~/.ssh/dcosiotdemo \~/iot/dcos-iot-demo/install/install_dcos.sh cory6458@40.78.18.217:\~
 </pre>
 <img src="02.png">
-<br><br><b>Step 3:</b> Establish a secure connection to the boot node using ssh.<br>
+
+<br><b>Step 3:</b> Establish a secure connection to the boot node using ssh.<br>
 <pre>
 $ ssh -i {private-key} {username}@{boot server ip}
 
@@ -30,7 +32,8 @@ Example:
 $ ssh -i ~/.ssh/dcosiotdemo cory6458@40.78.18.217
 </pre>
 <img src="03.png">
-<br><br><b>Windows Users Only:</b> <a href="windows.md">see further instructions</a>.<br>
+
+<br><b>Windows Users Only:</b> <a href="windows.md">see further instructions</a>.<br>
 <br>
 
 ## Run installer
@@ -50,14 +53,14 @@ $ sudo bash install_dcos.sh 1 5 1
 - Enter OS Username (centos): specify your username, <i>e.g. cory6458</i>
 - Enter PKI Filename (centos.pem): specify your key filename, <i>e.g. dcosiotdemo</i>
 
-<br><br><b>Step 5:</b> Press 'Enter' to continue the installation.  The first step of installation is for the boot node to provision itself with the installers that will be eventually executed on the master & agent nodes.  You will see a listing of the master private IPs and then a message stating the 'Boot Setup Complete'.  The duration of this step is typically 2-5 minutes and should not take longer than 10 minutes.<br>
+<br><b>Step 5:</b> Press 'Enter' to continue the installation.  The first step of installation is for the boot node to provision itself with the installers that will be eventually executed on the master & agent nodes.  You will see a listing of the master private IPs and then a message stating the 'Boot Setup Complete'.  The duration of this step is typically 2-5 minutes and should not take longer than 10 minutes.<br>
 <img src="05.png">
 
-<br><br><b>Step 6:</b> Once the boot setup is complete DC/OS powered by Apache Mesos is installed on all master, private agent & public agent nodes.  DC/OS installation typically takes 5 minutes or less and should not take longer than 10 minutes.  The last output line from the installer should read 'DC/OS is Ready'.<br>
+<br><b>Step 6:</b> Once the boot setup is complete DC/OS powered by Apache Mesos is installed on all master, private agent & public agent nodes.  DC/OS installation typically takes 5 minutes or less and should not take longer than 10 minutes.  The last output line from the installer should read 'DC/OS is Ready'.<br>
 <img src="06.png">
 <br>
 
 ## Access DC/OS
 
 
-<br><br><b>Congratulations:</b> You have successfully installed DC/OS.  Next we will <a href="../3-explore/README.md">Explore the DC/OS & Mesos dashboards</a>.
+<br><b>Congratulations:</b> You have successfully installed DC/OS.  Next we will <a href="../3-explore/README.md">Explore the DC/OS & Mesos dashboards</a>.
