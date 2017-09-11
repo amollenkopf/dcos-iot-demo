@@ -21,7 +21,7 @@
 <br><b>Step 7:</b> Click the 'REVIEW AND INSTALL' button and review the parameters values.<br>
 <img src="07.png" width="70%" height="70%"/>
 
-<br><b>Step 8:</b> Click the 'Install' button to install the Kafka package.<br>
+<br><b>Step 8:</b> Click the 'INSTALL' button to install the kafka package.<br>
 <img src="08.png" width="50%" height="50%"/>
 
 <br><b>Step 9:</b> In the DC/OS dashboard navigate to 'Services - Services'.  The 'Services' tab is where you can monitor what services have been scheduled and are running on the DC/OS cluster.  Notice there is a Service named 'kafka' that now appears.<br>
