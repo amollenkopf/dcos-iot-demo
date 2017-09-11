@@ -9,4 +9,4 @@ This section walks you through step-by-step on how to exlore the dashboards of a
 <br><br><b>Step 3:</b> Establish a secure connection to the boot node using ssh.<br>
 <img src="03.png">
 
-<br><br><b>Congratulations:</b> You have have successfully explored the DC/OS and Mesos dashboards.  Next we will (Install Kafka & schedule brokers)[../4-kafka/README.md].
+<br><br><b>Congratulations:</b> You have have successfully explored the DC/OS and Mesos dashboards.  Next we will [Install Kafka & schedule brokers](../4-kafka/README.md).
