@@ -3,7 +3,7 @@ This section walks you through step-by-step on how to exlore the dashboards of a
 
 The DC/OS and Mesos dashboards allows you to visualize what has been allocated on the cluster, enables you to manage <a href="https://github.com/mesosphere/universe/tree/version-3.x/repo/packages">packages (Mesos frameworks)</a> that you enable the cluster can use, and to schedule tasks to run on the cluster.  This section provides a brief walk through of the DC/OS & Mesos dashboards and describes what information can be seen and what actions can be performed.
 
-# Explore the DC/OS administrative dashboard<br>
+## Explore the DC/OS administrative dashboard<br>
 <br><b>Step 1:</b> Connect to the DC/OS administrative dashboard by openibg a web browser to the 'DNS name' or 'IP address' of your master agent node, e.g. https://adamdcos04dcos.westus.cloudapp.azure.com or https://40.78.23.14.  The first time you connect you will get a 'Not Secure' warning page, to proceed beyond this expand the 'Advanced' section and click on the 'Process to ...' link.  Once connected to your DC/OS dashboard you should see a high level dashboard of your cluster including information about CPU Allocation, Memory Allocation, Task Failure Rate, and Services Health.<br>
 <img src="01.png"/><ul>
 <li>CPU Allocation: showing 0 of 104 shares.  We chose 'D4_V2 Standard' (8 cores) instance types for our agent nodes.  104 shares of cpu allocation divided by 8 cores per node = 13 nodes.</li><ul>
@@ -21,7 +21,7 @@ The DC/OS and Mesos dashboards allows you to visualize what has been allocated o
 <li>Private agent node hostnames start with 10.32.0.*.</li></ul>
 <img src="03.png"/><br>
 
-# Explore the Mesos dashboards<br>
+## Explore the Mesos dashboards<br>
 <br><br><b>Step 4:</b> The foundation of DC/OS is Apache Mesos.  The Mesos dashboard provides very detailed information about active and completed tasks.  To access the Mesos dashboard use the same URL you used to access the DC/OS dashboard and append '/mesos' at the end, e.g. <a href="http://localhost:9001/mesos">https://localhost:9001/mesos</a>.
 <img src="04.png"/><br>
 
