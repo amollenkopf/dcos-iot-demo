@@ -47,7 +47,7 @@ Opening the [DC/OS Azure Template](https://portal.azure.com/#create/Microsoft.Te
 <br><b>Step 8:</b> Click on the 'Public IP address' of the boot node to get information on how to connect to it. Take note of the 'IP address', <i>e.g. 40.78.18.217</i>.  We will connect to the boot node via ssh to orchestrate the installation of DC/OS in a subsequent step.<br>
 <img src="12.png">
 
-<br><b>Step 9:</b> Click on the 'Public IP address' of the public agent node to get information on how to connect to it. Take note of the 'DNA name', <i>adamdcos04.westus.cloudapp.azure.com</i> and 'IP address', <i>e.g. 40.78.18.217</i>.  We will connect to the 'public agent' via a web browser to access the DC/OS administrative and Mesos dashboards once we've successfully completed the installation in a subsequent step.<br>
+<br><b>Step 9:</b> Click on the 'Public IP address' of the public master node to get information on how to connect to it. Take note of the 'DNA name', <i>adamdcos04dcos.westus.cloudapp.azure.com</i> and 'IP address', <i>e.g. 40.78.23.14</i>.  We will connect to the master agent node via a web browser to access the DC/OS administrative and Mesos dashboards once we've successfully completed the installation in a subsequent step.<br>
 <img src="13.png">
 
 <br><br><b>Congratulations:</b> You now have compute resources in place on Microsoft Azure that can be used to [Install DC/OS](../2-install/README.md).
