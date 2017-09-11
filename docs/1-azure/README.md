@@ -47,4 +47,7 @@ Opening the [DC/OS Azure Template](https://portal.azure.com/#create/Microsoft.Te
 <br><b>Step 8:</b> Click on the 'Public IP address' of the boot node to get information on how to connect to it. Take note of the 'IP address', <i>e.g. 40.78.18.217</i>.<br>
 <img src="12.png">
 
+<br><b>Step 9:</b> Click on the 'Public IP address' of the public agent node to get information on how to connect to it. Take note of the 'DNA name', <i>adamdcos04.westus.cloudapp.azure.com</i> and 'IP address', <i>e.g. 40.78.18.217</i>.<br>
+<img src="13.png">
+
 <br><br><b>Congratulations:</b> You now have compute resources in place on Microsoft Azure that can be used to [Install DC/OS](../2-install/README.md).
