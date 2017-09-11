@@ -28,7 +28,7 @@
 <img src="09.png" width="70%" height="70%"/>
 
 <br><b>Step 10:</b> TODO<br>
-<img src="10.png" width="70%" height="70%"/>
+<img src="10.png" width="50%" height="50%"/>
 
 <br><b>Step 11:</b> TODO<br>
 <img src="11.png"/>
