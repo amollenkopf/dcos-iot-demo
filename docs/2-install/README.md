@@ -66,7 +66,7 @@ $ sudo bash install_dcos.sh 1 5 1
 
 <br><b>Step 8 (Optional):</b> If your corporate firewall or other network measures cause you to be unable to access the DC/OS administrative interface directly you can establish an 'ssh tunnel' into your master agent node.  Once the 'ssh tunnel' is in place you can open a browser to https://localhost:9001 to access the DC/OS administrative dashboard.<br>
 <pre>
-$ scp -i {private-key} -L 9001:m1:443 {username}@{master agent node ip}:~
+$ ssh -i {private-key} -L 9001:m1:443 {username}@{master agent node ip}:~
 
 Example:
 $ ssh -i ~/.ssh/dcosiotdemo -L 9001:m1:443 cory6458@40.78.19.245
