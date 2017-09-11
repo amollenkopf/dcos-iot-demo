@@ -19,7 +19,7 @@
 <img src="06.png"/>
 
 <br><b>Step 7:</b> Click the 'REVIEW AND INSTALL' button and review the parameters values.<br>
-<img src="7.png"/>
+<img src="07.png"/>
 
 <br><b>Step 8:</b> Click the 'Install' button to install the Kafka package.<br>
 <img src="08.png"/>
