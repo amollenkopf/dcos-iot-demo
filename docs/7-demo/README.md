@@ -1,5 +1,5 @@
 # Run the demo
-
+Schedule a real-time analytic task & a source that emits events
 
 
 ## Run a Spark Streaming job
@@ -28,6 +28,7 @@
 <img src="07.png"/>
 
 ## Applying clean-up procedures between demo runs.
+<a href="docs/cleanup-demo.md">Applying cleanup procedures between demo runs</a>.<br>
 
 <br><b>Step 8:</b> ...<br>
 <img src="08.png"/>
