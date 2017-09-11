@@ -3,7 +3,7 @@
 <b>Step 1:</b> In the DC/OS dashboard navigate to 'Universe - Packages'.  The 'Universe' is where you can manage what packages (aka mesos frameworks) your cluster can make use of.<br>
 <img src="01.png"/>
 
-<br><b>Step 2:</b> Scroll down in the 'Universe' package listings to find the 'Kafka' package and click it's corresponding 'Install' button.<br>
+<br><b>Step 2:</b> Scroll down in the 'Universe' package listings to find the 'kafka' package and click it's corresponding 'INSTALL PACKAGE' button.<br>
 <img src="02.png"/>
 
 <br><b>Step 3:</b> Click the 'Advanced Installation' button to start the package installation process with the ability to override the default configuration.  The first section to review is the kafka 'service' configuration. Leave the defaults on this section.<br>
