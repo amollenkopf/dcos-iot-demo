@@ -7,7 +7,7 @@
 <img src="02.png"/>
 
 <br><b>Step 3:</b> Click the 'Advanced Installation' button to start the package installation process with the ability to override the default configuration.  The first section to review is the kafka 'service' configuration. Leave the defaults on this section.<br>
-<img src="03.png"/>
+<img src="03.png" width="50%" height="50%"/>
 
 <br><b>Step 4:</b> Click the 'brokers' to fine tune the broker installation parameters.<br>
 <img src="04.png"/>
