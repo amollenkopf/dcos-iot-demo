@@ -28,7 +28,7 @@
 <li>For more information about querying elasticsearch, see the <a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.5/index.html">Elasticsearch 5.5 Reference Guide</a>.</li>
 </ul>
 
-<br><b>Step 9:</b> The webapp also has a map application that can be accessed at ...., e.g. ...<br>
+<br><b>Step 9:</b> The webapp's primary function is to serve as a map application that queries elasticsearch and visualizes the results via a map.  The map application can be accessed on the public agent node at /map/index.html, e.g. https://adamdcos04.westus.cloudapp.azure.com/map/index.html<br>
 <img src="11.png"/>
 
 <br><br><b>Congratulations:</b> You now have a Map web application in place ...  Next, we will walk through how to ....
