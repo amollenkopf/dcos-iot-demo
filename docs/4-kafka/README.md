@@ -13,16 +13,16 @@
 <img src="04.png"/>
 
 <br><b>Step 5:</b> Scroll down through the 'brokers' installation parameters.  Find the 'count' parameter and change the value to the number of brokers you desire, for the purpose of the demo we will keep the default of '3'.<br>
-<img src="05.png"/>
+<img src="05.png" width="70%" height="70%"/>
 
 <br><b>Step 6:</b> Click 'kafka' and check the option to 'DELETE.TOPIC.ENABLE' so that we can clean up our data between demonstration runs.<br>
-<img src="06.png"/>
+<img src="06.png" width="70%" height="70%"/>
 
 <br><b>Step 7:</b> Click the 'REVIEW AND INSTALL' button and review the parameters values.<br>
-<img src="07.png"/>
+<img src="07.png" width="70%" height="70%"/>
 
 <br><b>Step 8:</b> Click the 'Install' button to install the Kafka package.<br>
-<img src="08.png"/>
+<img src="08.png" width="50%" height="50%"/>
 
 
 
