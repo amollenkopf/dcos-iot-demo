@@ -31,6 +31,7 @@ Opening the [DC/OS Azure Template](https://portal.azure.com/#create/Microsoft.Te
 - Num Public Agents: the number of Mesos public agent compute resources you wish to provision, <i>e.g. 1</i>.
 - Public Agent Size: the [Linux Virtual Machine size](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/sizes) you wish to provision for public agent nodes, <i>e.g. Standard_DS3_V2 (4 vCPU, 14 GiB memory)</i>.
 - Scroll Down and review the 'Terms and Conditions' and if you agree check the 'I agree' checkbox.
+
 <br><br><b>Step 3:</b> Click the 'Purchase' button to start provisioning your compute resources on Azure.  You will be returned back to main portal dashboard screen where you can see in the notification area one deployment occurring.<br>
 <img src="07.png">
 <br><br><b>Step 4:</b> Click on the 'Resource Groups' icon on the left hand menu (second item down) and click on the name of the resource group you are deploying.<br>
