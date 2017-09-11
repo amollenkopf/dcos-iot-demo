@@ -10,7 +10,7 @@
 <img src="03.png" width="70%" height="70%"/>
 
 <br><b>Step 4:</b> Click the 'brokers' to fine tune the broker installation parameters.<br>
-<img src="04.png"/>
+<img src="04.png" width="70%" height="70%"/>
 
 <br><b>Step 5:</b> Scroll down through the 'brokers' installation parameters.  Find the 'count' parameter and change the value to the number of brokers you desire, for the purpose of the demo we will keep the default of '3'.<br>
 <img src="05.png" width="70%" height="70%"/>
