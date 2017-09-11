@@ -1,4 +1,4 @@
-# Install a Map web application
+# Install Map web application
 
 <b>Step 1:</b> In the DC/OS dashboard navigate to 'Services - Services'. To run a new Service click the '+' button at the top right of the Services screen.<br>
 <img src="01.png"/>
