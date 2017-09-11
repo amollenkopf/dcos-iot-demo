@@ -13,4 +13,4 @@ This project demonstrates how to configure a full stack geo-enabled Internet of 
 
 ## Running the demo:
 7. <a href="docs/7-demo/README.md">Run the demo</a>.<br>
-8. <a href="docs/cleanup-demo.md">Applying cleanup procedures between demo runs</a>.
+8. <a href="docs/cleanup-demo.md">Apply cleanup procedures between demo runs</a>.
