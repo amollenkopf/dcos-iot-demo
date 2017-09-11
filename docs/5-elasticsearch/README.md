@@ -33,6 +33,9 @@
 <br><b>Step 11:</b> TODO<br>
 <img src="11.png"/>
 
+<br><b>Step 12:</b> TODO<br>
+<img src="12.png"/>
+
 <br><br><b>Congratulations:</b> You now have an Elasticsearch cluster installed with two data nodes ready to store data on the DC/OS cluster.  Next, we will walk through how to TODO.
 
 
