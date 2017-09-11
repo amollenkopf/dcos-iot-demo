@@ -19,7 +19,7 @@ The DC/OS and Mesos dashboards allows you to visualize what has been allocated o
 <li>Hostnames starting with 172.17.3.* are the public agent nodes.</li></ul><br><br>
 
 ## Explore the Mesos dashboard
-<br><br><b>Step 3:</b> The foundation of DC/OS is Apache Mesos.  The Mesos dashboard provides very detailed information about active and completed tasks.  To access the Mesos dashboard use the same URL you used to access the DC/OS dashboard but append '/mesos' at the end, e.g. https://adamdcos04dcos.westus.cloudapp.azure.com/mesos</a>. On the bottom left of the Mesos dashboard  we can see another view of the resources avaiable in the cluster.  Once we start deploying tasks we will see the shares of CPUs/mem/disk we have allocated in the 'Used' row.<br>
+<b>Step 3:</b> The foundation of DC/OS is Apache Mesos.  The Mesos dashboard provides very detailed information about active and completed tasks.  To access the Mesos dashboard use the same URL you used to access the DC/OS dashboard but append '/mesos' at the end, e.g. https://adamdcos04dcos.westus.cloudapp.azure.com/mesos</a>. On the bottom left of the Mesos dashboard  we can see another view of the resources avaiable in the cluster.  Once we start deploying tasks we will see the shares of CPUs/mem/disk we have allocated in the 'Used' row.<br>
 <img src="03.png"/><br>
 
 <br><br><b>Step 4:</b> In the Mesos dashboard click on the 'Agents' menu to view agent level information.<br>
