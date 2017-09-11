@@ -30,4 +30,7 @@
 <br><b>Step 10:</b> Click on 'kafka' in the service listing to open up more information on the 'kafka' service.  Here we can see the three brokers, their names, their status, and the resources that have been allocated to them.<br>
 <img src="10.png"/>
 
+<br><b>Step 11:</b> Taking a quick glimpse at the Mesos dashboard we can see the 'Active Tasks' that are running to support our Kafka brokers.  <i>Note: you can launch into the log files, etc... of any of the brokers from this dashboard.</i><br>
+<img src="11.png"/>
+
 <br><br><b>Congratulations:</b> You now have Kafka installed with three brokers ready to receive data on the DC/OS cluster.  Next, we will walk through how to [Install Elasticsearch & schedule a cluster](../5-elasticsearch/README.md).
