@@ -15,8 +15,8 @@ The DC/OS and Mesos dashboards allows you to visualize what has been allocated o
 
 <br><b>Step 2:</b> On the DC/OS dashboard click the 'Nodes' tab to see the nodes that are participating in the cluster.
 <img src="02.png"/><ul>
-<li>Private agent node hostnames start with 172.17.2.*.</li>
-<li>Public agent node hostnames start with 172.17.3.*.</li></ul>
+<li>Hostnames starting with 172.17.2.* are the private agent nodes.</li>
+<li>Hostnames starting with 172.17.3.* are the public agent nodes.</li></ul>
 
 ## Explore the Mesos dashboards
 <br><br><b>Step 4:</b> The foundation of DC/OS is Apache Mesos.  The Mesos dashboard provides very detailed information about active and completed tasks.  To access the Mesos dashboard use the same URL you used to access the DC/OS dashboard and append '/mesos' at the end, e.g. <a href="http://localhost:9001/mesos">https://localhost:9001/mesos</a>.
