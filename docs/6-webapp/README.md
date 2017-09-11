@@ -22,7 +22,7 @@
 <img src="07.png"/>
 
 <br><b>Step 8:</b> The webapp serves as a proxy for elasticsearch queries so it is possible to 'curl' queries to elasticsearch.  For example:<ul>
-<li>To check the health of the elasticsearch cluster: curl -XGET http://adamdcos04.westus.cloudapp.azure.com/_cat/health?v<br>
+<li>To check the health of the elasticsearch cluster: <pre>curl -XGET http://adamdcos04.westus.cloudapp.azure.com/_cat/health?v</pre><br>
 <img src="08.png"/></li>
 <li>To list all indices in the elasticsearch cluster: curl -XGET http://adamdcos04.westus.cloudapp.azure.com/_cat/indices?v</li>
 <li>To query a specific index named 'taxi': curl -XGET http://adamdcos04.westus.cloudapp.azure.com/taxi</li>
