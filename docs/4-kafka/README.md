@@ -6,32 +6,25 @@
 <br><b>Step 2:</b> Scroll down in the 'Universe' package listings to find the 'Kafka' package and click it's corresponding 'Install' button.<br>
 <img src="02.png"/>
 
-<br><b>Step 3:</b> Click the 'Advanced Installation' button to start the package installation process.<br>
+<br><b>Step 3:</b> Click the 'Advanced Installation' button to start the package installation process.  The first section to review is the kafka 'service' configuration. Leave the defaults on this section.<br>
 <img src="03.png"/>
 
-<br><b>Step 4:</b> Click the 'Advanced Installation' link to fine tune the installation parameters.<br>
+<br><b>Step 4:</b> Click the 'brokers' to fine tune the broker installation parameters.<br>
 <img src="04.png"/>
 
-<br><b>Step 5:</b> Click the 'service' parameter group, scroll through it's available options, and keep all defaults.<br>
+<br><b>Step 5:</b> Scroll down through the 'brokers' installation parameters.  Find the 'count' parameter and change the value to the number of brokers you desire, for the purpose of the demo we will keep the default of '3'.<br>
 <img src="05.png"/>
 
-<br><b>Step 6:</b> Click the 'brokers' parameter group and scroll through it's available options.<br>
+<br><b>Step 6:</b> Click 'kafka' and check the option to 'DELETE.TOPIC.ENABLE' so that we can clean up our data between demonstration runs.<br>
 <img src="06.png"/>
 
-<br><b>Step 7:</b> Find the 'count' parameter and change the value to the number of brokers you desire, for the purpose of the demo we will keep the default of '3'.<br>
-<img src="07.png"/>
+<br><b>Step 7:</b> Click the 'REVIEW AND INSTALL' button and review the parameters values.<br>
+<img src="7.png"/>
 
-<br><b>Step 8:</b> Click the 'kafka' parameter group and scroll through it's available options.<br>
+<br><b>Step 8:</b> Click the 'Install' button to install the Kafka package.<br>
 <img src="08.png"/>
 
-<br><b>Step 9:</b> Find the 'delete.topic.enable' parameter and enable it so that we will be able to delete topics between demo runs.<br>
-<img src="09.png"/>
 
-<br><b>Step 10:</b> Click the 'Review and Install' button and review the parameters values.<br>
-<img src="10.png"/>
-
-<br><b>Step 11:</b> Click the 'Install' button to install the package and click the 'Acknowledge (check)' button.<br>
-<img src="11.png"/>
 
 <br><b>Step 12:</b> In the DC/OS dashboard navigate to 'Services'.  The 'Services' tab is where you can monitor what services have been scheduled and are running on the DC/OS cluster.  Notice there is a Service named 'kafka' that now appears.<br>
 <img src="12.png"/>
