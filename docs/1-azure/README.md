@@ -12,7 +12,7 @@ This section walks you through step-by-step on how to provision compute resource
 
 ## Provision compute resources on Microsoft Azure
 <b>Step 1:</b> The easiest way to provision compute resources on Microsoft Azure is to make use of an 'Azure Template'.
-Opening the [DC/OS Azure Template](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Famollenkopf%2Fdcos-iot-demo%2Fmaster%2Fdocs%2F1-azure%2Ftemplate%2Fdcos.json) will prompt you to login to your Azure Portal using your credentials.  n <i>note: In case you are interested, the configuration of the Azure Template can be found</i> [here](https://raw.githubusercontent.com/amollenkopf/dcos-iot-demo/master/docs/1-azure/template/dcos.json).
+Opening the [DC/OS Azure Template](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Famollenkopf%2Fdcos-iot-demo%2Fmaster%2Fdocs%2F1-azure%2Ftemplate%2Fdcos.json) will prompt you to login to your Azure Portal using your credentials.  <i>note: In case you are interested, the configuration of the Azure Template can be found</i> [here](https://raw.githubusercontent.com/amollenkopf/dcos-iot-demo/master/docs/1-azure/template/dcos.json).
 
 <br><br><b>Step 2:</b> With the 'dcos' Azure template open, click the 'Deploy' button and fill in the parameters as follows:<br>
 <img src="05.png">
