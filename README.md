@@ -9,7 +9,7 @@ This project demonstrates how to configure a full stack geo-enabled Internet of 
 3. <a href="docs/2-install/README.md">Install DC/OS</a>.<br>
 4. <a href="docs/3-explore/README.md">Explore the DC/OS & Mesos dashboards</a>.<br>
 5. <a href="docs/4-kafka/README.md">Install Kafka & schedule brokers</a>.<br>
-6. <a href="docs/es-setup.md">Install Elasticsearch & schedule a cluster</a>.<br>
+6. <a href="docs/5-elasticsearch/README.md">Install Elasticsearch & schedule a cluster</a>.<br>
 7. <a href="docs/map-setup.md">Configure the map application</a>.<br>
 8. <a href="docs/app-setup.md">Schedule a real-time analytic task & a source that emits events</a>.<br>
 
