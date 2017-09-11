@@ -24,17 +24,20 @@
 <br><b>Step 8:</b> Click 'coordinator_nodes' to adjust the 'COUNT', 'CPUS', MEM', 'HEAP SIZE', 'DISK' and 'DISK_TYPE' paramaters to your desired settings.<br>
 <img src="08.png" width="70%" height="70%"/>
 
-<br><b>Step 9:</b> TODO<br>
+<br><b>Step 9:</b> Click the 'REVIEW AND INSTALL' button and review the parameters values.<br>
 <img src="09.png" width="70%" height="70%"/>
 
-<br><b>Step 10:</b> TODO<br>
+<br><b>Step 10:</b> Click the 'INSTALL' button to install the elastic package.<br>
 <img src="10.png" width="50%" height="50%"/>
 
-<br><b>Step 11:</b> TODO<br>
+<br><b>Step 11:</b> In the DC/OS dashboard navigate to 'Services - Services'.  Notice there is a Service named 'elastic' that now appears.<br>
 <img src="11.png"/>
 
-<br><b>Step 12:</b> TODO<br>
+<br><b>Step 12:</b> Click on 'elastic' in the service listing to open up more information on the 'elastic' service.  Here we can see TODO:... and the resources that have been allocated to them.<br>
 <img src="12.png"/>
+
+<br><b>Step 13:</b> Taking a quick glimpse at the Mesos dashboard we can see the 'Active Tasks' that are running to support our Elasticsearch cluster.  <i>Note: you can launch into the log files, etc... of any of the tasks from this dashboard.</i><br>
+<img src="13.png"/>
 
 <br><br><b>Congratulations:</b> You now have an Elasticsearch cluster installed with two data nodes ready to store data on the DC/OS cluster.  Next, we will walk through how to TODO.
 
