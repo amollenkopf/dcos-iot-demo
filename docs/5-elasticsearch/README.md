@@ -33,7 +33,7 @@
 <br><b>Step 11:</b> In the DC/OS dashboard navigate to 'Services - Services'.  Notice there is a Service named 'elastic' that now appears.<br>
 <img src="11.png"/>
 
-<br><b>Step 12:</b> Click on 'elastic' in the service listing to open up more information on the 'elastic' service.  Here we can see TODO:... and the resources that have been allocated to them.<br>
+<br><b>Step 12:</b> Click on 'elastic' in the service listing to open up more information on the 'elastic' service.  Here we can see elastic tasks and the resources that have been allocated to them.<br>
 <img src="12.png"/>
 
 <br><b>Step 13:</b> Taking a quick glimpse at the Mesos dashboard we can see the 'Active Tasks' that are running to support our Elasticsearch cluster.  <i>Note: you can launch into the log files, etc... of any of the tasks from this dashboard.</i><br>
