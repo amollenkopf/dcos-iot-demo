@@ -30,4 +30,4 @@
 <br><b>Step 10:</b> Click on 'kafka' in the service listing to open up more information on the 'kafka' service.  Here we can see the three brokers, their names, their status, and the resources that have been allocated to them.<br>
 <img src="10.png"/>
 
-<br><br><b>Congratulations:</b> You now have Kafka installed with three brokers ready to receive data on the DC/OS cluster.  Next, we will walk through how to <a href="../05-elasticsearch.md">Install & schedule an Elasticsearch cluster</a>
+<br><br><b>Congratulations:</b> You now have Kafka installed with three brokers ready to receive data on the DC/OS cluster.  Next, we will walk through how to [Install & schedule an Elasticsearch cluster](../5-elasticsearch/README.md).
