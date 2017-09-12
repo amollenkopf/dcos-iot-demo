@@ -11,7 +11,7 @@ We will now configure a Source to emit data into the Kafka brokers.  A real-time
 <img src="01.png"/>
 
 <br><b>Step 2:</b> To schedule <a href="../../spatiotemporal-esri-analytics/taxi-stream.json">spatiotemporal-esri-analytics/taxi-stream.json</a> go to the DC/OS dashboard and navigate to 'Services - Services'. To run a new Service click the '+' button at the top right of the Services screen.
-<img src="02.png"/><br>
+<img src="02.png" width="60%" height="60%"/><br>
 
 <br><b>Step 3:</b> Open the Marathon dashboard to view the deployment progress of rat01:<br>
 <img src="03.png"/><br>
