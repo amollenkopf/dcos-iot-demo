@@ -10,20 +10,25 @@ We will now configure a Source to emit data into the Kafka brokers.  A real-time
 <li>each worker task starts up with the spark-submit command with lots of application specific parameters</li></ul>
 <img src="01.png"/>
 
-<br><b>Step 2:</b> To schedule <a href="../../spatiotemporal-esri-analytics/taxi-stream.json">spatiotemporal-esri-analytics/taxi-stream.json</a> go to the DC/OS dashboard and navigate to 'Services - Services'. To run a new Service click the '+' button at the top right of the Services screen.
+<br><b>Step 2:</b> To schedule 'task-stream' go to the DC/OS dashboard and navigate to 'Services - Services'. To run a new Service click the '+' button at the top right of the Services screen.
 <img src="02.png" width="60%" height="60%"/><br>
 
-<br><b>Step 3:</b> Open the Marathon dashboard to view the deployment progress of rat01:<br>
+<br><b>Step 3:</b> Click the 'Single Container' option.<br>
 <img src="03.png"/><br>
 
-<br><b>Step 4:</b> Click on the rat01 application to see more details include what hosts and ports it was scheduled to:<br>
+<br><b>Step 4:</b> Toggle the 'JSON EDITOR' button to on and cut & paste the contents of <a href="../../spatiotemporal-esri-analytics/taxi-stream.json">spatiotemporal-esri-analytics/taxi-stream.json</a> into the JSON area.<br>
 <img src="04.png"/><br>
 
-<br><b>Step 5:</b> Open the Mesos dashboard to view the active tasks of rat01:<br>
+<br><b>Step 5:</b> Click the 'REVIEW & RUN' button, review the service configuration & click the 'RUN SERVICE' button to schedule 'taxi-stream'.<br>
 <img src="05.png"/><br>
 
-<br><b>Step 6:</b> For each rat01 instance click on it's 'Sandbox' and open the stdout file to monitor verbose print outs of rat01:<br>
+
+<br><b>Step 6:</b> On the 'Services' page note that 'taxi-stream' is in 'Deploying' status.  <i>note: The first time you deploy the service it will download the .jar file from S3 and will likely take a couple of minutes so be patient.</i><br>
 <img src="06.png"/><br>
+
+Click on the rat01 application to see more details include what hosts and ports it was scheduled to:
+Open the Mesos dashboard to view the active tasks of rat01:
+For each rat01 instance click on it's 'Sandbox' and open the stdout file to monitor verbose print outs of rat01
 
 <br><b>Step 7:</b> The three stdout files of the associated rat01 instances are showing that they are saving 0 records to Elasticsearch.  This is because we have not yet enabled a Source that will emit events.<br>
 <img src="07.png"/><br>
