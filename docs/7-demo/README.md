@@ -48,7 +48,7 @@ We will now configure a Source to emit data into the Kafka brokers.  A real-time
 <img src="12.png"/>
 
 <br><b>Step 13:</b> To schedule 'task-source' go to the DC/OS dashboard and navigate to 'Services - Services'. To run a new Service click the '+' button at the top right of the Services screen and click the 'Single Container' option.<br>
-<img src="13.png" width="60%" height="60%"/><br>
+<img src="13.png"/><br>
 
 <br><b>Step 14:</b> Toggle the 'JSON EDITOR' button to on and cut & paste the contents of <a href="../../spatiotemporal-event-source/taxi-source.json">spatiotemporal-event-source/taxi-source.json</a> into the JSON area.<br>
 <img src="14.png"/><br>
