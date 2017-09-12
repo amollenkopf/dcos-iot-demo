@@ -3,7 +3,7 @@ Schedule a real-time analytic task & a source that emits events.<br>
 We will now configure a Source to emit data into the Kafka brokers.  A real-time analytic task using Spark Streaming will then consume the data and write the results to the spatiotemporal-store.  The spatiotemporal-store uses Elasticsearch to efficiently index observations by space, time, and all the other attributes of the event.  The JavaScript map app periodically queries to reflect the latest state of observations on a map.
 <img src="../0-overview/flow.png"/>
 
-## Run a Spark Streaming job (taxi-stream)
+## Schedule a Spark Streaming job (taxi-stream)
 <b>Step 1:</b> Review the taxi-stream spark streaming task marathon configuration found at <a href="../../spatiotemporal-esri-analytics/taxi-stream.json">spatiotemporal-esri-analytics/taxi-stream.json</a>.  Breaking the marathon app configuration file down:<ul><li>deploys a spark streaming 'taxi-stream' job using the <a href="https://hub.docker.com/r/mesosphere/spark/">mesosphere/spark:1.1.1-2.2.0-hadoop-2.7</a> Docker image.</li>
 <li>the --class gets bootstraped in via a URI that is downloaded prior to the start of each worker task</li>
 <li>each worker task is allocated 2 cpu shares & 1GB of memory</li>
@@ -39,6 +39,5 @@ We will now configure a Source to emit data into the Kafka brokers.  A real-time
 
 <br><b>Step 11:</b> In the Sandbox of a task we can gain access to the output files such as the stdout file to monitor the verbose print outs of the 'taxi-stream' task.  Click on the 'stdout' link to view this.  The stdout file is showing that it is saving 0 records to Elasticsearch.  This is because we have not yet enabled a 'taxi-source' that will emit events to Kafka for this Spark Streaming job to consume.<br>
 <img src="11.png" width="60%" height="60%"/><br><br>
-
 
 <br><br><b>Congratulations:</b> You have ...
