@@ -5,8 +5,8 @@ This project demonstrates how to configure a full stack geo-enabled Internet of 
 
 <table><tr><td width="50%">a</td><td width="50%">b</td></tr></table>
 
-<img src="doc/9-visual/02.gif"><br>
-<img src="doc/9-visual/03.gif"><br>
+<img src="docs/9-visual/02.gif"><br>
+<img src="docs/9-visual/03.gif"><br>
 
 ## To create your own DC/OS IoT demo environment:
 1. <a href="docs/0-overview/README.md">Review the application & architecture overview</a>.<br>
