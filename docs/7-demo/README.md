@@ -1,6 +1,6 @@
 # Run the demo
 Schedule a real-time analytic task & a source that emits events.<br>
-We will now configure a Source to emit data into the Kafka brokers.  A real-time analytic task using SPark Streaming will then consume the data and write the results to the spatiotemporal-store.  The spatiotemporal-store uses Elasticsearch to efficiently index observations by space, time, and all the other attributes of the event.  The JavaScript map app periodically queries to reflect the latest state of observations on a map.
+We will now configure a Source to emit data into the Kafka brokers.  A real-time analytic task using Spark Streaming will then consume the data and write the results to the spatiotemporal-store.  The spatiotemporal-store uses Elasticsearch to efficiently index observations by space, time, and all the other attributes of the event.  The JavaScript map app periodically queries to reflect the latest state of observations on a map.
 <img src="../0-overview/flow.png"/>
 
 ## Run a Spark Streaming job: taxi-stream
@@ -45,7 +45,7 @@ We will now configure a Source to emit data into the Kafka brokers.  A real-time
 <li>each container is allocated 1 cpu shares & 5GB of memory (needed to load the large simulation file into memory)</li>
 <li>each container starts up with a java command with lots of application specific parameters (including the Kafka Mesos DNS entry)</li>
 <li>the --class gets resolved as part of the <a href="https://hub.docker.com/r/amollenkopf/spatiotemporal-event-source/">amollenkopf/spatiotemporal-event-source</a> Docker image</li></ul>
-<img src="12.png"/><br>
+<img src="12.png"/>
 
 <br><b>Step 13:</b> To schedule 'task-source' go to the DC/OS dashboard and navigate to 'Services - Services'. To run a new Service click the '+' button at the top right of the Services screen and click the 'Single Container' option.<br>
 <img src="13.png" width="60%" height="60%"/><br>
