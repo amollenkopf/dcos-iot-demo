@@ -38,9 +38,8 @@ We will now configure a Source to emit data into the Kafka brokers.  A real-time
 <img src="10.png"/><br>
 
 <br><b>Step 11:</b> In the Sandbox of a task we can gain access to the output files such as the stdout file to monitor the verbose print outs of the 'taxi-stream' task.  Click on the 'stdout' link to view this.  The stdout file is showing that it is saving 0 records to Elasticsearch.  This is because we have not yet enabled a 'taxi-source' that will emit events to Kafka for this Spark Streaming job to consume.<br>
-<img src="11.png" width="50%" height="50%"/><br>
+<img src="11.png" width="50%" height="50%"/><br><br>
 
-<br>
 ## Run a Kafka producer appplication: taxi-source
 <b>Step 12:</b> Review the taxi-source Kafka producer task marathon configuration found at <a href="../../spatiotemporal-event-source/taxi-source.json">spatiotemporal-event-source/taxi-source.json</a>.  Breaking the marathon app configuration file down:<ul><li>deploys one instance of a 'taxi-source' deployed as a <a href="https://hub.docker.com/r/amollenkopf/spatiotemporal-event-source/">amollenkopf/spatiotemporal-event-source</a> Docker container</li>
 <li>each container is allocated 1 cpu shares & 5GB of memory (needed to load the large simulation file into memory)</li>
