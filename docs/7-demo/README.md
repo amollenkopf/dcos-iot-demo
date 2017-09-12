@@ -94,7 +94,4 @@ We will now configure a Source to emit data into the Kafka brokers.  A real-time
 <br><b>Step 28:</b> Disabling both the Heatmap and Replay capabilities we get back to a near real-time view of the obervations:<br>
 <img src="28.png"/><br>
 
-<br><b>Step 29:</b> Reviewing the stdout files of the associated real-time analytic tasks we can see that they are continuing to process events in a distributed fashion:<br>
-<img src="29.png"/><br>
-
 <br><br><b>Congratulations:</b> You now have ...
