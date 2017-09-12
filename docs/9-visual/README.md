@@ -3,7 +3,7 @@
 The 'taxi-stream' task writes events it recieves to Elasticsearch data nodes.  The 'map-webapp' that was deployed previously continuously queries Elasticsearch to visualize the latest taxi movement information on a map.  Each second the visualization is automatically updated with the latest taxi movement statistics from Elasticsearch.  The map application can be accessed on the public agent node at /map/index.html, e.g. https://adamdcos04.westus.cloudapp.azure.com/map/index.html.<br>
 <img src="01.gif"/><br>
 
-<br><b>Step 2:</b> The 'map-webapp' has the ability to enable 'Replay' of the spatiotemporal observations.  To enable this flip the dial to on and use the time slider on the bottom left corner to specify the time window you want to replay with.  Stepping forward on the replay we can see the counts (labels on the goehash aggregations) increasing:<br>
+<br><b>Step 2:</b> The 'map-webapp' has the ability to enable 'Replay' of the spatiotemporal observations.  To enable this flip the 'Replay' dial to on and use the time slider on the bottom left corner to specify the time window you want to replay with.  Stepping forward on the replay we can see the counts (labels on the goehash aggregations) increasing:<br>
 <img src="02.gif"/><br>
 
 <br><b>Step 3:</b> The 'map-webapp' also supports the ability to generate a client-side heatmap based on content being queried from Elasticsearch.  To enable this flip the 'Heatmap' dial to on and interact with the replay bar to see how taxi movement density changes with time using heatmap as the visualization technique.<br>
