@@ -155,7 +155,7 @@
 
     // on map load continue
     _map.on("load", function () {
-      getTimeRange();
+      getTimeRangeAndUpdateActiveLayer();
       addESFeatureLayer();
       addAggregationLayer();
       addHeatmapLayer();
@@ -195,7 +195,7 @@
         domStyle.set(dom.byId('timeSlider'), "display", 'none');
         _map.setTimeSlider(null);
         _map.setTimeExtent(null);
-        getTimeRange();
+        getTimeRangeAndUpdateActiveLayer();
         _replay = false;
       }
     }
