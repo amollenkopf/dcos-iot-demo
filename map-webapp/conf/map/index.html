@@ -217,8 +217,8 @@
       }
     }
 
-    // get time range from the ES index
-    function getTimeRange() {
+    // get time range from the ES index and update the active layer
+    function getTimeRangeAndUpdateActiveLayer() {
       _esClient.search({
           index: _esIndex,
           type: _esType,
@@ -316,7 +316,7 @@
     // get aggregations from the ES index, and update/refresh the active layer
     function updateActiveLayer(level, extent) {
       if (_timeExtent == null) {
-        getTimeRange();
+        getTimeRangeAndUpdateActiveLayer();
       }
 
       var coords = webMercatorUtils.webMercatorToGeographic(extent);
@@ -807,7 +807,7 @@
 
     function updateTimeSlider() {
       if (_timeExtent == null) {
-        getTimeRange();
+        getTimeRangeAndUpdateActiveLayer();
       }
 
       timeSlider.createTimeStopsByCount(_timeExtent, 21);
@@ -865,7 +865,7 @@
       if (_refreshInterval !== 0) {
         setInterval(function () {
           if (!_replay) {
-            updateActiveLayer(_map.getLevel(), _mapExtent);
+            getTimeRangeAndUpdateActiveLayer();
             console.log("refresh");
           }
         }, _refreshInterval)
