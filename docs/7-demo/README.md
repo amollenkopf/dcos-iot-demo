@@ -25,7 +25,7 @@ We will now configure a Source to emit data into the Kafka brokers.  A real-time
 <br><b>Step 6:</b> On the 'Services' page note that 'taxi-stream' is in 'Deploying' status.  <i>note: The first time you deploy the service it will download the .jar file from S3 and will likely take a couple of minutes so be patient.</i><br>
 <img src="06.png"/><br>
 
-<br><b>Step 7:</b> Once the 'taxi-stream' shows a status of 'Running' click on the 'taxi-stream' to see more information.<br>
+<br><b>Step 7:</b> Once the 'taxi-stream' shows a status of 'Running' click on 'taxi-stream' to see more information.<br>
 <img src="07.png"/><br>
 
 <br><b>Step 8:</b> 'taxi-stream' is a Spark Streaming job.  Here we can see the host where the Spark Streaming driver was scheduled to as well as the status of the driver.  To see the actual worker tasks we must dive into the Mesos Dashboard.<br>
@@ -46,6 +46,40 @@ We will now configure a Source to emit data into the Kafka brokers.  A real-time
 <li>each container starts up with a java command with lots of application specific parameters (including the Kafka Mesos DNS entry)</li>
 <li>the --class gets resolved as part of the <a href="https://hub.docker.com/r/amollenkopf/spatiotemporal-event-source/">amollenkopf/spatiotemporal-event-source</a> Docker image</li></ul>
 <img src="12.png"/><br>
+
+<br><b>Step 13:</b> To schedule 'task-source' go to the DC/OS dashboard and navigate to 'Services - Services'. To run a new Service click the '+' button at the top right of the Services screen and click the 'Single Container' option.<br>
+<img src="13.png" width="60%" height="60%"/><br>
+
+<br><b>Step 14:</b> Toggle the 'JSON EDITOR' button to on and cut & paste the contents of <a href="../../spatiotemporal-event-source/taxi-source.json">spatiotemporal-event-source/taxi-source.json</a> into the JSON area.<br>
+<img src="14.png"/><br>
+
+<br><b>Step 15:</b> Click the 'REVIEW & RUN' button, review the service configuration & click the 'RUN SERVICE' button to schedule 'taxi-source'.<br>
+<img src="15.png"/><br>
+
+<br><b>Step 16:</b> On the 'Services' page note that 'taxi-source' is in 'Deploying' status.  <i>note: The first time you deploy the service it will download the .csv simulation file from S3 and will likely take a couple of minutes so be patient.</i><br>
+<img src="16.png"/><br>
+
+<br><b>Step 17:</b> Once the 'taxi-source' shows a status of 'Running' click on 'taxi-source' to see more information.<br>
+<img src="17.png"/><br>
+
+<br><b>Step 18:</b> 'taxi-stream' is a Spark Streaming job.  Here we can see the host where the Spark Streaming driver was scheduled to as well as the status of the driver.  To see the actual worker tasks we must dive into the Mesos Dashboard.<br>
+<img src="18.png"/><br>
+
+<br><b>Step 19:</b> Open the Mesos dashboard to view the tasks of 'taxi-stream'.  Here we can see the driver task 'taxi-stream' and it's corresponding worker tasks 'taxi-rat 0', 'taxi-rat 1' and 'taxi-rat 2'.  note: 'rat' is an abbreviation for real-time analytic task.<br>
+<img src="19.png"/><br>
+
+<br><b>Step 20:</b> To view the progress of the spark streaming job click on the 'Sandbox' of the driver task 'taxi-stream'.<br>
+<img src="20.png"/><br>
+
+<br><b>Step 21:</b> In the Sandbox of a task we can gain access to the output files such as the stdout file to monitor the verbose print outs of the 'taxi-stream' task.  Click on the 'stdout' link to view this.  The stdout file is showing that it is saving 0 records to Elasticsearch.  This is because we have not yet enabled a 'taxi-source' that will emit events to Kafka for this Spark Streaming job to consume.<br>
+<img src="21.png" width="50%" height="50%"/><br><br>
+
+
+
+
+
+
+
 
 <br><b>Step 11:</b> To schedule a Source that emits events into a Kafka topic's partitions running on a DC/OS cluster issue the following DC/OS CLI command<ul><li>dcos marathon app add spatiotemporal-event-source/source01.json</li></ul>
 <img src="11.png"/><br>
