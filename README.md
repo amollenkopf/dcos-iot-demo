@@ -17,4 +17,4 @@ This project demonstrates how to configure a full stack geo-enabled Internet of 
 9. <a href="docs/9-visual/README.md">Visualize IoT movement behavior</a> (map-webapp).<br>
 
 ## Cleanup procedure between demo runs:
-10. <a href="docs/cleanup-demo.md">Apply cleanup procedures between demo runs</a>.
+10. <a href="docs/cleanup-demo.md">Apply cleanup procedures</a> between demo runs.
