@@ -5,9 +5,9 @@ We will now configure a Source to emit data into the Kafka brokers.  A real-time
 
 ## Run a Spark Streaming job: taxi-stream
 <b>Step 1:</b> Review the taxi-stream spark streaming task marathon configuration found at <a href="../../spatiotemporal-esri-analytics/taxi-stream.json">spatiotemporal-esri-analytics/taxi-stream.json</a>.  Breaking the marathon app configuration file down:<ul><li>deploys a spark streaming 'taxi-stream' job deployed using the <a href="https://hub.docker.com/r/mesosphere/spark/">mesosphere/spark:1.1.1-2.2.0-hadoop-2.7</a> Docker image.</li>
-<li>the --class gets bootstraped in via a URI that is downloaded prior to the start of each worker task</li></ul>
+<li>the --class gets bootstraped in via a URI that is downloaded prior to the start of each worker task</li>
 <li>each worker task is allocated 2 cpu shares & 1GB of memory</li>
-<li>each worker task starts up with the spark-submit command with lots of application specific parameters</li>
+<li>each worker task starts up with the spark-submit command with lots of application specific parameters</li></ul>
 <img src="01.png"/><br>
 
 <br><b>Step 2:</b> To schedule <a href="../spatiotemporal-esri-analytics/rat01.json">spatiotemporal-esri-analytics/rat01.json</a> onto the DC/OS cluster go to the DC/OS dashboard and navigate to 'Services - Services'. To run a new Service click the '+' button at the top right of the Services screen.
