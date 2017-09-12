@@ -92,4 +92,4 @@ The 'taxi-stream' task is writing events it recieves to Elasticsearch data nodes
 <br><b>Step 26:</b> Disabling the 'Heatmap' dial we can switch back into a geohash aggregation visualization of the near real-time taxi movement.<br>
 <img src="26.png"/><br>
 
-<br><br><b>Congratulations:</b> You now have successfully run the dcos-iot-demo and visualized taxi movement using geoaggregation techniques.
+<br><br><b>Congratulations:</b> You have successfully run the dcos-iot-demo and visualized taxi movement using geoaggregation techniques.
