@@ -38,7 +38,7 @@ We will now configure a Source to emit data into the Kafka brokers.  A real-time
 <img src="10.png"/><br>
 
 <br><b>Step 11:</b> In the Sandbox of a task we can gain access to the output files such as the stdout file to monitor the verbose print outs of the 'taxi-stream' task.  Click on the 'stdout' link to view this.  The stdout file is showing that it is saving 0 records to Elasticsearch.  This is because we have not yet enabled a 'taxi-source' that will emit events to Kafka for this Spark Streaming job to consume.<br>
-<img src="11.png" width="50%" height="50%"/><br><br>
+<img src="11.png" width="60%" height="60%"/><br><br>
 
 ## Run a Kafka producer appplication: taxi-source
 <b>Step 12:</b> Review the taxi-source Kafka producer task marathon configuration found at <a href="../../spatiotemporal-event-source/taxi-source.json">spatiotemporal-event-source/taxi-source.json</a>.  Breaking the marathon app configuration file down:<ul><li>deploys one instance of a 'taxi-source' deployed as a <a href="https://hub.docker.com/r/amollenkopf/spatiotemporal-event-source/">amollenkopf/spatiotemporal-event-source</a> Docker container</li>
@@ -62,17 +62,17 @@ We will now configure a Source to emit data into the Kafka brokers.  A real-time
 <br><b>Step 17:</b> Once the 'taxi-source' shows a status of 'Running' click on 'taxi-source' to see more information.<br>
 <img src="17.png"/><br>
 
-<br><b>Step 18:</b> 'taxi-stream' is a Spark Streaming job.  Here we can see the host where the Spark Streaming driver was scheduled to as well as the status of the driver.  To see the actual worker tasks we must dive into the Mesos Dashboard.<br>
+<br><b>Step 18:</b> 'taxi-source' is a custom Scala source application that reads a CSV file from S3, loads it's contents into memory and then produces taxi vehicle movement events to a Kafka topic.  Here we can see the host where the app was scheduled to as well as the status of the app.  To see the progress of the app we can dive into the Mesos Dashboard.<br>
 <img src="18.png"/><br>
 
-<br><b>Step 19:</b> Open the Mesos dashboard to view the tasks of 'taxi-stream'.  Here we can see the driver task 'taxi-stream' and it's corresponding worker tasks 'taxi-rat 0', 'taxi-rat 1' and 'taxi-rat 2'.  note: 'rat' is an abbreviation for real-time analytic task.<br>
+<br><b>Step 19:</b> Open the Mesos dashboard to view the task of 'taxi-source'.<br>
 <img src="19.png"/><br>
 
-<br><b>Step 20:</b> To view the progress of the spark streaming job click on the 'Sandbox' of the driver task 'taxi-stream'.<br>
-<img src="20.png"/><br>
+<br><b>Step 20:</b> Here we can see the application task for 'taxi-source' and can monitor the progress by clicking into the 'Sandbox' and opening it's 'stdout' file.<br>
+<img src="20.png" width="60%" height="60%"/><br>
 
-<br><b>Step 21:</b> In the Sandbox of a task we can gain access to the output files such as the stdout file to monitor the verbose print outs of the 'taxi-stream' task.  Click on the 'stdout' link to view this.  The stdout file is showing that it is saving 0 records to Elasticsearch.  This is because we have not yet enabled a 'taxi-source' that will emit events to Kafka for this Spark Streaming job to consume.<br>
-<img src="21.png" width="50%" height="50%"/><br><br>
+<br><b>Step 21:</b> In the Mesos dashboard navigate to open the 'stdout' file of the 'taxi-stream' Spark Streaming driver.  Here we can see that the Spark Streaming workers tasks are now recieving the events from Kafka.<br>
+<img src="21.png" width="60%" height="60%"/><br><br>
 
 
 
