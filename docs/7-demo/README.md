@@ -75,52 +75,26 @@ We will now configure a Source to emit data into the Kafka brokers.  A real-time
 <img src="21.png" width="60%" height="60%"/><br><br>
 
 
-
-
-
-
-
-
-<br><b>Step 11:</b> To schedule a Source that emits events into a Kafka topic's partitions running on a DC/OS cluster issue the following DC/OS CLI command<ul><li>dcos marathon app add spatiotemporal-event-source/source01.json</li></ul>
-<img src="11.png"/><br>
-
-<br><b>Step 12:</b> Open the Marathon dashboard to view the deployment progress of source01 (it will take 1-2 minutes to deploy as the Docker image is large due to the size of the simulation file):<br>
-<img src="12.png"/><br>
-
-<br><b>Step 13:</b> Click on the source01 application to see more details include what host and port it was scheduled to:<br>
-<img src="13.png"/><br>
-
-<br><b>Step 14:</b> Open the Mesos dashboard to view the active task of source01:<br>
-<img src="14.png"/><br>
-
-<br><b>Step 15:</b> Click on the 'Sandbox' of the source01 instance and open the stdout file to monitor verbose print outs of source01:<br>
-<img src="15.png"/><br>
-
-<br><b>Step 16:</b> The stdout file of the associated source01 instance shows that it is emitting events to the Kafka topic partitions every 3 seconds:<br>
-<img src="16.png"/><br>
-
-<br><b>Step 17:</b> The three stdout files of the associated rat01 instances are now showing they are consuming these events evenly as each is subscribed to a unique Kafka topic partition:<br>
-<img src="17.png"/><br>
-
-<br><b>Step 18:</b> Go back to the browser tab that has the map app and hit the refresh button.  You should now see taxi content appearing on the map asgeohash aggregations that are auto-updated as new data appears in Elasticsearch:<br>
-<img src="18.png"/><br>
-
-<br><b>Step 19:</b> The map app has the ability to enable 'Replay' of the spatiotemporal observations.  To enable this flip the dial to on and use the time slider on the bottom left corner to specify the time window you want to replay with:<br>
-<img src="19.png"/><br>
-
-<br><b>Step 20:</b> Steppign forward on the replay we can see the counts (labels on the goehash aggregations) increasing:<br>
-<img src="20.png"/><br>
-
-<br><b>Step 21:</b> The map app also supports the ability to generate a client-side heatmap based on content being queried from Elasticsearch:<br>
-<img src="21.png"/><br>
-
-<br><b>Step 22:</b> Using the timeslider we can see how the density changes over time<br>
+## Visualize taxi movement behavior on a map: map-webapp
+<br><b>Step 22:</b> Go back to the browser tab that has the map app and hit the refresh button.  You should now see taxi content appearing on the map asgeohash aggregations that are auto-updated as new data appears in Elasticsearch:<br>
 <img src="22.png"/><br>
 
-<br><b>Step 23:</b> Disabling both the Heatmap and Replay capabilities we get back to a near real-time view of the obervations:<br>
+<br><b>Step 23:</b> The map app has the ability to enable 'Replay' of the spatiotemporal observations.  To enable this flip the dial to on and use the time slider on the bottom left corner to specify the time window you want to replay with:<br>
 <img src="23.png"/><br>
 
-<br><b>Step 24:</b> Reviewing the stdout files of the associated real-time analytic tasks we can see that they are continuing to process events in a distributed fashion:<br>
+<br><b>Step 24:</b> Steppign forward on the replay we can see the counts (labels on the goehash aggregations) increasing:<br>
 <img src="24.png"/><br>
+
+<br><b>Step 25:</b> The map app also supports the ability to generate a client-side heatmap based on content being queried from Elasticsearch:<br>
+<img src="25.png"/><br>
+
+<br><b>Step 26:</b> Using the timeslider we can see how the density changes over time<br>
+<img src="27.png"/><br>
+
+<br><b>Step 28:</b> Disabling both the Heatmap and Replay capabilities we get back to a near real-time view of the obervations:<br>
+<img src="28.png"/><br>
+
+<br><b>Step 29:</b> Reviewing the stdout files of the associated real-time analytic tasks we can see that they are continuing to process events in a distributed fashion:<br>
+<img src="29.png"/><br>
 
 <br><br><b>Congratulations:</b> You now have ...
