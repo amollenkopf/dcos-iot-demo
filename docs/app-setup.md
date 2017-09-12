@@ -1,6 +1,6 @@
 # Schedule a Real-Time Analytic Task & a Source that emits events
 We will now configure a Source to emit data into the Kafka brokers.  A real-time analytic task using SPark Streaming will then consume the data and write the results to the spatiotemporal-store.  The spatiotemporal-store uses Elasticsearch to efficiently index observations by space, time, and all the other attributes of the event.  The JavaScript map app periodically queries to reflect the latest state of observations on a map.
-<img src="../images/00-overview/iot-flow.jpg"/>
+<img src="../00-overview/flow.png"/>
 
 <b>Step 1:</b> We will now review a real-time analytic task marathon configuration found at <a href="../spatiotemporal-esri-analytics/rat01.json">spatiotemporal-esri-analytics/rat01.json</a>.  Breaking the marathon app configuration file down:<ul><li>deploys 3 instances of a 'rat01' deployed as <a href="https://hub.docker.com/r/mesosphere/spark/">mesosphere/spark-1.6.1.6</a> Docker containers</li>
 <li>each container is allocated 4 cpu shares & 2GB of memory</li>
