@@ -77,19 +77,19 @@ We will now configure a Source to emit data into the Kafka brokers.  A real-time
 
 ## Visualize taxi movement behavior on a map: map-webapp
 <br><b>Step 22:</b> Go back to the browser tab that has the map app and hit the refresh button.  You should now see taxi content appearing on the map asgeohash aggregations that are auto-updated as new data appears in Elasticsearch:<br>
-<img src="22.png"/><br>
+<img src="22.gif"/><br>
 
 <br><b>Step 23:</b> The map app has the ability to enable 'Replay' of the spatiotemporal observations.  To enable this flip the dial to on and use the time slider on the bottom left corner to specify the time window you want to replay with:<br>
-<img src="23.png"/><br>
+<img src="23.gif"/><br>
 
 <br><b>Step 24:</b> Steppign forward on the replay we can see the counts (labels on the goehash aggregations) increasing:<br>
-<img src="24.png"/><br>
+<img src="24.gif"/><br>
 
 <br><b>Step 25:</b> The map app also supports the ability to generate a client-side heatmap based on content being queried from Elasticsearch:<br>
 <img src="25.png"/><br>
 
 <br><b>Step 26:</b> Using the timeslider we can see how the density changes over time<br>
-<img src="27.png"/><br>
+<img src="26.png"/><br>
 
 <br><b>Step 28:</b> Disabling both the Heatmap and Replay capabilities we get back to a near real-time view of the obervations:<br>
 <img src="28.png"/><br>
