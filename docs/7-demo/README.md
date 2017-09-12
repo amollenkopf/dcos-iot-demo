@@ -4,11 +4,11 @@ We will now configure a Source to emit data into the Kafka brokers.  A real-time
 <img src="../0-overview/flow.png"/>
 
 ## Run a Spark Streaming job: taxi-stream
-<b>Step 1:</b> We will now review a real-time analytic task marathon configuration found at <a href="../spatiotemporal-esri-analytics/rat01.json">spatiotemporal-esri-analytics/rat01.json</a>.  Breaking the marathon app configuration file down:<ul><li>deploys 3 instances of a 'rat01' deployed as <a href="https://hub.docker.com/r/mesosphere/spark/">mesosphere/spark-1.6.1.6</a> Docker containers</li>
-<li>each container is allocated 4 cpu shares & 2GB of memory</li>
-<li>each container starts up with the spark-submit command with lots of application specific parameters</li>
+<b>Step 1:</b> Review the taxi-stream spark streaming task marathon configuration found at <a href="../spatiotemporal-esri-analytics/taxi-stream.json">spatiotemporal-esri-analytics/taxi-stream.json</a>.  Breaking the marathon app configuration file down:<ul><li>deploys a spark streaming 'taxi-stream' job deployed using the <a href="https://hub.docker.com/r/mesosphere/spark/">mesosphere/spark:1.1.1-2.2.0-hadoop-2.7</a> Docker image</li>
+<li>each worker is allocated 2 cpu shares & 1GB of memory</li>
+<li>each worker starts up with the spark-submit command with lots of application specific parameters</li>
 <li>the --class gets bootstraped in via a URI downloaded prior to the start of each container</li></ul>
-<img src="../images/07-app-setup/app-01.png"/><br>
+<img src="01.png"/><br>
 
  
 
