@@ -3,7 +3,7 @@ Schedule a real-time analytic task & a source that emits events.<br>
 We will now configure a Source to emit data into the Kafka brokers.  A real-time analytic task using Spark Streaming will then consume the data and write the results to the spatiotemporal-store.  The spatiotemporal-store uses Elasticsearch to efficiently index observations by space, time, and all the other attributes of the event.  The JavaScript map app periodically queries to reflect the latest state of observations on a map.
 <img src="../0-overview/flow.png"/>
 
-## Run a Spark Streaming job: taxi-stream
+## Run a Spark Streaming job (taxi-stream)
 <b>Step 1:</b> Review the taxi-stream spark streaming task marathon configuration found at <a href="../../spatiotemporal-esri-analytics/taxi-stream.json">spatiotemporal-esri-analytics/taxi-stream.json</a>.  Breaking the marathon app configuration file down:<ul><li>deploys a spark streaming 'taxi-stream' job using the <a href="https://hub.docker.com/r/mesosphere/spark/">mesosphere/spark:1.1.1-2.2.0-hadoop-2.7</a> Docker image.</li>
 <li>the --class gets bootstraped in via a URI that is downloaded prior to the start of each worker task</li>
 <li>each worker task is allocated 2 cpu shares & 1GB of memory</li>
@@ -40,7 +40,7 @@ We will now configure a Source to emit data into the Kafka brokers.  A real-time
 <br><b>Step 11:</b> In the Sandbox of a task we can gain access to the output files such as the stdout file to monitor the verbose print outs of the 'taxi-stream' task.  Click on the 'stdout' link to view this.  The stdout file is showing that it is saving 0 records to Elasticsearch.  This is because we have not yet enabled a 'taxi-source' that will emit events to Kafka for this Spark Streaming job to consume.<br>
 <img src="11.png" width="60%" height="60%"/><br><br>
 
-## Run a Kafka producer appplication: taxi-source
+## Run a Kafka producer appplication (taxi-source)
 <b>Step 12:</b> Review the taxi-source Kafka producer task marathon configuration found at <a href="../../spatiotemporal-event-source/taxi-source.json">spatiotemporal-event-source/taxi-source.json</a>.  Breaking the marathon app configuration file down:<ul><li>deploys one instance of a 'taxi-source' deployed as a <a href="https://hub.docker.com/r/amollenkopf/spatiotemporal-event-source/">amollenkopf/spatiotemporal-event-source</a> Docker container</li>
 <li>each container is allocated 1 cpu shares & 5GB of memory (needed to load the large simulation file into memory)</li>
 <li>each container starts up with a java command with lots of application specific parameters (including the Kafka Mesos DNS entry)</li>
@@ -75,23 +75,21 @@ We will now configure a Source to emit data into the Kafka brokers.  A real-time
 <img src="21.png" width="60%" height="60%"/><br><br>
 
 
-## Visualize taxi movement behavior on a map: map-webapp
-<br><b>Step 22:</b> Go back to the browser tab that has the map app and hit the refresh button.  You should now see taxi content appearing on the map asgeohash aggregations that are auto-updated as new data appears in Elasticsearch:<br>
+## Visualize taxi movement behavior (map-webapp)
+<br><b>Step 22:</b> 
+The 'taxi-stream' task is writing events it recieves to Elasticsearch data nodes.  The 'map-webapp' that was deployed previously continuously queries Elasticsearch to visualize the latest taxi movement information on a map.  The map application can be accessed on the public agent node at /map/index.html, e.g. https://adamdcos04.westus.cloudapp.azure.com/map/index.html.<br>
 <img src="22.gif"/><br>
 
-<br><b>Step 23:</b> The map app has the ability to enable 'Replay' of the spatiotemporal observations.  To enable this flip the dial to on and use the time slider on the bottom left corner to specify the time window you want to replay with:<br>
+<br><b>Step 23:</b> The 'map-webapp' has the ability to enable 'Replay' of the spatiotemporal observations.  To enable this flip the dial to on and use the time slider on the bottom left corner to specify the time window you want to replay with.  Stepping forward on the replay we can see the counts (labels on the goehash aggregations) increasing:<br>
 <img src="23.gif"/><br>
 
-<br><b>Step 24:</b> Steppign forward on the replay we can see the counts (labels on the goehash aggregations) increasing:<br>
+<br><b>Step 24:</b> The 'map-webapp' also supports the ability to generate a client-side heatmap based on content being queried from Elasticsearch.  To enable this flip the 'Heatmap' dial to on and interact with the replay bar to see how taxi movement density changes with time using heatmap as the visualization technique.<br>
 <img src="24.gif"/><br>
 
-<br><b>Step 25:</b> The map app also supports the ability to generate a client-side heatmap based on content being queried from Elasticsearch:<br>
+<br><b>Step 25:</b> Disabling the 'Replay' dial we can switch back into 'live' mode visualizing near real-time taxi movement as it occurs.<br>
 <img src="25.png"/><br>
 
-<br><b>Step 26:</b> Using the timeslider we can see how the density changes over time<br>
+<br><b>Step 26:</b> Disabling the 'Heatmap' dial we can switch back into a geohash aggregation visualization of the near real-time taxi movement.<br>
 <img src="26.png"/><br>
 
-<br><b>Step 28:</b> Disabling both the Heatmap and Replay capabilities we get back to a near real-time view of the obervations:<br>
-<img src="28.png"/><br>
-
-<br><br><b>Congratulations:</b> You now have ...
+<br><br><b>Congratulations:</b> You now have successfully run the dcos-iot-demo and visualized taxi movement using geoaggregation techniques.
