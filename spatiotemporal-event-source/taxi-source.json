@@ -7,9 +7,10 @@
     }
   },
   "cmd": "java -Xms4096m -Xmx4096m -jar ./jars/spatiotemporal-event-source-assembly-1.0.jar broker.kafka.l4lb.thisdcos.directory:9092 taxi 3000 /data/taxi/taxi-simulation-01-25.csv 1 false",
-  "id": "source01",
+  "id": "taxi-source",
   "instances": 1,
   "cpus": 1.0,
   "mem": 5120
 }
+
 
