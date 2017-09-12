@@ -25,7 +25,6 @@ We will now configure a Source to emit data into the Kafka brokers.  A real-time
 <br><b>Step 6:</b> On the 'Services' page note that 'taxi-stream' is in 'Deploying' status.  <i>note: The first time you deploy the service it will download the .jar file from S3 and will likely take a couple of minutes so be patient.</i><br>
 <img src="06.png"/><br>
 
-
 <br><b>Step 7:</b> Once the 'taxi-stream' shows a status of 'Running' click on the 'taxi-stream' to see more information.<br>
 <img src="07.png"/><br>
 
@@ -35,26 +34,19 @@ We will now configure a Source to emit data into the Kafka brokers.  A real-time
 <br><b>Step 9:</b> Open the Mesos dashboard to view the tasks of 'taxi-stream'.  Here we can see the driver task 'taxi-stream' and it's corresponding worker tasks 'taxi-rat 0', 'taxi-rat 1' and 'taxi-rat 2'.  note: 'rat' is an abbreviation for real-time analytic task.<br>
 <img src="09.png"/><br>
 
-<br><b>Step 10:</b> To view the progress of the spark streaming job we can click on the 'Sandbox' of the driver task 'taxi-stream'.<br>
+<br><b>Step 10:</b> To view the progress of the spark streaming job click on the 'Sandbox' of the driver task 'taxi-stream'.<br>
 <img src="10.png"/><br>
 
-<br><b>Step 11:</b> In the Sandbox of a task we can gain access to the output files such as the stdout file to monitor the verbose print outs of the 'taxi-stream' Spark Streaming job.  Click on the 'stdout' to view this.<br>
-<img src="11.png"/><br>
+<br><b>Step 11:</b> In the Sandbox of a task we can gain access to the output files such as the stdout file to monitor the verbose print outs of the 'taxi-stream' task.  Click on the 'stdout' link to view this.  The stdout file is showing that it is saving 0 records to Elasticsearch.  This is because we have not yet enabled a 'taxi-source' that will emit events to Kafka for this Spark Streaming job to consume.<br>
+<img src="11.png" width="50%" height="50%"/><br>
 
+## Run a Kafka producer appplication: taxi-source
 
-
-The three stdout files of the associated rat01 instances are showing that they are saving 0 records to Elasticsearch.  This is because we have not yet enabled a Source that will emit events.
-
-In order for us to partition events sent to Kafka in an evenly distributed mode we will create a topic with partitions matching the number of brokers we have deployed.  The Source (producer) has code, see <a href="../spatiotemporal-event-source/src/main/scala/org/cam/geo/source/SpatiotemporalFileEventSource.scala">SpatiotemporalFileEventSource.scala</a> use of <a href="../spatiotemporal-event-source/src/main/scala/org/cam/geo/source/SimplePartitioner.scala">SimplePartitioner.scala</a>, that partitions the events in a consistent manner so the same taxi ids go to the same partitions while evenly distributing the load across the configured partitions of the topic.<br><ul><li>dcos kafka topic create taxi --partitions=3 --replication=1</li></ul>
-
-The Source has runtime parameters that specify deployment hosts & ports of the Kafka brokers.  To learn this information use the DC/OS CLI and issue the following command<br><ul><li>dcos kafka connection</li></ul>
-
-We will now review a source task marathon configuration found at <a href="../spatiotemporal-event-source/source01.json">spatiotemporal-event-source/source01.json</a>.  Breaking the marathon app configuration file down:<ul><li>deploys 1 instance of a 'source01' deployed as a <a href="https://hub.docker.com/r/amollenkopf/spatiotemporal-event-source/">amollenkopf/spatiotemporal-event-source</a> Docker container</li>
-<li>each container is allocated 1 cpu shares & 5GB of memory (needed for the large simulation file)</li>
-<li>each container starts up with the java command with lots of application specific parameters (including the Kafka broker hosts & ports)</li>
-<li>the --class comes as part of the <a href="https://hub.docker.com/r/amollenkopf/spatiotemporal-event-source/">amollenkopf/spatiotemporal-event-source</a> Docker image</li></ul>
-<img src="10.png"/><br>
-<ul><li>NOTE: MAKE SURE you change the broker hosts and port numbers in the <a href="../spatiotemporal-event-source/source01.json">spatiotemporal-event-source/source01.json</a> with what was learned in Step 9.</li></ul>
+<b>Step 12:</b> Review the taxi-source Kafka producer task marathon configuration found at <a href="../../spatiotemporal-event-source/taxi-source.json">spatiotemporal-event-source/taxi-source.json</a>.  Breaking the marathon app configuration file down:<ul><li>deploys one instance of a 'taxi-source' deployed as a <a href="https://hub.docker.com/r/amollenkopf/spatiotemporal-event-source/">amollenkopf/spatiotemporal-event-source</a> Docker container</li>
+<li>each container is allocated 1 cpu shares & 5GB of memory (needed to load the large simulation file into memory)</li>
+<li>each container starts up with a java command with lots of application specific parameters (including the Kafka Mesos DNS entry)</li>
+<li>the --class gets resolved as part of the <a href="https://hub.docker.com/r/amollenkopf/spatiotemporal-event-source/">amollenkopf/spatiotemporal-event-source</a> Docker image</li></ul>
+<img src="12.png"/><br>
 
 <br><b>Step 11:</b> To schedule a Source that emits events into a Kafka topic's partitions running on a DC/OS cluster issue the following DC/OS CLI command<ul><li>dcos marathon app add spatiotemporal-event-source/source01.json</li></ul>
 <img src="11.png"/><br>
