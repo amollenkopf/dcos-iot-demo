@@ -8,9 +8,9 @@ We will now configure a Source to emit data into the Kafka brokers.  A real-time
 <li>the --class gets bootstraped in via a URI that is downloaded prior to the start of each worker task</li>
 <li>each worker task is allocated 2 cpu shares & 1GB of memory</li>
 <li>each worker task starts up with the spark-submit command with lots of application specific parameters</li></ul>
-<img src="01.png"/><br>
+<img src="01.png"/>
 
-<br><b>Step 2:</b> To schedule <a href="../spatiotemporal-esri-analytics/rat01.json">spatiotemporal-esri-analytics/rat01.json</a> onto the DC/OS cluster go to the DC/OS dashboard and navigate to 'Services - Services'. To run a new Service click the '+' button at the top right of the Services screen.
+<br><b>Step 2:</b> To schedule <a href="../../spatiotemporal-esri-analytics/taxi-stream.json">spatiotemporal-esri-analytics/taxi-stream.json</a> go to the DC/OS dashboard and navigate to 'Services - Services'. To run a new Service click the '+' button at the top right of the Services screen.
 <img src="02.png"/><br>
 
 <br><b>Step 3:</b> Open the Marathon dashboard to view the deployment progress of rat01:<br>
