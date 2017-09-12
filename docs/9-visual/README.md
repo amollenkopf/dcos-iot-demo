@@ -12,7 +12,7 @@ The 'taxi-stream' task writes events it recieves to Elasticsearch data nodes.  T
 <br><b>Step 4:</b> Disabling the 'Replay' dial we can switch back into 'live' mode visualizing near real-time taxi movement as it occurs.<br>
 <img src="04.png"/><br>
 
-<br><b>Step 5:</b> Disabling the 'Heatmap' dial we can switch back into a geohash aggregation visualization of the near real-time taxi movement.<br>
+<br><b>Step 5:</b> Disabling the 'Heatmap' dial we can switch back into a geohash aggregation visualization of the near real-time taxi movement. By default 'live' mode updates every second with the latest taxi movement obvservations available.<br>
 <img src="05.png"/><br>
 
 <br><br><b>Congratulations:</b> You have successfully run the dcos-iot-demo and visualized taxi movement using geoaggregation techniques.
