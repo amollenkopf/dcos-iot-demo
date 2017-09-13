@@ -6,7 +6,7 @@ This project demonstrates how to configure a full stack geo-enabled Internet of 
 
 ## To create your own DC/OS IoT demo environment:
 1. <a href="docs/0-overview/README.md">Review the application & architecture overview</a>.<br>
-2. Provision compute resources on <a href="docs/1-azure/README.md">Microsoft Azure</a>, <a href="docs/1-amazon/README.md">Amazon Web Services</a>, Amazon C2S or <a href="docs/1-on-premise/README.md">on-premise.</a><br>
+2. Provision compute resources on <a href="docs/1-azure/README.md">Microsoft Azure</a>, <a href="docs/1-amazon/README.md">Amazon Web Services</a>, <a href="docs/1-amazon-c2s/README.md">Amazon C2S</a> or <a href="docs/1-on-premise/README.md">on-premise.</a><br>
 3. <a href="docs/2-install/README.md">Install DC/OS</a> and then <a href="docs/3-explore/README.md">Explore the DC/OS & Mesos dashboards</a>.<br>
 4. <a href="docs/4-kafka/README.md">Install Kafka & schedule brokers</a>.<br>
 5. <a href="docs/5-elasticsearch/README.md">Install Elasticsearch & schedule a cluster</a>.<br>
@@ -16,4 +16,4 @@ This project demonstrates how to configure a full stack geo-enabled Internet of 
 7. <a href="docs/7-stream/README.md">Schedule a Spark Streaming job</a>.<br>
 8. <a href="docs/8-source/README.md">Schedule a Kafka producer application</a>.<br>
 9. <a href="docs/9-visual/README.md">Visualize IoT movement behavior</a>.<br>
-10. <a href="docs/cleanup-demo.md">Applying cleanup procedures</a> between demo runs.
+10. <a href="docs/10-cleanup/README.md">Applying cleanup procedures</a> between demo runs.
