@@ -16,4 +16,4 @@ This project demonstrates how to configure a full stack geo-enabled Internet of 
 7. <a href="docs/7-stream/README.md">Schedule a Spark Streaming job</a>.<br>
 8. <a href="docs/8-source/README.md">Schedule a Kafka producer application</a>.<br>
 9. <a href="docs/9-visual/README.md">Visualize IoT movement behavior</a>.<br>
-10. <a href="docs/cleanup-demo.md">Applying cleanup procedures</a> between demo runs.
+10. <a href="docs/10-cleanup/README.md">Applying cleanup procedures</a> between demo runs.
