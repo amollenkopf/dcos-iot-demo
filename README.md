@@ -5,15 +5,15 @@ This project demonstrates how to configure a full stack geo-enabled Internet of 
 <!-- <center><a href="https://youtu.be/tOPmPIHuV-o"><img src="docs/0-overview//dcos-iot-demo-screenshot.jpg" height="75%" width="75%" ></a></center> -->
 
 ## To create your own DC/OS IoT demo environment:
-1. <a href="docs/0-overview/README.md">Review the application & architecture overview</a>.<br>
-2. Provision compute resources on <a href="docs/1-azure/README.md">Microsoft Azure</a>, <a href="docs/1-amazon/README.md">Amazon Web Services</a>, <a href="docs/1-amazon-c2s/README.md">Amazon C2S</a> or <a href="docs/1-on-premise/README.md">on-premise.</a><br>
-3. <a href="docs/2-install/README.md">Install DC/OS</a> and then <a href="docs/3-explore/README.md">Explore the DC/OS & Mesos dashboards</a>.<br>
-4. <a href="docs/4-kafka/README.md">Install Kafka & schedule brokers</a>.<br>
-5. <a href="docs/5-elasticsearch/README.md">Install Elasticsearch & schedule a cluster</a>.<br>
-6. <a href="docs/6-webapp/README.md">Install Map web application</a>.<br>
+0. <a href="docs/0-overview/README.md">Review the application & architecture overview</a>.<br>
+1. Provision compute resources on <a href="docs/1-azure/README.md">Microsoft Azure</a>, <a href="docs/1-amazon/README.md">Amazon Web Services</a>, <a href="docs/1-amazon-c2s/README.md">Amazon C2S</a> or <a href="docs/1-on-premise/README.md">on-premise.</a><br>
+2. <a href="docs/2-install/README.md">Install DC/OS</a> and then <a href="docs/3-explore/README.md">Explore the DC/OS & Mesos dashboards</a>.<br>
+3. <a href="docs/4-kafka/README.md">Install Kafka & schedule brokers</a>.<br>
+4. <a href="docs/5-elasticsearch/README.md">Install Elasticsearch & schedule a cluster</a>.<br>
+5. <a href="docs/6-webapp/README.md">Install Map web application</a>.<br>
 
 ## Running the demo:
-7. <a href="docs/7-stream/README.md">Schedule a Spark Streaming job</a>.<br>
-8. <a href="docs/8-source/README.md">Schedule a Kafka producer application</a>.<br>
-9. <a href="docs/9-visual/README.md">Visualize IoT movement behavior</a>.<br>
-10. <a href="docs/10-cleanup/README.md">Applying cleanup procedures</a> between demo runs.
+6. <a href="docs/7-stream/README.md">Schedule a Spark Streaming job</a>.<br>
+7. <a href="docs/8-source/README.md">Schedule a Kafka producer application</a>.<br>
+8. <a href="docs/9-visual/README.md">Visualize IoT movement behavior</a>.<br>
+9. <a href="docs/10-cleanup/README.md">Applying cleanup procedures</a> between demo runs.
