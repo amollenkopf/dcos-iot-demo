@@ -1,4 +1,4 @@
-# Install Elasticsearch & schedule a Cluster
+# Install Elastic & schedule an Elasticsearch Cluster
 
 <b>Step 1:</b> In the DC/OS dashboard navigate to 'Universe - Packages'.<br>
 <img src="01.png"/>
